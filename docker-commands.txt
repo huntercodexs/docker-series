@@ -1,0 +1,36 @@
+
+# Criar network
+> docker network create elk_gateway
+
+# Limpar todos os recursos: container, images, volumes e networks
+> docker system prune -a
+
+# Para os containers
+> docker-compose stop
+
+# Remover os containers do docker-compose (sem remover as imagens e alterações feitas nelas)
+> docker-compose down
+
+# Subir os containers/serviços contidos no arquivo docker-compose.yml
+> docker-compose up -d
+
+# Descobrir o ID dos containers e serviços para acessar via docker exec
+> docker container ls
+CONTAINER ID   IMAGE                                                 COMMAND                  CREATED       STATUS       PORTS                                                                                            NAMES
+a33fe8002c47   docker.elastic.co/logstash/logstash:8.1.2             "/usr/local/bin/dock…"   3 hours ago   Up 3 hours   0.0.0.0:5000->5000/tcp, 0.0.0.0:5044->5044/tcp, 0.0.0.0:9600->9600/tcp, 0.0.0.0:5000->5000/udp   logstash
+3a317d9364ec   docker.elastic.co/kibana/kibana:8.1.2                 "/bin/tini -- /usr/l…"   3 hours ago   Up 2 hours   0.0.0.0:5601->5601/tcp                                                                           kibana
+a9250894b386   docker.elastic.co/elasticsearch/elasticsearch:8.1.2   "/bin/tini -- /usr/l…"   3 hours ago   Up 3 hours   0.0.0.0:9200->9200/tcp, 0.0.0.0:9300->9300/tcp                                                   elasticsearch
+
+# Acessar um container pelo ID
+> docker exec -it a9250894b386 /bin/bash
+elasticsearch@a9250894b386:~$
+
+# Verificar status elastisearch
+curl localhost:9200
+
+# Executar requisições ao logstash
+telnet localhost 5000
+
+# Kibana Links
+http://localhost:5601/app/home#/
+http://localhost:5601/app/dev_tools#/console

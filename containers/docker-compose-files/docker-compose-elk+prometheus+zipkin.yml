@@ -1,0 +1,107 @@
+version: "3.7"
+services:
+  #----------------------------------------------------------------------------------------
+  # WARNING: This is a Development Mode
+  #----------------------------------------------------------------------------------------
+  elasticsearch:
+    container_name: elasticsearch
+    image: docker.elastic.co/elasticsearch/elasticsearch:8.1.2
+    #build: ./elasticsearch/dockerfile/
+    environment:
+      ELASTIC_VERSION: 8.1.2
+      ES_JAVA_OPTS: -Xmx512m -Xms512m
+      ELASTIC_PASSWORD: 123mudar
+      discovery.type: single-node
+    volumes:
+      - ./elasticsearch/config/elasticsearch.yml:/usr/share/elasticsearch/config/elasticsearch.yml:ro,z
+      - elasticsearch:/usr/share/elasticsearch/data:z
+    ports:
+      - "9200:9200"
+      - "9300:9300"
+    networks:
+      - elk_gateway
+  #----------------------------------------------------------------------------------------
+  kibana:
+    container_name: kibana
+    image: docker.elastic.co/kibana/kibana:8.1.2
+    #build: ./kibana/dockerfile/
+    environment:
+      ELASTIC_VERSION: 8.1.2
+      ELASTICSEARCH_HOSTS: http://elasticsearch:9200
+      KIBANA_PASSWORD: 123mudar
+    volumes:
+      - ./kibana/config/kibana.yml:/usr/share/kibana/config/kibana.yml:ro,Z
+    ports:
+      - "5601:5601"
+    networks:
+      - elk_gateway
+    depends_on:
+      - elasticsearch
+  #----------------------------------------------------------------------------------------
+  logstash:
+    container_name: logstash
+    image: docker.elastic.co/logstash/logstash:8.1.2
+    #build: ./logstash/dockerfile/
+    environment:
+      ELASTIC_VERSION: 8.1.2
+      LS_JAVA_OPTS: -Xmx512m -Xms512m
+      LOGSTASH_INTERNAL_PASSWORD: 123mudar
+    volumes:
+      - ./logstash/config/logstash.yml:/usr/share/logstash/config/logstash.yml:ro,Z
+      - ./logstash/pipeline:/usr/share/logstash/pipeline:ro,Z
+    ports:
+      - "5044:5044"
+      - "5000:5000/tcp"
+      - "5000:5000/udp"
+      - "9600:9600"
+    networks:
+      - elk_gateway
+    depends_on:
+      - elasticsearch
+  #----------------------------------------------------------------------------------------
+  grafana:
+    image: grafana/grafana
+    container_name: grafana
+    #build: ./grafana/dockerfile/
+    ports:
+      - "3001:3000"
+    #volumes:
+    #  - "./grafana/:/etc/grafana/"
+    #  - "./grafana/plugins/:/var/lib/grafana/plugins"
+    #    links:
+    #      - mysql-80
+    tty: true
+  #----------------------------------------------------------------------------------------
+  grafana-ubuntu:
+    image: grafana/grafana-enterprise:8.4.6-ubuntu
+    container_name: grafana-ubuntu
+    #build: ./grafana-ubuntu/dockerfile/
+    ports:
+      - "3000:3000"
+    #volumes:
+    #  - "./grafana-ubuntu/:/etc/grafana/"
+    #  - "./grafana-ubuntu/plugins/:/var/lib/grafana/plugins"
+    #    links:
+    #      - mysql-80
+    tty: true
+  #----------------------------------------------------------------------------------------
+  prometheus:
+    image: prom/prometheus
+    container_name: prometheus
+    #build: ./prometheus/dockerfile/
+    ports:
+      - "9090:9090"
+    volumes:
+      - "./prometheus/:/etc/prometheus/"
+    #    links:
+    #      - mysql-80
+    tty: true
+#----------------------------------------------------------------------------------------
+networks:
+  elk_gateway:
+    driver: bridge
+  dev_gateway:
+    external: true
+#----------------------------------------------------------------------------------------
+volumes:
+  elasticsearch:

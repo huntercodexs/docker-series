@@ -1,0 +1,11 @@
+#---
+#
+### General Settings
+#cluster.name: ${CLUSTER_NAME}
+#network.host: ${HOST_ADDRESS}
+#
+### X-Pack settings
+#xpack.license.self_generated.type: ${LICENSE}
+#xpack.security.enabled: ${SECURITY_ENABLE}
+#xpack.security.enrollment.enabled: ${SECURITY_ENROLLMENT_ENABLE}
+#discovery.type: ${DISCOVERY_TYPE}

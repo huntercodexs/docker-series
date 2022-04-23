@@ -1,0 +1,155 @@
+{
+	"info": {
+		"_postman_id": "640e3893-402f-4e3c-903b-2b7e32479032",
+		"name": "DOCKER-ELK",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "Elasticsearch Check",
+			"request": {
+				"auth": {
+					"type": "basic",
+					"basic": [
+						{
+							"key": "password",
+							"value": "123mudar",
+							"type": "string"
+						},
+						{
+							"key": "username",
+							"value": "elastic",
+							"type": "string"
+						}
+					]
+				},
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:9200",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "9200"
+				}
+			},
+			"response": [
+				{
+					"name": "Elasticsearch Check",
+					"originalRequest": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:9200",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "9200"
+						}
+					},
+					"status": "OK",
+					"code": 200,
+					"_postman_previewlanguage": "json",
+					"header": [
+						{
+							"key": "content-type",
+							"value": "application/json; charset=UTF-8"
+						},
+						{
+							"key": "content-encoding",
+							"value": "gzip"
+						},
+						{
+							"key": "content-length",
+							"value": "331"
+						}
+					],
+					"cookie": [],
+					"body": "{\n    \"name\": \"5eb165fcff91\",\n    \"cluster_name\": \"docker-cluster\",\n    \"cluster_uuid\": \"66oqcZz9RKqLl1BC5PMHLg\",\n    \"version\": {\n        \"number\": \"7.9.2\",\n        \"build_flavor\": \"default\",\n        \"build_type\": \"docker\",\n        \"build_hash\": \"d34da0ea4a966c4e49417f2da2f244e3e97b4e6e\",\n        \"build_date\": \"2020-09-23T00:45:33.626720Z\",\n        \"build_snapshot\": false,\n        \"lucene_version\": \"8.6.2\",\n        \"minimum_wire_compatibility_version\": \"6.8.0\",\n        \"minimum_index_compatibility_version\": \"6.0.0-beta1\"\n    },\n    \"tagline\": \"You Know, for Search\"\n}"
+				}
+			]
+		},
+		{
+			"name": "Logstash Send",
+			"request": {
+				"auth": {
+					"type": "basic",
+					"basic": [
+						{
+							"key": "password",
+							"value": "123mudar",
+							"type": "string"
+						},
+						{
+							"key": "username",
+							"value": "elastic",
+							"type": "string"
+						}
+					]
+				},
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"text\": \"hi i'm a new test from postman\",\r\n    \"code\": 4001\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:8080",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080"
+				}
+			},
+			"response": [
+				{
+					"name": "Logstash Send",
+					"originalRequest": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"text\": \"hi i'm a new test from postman\",\r\n    \"code\": 4001\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8080",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080"
+						}
+					},
+					"status": "OK",
+					"code": 200,
+					"_postman_previewlanguage": "plain",
+					"header": [
+						{
+							"key": "content-length",
+							"value": "2"
+						},
+						{
+							"key": "content-type",
+							"value": "text/plain"
+						}
+					],
+					"cookie": [],
+					"body": "ok"
+				}
+			]
+		}
+	]
+}

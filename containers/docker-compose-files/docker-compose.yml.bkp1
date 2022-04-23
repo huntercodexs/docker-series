@@ -1,0 +1,103 @@
+version: "3.7"
+services:
+  #----------------------------------------------------------------------------------------
+  elasticsearch:
+    container_name: elasticsearch
+    image: docker.elastic.co/elasticsearch/elasticsearch:${STACK_VERSION}
+    #build: ./elasticsearch/dockerfile/
+    env_file: .env
+    environment:
+      #General Settings
+      ELASTIC_VERSION: ${STACK_VERSION}
+      ELASTIC_PASSWORD: ${ELASTIC_PASSWORD}
+      KIBANA_USERNAME: ${KIBANA_USERNAME}
+      KIBANA_SYSTEM_USERNAME: ${KIBANA_USERNAME}
+      LOGSTASH_INTERNAL_USERNAME: ${LOGSTASH_USERNAME}
+      LOGSTASH_INTERNAL_PASSWORD: ${LOGSTASH_INTERNAL_PASSWORD}
+      ES_JAVA_OPTS: ${ES_JAVA_OPTS}
+      #Simple Settings
+      cluster.name: ${CLUSTER_NAME}
+      network.host: ${HOST_ADDRESS}
+      discovery.type: ${DISCOVERY_TYPE}
+      #Security Settings
+      xpack.license.self_generated.type: ${LICENSE}
+      xpack.security.enabled: ${SECURITY_ENABLE}
+      xpack.security.enrollment.enabled: ${SECURITY_ENROLLMENT_ENABLE}
+    volumes:
+      - ./elasticsearch/config/elasticsearch.yml:/usr/share/elasticsearch/config/elasticsearch.yml:rw,z
+      - elasticsearch:/usr/share/elasticsearch/data:rw,z
+    ports:
+      - ${ES_PORT_1}:9200
+      - ${ES_PORT_2}:9300
+    networks:
+      - ${ELK_NETWORK}
+  #----------------------------------------------------------------------------------------
+  kibana:
+    container_name: kibana
+    image: docker.elastic.co/kibana/kibana:${STACK_VERSION}
+    #build: ./kibana/dockerfile/
+    env_file: .env
+    environment:
+      #General Settings
+      ELASTIC_VERSION: ${STACK_VERSION}
+      ELASTICSEARCH_HOSTS: ${ELASTICSEARCH_HOST}
+      ELASTICSEARCH_USERNAME: ${KIBANA_USERNAME}
+      KIBANA_PASSWORD: ${KIBANA_PASSWORD}
+      KIBANA_SYSTEM_PASSWORD: ${KIBANA_PASSWORD}
+      #Simple Settings
+      server.name: ${KIBANA_SERVER_NAME}
+      server.host: ${HOST_ADDRESS}
+      server.port: ${KB_PORT}
+      elasticsearch.hosts: ${ELASTICSEARCH_HOST}
+      monitoring.ui.container.elasticsearch.enabled: ${MONITORING_ES}
+      #Security Settings
+      elasticsearch.username: ${KIBANA_USERNAME}
+      elasticsearch.password: ${KIBANA_PASSWORD}
+      xpack.security.encryptionKey: ${KIBANA_ENC_KEY}
+      xpack.reporting.kibanaServer.hostname: ${KIBANA_HOST_NAME}
+      xpack.reporting.roles.enabled: ${KIBANA_REPORT_ROLES}
+    volumes:
+      - ./kibana/config/kibana.yml:/usr/share/kibana/config/kibana.yml:rw,Z
+    ports:
+      - ${KB_PORT}:5601
+    networks:
+      - ${ELK_NETWORK}
+    depends_on:
+      - elasticsearch
+    links:
+      - elasticsearch
+  #----------------------------------------------------------------------------------------
+  logstash:
+    container_name: logstash
+    image: docker.elastic.co/logstash/logstash:${STACK_VERSION}
+    #build: ./logstash/dockerfile/
+    env_file: .env
+    environment:
+      #General Settings
+      ELASTIC_VERSION: ${STACK_VERSION}
+      LOGSTASH_INTERNAL_PASSWORD: ${LOGSTASH_INTERNAL_PASSWORD}
+      LS_JAVA_OPTS: ${LS_JAVA_OPTS}
+      #Simple Settings
+      http.host: ${HOST_ADDRESS}
+      xpack.monitoring.elasticsearch.hosts: ${ELASTICSEARCH_HOST}
+    volumes:
+      #- ./logstash/config/logstash.yml:/usr/share/logstash/config/logstash.yml:rw,Z
+      - ./logstash/pipeline:/usr/share/logstash/pipeline:rw,Z
+    ports:
+      - ${LS_PORT_1}:5044
+      - ${LS_PORT_2}:9600
+      - ${LS_TCP_PORT}:5000/tcp
+      - ${LS_UDP_PORT}:5000/udp
+    networks:
+      - ${ELK_NETWORK}
+    depends_on:
+      - elasticsearch
+    links:
+      - elasticsearch
+#------------------------------------------------------------------------------------------
+networks:
+  containers_elk_gateway:
+    driver: bridge
+#------------------------------------------------------------------------------------------
+volumes:
+  elasticsearch:

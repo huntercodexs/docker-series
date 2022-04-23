@@ -1,0 +1,13 @@
+trash
+*-tar
+*.jar
+*.deb
+*.exec
+*.run
+.idea
+nodes
+/docker-elk/
+/elkstack792/
+**/containers/mysql-57/**
+**/containers/mysql-80/**
+**/containers/ubuntu-1804/micro-services/**

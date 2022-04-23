@@ -1,0 +1,18 @@
+
+## General Settings
+cluster.name: ${CLUSTER_NAME}
+network.host: ${HOST_ADDRESS}
+discovery.type: ${DISCOVERY_TYPE}
+
+## X-Pack settings
+xpack.license.self_generated.type: ${LICENSE}
+xpack.security.enabled: ${SECURITY_ENABLE}
+#xpack.security.enrollment.enabled: ${SECURITY_ENROLLMENT_ENABLE}
+#xpack.security.fips_mode.enabled:
+#xpack.security.dls_fls.enabled:
+#xpack.security.audit.enabled:
+xpack.security.authc.token.enabled: ${AUTH_TOKEN_CHECK}
+#xpack.security.http.filter.enabled
+xpack.security.http.ssl.enabled: false
+xpack.security.authc.api_key.enabled: false
+#http.tls.selfSignedCertificate.disabled: true
