@@ -1,0 +1,12 @@
+
+## General Settings
+cluster.name: ${CLUSTER_NAME}
+network.host: ${HOST_ADDRESS}
+discovery.type: ${DISCOVERY_TYPE}
+
+## X-Pack settings
+xpack.license.self_generated.type: ${LICENSE}
+xpack.security.enabled: ${SECURITY_ENABLE}
+xpack.security.authc.token.enabled: ${AUTH_TOKEN_CHECK}
+xpack.security.http.ssl.enabled: false
+xpack.security.authc.api_key.enabled: false
