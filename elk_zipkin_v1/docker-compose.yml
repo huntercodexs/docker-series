@@ -5,10 +5,10 @@ services:
   elasticsearch:
     env_file: .env
     container_name: elasticsearch
-    image: elasticsearch:${STACK_VERSION}
+    image: elasticsearch:${GENERAL_STACK_VERSION}
     ports:
-      - ${ES_PORT_1}:9200
-      - ${ES_PORT_2}:9300
+      - ${ELASTICSEARCH_PORT_1}:9200
+      - ${ELASTICSEARCH_PORT_2}:9300
     volumes:
       - type: bind
         source: ./elasticsearch/config/elasticsearch.yml
@@ -19,13 +19,13 @@ services:
         target: /usr/share/elasticsearch/data
         read_only: false
     environment:
-      ELASTIC_VERSION: ${STACK_VERSION}
+      ELASTIC_VERSION: ${GENERAL_STACK_VERSION}
       ELASTIC_PASSWORD: ${ELASTIC_PASSWORD}
       KIBANA_USERNAME: ${KIBANA_SYSTEM_USERNAME}
       KIBANA_SYSTEM_USERNAME: ${KIBANA_SYSTEM_USERNAME}
       LOGSTASH_INTERNAL_USERNAME: ${LOGSTASH_INTERNAL_USERNAME}
       LOGSTASH_INTERNAL_PASSWORD: ${LOGSTASH_INTERNAL_PASSWORD}
-      ES_JAVA_OPTS: ${ES_JAVA_OPTS}
+      ES_JAVA_OPTS: ${ELASTICSEARCH_JAVA_OPTS}
     ulimits:
       memlock:
         soft: -1
@@ -34,17 +34,17 @@ services:
   kibana:
     env_file: .env
     container_name: kibana
-    image: kibana:${STACK_VERSION}
+    image: kibana:${GENERAL_STACK_VERSION}
     ports:
-      - ${KB_PORT}:5601
+      - ${KIBANA_PORT}:5601
     volumes:
       - type: bind
         source: ./kibana/config/kibana.yml
         target: /usr/share/kibana/config/kibana.yml
         read_only: true
     environment:
-      ELASTIC_VERSION: ${STACK_VERSION}
-      ELASTICSEARCH_HOSTS: ${ELASTICSEARCH_HOSTS}
+      ELASTIC_VERSION: ${GENERAL_STACK_VERSION}
+      ELASTICSEARCH_HOSTS: ${ELASTICSEARCH_HTTP_HOSTS}
       ELASTICSEARCH_USERNAME: ${ELASTIC_USERNAME}
       KIBANA_PASSWORD: ${KIBANA_PASSWORD}
       KIBANA_SYSTEM_PASSWORD: ${KIBANA_SYSTEM_PASSWORD}
@@ -54,13 +54,13 @@ services:
   logstash:
     env_file: .env
     container_name: logstash
-    image: logstash:${STACK_VERSION}
+    image: logstash:${GENERAL_STACK_VERSION}
     ports:
-      - ${LS_PORT_HTTP}:8080
-      - ${LS_PORT_1}:5044
-      - ${LS_PORT_2}:9600
-      - ${LS_TCP_PORT}:5000/tcp
-      - ${LS_UDP_PORT}:5000/udp
+      - ${LOGSTASH_PORT_HTTP}:8080
+      - ${LOGSTASH_PORT_1}:5044
+      - ${LOGSTASH_PORT_2}:9600
+      - ${LOGSTASH_TCP_PORT}:5000/tcp
+      - ${LOGSTASH_UDP_PORT}:5000/udp
     volumes:
       - type: bind
         source: ./logstash/pipeline
@@ -71,9 +71,9 @@ services:
         target: /usr/share/logstash/config/logstash.yml
         read_only: true
     environment:
-      ELASTIC_VERSION: ${STACK_VERSION}
+      ELASTIC_VERSION: ${GENERAL_STACK_VERSION}
       LOGSTASH_INTERNAL_PASSWORD: ${LOGSTASH_INTERNAL_PASSWORD}
-      LS_JAVA_OPTS: ${LS_JAVA_OPTS}
+      LS_JAVA_OPTS: ${LOGSTASH_JAVA_OPTS}
     depends_on:
       - elasticsearch
   #----------------------------------------------------------------------------------------
@@ -85,16 +85,25 @@ services:
       - ${ZIPKIN_PORT}:9411
     volumes:
       - type: bind
-        source: ./zipkin/zipkin.lock
+        source: ./zipkin/
         target: /home/zipkin
         read_only: false
     environment:
-      DSTORAGE_TYPE: ${ZIPKIN_STORAGE_TYPE}
-      DES_HOSTS: ${ELASTICSEARCH_HOSTS}
+      STORAGE_TYPE: ${ZIPKIN_STORAGE_TYPE}
       SEARCH_ENABLED: ${ZIPKIN_SEARCH_ENABLED}
+      ES_HTTP_LOGGING: ${ZIPKIN_HTTP_LOGGING}
+      ES_CREDENTIALS_FILE: ${ZIPKIN_CREDENTIALS_FILE}
+      ES_USERNAME: ${ELASTIC_USERNAME}
+      ES_PASSWORD: ${ELASTIC_PASSWORD}
       ELASTIC_USERNAME: ${ELASTIC_USERNAME}
       ELASTIC_PASSWORD: ${ELASTIC_PASSWORD}
-    tty: true
+      ELASTICSEARCH_USERNAME: ${ELASTICSEARCH_USERNAME}
+      ELASTICSEARCH_PASSWORD: ${ELASTICSEARCH_PASSWORD}
+      ES_HOSTS: ${ELASTICSEARCH_HTTP_HOSTS}
+      ELASTICSEARCH_HOSTS: ${ELASTICSEARCH_HTTP_HOSTS}
+      ES_SSL_NO_VERIFY: ${SECURITY_ZIPKIN_NO_SSL_CHECK}
+    depends_on:
+      - elasticsearch
   #----------------------------------------------------------------------------------------
 
 volumes:

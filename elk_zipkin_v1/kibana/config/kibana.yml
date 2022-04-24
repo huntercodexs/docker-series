@@ -1,10 +1,10 @@
 
 ## General Settings
+server.host: ${GENERAL_HOST_ADDRESS}
 server.name: ${KIBANA_SERVER_NAME}
-server.host: ${HOST_ADDRESS}
-server.port: ${KB_PORT}
-elasticsearch.hosts: ${ELASTICSEARCH_HOSTS}
-monitoring.ui.container.elasticsearch.enabled: ${MONITORING_ES}
+server.port: ${KIBANA_PORT}
+elasticsearch.hosts: ${ELASTICSEARCH_HTTP_HOSTS}
+monitoring.ui.container.elasticsearch.enabled: ${KIBANA_MONITORING_ES}
 
 ## X-Pack security credentials
 elasticsearch.username: ${ELASTIC_USERNAME}
