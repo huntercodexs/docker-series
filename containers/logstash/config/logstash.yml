@@ -1,7 +1,0 @@
-#---
-#
-#### General Settings
-#http.host: ${HOST_ADDRESS}
-#
-#### X-Pack Settings
-#xpack.monitoring.elasticsearch.hosts: ${ELASTICSEARCH_HOST}
