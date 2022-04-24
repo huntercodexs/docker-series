@@ -27,6 +27,15 @@
 4. Zipkin
 <pre>http://localhost:9411</pre>
 
+5. Prometheus
+<pre>http://localhost:9090</pre>
+
+6. Grafana
+<pre>http://localhost:3001/login</pre>
+
+7. Grafana Ubuntu
+<pre>http://localhost:3000/login</pre>
+
 # Commands
 
 1. Access zipkin container
