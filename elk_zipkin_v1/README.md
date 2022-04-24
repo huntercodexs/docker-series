@@ -32,4 +32,3 @@
 1. Access zipkin container
 
 > docker exec -it ${CONTAINER-ID} sh
-> 
