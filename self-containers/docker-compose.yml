@@ -1,0 +1,212 @@
+version: "3.7"
+services:
+
+  #----------------------------------------------------------------------------------------
+  elasticsearch:
+    env_file: .env
+    container_name: elasticsearch
+    image: elasticsearch:${GENERAL_STACK_VERSION}
+    ports:
+      - ${ELASTICSEARCH_PORT_1}:9200
+      - ${ELASTICSEARCH_PORT_2}:9300
+    volumes:
+      - type: bind
+        source: ./elasticsearch/config/elasticsearch.yml
+        target: /usr/share/elasticsearch/config/elasticsearch.yml
+        read_only: true
+      - type: bind
+        source: elasticsearch
+        target: /usr/share/elasticsearch/data
+        read_only: false
+    environment:
+      ELASTIC_VERSION: ${GENERAL_STACK_VERSION}
+      ELASTIC_PASSWORD: ${ELASTIC_PASSWORD}
+      KIBANA_USERNAME: ${KIBANA_SYSTEM_USERNAME}
+      KIBANA_SYSTEM_USERNAME: ${KIBANA_SYSTEM_USERNAME}
+      LOGSTASH_INTERNAL_USERNAME: ${LOGSTASH_INTERNAL_USERNAME}
+      LOGSTASH_INTERNAL_PASSWORD: ${LOGSTASH_INTERNAL_PASSWORD}
+      ES_JAVA_OPTS: ${ELASTICSEARCH_JAVA_OPTS}
+    ulimits:
+      memlock:
+        soft: -1
+        hard: -1
+  #----------------------------------------------------------------------------------------
+  kibana:
+    env_file: .env
+    container_name: kibana
+    image: kibana:${GENERAL_STACK_VERSION}
+    ports:
+      - ${KIBANA_PORT}:5601
+    volumes:
+      - type: bind
+        source: ./kibana/config/kibana.yml
+        target: /usr/share/kibana/config/kibana.yml
+        read_only: true
+    environment:
+      ELASTIC_VERSION: ${GENERAL_STACK_VERSION}
+      ELASTICSEARCH_HOSTS: ${ELASTICSEARCH_HTTP_HOSTS}
+      ELASTICSEARCH_USERNAME: ${ELASTIC_USERNAME}
+      KIBANA_PASSWORD: ${KIBANA_PASSWORD}
+      KIBANA_SYSTEM_PASSWORD: ${KIBANA_SYSTEM_PASSWORD}
+    depends_on:
+      - elasticsearch
+  #----------------------------------------------------------------------------------------
+  logstash:
+    env_file: .env
+    container_name: logstash
+    image: logstash:${GENERAL_STACK_VERSION}
+    ports:
+      - ${LOGSTASH_PORT_HTTP}:8080
+      - ${LOGSTASH_PORT_1}:5044
+      - ${LOGSTASH_PORT_2}:9600
+      - ${LOGSTASH_TCP_PORT}:5000/tcp
+      - ${LOGSTASH_UDP_PORT}:5000/udp
+    volumes:
+      - type: bind
+        source: ./logstash/pipeline
+        target: /usr/share/logstash/pipeline
+        read_only: true
+      - type: bind
+        source: ./logstash/config/logstash.yml
+        target: /usr/share/logstash/config/logstash.yml
+        read_only: true
+    environment:
+      ELASTIC_VERSION: ${GENERAL_STACK_VERSION}
+      LOGSTASH_INTERNAL_PASSWORD: ${LOGSTASH_INTERNAL_PASSWORD}
+      LS_JAVA_OPTS: ${LOGSTASH_JAVA_OPTS}
+    depends_on:
+      - elasticsearch
+  #----------------------------------------------------------------------------------------
+  zipkin:
+    env_file: .env
+    container_name: zipkin
+    image: openzipkin/zipkin
+    ports:
+      - ${ZIPKIN_PORT}:9411
+    volumes:
+      - type: bind
+        source: ./zipkin/
+        target: /home/zipkin
+        read_only: false
+    environment:
+      STORAGE_TYPE: ${ZIPKIN_STORAGE_TYPE}
+      SEARCH_ENABLED: ${ZIPKIN_SEARCH_ENABLED}
+      #ES_HTTP_LOGGING: ${ZIPKIN_HTTP_LOGGING}
+      ES_USERNAME: ${ELASTIC_USERNAME}
+      ES_PASSWORD: ${ELASTIC_PASSWORD}
+      ES_HOSTS: ${ELASTICSEARCH_HTTP_HOSTS}
+      ES_SSL_NO_VERIFY: ${SECURITY_ZIPKIN_NO_SSL_CHECK}
+    depends_on:
+      - elasticsearch
+  #----------------------------------------------------------------------------------------
+  grafana:
+    env_file: .env
+    container_name: grafana
+    image: grafana/grafana
+    ports:
+      - ${GRAFANA_PORT}:3000
+    volumes:
+      - type: bind
+        source: ./grafana
+        target: /home/grafana/
+        read_only: true
+    tty: true
+  #----------------------------------------------------------------------------------------
+  grafana-ubuntu:
+    env_file: .env
+    container_name: grafana-ubuntu
+    image: grafana/grafana-enterprise:8.4.6-ubuntu
+    ports:
+      - ${GRAFANA_UBUNTU_PORT}:3000
+    volumes:
+      - type: bind
+        source: ./grafana-ubuntu
+        target: /home/grafana/
+        read_only: true
+    tty: true
+  #----------------------------------------------------------------------------------------
+  prometheus:
+    env_file: .env
+    container_name: prometheus
+    image: prom/prometheus
+    ports:
+      - ${PROMETHEUS_PORT}:9090
+    volumes:
+      - type: bind
+        source: ./prometheus/prometheus.yml
+        target: /etc/prometheus/prometheus.yml
+        read_only: true
+    tty: true
+  #----------------------------------------------------------------------------------------
+  openjdk-8u212:
+    image: openjdk:8u212
+    container_name: openjdk-8u212
+    #build: ./openjdk-8u212/dockerfile/
+    ports:
+      - "31899:8080"
+    #volumes:
+    #  - "./openjdk-8u212/:/etc/openjdk-8u212/"
+    #    links:
+    #      - mysql-80
+    tty: true
+  #----------------------------------------------------------------------------------------
+  ubuntu-2004:
+    image: ubuntu:20.04
+    container_name: ubuntu-2004
+#    build: ./ubuntu-2004/dockerfile/
+    ports:
+      - "8581:80"
+    volumes:
+      - "./ubuntu-2004/:/home/ubuntu/"
+    links:
+      - mysql-80
+    tty: true
+  #----------------------------------------------------------------------------------------
+  ubuntu-1804:
+    image: ubuntu:18.04
+    container_name: ubuntu-1804
+#    build: ./ubuntu-1804/dockerfile/
+    ports:
+      - "8580:80"
+      - "3806:3306"
+    volumes:
+      - "./ubuntu-1804/:/home/ubuntu/"
+    links:
+      - mysql-57
+    tty: true
+  #----------------------------------------------------------------------------------------
+  mysql-80:
+    image: mysql:8.0
+    container_name: mysql-80
+    ports:
+      - "3706:3306"
+    volumes:
+      - "./mysql-80:/var/lib/mysql/"
+    environment:
+      MYSQL_DATABASE: 'database'
+      #      MYSQL_USER: 'root'
+      MYSQL_PASSWORD: 'root123'
+      MYSQL_ROOT_PASSWORD: 'root123'
+  #----------------------------------------------------------------------------------------
+  mysql-57:
+    image: mysql:5.7
+    container_name: mysql-5-7
+    ports:
+      - "3606:3306"
+    volumes:
+      - "./mysql-57:/var/lib/mysql/"
+    environment:
+      MYSQL_DATABASE: 'database'
+#      MYSQL_USER: 'root'
+      MYSQL_PASSWORD: 'root123'
+      MYSQL_ROOT_PASSWORD: 'root123'
+  #----------------------------------------------------------------------------------------
+
+networks:
+  self_containers_gateway:
+    driver: bridge
+  dev_gateway:
+    external: true
+#----------------------------------------------------------------------------------------
+volumes:
+  elasticsearch:
