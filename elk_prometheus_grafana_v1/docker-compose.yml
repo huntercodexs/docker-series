@@ -88,6 +88,13 @@ services:
         source: ./grafana
         target: /home/grafana/
         read_only: true
+    environment:
+      GF_SECURITY_ADMIN_USER: ${GRAFANA_USERNAME}
+      GF_SECURITY_ADMIN_PASSWORD: ${GRAFANA_PASSWORD}
+      #GF_AWS_PROFILES: ${GRAFANA_AWS_PROFILE}
+      #GF_AWS_default_ACCESS_KEY_ID: ${GRAFANA_AWS_ACCESS_KEY_ID}
+      #GF_AWS_default_SECRET_ACCESS_KEY: ${GRAFANA_AWS_SECRET_KEY}
+      #GF_AWS_default_REGION: ${GRAFANA_AWS_REGION}
     tty: true
   #----------------------------------------------------------------------------------------
   grafana-ubuntu:
@@ -101,6 +108,13 @@ services:
         source: ./grafana-ubuntu
         target: /home/grafana/
         read_only: true
+    environment:
+      GF_SECURITY_ADMIN_USER: ${GRAFANA_USERNAME}
+      GF_SECURITY_ADMIN_PASSWORD: ${GRAFANA_PASSWORD}
+      #GF_AWS_PROFILES: ${GRAFANA_AWS_PROFILE}
+      #GF_AWS_default_ACCESS_KEY_ID: ${GRAFANA_AWS_ACCESS_KEY_ID}
+      #GF_AWS_default_SECRET_ACCESS_KEY: ${GRAFANA_AWS_SECRET_KEY}
+      #GF_AWS_default_REGION: ${GRAFANA_AWS_REGION}
     tty: true
   #----------------------------------------------------------------------------------------
   prometheus:
