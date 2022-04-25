@@ -8,6 +8,14 @@ trash
 nodes
 /docker-elk/
 /elkstack792/
-**/containers/mysql-57/**
-**/containers/mysql-80/**
-**/containers/ubuntu-1804/micro-services/**
+/micro-services/
+#**/self-containers/mysql-57/**
+#**/self-containers/mysql-80/**
+#**/self-containers/mssql/**
+#**/self-containers/mongo/**
+#**/self-containers/firebird/**
+#**/self-containers/sqlite/**
+#**/self-containers/postgres/**
+#**/self-containers/oracle/**
+#**/self-containers/redis/**
+**/self-containers/ubuntu-1804/micro-services/**
