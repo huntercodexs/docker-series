@@ -19,3 +19,4 @@ nodes
 #**/self-containers/oracle/**
 #**/self-containers/redis/**
 **/self-containers/ubuntu-1804/micro-services/**
+sources-docker-compose.yml

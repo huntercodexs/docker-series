@@ -215,6 +215,26 @@ services:
       MYSQL_PASSWORD: 'root123'
       MYSQL_ROOT_PASSWORD: 'root123'
   #----------------------------------------------------------------------------------------
+  sqlite3:
+    env_file: .env
+    container_name: sqlite3
+    build:
+      context: ./sqlite3
+    privileged: true
+    ports:
+      - ${SQLITE3_PORT}:5050
+    volumes:
+      - type: bind
+        source: ./sqlite3/sqliteDB/sqlite-autoconf
+        target: /data/sqlite3/
+        read_only: false
+      - type: bind
+        source: ./sqlite3/sqliteDB/databases
+        target: /root/db/
+        read_only: false
+    stdin_open: true
+    tty: true
+  #----------------------------------------------------------------------------------------
 
 networks:
   self_containers_gateway:
