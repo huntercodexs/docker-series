@@ -7,6 +7,8 @@
 - Kibana
 - Logstash
 - Zipkin
+- Prometheus
+- Grafana
 - Docker
 - Docker-Compose
 
@@ -41,3 +43,14 @@
 1. Access zipkin container
 
 > docker exec -it ${CONTAINER-ID} sh
+
+# Container Services
+
+NAME                COMMAND                  SERVICE             STATUS              PORTS
+elasticsearch       "/tini -- /usr/local…"   elasticsearch       running             0.0.0.0:9200->9200/tcp, 0.0.0.0:9300->9300/tcp
+grafana             "/run.sh"                grafana             running             0.0.0.0:3000->3000/tcp
+grafana-ubuntu      "/run.sh"                grafana-ubuntu      running             0.0.0.0:3001->3000/tcp
+kibana              "/usr/local/bin/dumb…"   kibana              running             0.0.0.0:5601->5601/tcp
+logstash            "/usr/local/bin/dock…"   logstash            running             0.0.0.0:5000->5000/tcp, 0.0.0.0:5000->5000/udp, 0.0.0.0:5044->5044/tcp, 0.0.0.0:8080->8080/tcp, 0.0.0.0:9600->9600/tcp
+prometheus          "/bin/prometheus --c…"   prometheus          running             0.0.0.0:9090->9090/tcp
+zipkin              "start-zipkin"           zipkin              running (healthy)   0.0.0.0:9411->9411/tcp
