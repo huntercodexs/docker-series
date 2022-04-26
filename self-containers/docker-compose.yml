@@ -225,7 +225,7 @@ services:
         source: ./redis/redis.conf
         target: /etc/redis/redis.conf
         read_only: false
-    command: redis-server --requirepass 123@Mudar#
+    command: redis-server --requirepass ${REDIS_AUTH}
     tty: true
   #-----------------------------------------------------------------------------------------
   mongo:
