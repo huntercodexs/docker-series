@@ -189,31 +189,62 @@ services:
       - mysql-57
     tty: true
   #----------------------------------------------------------------------------------------
+  mssql-tools:
+    env_file: .env
+    container_name: mssql-tools
+    image:  mcr.microsoft.com/mssql-tools
+    ports:
+      - ${MSSQL_TOOLS_PORT}:10000
+    tty: true
+  #----------------------------------------------------------------------------------------
+  mssql:
+    env_file: .env
+    container_name: mssql
+    image: mcr.microsoft.com/mssql/server:2019-latest
+    ports:
+      - ${MSSQL_PORT}:1433
+    volumes:
+      - type: bind
+        source: ./mssql
+        target: /var/lib/mssql/data/
+        read_only: false
+      - type: bind
+        source: ./mssql/data
+        target: /var/opt/mssql/data/
+        read_only: false
+    environment:
+      SA_PASSWORD: ${MSSQL_SA_PASSWORD}
+      MSSQL_SA_PASSWORD: ${MSSQL_SA_PASSWORD}
+      ACCEPT_EULA: ${MSSQL_ACCEPT_EULA}
+      MSSQL_PID: ${MSSQL_EDITION}
+      TRUSTED_CONNECTION: ${MSSQL_TRUSTED_CONNECTION}
+    tty: true
+  #----------------------------------------------------------------------------------------
   mysql-80:
     image: mysql:8.0
-    container_name: mysql-80
+    container_name: mysql80
     ports:
       - "3706:3306"
     volumes:
       - "./mysql-80:/var/lib/mysql/"
     environment:
-      MYSQL_DATABASE: 'database'
-      #      MYSQL_USER: 'root'
-      MYSQL_PASSWORD: 'root123'
-      MYSQL_ROOT_PASSWORD: 'root123'
+      MYSQL_DATABASE: ${MYSQL80_DATABASE}
+      MYSQL_USERNAME: ${MYSQL80_USERNAME}
+      MYSQL_PASSWORD: ${MYSQL80_PASSWORD}
+      MYSQL_ROOT_PASSWORD: ${MYSQL80_ROOT_PASSWORD}
   #----------------------------------------------------------------------------------------
   mysql-57:
     image: mysql:5.7
-    container_name: mysql-5-7
+    container_name: mysql57
     ports:
-      - "3606:3306"
+      - ${MYSQL57_PORT}:3306
     volumes:
       - "./mysql-57:/var/lib/mysql/"
     environment:
-      MYSQL_DATABASE: 'database'
-#      MYSQL_USER: 'root'
-      MYSQL_PASSWORD: 'root123'
-      MYSQL_ROOT_PASSWORD: 'root123'
+      MYSQL_DATABASE: ${MYSQL57_DATABASE}
+      MYSQL_USERNAME: ${MYSQL57_USERNAME}
+      MYSQL_PASSWORD: ${MYSQL57_PASSWORD}
+      MYSQL_ROOT_PASSWORD: ${MYSQL57_ROOT_PASSWORD}
   #----------------------------------------------------------------------------------------
   sqlite3:
     env_file: .env

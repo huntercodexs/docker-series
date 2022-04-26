@@ -21,3 +21,4 @@ nodes
 **/self-containers/ubuntu-1804/micro-services/**
 sources-docker-compose.yml
 self-containers/sqlite3/sqliteDB/databases/**.db
+self-containers/mssql/data/**
