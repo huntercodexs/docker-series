@@ -189,25 +189,14 @@ services:
       - mysql-57
     tty: true
   #----------------------------------------------------------------------------------------
-#  oracle:
-#    container_name: oracle
-#    #Tem que usar um build para fazer login no docker hub
-#    #        image: store/oracle/database-enterprise:12.2.0.1
-#    privileged: true
-#    ports:
-#      - "1521:1521"
-#      - "5500:5500"
-#    networks:
-#      - default
-#      - dockerized_default
-#    #        environment:
-#    #            -
-#    volumes:
-#      - ./projects/oracle/oracleData/enterprise/:/opt/oracle/oradata/
-#    #            - ./projects/oracle/init.sql:/docker-entrypoint-initdb.d/10-init.sql
-#    build: ./projects/oracle
-##        command:
-##            - docker login
+  #
+  # NOTE: use the oracle_builder.sh in self-containers directory
+  # command: ./oracle/oracle_build.sh
+  #
+  oracle-fake:
+    env_file: .env
+    container_name: oracle-fake
+    image: alpine
   #----------------------------------------------------------------------------------------
   redis:
     env_file: .env
