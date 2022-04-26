@@ -13,15 +13,7 @@ Please use the branch selection to access others configurations to most need and
 - Ubuntu 18.04
 - Mysql 5.7
 - Mysql 8.0
-
-- Mssql 
-<pre>
-docker exec -u root -it mssql /bin/bash
-root@76948c9516a3:/#
-
-docker exec -it mssql /bin/bash
-</pre>
-
+- Mssql
 - Oracle
 - SQLite3
 - Firebird
