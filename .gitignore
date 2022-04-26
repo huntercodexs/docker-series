@@ -23,3 +23,4 @@ sources-docker-compose.yml
 self-containers/sqlite3/sqliteDB/databases/**.db
 self-containers/mssql/data/**
 self-containers/postgres/PostgreSQL/**
+self-containers/mongo/MongoDB/**
