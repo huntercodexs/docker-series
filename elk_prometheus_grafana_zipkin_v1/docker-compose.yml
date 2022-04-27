@@ -15,7 +15,7 @@ services:
         target: /usr/share/elasticsearch/config/elasticsearch.yml
         read_only: true
       - type: bind
-        source: elasticsearch
+        source: ./elasticsearch
         target: /usr/share/elasticsearch/data
         read_only: false
     environment:
