@@ -1,0 +1,9 @@
+
+## General Settings
+http.host: ${GENERAL_HOST_ADDRESS}
+xpack.monitoring.elasticsearch.hosts: ${ELASTICSEARCH_HTTP_HOSTS}
+
+## X-Pack security credentials
+xpack.monitoring.elasticsearch.username: ${ELASTIC_USERNAME}
+xpack.monitoring.elasticsearch.password: ${ELASTIC_PASSWORD}
+xpack.monitoring.elasticsearch.ssl.verification_mode: ${SECURITY_LOGSTASH_SSL_CHECK}
