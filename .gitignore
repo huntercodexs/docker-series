@@ -18,3 +18,4 @@ self-containers/oracle/oracleData/database/**
 self-containers/oracle/oracleData/docker-images/**
 self-containers/oracle/oracleData/enterprise/**
 /self-containers/oracle/oracleData/docker-images/
+elk_prometheus_grafana_zipkin_mysql_v1/mysql-80/**
