@@ -165,6 +165,19 @@ services:
       MYSQL_PASSWORD: ${MYSQL80_PASSWORD}
       MYSQL_ROOT_PASSWORD: ${MYSQL80_ROOT_PASSWORD}
   #----------------------------------------------------------------------------------------
+  mysql-57:
+    image: mysql:5.7
+    container_name: mysql57
+    ports:
+      - ${MYSQL57_PORT}:3306
+    volumes:
+      - "./mysql-57:/var/lib/mysql/"
+    environment:
+      MYSQL_DATABASE: ${MYSQL57_DATABASE}
+      MYSQL_USERNAME: ${MYSQL57_USERNAME}
+      MYSQL_PASSWORD: ${MYSQL57_PASSWORD}
+      MYSQL_ROOT_PASSWORD: ${MYSQL57_ROOT_PASSWORD}
+  #----------------------------------------------------------------------------------------
 
 volumes:
   elastcsearch:

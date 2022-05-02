@@ -6,7 +6,7 @@ scrape_configs:
     scrape_interval: 2s
     metrics_path: "/actuator/prometheus"
     static_configs:
-      - targets: ['192.168.15.14:31302']
+      - targets: ['192.168.15.16:31302']
   
   ############################################# Microservice identification sample - 1
   
@@ -14,7 +14,7 @@ scrape_configs:
     scrape_interval: 2s
     metrics_path: "/actuator/prometheus"
     static_configs:
-      - targets: ['192.168.15.14:31304']
+      - targets: ['192.168.15.16:31304']
   
   ############################################# Microservice identification sample - 2
   
@@ -22,4 +22,4 @@ scrape_configs:
     scrape_interval: 2s
     metrics_path: "/actuator/prometheus"
     static_configs:
-      - targets: ['192.168.15.14:31303']
+      - targets: ['192.168.15.16:31303']
