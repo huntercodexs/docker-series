@@ -15,6 +15,25 @@ services:
         target: /usr/share/nginx/html
         read_only: false
   #----------------------------------------------------------------------------------------
+  #################################
+  # NOTE: IS NOT WORKING CORRECTLY
+  #################################
+  nginx-latest-unified:
+    container_name: nginx-latest-unified
+    image: nginx:latest
+    privileged: true
+    ports:
+      - ${NGINX_UNIFIED_PORT}:80
+    volumes:
+      - type: bind
+        source: ./nginx/unified.nginx.conf
+        target: /etc/nginx/nginx.conf
+        read_only: true
+      - type: bind
+        source: ./app
+        target: /usr/share/nginx/html
+        read_only: false
+  #----------------------------------------------------------------------------------------
   nginx-latest:
     container_name: nginx-latest
     image: nginx:latest
