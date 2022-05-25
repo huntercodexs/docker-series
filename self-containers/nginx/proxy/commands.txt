@@ -1,0 +1,56 @@
+
+sudo openssl req -x509 -nodes -days 365 -newkey rsa:2048 -keyout app1.key -out app1.crt
+
+Generating a RSA private key
+.....................................................................................+++++
+..............+++++
+writing new private key to 'app1.key'
+-----
+You are about to be asked to enter information that will be incorporated
+into your certificate request.
+What you are about to enter is what is called a Distinguished Name or a DN.
+There are quite a few fields but you can leave some blank
+For some fields there will be a default value,
+If you enter '.', the field will be left blank.
+-----
+Country Name (2 letter code) [AU]:BR
+State or Province Name (full name) [Some-State]:Sao Paulo
+Locality Name (eg, city) []:Taubate
+Organization Name (eg, company) [Internet Widgits Pty Ltd]:Huntercodexs    
+Organizational Unit Name (eg, section) []:Software Developer
+Common Name (e.g. server FQDN or YOUR name) []:J DE O TEIXEIRA   
+Email Address []:huntercodexs@gmail.com
+
+############################################################################################
+
+sudo openssl req -x509 -nodes -days 365 -newkey rsa:2048 -keyout app2.key -out app2.crt
+
+Generating a RSA private key
+.......+++++
+....................+++++
+writing new private key to 'app2.key'
+-----
+You are about to be asked to enter information that will be incorporated
+into your certificate request.
+What you are about to enter is what is called a Distinguished Name or a DN.
+There are quite a few fields but you can leave some blank
+For some fields there will be a default value,
+If you enter '.', the field will be left blank.
+-----
+Country Name (2 letter code) [AU]:BR
+State or Province Name (full name) [Some-State]:Sao Paulo
+Locality Name (eg, city) []:Taubate
+Organization Name (eg, company) [Internet Widgits Pty Ltd]:Huntercodexs
+Organizational Unit Name (eg, section) []:Software Developer
+Common Name (e.g. server FQDN or YOUR name) []:J DE O TEIXEIRA
+Email Address []:huntercodexs@gmail.com
+
+############################################################################################
+
+sudo vi /etc/hosts
+
+#Server: NGINX Reverse Proxy
+###########################################################
+
+192.168.15.13   app1.servername.test
+192.168.15.13   app2.servername.test
