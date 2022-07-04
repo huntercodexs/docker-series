@@ -86,8 +86,8 @@ services:
             reverse_proxy:
                 ipv4_address: 10.0.0.3
     #----------------------------------------------------------------------------------------
-    # How to access (generic sample test): http://192.168.15.13:38081/generic/index.html
-    # How to access (generic sample test): http://192.168.15.13:38081/app-name/sample/index.html
+    # How to access (generic sample test): http://{SERVER-IP}:38081/generic/index.html
+    # How to access (generic sample test): http://{SERVER-IP}:38081/app-name/sample/index.html
     nginx-latest-static:
         container_name: nginx-latest-static
         image: nginx:latest
