@@ -1,6 +1,5 @@
 trash
 *-tar
-*.jar
 *.deb
 *.exec
 *.run
@@ -26,3 +25,4 @@ self-containers/oracle/oracleData/enterprise/**
 /self-containers/app/jshunter/.gitignore
 /self-containers/app/phphunter/index.php
 /self-containers/app/generic/index.html
+openjdk8_212_mysql8/mysql-80/*

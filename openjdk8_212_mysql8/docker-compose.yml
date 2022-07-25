@@ -1,32 +1,52 @@
 version: "3.7"
 services:
     #----------------------------------------------------------------------------------------
+    #
+    # NOTE: JUST WORK WITH JAR FILE !
+    # After changes in the current project and generated jar file, copy it into docker container openjdk
+    # and run the command "docker-compose up openjdk-8u212" to feature update
+    #
+    # or execute directly command as
+    #   docker exec -it openjdk-8u212 java -jar /home/openjdk/simple-api-demo/SIMPLE-API-DEMO-22.01.1-SNAPSHOT.jar
+    #
+    # request sample: http://192.168.0.174:31890/api/simple-api-demo
+    # response: OK, it is working fine !
     openjdk-8u212:
         image: openjdk:8u212
         container_name: openjdk-8u212
-        #build: ./java/openjdk-8u212/dockerfile/
         ports:
-            - "31899:8080"
-        #volumes:
-        #  - "./java/openjdk-8u212/:/etc/openjdk-8u212/"
-        #    links:
-        #      - mysql-80
+            - "31890:31890"
+        volumes:
+            - type: bind
+              source: ./java/simple-api-demo
+              target: /home/openjdk/simple-api-demo
+              read_only: false
         tty: true
+        networks:
+            - openjdk-net
+        command: "java -jar /home/openjdk/simple-api-demo/SIMPLE-API-DEMO-22.01.1-SNAPSHOT.jar"
     #----------------------------------------------------------------------------------------
-    mysql-80:
+    mysql-80-to-jdk:
+        env_file: .env
         image: mysql:8.0
-        container_name: mysql80
+        container_name: mysql-80-to-jdk
         ports:
             - "3706:3306"
         volumes:
-            - "./mysql-80:/var/lib/mysql/"
+            - type: bind
+              source: ./mysql-80
+              target: /var/lib/mysql/
+              read_only: false
         environment:
             MYSQL_DATABASE: ${MYSQL80_DATABASE}
             MYSQL_USERNAME: ${MYSQL80_USERNAME}
             MYSQL_PASSWORD: ${MYSQL80_PASSWORD}
             MYSQL_ROOT_PASSWORD: ${MYSQL80_ROOT_PASSWORD}
+        tty: true
+        networks:
+            - openjdk-net
     #----------------------------------------------------------------------------------------
 
 networks:
-    self_containers_gateway:
+    openjdk-net:
         driver: bridge
