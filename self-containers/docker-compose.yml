@@ -7,6 +7,7 @@ services:
     # ==> IN PROGRESS
     #
     nginx-latest-unified:
+        env_file: .env
         container_name: nginx-latest-unified
         image: nginx:latest
         privileged: true
@@ -63,6 +64,7 @@ services:
                 ipv4_address: 10.0.0.100
                 
     nginx-reverse-proxy-app1:
+        env_file: .env
         container_name: nginx-reverse-proxy-app1
         image: nginx:latest
         volumes:
@@ -75,6 +77,7 @@ services:
                 ipv4_address: 10.0.0.2
             
     nginx-reverse-proxy-app2:
+        env_file: .env
         container_name: nginx-reverse-proxy-app2
         image: nginx:latest
         volumes:
@@ -89,6 +92,7 @@ services:
     # How to access (generic sample test): http://{SERVER-IP}:38081/generic/index.html
     # How to access (generic sample test): http://{SERVER-IP}:38081/app-name/sample/index.html
     nginx-latest-static:
+        env_file: .env
         container_name: nginx-latest-static
         image: nginx:latest
         ports:
@@ -100,6 +104,7 @@ services:
               read_only: false
     #----------------------------------------------------------------------------------------
     nginx-latest:
+        env_file: .env
         container_name: nginx-latest
         image: nginx:latest
         privileged: true
@@ -127,6 +132,7 @@ services:
             - php80
     #----------------------------------------------------------------------------------------
     php80:
+        env_file: .env
         container_name: php80
         privileged: true
         environment:
@@ -291,19 +297,35 @@ services:
               read_only: true
         tty: true
     #----------------------------------------------------------------------------------------
+    #----------------------------------------------------------------------------------------
+    #
+    # NOTE: JUST WORK WITH JAR FILE !
+    # After changes in the current project and generated jar file, copy it into docker container openjdk
+    # and run the command "docker-compose up openjdk-8u212" to feature update
+    #
+    # or execute directly command as
+    #   docker exec -it openjdk-8u212 java -jar /home/openjdk/simple-api-demo/SIMPLE-API-DEMO-22.01.1-SNAPSHOT.jar
+    #
+    # request sample: http://192.168.0.174:31890/api/simple-api-demo
+    # response: OK, it is working fine !
     openjdk-8u212:
+        env_file: .env
         image: openjdk:8u212
         container_name: openjdk-8u212
-        #build: ./java/openjdk-8u212/dockerfile/
         ports:
-            - "31899:8080"
-        #volumes:
-        #  - "./java/openjdk-8u212/:/etc/openjdk-8u212/"
-        #    links:
-        #      - mysql-80
+            - "31890:31890"
+        volumes:
+            - type: bind
+              source: ./java/simple-api-demo
+              target: /home/openjdk/simple-api-demo
+              read_only: false
         tty: true
+        networks:
+            - openjdk-net
+        command: "java -jar /home/openjdk/simple-api-demo/SIMPLE-API-DEMO-22.01.1-SNAPSHOT.jar"
     #----------------------------------------------------------------------------------------
     ubuntu-2004:
+        env_file: .env
         image: ubuntu:20.04
         container_name: ubuntu-2004
         #    build: ./ubuntu-2004/dockerfile/
@@ -316,6 +338,7 @@ services:
         tty: true
     #----------------------------------------------------------------------------------------
     ubuntu-1804:
+        env_file: .env
         image: ubuntu:18.04
         container_name: ubuntu-1804
         #    build: ./ubuntu-1804/dockerfile/
@@ -327,6 +350,8 @@ services:
         links:
             - mysql-57
         tty: true
+        networks:
+            - self_containers_gateway
     #----------------------------------------------------------------------------------------
     #
     # NOTE: use the oracle_builder.sh in self-containers directory
@@ -447,6 +472,7 @@ services:
         tty: true
     #----------------------------------------------------------------------------------------
     mysql-80:
+        env_file: .env
         image: mysql:8.0
         container_name: mysql80
         ports:
@@ -460,6 +486,7 @@ services:
             MYSQL_ROOT_PASSWORD: ${MYSQL80_ROOT_PASSWORD}
     #----------------------------------------------------------------------------------------
     mysql-57:
+        env_file: .env
         image: mysql:5.7
         container_name: mysql57
         ports:
@@ -492,6 +519,33 @@ services:
         stdin_open: true
         tty: true
     #----------------------------------------------------------------------------------------
+    # After up container run the commands below:
+    #   /usr/local/bin/python -m pip install --upgrade pip
+    #   pip3 install flask
+    #   pip3 install -U flask-cors
+    #
+    # GET http://192.168.0.174:35000/api/welcome
+    # POST http://192.168.0.174:35000/api/article {"name": "Tester"}
+    python3:
+        env_file: .env
+        image: python:3
+        container_name: python3
+        ports:
+            - ${PYTHON3_PORT1}:5000
+            - ${PYTHON3_PORT2}:8080
+            - ${PYTHON3_PORT3}:31800
+        volumes:
+            - type: bind
+              source: ./python3/pysimple
+              target: /home/python3/pysimple
+              read_only: false
+#        links:
+#            - mysql-57
+#            - mysql-80
+        tty: true
+        networks:
+            - open_network
+    #----------------------------------------------------------------------------------------
 
 networks:
     self_containers_gateway:
@@ -504,6 +558,8 @@ networks:
         ipam:
             config:
                 - subnet: 10.0.0.0/16
+    openjdk-net:
+        driver: bridge
 #----------------------------------------------------------------------------------------
 volumes:
     elasticsearch:
