@@ -1,0 +1,44 @@
+version: "3.7"
+services:
+    
+    #----------------------------------------------------------------------------------------
+    apache2:
+        env_file: .env
+        image: httpd
+        container_name: apache2
+        ports:
+            - ${APACHE2_PORT}:80
+        volumes:
+            - type: bind
+              source: ./apache2/web
+              target: /usr/local/apache2/htdocs
+              read_only: false
+        tty: true
+        networks:
+            - open_network
+        depends_on:
+            - php80
+        links:
+            - php80
+    #----------------------------------------------------------------------------------------
+    php80:
+        env_file: .env
+        container_name: php80
+        privileged: true
+        environment:
+            PHP_IDE_CONFIG: ${PHP_IDE_CONFIG}
+        volumes:
+            - type: bind
+              source: ./app
+              target: /var/www/app
+              read_only: false
+        build:
+            context: ./php/80
+            dockerfile: php80.dockerfile
+        networks:
+            - open_network
+    #----------------------------------------------------------------------------------------
+
+networks:
+    open_network:
+        external: true
