@@ -546,6 +546,34 @@ services:
         networks:
             - open_network
     #----------------------------------------------------------------------------------------
+    # docker network create open_network
+    # npm init
+    # npm install express --save
+    # npm install -g npm@8.15.0
+    # npm install -g nodemon
+    nodejs:
+        env_file: .env
+        #image: node
+        build:
+            context: ./nodejs/app
+            dockerfile: nodejs.dockerfile
+        container_name: nodejs
+        ports:
+            - ${NODEJS_PORT1}:3000
+            - ${NODEJS_PORT2}:8080
+        volumes:
+            - type: bind
+              source: ./nodejs/app
+              target: /home/nodejs/app
+              read_only: false
+            - type: bind
+              source: ./nodejs/app/node_modules
+              target: /home/nodejs/app/node_modules
+              read_only: false
+        tty: true
+        networks:
+            - open_network
+    #----------------------------------------------------------------------------------------
 
 networks:
     self_containers_gateway:
