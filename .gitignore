@@ -26,3 +26,4 @@ self-containers/oracle/oracleData/enterprise/**
 /self-containers/app/jshunter/.gitignore
 /self-containers/app/phphunter/index.php
 /self-containers/app/generic/index.html
+/self-containers/nodejs/app/node_modules/
