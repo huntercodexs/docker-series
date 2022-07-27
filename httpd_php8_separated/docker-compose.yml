@@ -1,0 +1,56 @@
+version: "3.7"
+services:
+    
+    #----------------------------------------------------------------------------------------
+    apache2:
+        env_file: .env
+        image: httpd
+        container_name: apache2
+        ports:
+            - ${APACHE2_PORT}:80
+        volumes:
+            - type: bind
+              source: ./apache2/conf/httpd.conf
+              target: /usr/local/apache2/conf/httpd.conf
+              read_only: false
+            - type: bind
+              source: ./apache2/conf/demo.httpd.conf
+              target: /usr/local/apache2/conf/demo.httpd.conf
+              read_only: false
+            - type: bind
+              source: ./apache2/conf/virtualhost.conf
+              target: /usr/local/apache2/conf/virtualhost.conf
+              read_only: false
+            - type: bind
+              source: ./app/
+              target: /var/www/html/
+              read_only: false
+        tty: true
+        depends_on:
+            - php8
+        networks:
+            - open_network
+    #----------------------------------------------------------------------------------------
+    php8:
+        env_file: .env
+        container_name: php8
+        build:
+            context: ./php8
+            dockerfile: php8.dockerfile
+        privileged: true
+        environment:
+            PHP_IDE_CONFIG: ${PHP_IDE_CONFIG}
+        ports:
+            - ${PHP8_PORT}:9000
+        volumes:
+            - type: bind
+              source: ./app/
+              target: /var/www/html/
+              read_only: false
+        networks:
+            - open_network
+    #----------------------------------------------------------------------------------------
+
+networks:
+    open_network:
+        external: true
