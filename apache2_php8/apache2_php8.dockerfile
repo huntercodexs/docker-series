@@ -1,8 +1,8 @@
-FROM php:8.0-fpm
+FROM ubuntu/apache2
 
-ENV DIR_WWW "/var/www/app"
+WORKDIR /var/www/html
 
-RUN echo "PHP 8.0 BUILDER IS STARTING ..."
+ENV DIR_WWW /var/www/html
 
 ## UPDATE
 RUN apt-get update && apt-get upgrade -y \
@@ -18,16 +18,9 @@ RUN apt-get install -y \
     pkg-config \
     libssl-dev
 
-## Node
-#RUN apt-get install -y gnupg2
-#RUN rm -rf /var/lib/apt/lists/ && \
-#    curl -sL https://deb.nodesource.com/setup_12.x | bash -
-#RUN apt-get install nodejs -y
-
 ## ZIP
 RUN apt-get install -y libzip-dev && \
-    apt-get install -y zip && \
-    docker-php-ext-install zip
+    apt-get install -y zip
 
 ## EXTRAS
 RUN apt install -y nano
@@ -39,25 +32,29 @@ RUN apt install -y alien
 RUN apt-get install -y libaio1
 RUN apt-get install -y tzdata
 
+## PHP INSTALL
+RUN apt-get -y install php8.0 libapache2-mod-php8.0
+RUN service apache2 restart
+
 ## ESSENTIAL
 RUN apt-get install -y zstd
-RUN apt install -y php-common/stable
+RUN apt install -y php-common
 
 ## PDO
 #RUN docker-php-ext-install pdo
 #RUN docker-php-ext-install pdo pdo_mysql
 
 ## GD
-RUN docker-php-ext-configure gd
-RUN docker-php-ext-install gd
-RUN docker-php-ext-install gd mysqli
-RUN docker-php-ext-install dom
-RUN docker-php-ext-install intl
+#RUN docker-php-ext-configure gd
+#RUN docker-php-ext-install gd
+#RUN docker-php-ext-install gd mysqli
+#RUN docker-php-ext-install dom
+#RUN docker-php-ext-install intl
 
 ## PHP LIBRARIES
-RUN docker-php-ext-install opcache
-RUN docker-php-ext-install bcmath
-RUN docker-php-ext-install mbstring
+#RUN docker-php-ext-install opcache
+#RUN docker-php-ext-install bcmath
+#RUN docker-php-ext-install mbstring
 
 ## XDEBUG
 #RUN pecl install xdebug
@@ -166,5 +163,20 @@ RUN curl -sS https://getcomposer.org/installer | php -- --install-dir=/usr/local
 RUN groupadd docker_series -g 999
 RUN useradd docker_series -g docker_series -d $DIR_WWW
 
-EXPOSE 9000
-CMD ["php-fpm"]
+COPY ./apache2/conf/app.local.conf /etc/apache2/sites-available/app.local.conf
+
+RUN a2ensite app.local.conf
+
+#RUN systemctl restart apache2
+#RUN systemctl reload apache2
+RUN service apache2 restart
+RUN a2enmod rewrite
+#RUN a2enmod restart
+
+#COPY ./app/* /var/www/public_html/
+COPY ./app/* /var/www/html/
+
+EXPOSE 80
+EXPOSE 8080
+EXPOSE 38989
+
