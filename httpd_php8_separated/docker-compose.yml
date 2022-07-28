@@ -2,24 +2,32 @@ version: "3.7"
 services:
     
     #----------------------------------------------------------------------------------------
+    # Server version: Apache/2.4.54 (Unix)
+    # Server built:   Jul 12 2022 04:31:28
+    #
+    # Execute the script "helper.sh share" after docker-compose up -d
+    #   > docker exec -it apache2 /bin/bash
+    #   > /home/apache2/helper.sh share
+    # Edit the files in /httpd_php8_separated/apache2/conf/ in this project path [conf|htdocs]
+    #   > httpd.conf
+    #   > sites-available.conf
+    # Execute again the script "helper.sh deploy"
+    #   > /home/apache2/helper.sh deploy
+    # Restart apache service: "service apache2 restart"
+    # Check if a2enmod is ok: "a2enmod rewrite"
+    # If needed check virtualhost name is ok: "a2ensite app.local.conf"
     apache2:
         env_file: .env
         image: httpd
         container_name: apache2
         ports:
-            - ${APACHE2_PORT}:80
+            - ${APACHE2_PORT1}:80
+            - ${APACHE2_PORT2}:443
+        privileged: true
         volumes:
             - type: bind
-              source: ./apache2/conf/httpd.conf
-              target: /usr/local/apache2/conf/httpd.conf
-              read_only: false
-            - type: bind
-              source: ./apache2/conf/demo.httpd.conf
-              target: /usr/local/apache2/conf/demo.httpd.conf
-              read_only: false
-            - type: bind
-              source: ./apache2/conf/virtualhost.conf
-              target: /usr/local/apache2/conf/virtualhost.conf
+              source: ./apache2/
+              target: /home/apache2/
               read_only: false
             - type: bind
               source: ./app/
@@ -27,21 +35,47 @@ services:
               read_only: false
         tty: true
         depends_on:
-            - php8
+            - php
+        links:
+            - php
+        networks:
+            - open_network
+        environment:
+            WEB_PHP_SOCKET: "php:9000"
+            WEB_PHP_TIMEOUT: 600
+            WEB_DOCUMENT_ROOT: "/var/www/html"
+
+    webserver:
+        env_file: .env
+        container_name: webserver
+        image: webdevops/apache:alpine
+        depends_on:
+            - php
+        links:
+            - php
+        ports:
+            - "80:80"
+            - "443:443"
+        volumes:
+            - ".:/var/www/html"
+        environment:
+            WEB_PHP_SOCKET: "php:9000"
+            WEB_PHP_TIMEOUT: 600
+            WEB_DOCUMENT_ROOT: "/var/www/html"
         networks:
             - open_network
     #----------------------------------------------------------------------------------------
-    php8:
+    php:
         env_file: .env
-        container_name: php8
+        container_name: php
         build:
-            context: ./php8
-            dockerfile: php8.dockerfile
+            context: ./php
+            dockerfile: php.dockerfile
         privileged: true
         environment:
             PHP_IDE_CONFIG: ${PHP_IDE_CONFIG}
         ports:
-            - ${PHP8_PORT}:9000
+            - ${PHP_PORT}:9000
         volumes:
             - type: bind
               source: ./app/

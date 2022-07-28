@@ -27,3 +27,5 @@ self-containers/oracle/oracleData/enterprise/**
 /self-containers/app/phphunter/index.php
 /self-containers/app/generic/index.html
 /self-containers/nodejs/app/node_modules/
+/httpd_php8_separated/apache2/conf/**
+/httpd_php8_separated/apache2/htdocs/**
