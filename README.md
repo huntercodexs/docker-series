@@ -15,6 +15,15 @@ Please use the branch selection to access others configurations to most need and
 
 - HTTPD
 - PHP-FPM
+- DATABASES
+  - MYSQL
+  - MSSQL
+  - PGSQL
+  - MONGO
+  - FIREBIRD
+  - ORACLE
+  - SQLITE
+  - REDIS
 
 -------------
 
