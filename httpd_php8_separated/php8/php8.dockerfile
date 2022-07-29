@@ -1,8 +1,8 @@
 FROM php:8.0-fpm
 
-ENV DIR_WWW "/var/www/app"
+ENV DIR_WWW "/var/www/webserver"
 
-RUN echo "PHP 8.0 BUILDER IS STARTING ..."
+WORKDIR $DIR_WWW
 
 ## UPDATE
 RUN apt-get update && apt-get upgrade -y \
@@ -74,6 +74,9 @@ RUN docker-php-ext-install mbstring
 
 ## COMPOSER
 RUN curl -sS https://getcomposer.org/installer | php -- --install-dir=/usr/local/bin --filename=composer
+
+## MYSQL
+#RUN docker-php-ext-install mysqli && docker-php-ext-enable mysqli
 
 ## PDO-SQLSRV (MSSQL) (Ubuntu 20.04)
 #RUN curl https://packages.microsoft.com/keys/microsoft.asc | apt-key add -
