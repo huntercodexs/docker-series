@@ -7,6 +7,10 @@ trash
 .idea
 nodes
 *.zip
+*.rpm
+*.h
+*.c
+*.d
 #Webserver
 /httpd_php8_databases_separated/webserver/conf/extra
 /httpd_php8_databases_separated/webserver/conf/original
@@ -17,3 +21,6 @@ nodes
 /httpd_php8_databases_separated/oracle/oradata/dbconfig
 /httpd_php8_databases_separated/oracle/oradata/ORCLCDB
 /httpd_php8_databases_separated/oracle/oradata/.ORCLCDB.created
+#Oracle Libs
+/httpd_php8_databases_separated/php8/php-drivers/oracle/instantclient/*.rpm
+/httpd_php8_databases_separated/php8/php-drivers/oracle/lib/**
