@@ -6,8 +6,12 @@ trash
 *.run
 .idea
 nodes
-/httpd_php8_separated/webserver/conf/extra
-/httpd_php8_separated/webserver/conf/original
-/httpd_php8_separated/webserver/conf/magic
-/httpd_php8_separated/webserver/conf/mime.types
-/httpd_php8_separated/webserver/htdocs
+*.zip
+/httpd_php8_databases_separated/webserver/conf/extra
+/httpd_php8_databases_separated/webserver/conf/original
+/httpd_php8_databases_separated/webserver/conf/magic
+/httpd_php8_databases_separated/webserver/conf/mime.types
+/httpd_php8_databases_separated/webserver/htdocs
+/httpd_php8_databases_separated/oracle/oradata/dbconfig
+/httpd_php8_databases_separated/oracle/oradata/ORCLCDB
+/httpd_php8_databases_separated/oracle/oradata/.ORCLCDB.created

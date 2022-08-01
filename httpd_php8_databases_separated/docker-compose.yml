@@ -34,14 +34,53 @@ services:
         networks:
             - webserver_network
     #----------------------------------------------------------------------------------------
+    # IMPORTANT:
+    #   The builder of this container is very long and need a long time to finish correctly
     #
-    # NOTE: use the oracle_builder.sh in self-containers directory
-    # command: ./oracle/oracle_build.sh
+    # REQUIRED:
+    #   Database file: LINUX.X64_193000_db_home.zip
+    #   This file can be downloaded in https://www.oracle.com/database/technologies/oracle-database-software-downloads.html
     #
-    oracle-fake:
+    # EDITION:
+    #   ee - Enterprise Edition
+    #   se2 - Standard Edition
+    #   xe - Express Edition
+    #
+    # STEPS AFTER BUILD:
+    #   - Set Password Administration
+    #       HOST(your machine): docker exec -it oraclelinux ./setPassword.sh _YOUR_ORACLE_PASSWORD_
+    #   - Access the database CLI
+    #       GUEST(inside oraclelinux): sqlplus sys/_YOUR_ORACLE_PASSWORD_@ORCLPDB1 as sysdba
+    #   - Create User
+    #       GUEST(inside oraclelinux): CREATE USER DEVEL IDENTIFIED BY _YOUR_ORACLE_PASSWORD_;
+    #       GUEST(inside oraclelinux): GRANT CREATE SESSION, CREATE TABLE TO devel;
+    #       GUEST(inside oraclelinux): ALTER USER devel QUOTA 50m ON SYSTEM;
+    #       GUEST(inside oraclelinux): CREATE SMALLFILE TABLESPACE DEVEL DATAFILE '/opt/oracle/oradata/ORCLCDB/ORCLPDB1/devel.dbf' SIZE 1G;
+    #       GUEST(inside oraclelinux): ALTER DATABASE DEFAULT TABLESPACE DEVEL;
+    #   - How to Connect
+    #       GUEST(inside oraclelinux): sqlplus devel/_YOUR_ORACLE_PASSWORD_@ORCLPDB1;
+    #       * Please see the details to connection from SGBD DBeaver in folder oracle/midias/DBeaver-Oracle-Connection-Details.png
+    #
+    # ** All rights reserved to ORACLE - oracle.com
+    #
+    oraclelinux:
         env_file: .env
-        container_name: oracle-fake
-        image: alpine
+        container_name: oraclelinux
+        build:
+            context: ./oracle/19.3.0
+            args:
+                DB_EDITION: ${DB_EDITION}
+                ORACLE_PASSWORD: ${ORACLE_PASSWORD}
+            #shm_size: 1G
+        volumes:
+            - ./oracle/share:/home/oracle/share
+            - ./oracle/oradata:/opt/oracle/oradata
+        ports:
+            - ${ORACLE_PORT1}:1521
+            - ${ORACLE_PORT2}:5500
+        tty: true
+        networks:
+            - webserver_network
     #----------------------------------------------------------------------------------------
     redis:
         env_file: .env

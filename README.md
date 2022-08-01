@@ -21,7 +21,7 @@ Please use the branch selection to access others configurations to most need and
   - PGSQL
   - MONGO
   - FIREBIRD
-  - ORACLE
+  - ORACLE (All right reserved to oracle.com - &copy; 2022 Oracle)
   - SQLITE
   - REDIS
 
