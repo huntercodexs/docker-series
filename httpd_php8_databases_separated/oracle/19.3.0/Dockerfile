@@ -120,6 +120,8 @@ RUN chmod ug+x $INSTALL_DIR/*.sh && \
 
 FROM base
 
+ARG ORACLE_PASSWORD
+
 USER oracle
 COPY --chown=oracle:dba --from=builder $ORACLE_BASE $ORACLE_BASE
 
