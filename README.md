@@ -14,7 +14,7 @@ Please use the branch selection to access others configurations to most need and
 # Dockers Configurations Contained
 
 - HTTPD
-- PHP-FPM
+- PHP8-FPM
 - DATABASES
   - MYSQL
   - MSSQL
@@ -117,10 +117,16 @@ Access the microservice Oracle Linux
     sqlplus devel/_YOUR_ORACLE_PASSWORD_@ORCLPDB1;
     * Please see the details to connection from SGBD DBeaver in folder oracle/midias/DBeaver-Oracle-Connection-Details.png
   
+  - Access the Enterprise Manager: https://192.168.0.174:5500/em
+    - username: sys
+    - password: _YOUR_ORACLE_PASSWORD_
+    - container name: ORCLCDB1
+  
   ** All rights reserved to ORACLE - oracle.com
 </pre>
 
 > Database Connection Sample
 ![img.png](httpd_php8_databases_separated/oracle/midias/DBeaver-Oracle-Connection-Details.png)
+![img.png](httpd_php8_databases_separated/oracle/midias/Oracle-Database-EM.png)
 
 ---------------
