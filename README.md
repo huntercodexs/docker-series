@@ -55,8 +55,14 @@ Extension directory shared between HOST and Container
 
 Edit the /usr/local/etc/php/php.ini file and restart the service or container php8, by example
 
+from 
 <pre>
-from ;extension=pdo_oci to extension=pdo_oci 
+;extension=pdo_oci
+</pre>
+
+to
+<pre>
+extension=pdo_oci
 </pre>
 
 ------------
