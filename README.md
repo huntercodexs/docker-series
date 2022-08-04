@@ -137,38 +137,36 @@ tar -xvf oraclelinux-database-scripts-19c.tar.bz2
 
 > STEPS AFTER BUILD
 
-- Set Password Administration
+- HOST(your machine):
 
+Set Password Administration
 <pre>
-HOST(your machine): docker exec -it oraclelinux ./setPassword.sh _YOUR_ORACLE_PASSWORD_
+docker exec -it oraclelinux ./setPassword.sh _YOUR_ORACLE_PASSWORD_
 </pre>
 
-- Access the database CLI
-
+- Access the database container
 <pre>
-HOST(your machine): docker exec -it oraclelinux /bin/bash
-GUEST(inside oraclelinux): sqlplus sys/_YOUR_ORACLE_PASSWORD_@ORCLPDB1 as sysdba
+docker exec -it oraclelinux /bin/bash
 </pre>
 
-- Create User
+- GUEST(inside oraclelinux):
 
+Create User
 <pre>
-GUEST(inside oraclelinux):
-  sqlplus sys/_YOUR_ORACLE_PASSWORD_@ORCLPDB1 as sysdba
-    CREATE USER DEVEL IDENTIFIED BY _YOUR_ORACLE_PASSWORD_;
-    GRANT CREATE SESSION, CREATE TABLE TO DEVEL;
-    ALTER USER DEVEL QUOTA 50m ON SYSTEM;
-    CREATE SMALLFILE TABLESPACE DEVEL DATAFILE '/opt/oracle/oradata/ORCLCDB/ORCLPDB1/devel.dbf' SIZE 1G;
-    ALTER DATABASE DEFAULT TABLESPACE DEVEL;
-    SELECT * FROM ALL_USERS au;
-    SELECT * FROM ALL_USERS au WHERE au.USERNAME = 'DEVEL';
-    EXIT;
+sqlplus sys/_YOUR_ORACLE_PASSWORD_@ORCLPDB1 as sysdba
+CREATE USER DEVEL IDENTIFIED BY _YOUR_ORACLE_PASSWORD_;
+GRANT CREATE SESSION, CREATE TABLE TO DEVEL;
+ALTER USER DEVEL QUOTA 50m ON SYSTEM;
+CREATE SMALLFILE TABLESPACE DEVEL DATAFILE '/opt/oracle/oradata/ORCLCDB/ORCLPDB1/devel.dbf' SIZE 1G;
+ALTER DATABASE DEFAULT TABLESPACE DEVEL;
+SELECT * FROM ALL_USERS au;
+SELECT * FROM ALL_USERS au WHERE au.USERNAME = 'DEVEL';
+EXIT;
 </pre>
 
-- Connect on database using the new user
-
+Connect on database using the new user
 <pre>
-GUEST(inside oraclelinux): sqlplus devel/_YOUR_ORACLE_PASSWORD_@ORCLPDB1;
+sqlplus devel/_YOUR_ORACLE_PASSWORD_@ORCLPDB1;
 </pre>
 
 - Access the microservice Oracle Linux: 
