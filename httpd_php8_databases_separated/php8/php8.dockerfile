@@ -2,7 +2,7 @@ FROM php:8.1.0-fpm
 
 ENV DIR_WWW "/var/www/webserver"
 
-WORKDIR "/opt/oracle/"
+WORKDIR "/opt"
 
 ## UPDATE
 RUN apt-get update && apt-get upgrade -y \
@@ -69,6 +69,8 @@ RUN curl -sS https://getcomposer.org/installer | php -- --install-dir=/usr/local
 RUN docker-php-ext-install pdo
 
 ## ORACLE
+RUN mkdir -p /opt/oracle
+
 RUN wget https://download.oracle.com/otn_software/linux/instantclient/193000/instantclient-sdk-linux.x64-19.3.0.0.0dbru.zip
 RUN wget https://download.oracle.com/otn_software/linux/instantclient/193000/instantclient-basic-linux.x64-19.3.0.0.0dbru.zip
 RUN wget https://download.oracle.com/otn_software/linux/instantclient/193000/instantclient-sqlplus-linux.x64-19.3.0.0.0dbru.zip
@@ -77,19 +79,20 @@ RUN unzip instantclient-sdk-linux.x64-19.3.0.0.0dbru.zip
 RUN unzip instantclient-basic-linux.x64-19.3.0.0.0dbru.zip
 RUN unzip instantclient-sqlplus-linux.x64-19.3.0.0.0dbru.zip
 
-RUN mv /opt/oracle/instantclient_19_3 /opt/oracle/instantclient
+RUN mv /opt/instantclient_19_3 /opt/oracle/instantclient
+RUN mv /opt/instantclient*.zip /opt/oracle/
 
-ENV LD_LIBRARY_PATH /opt/oracle/instantclient/:$LD_LIBRARY_PATH
+ENV ORACLE_SID ORCLCDB
 ENV ORACLE_HOME /opt/oracle/instantclient
 ENV PATH /opt/oracle/instantclient/:$PATH
-ENV ORACLE_SID ORCLCDB
 ENV TNS_ADMIN /opt/oracle/instantclient/network/admin
+ENV LD_LIBRARY_PATH /opt/oracle/instantclient/:$LD_LIBRARY_PATH
 
-RUN export LD_LIBRARY_PATH
-RUN export ORACLE_HOME
 RUN export PATH
-RUN export ORACLE_SID
 RUN export TNS_ADMIN
+RUN export ORACLE_SID
+RUN export ORACLE_HOME
+RUN export LD_LIBRARY_PATH
 
 RUN ldconfig
 
