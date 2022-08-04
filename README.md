@@ -58,10 +58,6 @@ Edit the files in /httpd_php8_separated/webserver/conf/ in this project path [co
 
 Execute again the script "webserver.sh restart"
   - /home/webserver/webserver.sh restart
-
-Access the microservice Oracle Linux
-  - http://192.168.0.174:38080/microservice-oraclelinux/
-
 </pre>
 
 -------------
@@ -116,12 +112,23 @@ Access the microservice Oracle Linux
     GUEST(inside oraclelinux):
     sqlplus devel/_YOUR_ORACLE_PASSWORD_@ORCLPDB1;
     * Please see the details to connection from SGBD DBeaver in folder oracle/midias/DBeaver-Oracle-Connection-Details.png
-  
-  - Access the Enterprise Manager: https://192.168.0.174:5500/em
+
+  - Access the microservice Oracle Linux: 
+    - http://192.168.0.174:38080/microservice-oraclelinux/
+
+  - Access the Enterprise Manager: 
+    - https://192.168.0.174:5500/em
     - username: sys
     - password: _YOUR_ORACLE_PASSWORD_
-    - container name: ORCLCDB1
-  
+    - container name: ORCLPDB1
+      to get this value exec in the current terminal:
+        SQL> show pdbs;
+        
+            CON_ID CON_NAME			  OPEN MODE  RESTRICTED
+        ---------- ------------------------------ ---------- ----------
+             3 ORCLPDB1			  READ WRITE NO
+        SQL> 
+
   ** All rights reserved to ORACLE - oracle.com
 </pre>
 
