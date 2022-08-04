@@ -27,23 +27,41 @@ Please use the branch selection to access others configurations to most need and
 
 -------------
 
-# How to use Webserver HTTPD+PHP8-FPM
+# About PHP8
 
 <pre>
-# Server version: Apache/2.4.54 (Unix)
-# Server built:   Jul 12 2022 04:31:28
-#
-# Execute the script "webserver.sh prepare" after docker-compose up -d
-#   > docker exec -it webserver /bin/bash
-#   > /home/apache2/webserver.sh prepare
-# Edit the files in /httpd_php8_separated/webserver/conf/ in this project path [conf|htdocs]
-#   > httpd.conf
-#   > sites-available.conf
-# Execute again the script "webserver.sh restart"
-#   > /home/webserver/webserver.sh restart
-# Restart apache service: "service webserver restart"
-# Check if a2enmod is ok: "a2enmod rewrite"
-# If needed check virtualhost name is ok: "a2ensite app.local.conf"
+  Ini files: 
+    /usr/local/etc/php/php.ini
+    /usr/local/etc/php/conf.d/
+  Extensions: 
+    /usr/local/lib/php/extensions/no-debug-non-zts-20210902/
+  
+  ** IMPORTANT **
+  - Edit the /usr/local/etc/php/php.ini file and restart the service or container php8
+</pre>
+
+------------
+
+# How to use Webserver HTTPD
+
+<pre>
+Server version: Apache/2.4.54 (Unix)
+Server built:   Jul 12 2022 04:31:28
+
+Execute the script "webserver.sh prepare" after docker-compose up -d
+  - docker exec -it webserver /bin/bash
+  - /home/apache2/webserver.sh prepare
+
+Edit the files in /httpd_php8_separated/webserver/conf/ in this project path [conf|htdocs]
+  - httpd.conf
+  - sites-available.conf
+
+Execute again the script "webserver.sh restart"
+  - /home/webserver/webserver.sh restart
+
+Access the microservice Oracle Linux
+  - http://192.168.0.174:38080/microservice-oraclelinux/
+
 </pre>
 
 -------------
@@ -53,18 +71,27 @@ Please use the branch selection to access others configurations to most need and
 <pre>
 
   IMPORTANT:
-  The builder of this container is very long and need a long time to finish correctly
-  Use the command docker-compose up --build to run in first time
-  After the first build use docker-compose up -d oraclelinux
+  - The builder of this container is very long and need a long time to finish correctly
+  - Use the command docker-compose up --build to run in first time
+  - After the first build use docker-compose up -d oraclelinux or docker-compose start oraclelinux
+  ** VERY IMPORTANT **
+    > The path oracle/oradata in current container instance "should be empty"
+    > Have sure that the oracle/oradata is empty or just have the dbconfig/ and ORCLCDB/ folders
   
   REQUIRED:
   Database file: LINUX.X64_193000_db_home.zip
   This file can be downloaded in https://www.oracle.com/database/technologies/oracle-database-software-downloads.html
+  Important: Put the LINUX.X64_193000_db_home.zip inside oracle/database before run the docker-compose
   
-  EDITION:
+  EDITION (see .env file):
   ee - Enterprise Edition
   se2 - Standard Edition
   xe - Express Edition
+
+  STEPS BEFORE BUILD:
+  - Unzip the oraclelinux-database-scripts-19c.tar.bz2 file inside the oracle/database folder
+    tar -xvf oraclelinux-database-scripts-19c.tar.bz2
+  - Check if oracle/oradata is empty or just have the dbconfig/ and ORCLCDB/ folders
   
   STEPS AFTER BUILD:
   - Set Password Administration
@@ -78,8 +105,8 @@ Please use the branch selection to access others configurations to most need and
   - Create User
     GUEST(inside oraclelinux):
     CREATE USER DEVEL IDENTIFIED BY _YOUR_ORACLE_PASSWORD_;
-    GRANT CREATE SESSION, CREATE TABLE TO devel;
-    ALTER USER devel QUOTA 50m ON SYSTEM;
+    GRANT CREATE SESSION, CREATE TABLE TO DEVEL;
+    ALTER USER DEVEL QUOTA 50m ON SYSTEM;
     CREATE SMALLFILE TABLESPACE DEVEL DATAFILE '/opt/oracle/oradata/ORCLCDB/ORCLPDB1/devel.dbf' SIZE 1G;
     ALTER DATABASE DEFAULT TABLESPACE DEVEL;
     SELECT * FROM ALL_USERS au;

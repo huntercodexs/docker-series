@@ -21,6 +21,15 @@ nodes
 /httpd_php8_databases_separated/oracle/oradata/dbconfig
 /httpd_php8_databases_separated/oracle/oradata/ORCLCDB
 /httpd_php8_databases_separated/oracle/oradata/.ORCLCDB.created
+/httpd_php8_databases_separated/oracle/database/*.sh
+/httpd_php8_databases_separated/oracle/database/*.ee
+/httpd_php8_databases_separated/oracle/database/*.se2
+/httpd_php8_databases_separated/oracle/database/*.rsp
+/httpd_php8_databases_separated/oracle/database/*.tmpl
 #Oracle Libs
 /httpd_php8_databases_separated/php8/php-drivers/oracle/instantclient/*.rpm
 /httpd_php8_databases_separated/php8/php-drivers/oracle/lib/**
+#PHP Extensions old
+/httpd_php8_databases_separated/php8/php-extensions/old/**
+#PHP ini old
+/httpd_php8_databases_separated/php8/php-ini/old/**

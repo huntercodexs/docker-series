@@ -1,19 +1,21 @@
 <?php
 
-//phpinfo();exit;
-
 #################################################
 # ORACLE DATABASE CONNECTION
 #################################################
+
 try {
 
+    /**
+     * Note: In this case the server database is working in another machine in a docker container
+     * that is called oraclelinux
+    */
     //driver:dbname[ip:port/service-name|container-name], username, password
-    //$con = new PDO("oci:dbname=//192.168.0.174:1521/ORCLPDB1", "devel", "oracle1Ipw");
-    $con = new PDO("oci:dbname=//192.168.0.174:1521/ORCLPDB1.localdomain", "devel", "oracle1Ipw");
+    $con = new PDO("oci:dbname=oraclelinux:1521/ORCLPDB1", "DEVEL", "oracle1Ipw");
     var_dump($con);
 
-    $r = $con->query("SELECT * FROM DEVEL.USERS u")->fetchAll(PDO::FETCH_ASSOC);
-    var_dump($r);
+    $r = $con->query("SELECT * FROM ALL_USERS au")->fetchAll(PDO::FETCH_ASSOC);
+    var_dump('<pre>', $r, '</pre>');
 
 } catch (PDOException $e) {
 
@@ -28,4 +30,5 @@ try {
     var_dump($error);
 }
 
+phpinfo();
 exit;
