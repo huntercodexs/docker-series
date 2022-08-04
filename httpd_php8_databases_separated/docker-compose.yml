@@ -35,28 +35,26 @@ services:
         networks:
             - webserver_network
     #----------------------------------------------------------------------------------------
-#    [DONE]
-#    oraclelinux:
-#        env_file: .env
-#        container_name: oraclelinux
-#        build:
-#            context: ./oracle/database
-#            dockerfile: oraclelinux.dockerfile
-#            args:
-#                DB_EDITION: ${DB_EDITION}
-#                ORACLE_PASSWORD: ${ORACLE_PASSWORD}
-#        volumes:
-#            - ./oracle/share:/home/oracle/share
-#            - ./oracle/oradata:/opt/oracle/oradata
-#        ports:
-#            - ${ORACLE_PORT1}:1521
-#            - ${ORACLE_PORT2}:5500
-#        tty: true
-#        networks:
-#            - default
-#            - webserver_network
+    oraclelinux:
+        env_file: .env
+        container_name: oraclelinux
+        build:
+            context: ./oracle/database
+            dockerfile: oraclelinux.dockerfile
+            args:
+                DB_EDITION: ${DB_EDITION}
+                ORACLE_PASSWORD: ${ORACLE_PASSWORD}
+        volumes:
+            - ./oracle/share:/home/oracle/share
+            - ./oracle/oradata:/opt/oracle/oradata
+        ports:
+            - ${ORACLE_PORT1}:1521
+            - ${ORACLE_PORT2}:5500
+        tty: true
+        networks:
+            - default
+            - webserver_network
     #----------------------------------------------------------------------------------------
-#    [WORK]
     mongo:
         env_file: .env
         container_name: mongo
@@ -77,7 +75,6 @@ services:
               read_only: false
         tty: true
     #----------------------------------------------------------------------------------------
-    # Run this service manually in case of error or exception
     mongo-express:
         env_file: .env
         container_name: mongo-express
