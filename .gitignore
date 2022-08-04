@@ -11,6 +11,9 @@ nodes
 *.h
 *.c
 *.d
+**/vendor/**
+/vendor/
+composer.*
 #Webserver
 /httpd_php8_databases_separated/webserver/conf/extra
 /httpd_php8_databases_separated/webserver/conf/original
@@ -33,3 +36,6 @@ nodes
 /httpd_php8_databases_separated/php8/php-extensions/old/**
 #PHP ini old
 /httpd_php8_databases_separated/php8/php-ini/old/**
+#MongoDB Dataabse
+/httpd_php8_databases_separated/mongo/MongoDB
+/httpd_php8_databases_separated/applications/microservice-mongodb/vendor

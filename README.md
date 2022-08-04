@@ -129,4 +129,28 @@ Access the microservice Oracle Linux
 ![img.png](httpd_php8_databases_separated/oracle/midias/DBeaver-Oracle-Connection-Details.png)
 ![img.png](httpd_php8_databases_separated/oracle/midias/Oracle-Database-EM.png)
 
+-------------
+
+# How to use MongoDB
+
+<pre> 
+  IMPORTANT:
+  - Check if mongo module is available in /usr/local/etc/php/php.ini and /usr/local/etc/php/conf.d/mongodb.ini
+  - Restart the webserver using the command /home/webserver/webserver.sh restart
+
+  AFTER BUILD:
+  - Access the container php8 in application folder and run the command
+    cd /var/www/webserver/microservice-mongodb
+    composer require mongodb/mongodb
+  or copy the file that are placed in /opt/mongodb to application root path
+  or run the command inside container: /home/shared/setup.sh
+  - Access the MongoDB Express: http://192.168.0.174:8090/
+    username: devel
+    password: _YOU_PASSWORD_MONGO_EXPRESS_
+  - Create a database: dbname
+  - Create a collection: users
+  - Create a documents(index): id, name
+  - Finally access the application local url: http://192.168.0.174:38080/microservice-mongodb/
+</pre>
+
 ---------------

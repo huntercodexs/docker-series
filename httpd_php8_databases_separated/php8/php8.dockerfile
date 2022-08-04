@@ -1,10 +1,13 @@
 FROM php:8.1.0-fpm
 
-ENV DIR_WWW "/var/www/webserver"
+ENV DIR_WEBSERVER "/var/www/webserver"
+ENV DIR_MS_ORACLE "/var/www/webserver/microservice-oraclelinux"
+ENV DIR_MS_MONGODB "/var/www/webserver/microservice-mongodb"
 
 WORKDIR "/opt"
 
 ## UPDATE
+#---------------------------------------------------------------------------------------------------------
 RUN apt-get update && apt-get upgrade -y \
 	libonig-dev \
 	libmcrypt-dev \
@@ -13,6 +16,7 @@ RUN apt-get update && apt-get upgrade -y \
 	libxml2-dev
 
 ## LIBRARIES
+#---------------------------------------------------------------------------------------------------------
 RUN apt-get install -y \
     libcurl4-openssl-dev \
     pkg-config \
@@ -22,11 +26,13 @@ RUN apt-get install -y \
     libaio-dev
 
 ## ZIP
+#---------------------------------------------------------------------------------------------------------
 RUN apt-get install -y libzip-dev && \
     apt-get install -y zip && \
     docker-php-ext-install zip
 
 ## EXTRAS
+#---------------------------------------------------------------------------------------------------------
 RUN apt install -y nano
 RUN apt install -y wget
 RUN apt install -y ufw
@@ -35,14 +41,17 @@ RUN apt install -y alien
 RUN apt install -y vim
 
 #RUN apt install -y ldconfig
+#---------------------------------------------------------------------------------------------------------
 RUN apt-get install -y libaio1
 RUN apt-get install -y tzdata
 
 ## ESSENTIAL
+#---------------------------------------------------------------------------------------------------------
 RUN apt-get install -y zstd
 RUN apt install -y php-common/stable
 
 ## GD
+#---------------------------------------------------------------------------------------------------------
 RUN docker-php-ext-configure gd
 RUN docker-php-ext-install gd
 RUN docker-php-ext-install gd mysqli
@@ -50,11 +59,13 @@ RUN docker-php-ext-install dom
 RUN docker-php-ext-install intl
 
 ## PHP LIBRARIES
+#---------------------------------------------------------------------------------------------------------
 RUN docker-php-ext-install opcache
 RUN docker-php-ext-install bcmath
 RUN docker-php-ext-install mbstring
 
 ## XDEBUG
+#---------------------------------------------------------------------------------------------------------
 #RUN pecl install xdebug
 #RUN docker-php-ext-enable xdebug
 #RUN echo "xdebug.client_port=9000" >> /usr/local/etc/php/conf.d/xdebug.ini
@@ -62,13 +73,16 @@ RUN docker-php-ext-install mbstring
 #RUN echo "xdebug.discover_client_host=true" >> /usr/local/etc/php/conf.d/xdebug.ini
 
 ## COMPOSER
+#---------------------------------------------------------------------------------------------------------
 RUN ls
 RUN curl -sS https://getcomposer.org/installer | php -- --install-dir=/usr/local/bin --filename=composer
 
 ## PDO
+#---------------------------------------------------------------------------------------------------------
 RUN docker-php-ext-install pdo
 
 ## ORACLE
+#---------------------------------------------------------------------------------------------------------
 RUN mkdir -p /opt/oracle
 
 RUN wget https://download.oracle.com/otn_software/linux/instantclient/193000/instantclient-sdk-linux.x64-19.3.0.0.0dbru.zip
@@ -105,12 +119,39 @@ RUN docker-php-ext-configure pdo_oci --with-pdo-oci=instantclient,/opt/oracle/in
 && docker-php-ext-enable \
         oci8
 
-RUN mkdir $DIR_WWW
-RUN groupadd docker_series -g 999
-RUN useradd docker_series -g docker_series -d $DIR_WWW
-RUN chown nobody:nogroup $DIR_WWW -R
+## MONGODB
+#---------------------------------------------------------------------------------------------------------
+RUN mkdir -p /opt/mongodb
 
-# Share data from oracle files
+RUN pecl install mongodb
+RUN printf "; priority=60\nextension=mongodb.so\n" > /usr/local/etc/php/conf.d/mongodb.ini
+RUN phpenmod mongodb
+RUN pecl config-set php_ini /usr/local/etc/php/php.ini
+
+#Application Session
+RUN cd /opt/mongodb
+RUN composer require mongodb/mongodb
+
+RUN mkdir -p $DIR_MS_MONGODB
+RUN chown nobody:nogroup $DIR_MS_MONGODB -R
+RUN chmod 777 $DIR_MS_MONGODB -R
+RUN cp -r vendor /opt/mongodb/
+RUN cp composer.* /opt/mongodb/
+RUN cp -r vendor $DIR_MS_MONGODB/
+RUN cp composer.* $DIR_MS_MONGODB/
+RUN rm -r vendor
+RUN rm /opt/composer.*
+
+RUN cd -
+
+## WEBSERVER SETTINGS FINAL
+#---------------------------------------------------------------------------------------------------------
+RUN mkdir -p $DIR_WEBSERVER
+RUN groupadd docker_series -g 999
+RUN useradd docker_series -g docker_series -d $DIR_WEBSERVER
+RUN chown nobody:nogroup $DIR_WEBSERVER -R
+
+# Share data from container to host
 RUN mkdir -p /home/shared/php8-ini
 RUN mkdir -p /home/shared/php8-extensions
 RUN chown nobody:nogroup /home/shared -R
