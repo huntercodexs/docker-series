@@ -70,10 +70,13 @@ services:
               target: /data/db/
               read_only: false
             - type: bind
-              source: ./mongo/mongod.conf
-              target: /etc/mongod.conf
+              source: ./mongo/mongodb.conf
+              target: /etc/mongodb.conf
               read_only: false
         tty: true
+        networks:
+            - default
+            - webserver_network
     #----------------------------------------------------------------------------------------
     mongo-express:
         env_file: .env
@@ -94,25 +97,31 @@ services:
             - mongo
         depends_on:
             - mongo
+        networks:
+            - default
+            - webserver_network
     #-----------------------------------------------------------------------------------------
-#    postgres:
-#        env_file: .env
-#        container_name: postgres
-#        image: postgres
-#        ports:
-#            - ${POSTGRES_PORT}:5432
-#        environment:
-#            POSTGRES_DB: ${POSTGRES_DB}
-#            POSTGRES_USER: ${POSTGRES_USER}
-#            POSTGRES_PASSWORD: ${POSTGRES_PASSWORD}
-#            TZ: GMT
-#        volumes:
-#            - type: bind
-#              source: ./postgres/PostgreSQL
-#              target: /var/lib/postgresql/data/
-#              read_only: false
-#        tty: true
-#    #----------------------------------------------------------------------------------------
+    postgres:
+        env_file: .env
+        container_name: postgres
+        image: postgres
+        ports:
+            - ${POSTGRES_PORT}:5432
+        environment:
+            POSTGRES_DB: ${POSTGRES_DB}
+            POSTGRES_USER: ${POSTGRES_USER}
+            POSTGRES_PASSWORD: ${POSTGRES_PASSWORD}
+            TZ: GMT
+        volumes:
+            - type: bind
+              source: ./postgres/PostgresSQL
+              target: /var/lib/postgresql/data/
+              read_only: false
+        tty: true
+        networks:
+            - default
+            - webserver_network
+    #----------------------------------------------------------------------------------------
 #    mssql:
 #        env_file: .env
 #        container_name: mssql

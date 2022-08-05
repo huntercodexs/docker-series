@@ -1,11 +1,17 @@
 FROM php:8.1.0-fpm
 
 ENV DIR_WEBSERVER "/var/www/webserver"
+ENV DIR_PHP_EXTENSIONS "/usr/local/lib/php/extensions/no-debug-non-zts-20210902"
+ENV DIR_PHP_INI "/usr/local/etc/php"
+ENV DIR_PHP_INI_FILES "/usr/local/etc/php/conf.d"
+
 ENV DIR_MS_ORACLE "/var/www/webserver/microservice-oraclelinux"
 ENV DIR_MS_MONGODB "/var/www/webserver/microservice-mongodb"
+ENV DIR_MS_POSTGRES "/var/www/webserver/microservice-postgres"
 
 WORKDIR "/opt"
 
+#---------------------------------------------------------------------------------------------------------
 ## UPDATE
 #---------------------------------------------------------------------------------------------------------
 RUN apt-get update && apt-get upgrade -y \
@@ -15,6 +21,7 @@ RUN apt-get update && apt-get upgrade -y \
 	libpng-dev \
 	libxml2-dev
 
+#---------------------------------------------------------------------------------------------------------
 ## LIBRARIES
 #---------------------------------------------------------------------------------------------------------
 RUN apt-get install -y \
@@ -25,12 +32,14 @@ RUN apt-get install -y \
     libaio1  \
     libaio-dev
 
+#---------------------------------------------------------------------------------------------------------
 ## ZIP
 #---------------------------------------------------------------------------------------------------------
 RUN apt-get install -y libzip-dev && \
     apt-get install -y zip && \
     docker-php-ext-install zip
 
+#---------------------------------------------------------------------------------------------------------
 ## EXTRAS
 #---------------------------------------------------------------------------------------------------------
 RUN apt install -y nano
@@ -45,11 +54,13 @@ RUN apt install -y vim
 RUN apt-get install -y libaio1
 RUN apt-get install -y tzdata
 
+#---------------------------------------------------------------------------------------------------------
 ## ESSENTIAL
 #---------------------------------------------------------------------------------------------------------
 RUN apt-get install -y zstd
 RUN apt install -y php-common/stable
 
+#---------------------------------------------------------------------------------------------------------
 ## GD
 #---------------------------------------------------------------------------------------------------------
 RUN docker-php-ext-configure gd
@@ -58,29 +69,34 @@ RUN docker-php-ext-install gd mysqli
 RUN docker-php-ext-install dom
 RUN docker-php-ext-install intl
 
+#---------------------------------------------------------------------------------------------------------
 ## PHP LIBRARIES
 #---------------------------------------------------------------------------------------------------------
 RUN docker-php-ext-install opcache
 RUN docker-php-ext-install bcmath
 RUN docker-php-ext-install mbstring
 
+#---------------------------------------------------------------------------------------------------------
 ## XDEBUG
 #---------------------------------------------------------------------------------------------------------
 #RUN pecl install xdebug
 #RUN docker-php-ext-enable xdebug
-#RUN echo "xdebug.client_port=9000" >> /usr/local/etc/php/conf.d/xdebug.ini
-#RUN echo "xdebug.mode=develop,coverage,debug,gcstats,profile,trace" >> /usr/local/etc/php/conf.d/xdebug.ini
-#RUN echo "xdebug.discover_client_host=true" >> /usr/local/etc/php/conf.d/xdebug.ini
+#RUN echo "xdebug.client_port=9000" >> $DIR_PHP_INI_FILES/xdebug.ini
+#RUN echo "xdebug.mode=develop,coverage,debug,gcstats,profile,trace" >> $DIR_PHP_INI_FILES/xdebug.ini
+#RUN echo "xdebug.discover_client_host=true" >> $DIR_PHP_INI_FILES/xdebug.ini
 
+#---------------------------------------------------------------------------------------------------------
 ## COMPOSER
 #---------------------------------------------------------------------------------------------------------
 RUN ls
 RUN curl -sS https://getcomposer.org/installer | php -- --install-dir=/usr/local/bin --filename=composer
 
+#---------------------------------------------------------------------------------------------------------
 ## PDO
 #---------------------------------------------------------------------------------------------------------
 RUN docker-php-ext-install pdo
 
+#---------------------------------------------------------------------------------------------------------
 ## ORACLE
 #---------------------------------------------------------------------------------------------------------
 RUN mkdir -p /opt/oracle
@@ -119,16 +135,16 @@ RUN docker-php-ext-configure pdo_oci --with-pdo-oci=instantclient,/opt/oracle/in
 && docker-php-ext-enable \
         oci8
 
+#---------------------------------------------------------------------------------------------------------
 ## MONGODB
 #---------------------------------------------------------------------------------------------------------
 RUN mkdir -p /opt/mongodb
 
 RUN pecl install mongodb
-RUN printf "; priority=60\nextension=mongodb.so\n" > /usr/local/etc/php/conf.d/mongodb.ini
+RUN printf ";priority=60\nextension=mongodb.so\n" > $DIR_PHP_INI_FILES/mongodb.ini
 RUN phpenmod mongodb
 RUN pecl config-set php_ini /usr/local/etc/php/php.ini
 
-#Application Session
 RUN cd /opt/mongodb
 RUN composer require mongodb/mongodb
 
@@ -144,6 +160,25 @@ RUN rm /opt/composer.*
 
 RUN cd -
 
+#---------------------------------------------------------------------------------------------------------
+## POSTGRES
+#---------------------------------------------------------------------------------------------------------
+RUN mkdir -p /opt/postgres
+
+RUN cd /opt/postgres
+
+RUN apt install -y postgresql postgresql-contrib
+RUN wget https://archlinux.org/packages/extra/x86_64/php-pgsql/download -O php-pgsql-8.1.0-x86_64.pkg.tar.zst
+RUN tar -I zstd -xvf php-pgsql-8.1.0-x86_64.pkg.tar.zst
+RUN cp usr/lib/php/modules/pgsql.so $DIR_PHP_EXTENSIONS/
+RUN cp usr/lib/php/modules/pdo_pgsql.so $DIR_PHP_EXTENSIONS/
+RUN printf ";priority=40\nextension=pgsql.so\n" > $DIR_PHP_INI_FILES/pgsql.ini
+RUN printf ";priority=50\nextension=pdo_pgsql.so\n" > $DIR_PHP_INI_FILES/pdo_pgsql.ini
+RUN phpenmod pgsql pdo_pgsql
+
+RUN cd -
+
+#---------------------------------------------------------------------------------------------------------
 ## WEBSERVER SETTINGS FINAL
 #---------------------------------------------------------------------------------------------------------
 RUN mkdir -p $DIR_WEBSERVER

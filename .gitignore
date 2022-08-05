@@ -14,6 +14,7 @@ nodes
 **/vendor/**
 /vendor/
 composer.*
+/httpd_php8_databases_separated/tmp
 #Webserver
 /httpd_php8_databases_separated/webserver/conf/extra
 /httpd_php8_databases_separated/webserver/conf/original
@@ -39,3 +40,5 @@ composer.*
 #MongoDB Dataabse
 /httpd_php8_databases_separated/mongo/MongoDB
 /httpd_php8_databases_separated/applications/microservice-mongodb/vendor
+#Postgres Database
+/httpd_php8_databases_separated/postgres/PostgresSQL
