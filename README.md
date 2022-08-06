@@ -146,7 +146,7 @@ tar -xvf oraclelinux-database-scripts-19c.tar.bz2
 
 Set Password Administration
 <pre>
-docker exec -it oraclelinux ./setPassword.sh _YOUR_ORACLE_PASSWORD_
+docker exec -it oraclelinux ./setPassword.sh ${YOUR_ORACLE_PASSWORD}
 </pre>
 
 - Access the database container
@@ -158,8 +158,8 @@ docker exec -it oraclelinux /bin/bash
 
 Create User
 <pre>
-sqlplus sys/_YOUR_ORACLE_PASSWORD_@ORCLPDB1 as sysdba
-CREATE USER DEVEL IDENTIFIED BY _YOUR_ORACLE_PASSWORD_;
+sqlplus sys/${YOUR_ORACLE_PASSWORD_@ORCLPDB1 as sysdb}
+CREATE USER DEVEL IDENTIFIED BY ${YOUR_ORACLE_PASSWORD_}
 GRANT CREATE SESSION, CREATE TABLE TO DEVEL;
 ALTER USER DEVEL QUOTA 50m ON SYSTEM;
 CREATE SMALLFILE TABLESPACE DEVEL DATAFILE '/opt/oracle/oradata/ORCLCDB/ORCLPDB1/devel.dbf' SIZE 1G;
@@ -171,13 +171,13 @@ EXIT;
 
 Connect on database using the new user
 <pre>
-sqlplus devel/_YOUR_ORACLE_PASSWORD_@ORCLPDB1;
+sqlplus devel/${YOUR_ORACLE_PASSWORD_@ORCLPDB1}
 </pre>
 
 - Access the microservice Oracle Linux: 
 
 <pre>
-http://192.168.0.174:38080/microservice-oraclelinux/
+http://${YOUR_IP_SERVER}:38080/microservice-oraclelinux/
 </pre>
 
 > Database Connection Sample
@@ -191,9 +191,9 @@ http://192.168.0.174:38080/microservice-oraclelinux/
 - Access the Enterprise Manager:
  
 <pre>
-https://192.168.0.174:5500/em
+https://${YOUR_IP_SERVER}:5500/em
   > username: sys
-  > password: _YOUR_ORACLE_PASSWORD_
+  > password: ${YOUR_ORACLE_PASSWORD}
   > container name: ORCLPDB1
   ** to get this value exec in the current terminal:
   SQL> show pdbs;
@@ -228,7 +228,7 @@ cd /var/www/webserver/microservice-mongodb composer require mongodb/mongodb or c
 - Access the MongoDB Express
 
 <pre>
-http://192.168.0.174:8090/
+http://${YOUR_IP_SERVER}:8090/
   username: devel
   password: _YOU_PASSWORD_MONGO_EXPRESS_
 </pre>
@@ -239,7 +239,7 @@ http://192.168.0.174:8090/
 - Finally, access the application local url:
 
 <pre>
-http://192.168.0.174:38080/microservice-mongodb/
+http://${YOUR_IP_SERVER}:38080/microservice-mongodb/
 </pre>
 
 -------------
@@ -249,7 +249,7 @@ http://192.168.0.174:38080/microservice-mongodb/
 - Access the postgres container
 
 <pre>
-http://192.168.0.174:38080/microservice-postgres/
+http://${YOUR_IP_SERVER}:38080/microservice-postgres/
 </pre>
 
 - Get the superuser postgres in CLI container postgres, and open the postgres database terminal:
@@ -302,7 +302,60 @@ INSERT INTO users (id, name, age) VALUES ('12734983', 'Solange Smart Wow', 34);
 - Access the application test URL:
 
 <pre>
-http://192.168.0.174:38080/microservice-postgres/
+http://${YOUR_IP_SERVER}:38080/microservice-postgres/
+</pre>
+
+-------------
+
+# How to use MSSQL
+
+- Access the docker container MSSQL-TOOLS service:
+
+<pre>
+docker exec -it mssql-tools /bin/bash
+</pre>
+
+- Access the command line SQL:
+
+<pre>
+sqlcmd -S ${YOUR_IP_SERVER} -U SA
+</pre>
+
+- Define a default database
+
+<pre>
+USE master
+GO
+</pre>
+
+- Create a table sample in master database:
+
+<pre>
+CREATE TABLE master.dbo.users (
+	id int NULL,
+	name varchar(100) NULL
+)
+GO
+</pre>
+
+- Insert data values to test:
+
+<pre>
+INSERT INTO master.dbo.users(id, name)VALUES(0, 'John Smith Wiz')
+GO
+</pre>
+
+- Select data sample from created table users:
+
+<pre>
+SELECT * FROM users
+GO
+</pre>
+
+- Access the application test URL:
+
+<pre>
+http://${YOUR_IP_SERVER}:38080/microservice-mssql/
 </pre>
 
 ---------------

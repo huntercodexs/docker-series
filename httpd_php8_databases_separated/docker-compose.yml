@@ -122,37 +122,43 @@ services:
             - default
             - webserver_network
     #----------------------------------------------------------------------------------------
-#    mssql:
-#        env_file: .env
-#        container_name: mssql
-#        image: mcr.microsoft.com/mssql/server:2019-latest
-#        ports:
-#            - ${MSSQL_PORT}:1433
-#        volumes:
-#            - type: bind
-#              source: ./mssql
-#              target: /var/lib/mssql/data/
-#              read_only: false
-#            - type: bind
-#              source: ./mssql/data
-#              target: /var/opt/mssql/data/
-#              read_only: false
-#        environment:
-#            SA_PASSWORD: ${MSSQL_SA_PASSWORD}
-#            MSSQL_SA_PASSWORD: ${MSSQL_SA_PASSWORD}
-#            ACCEPT_EULA: ${MSSQL_ACCEPT_EULA}
-#            MSSQL_PID: ${MSSQL_EDITION}
-#            TRUSTED_CONNECTION: ${MSSQL_TRUSTED_CONNECTION}
-#        tty: true
-#    #----------------------------------------------------------------------------------------
-#    mssql-tools:
-#        env_file: .env
-#        container_name: mssql-tools
-#        image:  mcr.microsoft.com/mssql-tools
-#        ports:
-#            - ${MSSQL_TOOLS_PORT}:10000
-#        tty: true
-#    #----------------------------------------------------------------------------------------
+    mssql:
+        env_file: .env
+        container_name: mssql
+        image: mcr.microsoft.com/mssql/server:2019-latest
+        ports:
+            - ${MSSQL_PORT}:1433
+        volumes:
+            - type: bind
+              source: ./mssql
+              target: /var/lib/mssql/data/
+              read_only: false
+            - type: bind
+              source: ./mssql/data
+              target: /var/opt/mssql/data/
+              read_only: false
+        environment:
+            SA_PASSWORD: ${MSSQL_SA_PASSWORD}
+            MSSQL_SA_PASSWORD: ${MSSQL_SA_PASSWORD}
+            ACCEPT_EULA: ${MSSQL_ACCEPT_EULA}
+            MSSQL_PID: ${MSSQL_EDITION}
+            TRUSTED_CONNECTION: ${MSSQL_TRUSTED_CONNECTION}
+        tty: true
+        networks:
+            - default
+            - webserver_network
+    #----------------------------------------------------------------------------------------
+    mssql-tools:
+        env_file: .env
+        container_name: mssql-tools
+        image:  mcr.microsoft.com/mssql-tools
+        ports:
+            - ${MSSQL_TOOLS_PORT}:10000
+        tty: true
+        networks:
+            - default
+            - webserver_network
+    #----------------------------------------------------------------------------------------
 #    mysql-80:
 #        env_file: .env
 #        image: mysql:8.0

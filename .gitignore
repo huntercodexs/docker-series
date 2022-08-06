@@ -42,3 +42,5 @@ composer.*
 /httpd_php8_databases_separated/applications/microservice-mongodb/vendor
 #Postgres Database
 /httpd_php8_databases_separated/postgres/PostgresSQL
+#MSSQL Database
+/httpd_php8_databases_separated/mssql/data

@@ -8,6 +8,7 @@ ENV DIR_PHP_INI_FILES "/usr/local/etc/php/conf.d"
 ENV DIR_MS_ORACLE "/var/www/webserver/microservice-oraclelinux"
 ENV DIR_MS_MONGODB "/var/www/webserver/microservice-mongodb"
 ENV DIR_MS_POSTGRES "/var/www/webserver/microservice-postgres"
+ENV DIR_MS_MSSQL "/var/www/webserver/microservice-mssql"
 
 WORKDIR "/opt"
 
@@ -59,6 +60,7 @@ RUN apt-get install -y tzdata
 #---------------------------------------------------------------------------------------------------------
 RUN apt-get install -y zstd
 RUN apt install -y php-common/stable
+RUN apt-get install -y gnupg2
 
 #---------------------------------------------------------------------------------------------------------
 ## GD
@@ -143,7 +145,7 @@ RUN mkdir -p /opt/mongodb
 RUN pecl install mongodb
 RUN printf ";priority=60\nextension=mongodb.so\n" > $DIR_PHP_INI_FILES/mongodb.ini
 RUN phpenmod mongodb
-RUN pecl config-set php_ini /usr/local/etc/php/php.ini
+RUN pecl config-set php_ini $DIR_PHP_INI/php.ini
 
 RUN cd /opt/mongodb
 RUN composer require mongodb/mongodb
@@ -175,6 +177,33 @@ RUN cp usr/lib/php/modules/pdo_pgsql.so $DIR_PHP_EXTENSIONS/
 RUN printf ";priority=40\nextension=pgsql.so\n" > $DIR_PHP_INI_FILES/pgsql.ini
 RUN printf ";priority=50\nextension=pdo_pgsql.so\n" > $DIR_PHP_INI_FILES/pdo_pgsql.ini
 RUN phpenmod pgsql pdo_pgsql
+RUN mv php-pgsql-8.1.0-x86_64.pkg.tar.zst usr /opt/postgres/
+
+RUN cd -
+
+#---------------------------------------------------------------------------------------------------------
+## MSSQL
+#---------------------------------------------------------------------------------------------------------
+RUN mkdir -p /opt/mssql
+
+RUN cd /opt/mssql
+
+RUN curl https://packages.microsoft.com/keys/microsoft.asc | apt-key add -
+RUN curl https://packages.microsoft.com/config/ubuntu/20.04/prod.list > /etc/apt/sources.list.d/mssql-release.list
+RUN apt-get update -y
+RUN apt-get upgrade -y
+RUN ACCEPT_EULA=Y apt-get install -y msodbcsql17
+RUN ACCEPT_EULA=Y apt-get install -y mssql-tools
+RUN apt-get install -y unixodbc-dev
+RUN pecl config-set php_ini $DIR_PHP_INI/php.ini
+RUN pecl install sqlsrv
+RUN pecl install pdo_sqlsrv
+RUN printf "; priority=20\nextension=sqlsrv.so\n" > $DIR_PHP_EXTENSIONS/sqlsrv.ini
+RUN printf "; priority=30\nextension=pdo_sqlsrv.so\n" > $DIR_PHP_EXTENSIONS/pdo_sqlsrv.ini
+RUN phpenmod sqlsrv pdo_sqlsrv
+RUN echo 'export PATH="$PATH:/opt/mssql-tools/bin"' >> ~/.bashrc
+#RUN source ~/.bashrc
+RUN mv microsoft mssql-tools mssql/
 
 RUN cd -
 
@@ -194,12 +223,12 @@ RUN chmod 777 /home/shared -R
 
 RUN mkdir -p /home/php8/php8-ini
 RUN mkdir -p /home/php8/php8-extensions
-RUN cp -r /usr/local/etc/php/ /home/php8/php8-ini/
-RUN cp -r /usr/local/lib/php/extensions/no-debug-non-zts-20210902/ /home/php8/php8-extensions/
+RUN cp -r $DIR_PHP_INI/ /home/php8/php8-ini/
+RUN cp -r $DIR_PHP_EXTENSIONS/ /home/php8/php8-extensions/
 RUN chown nobody:nogroup /home/php8 -R
 RUN chmod 777 /home/php8 -R
 
-COPY ./shared/php8-ini/php/php.ini /usr/local/etc/php/php.ini
+COPY ./shared/php8-ini/php/php.ini $DIR_PHP_INI/php.ini
 
 EXPOSE 9000
 CMD ["php-fpm"]
