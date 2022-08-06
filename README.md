@@ -179,7 +179,7 @@ sqlplus devel/${YOUR_ORACLE_PASSWORD_@ORCLPDB1}
 - Access the microservice Oracle Linux: 
 
 <pre>
-http://${YOUR_IP_SERVER}:38080/microservice-oraclelinux/
+http://${WEBSERVER_ADDRESS}:38080/microservice-oraclelinux/
 </pre>
 
 > Database Connection Sample
@@ -193,7 +193,7 @@ http://${YOUR_IP_SERVER}:38080/microservice-oraclelinux/
 - Access the Enterprise Manager:
  
 <pre>
-https://${YOUR_IP_SERVER}:5500/em
+https://${WEBSERVER_ADDRESS}:5500/em
   > username: sys
   > password: ${YOUR_ORACLE_PASSWORD}
   > container name: ORCLPDB1
@@ -230,7 +230,7 @@ cd /var/www/webserver/microservice-mongodb composer require mongodb/mongodb or c
 - Access the MongoDB Express
 
 <pre>
-http://${YOUR_IP_SERVER}:8090/
+http://${WEBSERVER_ADDRESS}:8090/
   username: devel
   password: _YOU_PASSWORD_MONGO_EXPRESS_
 </pre>
@@ -241,7 +241,7 @@ http://${YOUR_IP_SERVER}:8090/
 - Finally, access the application local url:
 
 <pre>
-http://${YOUR_IP_SERVER}:38080/microservice-mongodb/
+http://${WEBSERVER_ADDRESS}:38080/microservice-mongodb/
 </pre>
 
 -------------
@@ -251,7 +251,7 @@ http://${YOUR_IP_SERVER}:38080/microservice-mongodb/
 - Access the postgres container
 
 <pre>
-http://${YOUR_IP_SERVER}:38080/microservice-postgres/
+http://${WEBSERVER_ADDRESS}:38080/microservice-postgres/
 </pre>
 
 - Get the superuser postgres in CLI container postgres, and open the postgres database terminal:
@@ -304,7 +304,7 @@ INSERT INTO users (id, name, age) VALUES ('12734983', 'Solange Smart Wow', 34);
 - Access the application test URL:
 
 <pre>
-http://${YOUR_IP_SERVER}:38080/microservice-postgres/
+http://${WEBSERVER_ADDRESS}:38080/microservice-postgres/
 </pre>
 
 -------------
@@ -320,7 +320,7 @@ docker exec -it mssql-tools /bin/bash
 - Access the command line SQL:
 
 <pre>
-sqlcmd -S ${YOUR_IP_SERVER} -U SA
+sqlcmd -S ${WEBSERVER_ADDRESS} -U SA
 </pre>
 
 - Define a default database
@@ -357,7 +357,7 @@ GO
 - Access the application test URL:
 
 <pre>
-http://${YOUR_IP_SERVER}:38080/microservice-mssql/
+http://${WEBSERVER_ADDRESS}:38080/microservice-mssql/
 </pre>
 
 ---------------
