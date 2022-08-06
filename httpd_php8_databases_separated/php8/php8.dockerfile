@@ -184,9 +184,7 @@ RUN cd -
 #---------------------------------------------------------------------------------------------------------
 ## MSSQL
 #---------------------------------------------------------------------------------------------------------
-RUN mkdir -p /opt/mssql
-
-RUN cd /opt/mssql
+RUN mkdir -p /opt/microsoft
 
 RUN curl https://packages.microsoft.com/keys/microsoft.asc | apt-key add -
 RUN curl https://packages.microsoft.com/config/ubuntu/20.04/prod.list > /etc/apt/sources.list.d/mssql-release.list
@@ -198,12 +196,12 @@ RUN apt-get install -y unixodbc-dev
 RUN pecl config-set php_ini $DIR_PHP_INI/php.ini
 RUN pecl install sqlsrv
 RUN pecl install pdo_sqlsrv
-RUN printf "; priority=20\nextension=sqlsrv.so\n" > $DIR_PHP_EXTENSIONS/sqlsrv.ini
-RUN printf "; priority=30\nextension=pdo_sqlsrv.so\n" > $DIR_PHP_EXTENSIONS/pdo_sqlsrv.ini
+RUN printf "; priority=20\nextension=sqlsrv.so\n" > $DIR_PHP_INI_FILES/sqlsrv.ini
+RUN printf "; priority=30\nextension=pdo_sqlsrv.so\n" > $DIR_PHP_INI_FILES/pdo_sqlsrv.ini
 RUN phpenmod sqlsrv pdo_sqlsrv
-RUN echo 'export PATH="$PATH:/opt/mssql-tools/bin"' >> ~/.bashrc
+RUN echo 'export PATH="$PATH:/opt/microsoft/mssql-tools/bin"' >> ~/.bashrc
 #RUN source ~/.bashrc
-RUN mv microsoft mssql-tools mssql/
+RUN mv mssql-tools microsoft/
 
 RUN cd -
 

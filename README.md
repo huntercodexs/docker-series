@@ -14,15 +14,17 @@ environment to development using HTTP(Apache2) + PHP + Databases(see bellow).
 
 # Dockers Containers Databases
 
-- HTTPD
-- PHP8-FPM
+> ![img.png](./httpd_php8_databases_separated/files/midias/check-green.png) Available ![img.png](./httpd_php8_databases_separated/files/midias/check-silver.png) Disabled
+
+- HTTPD ![img.png](./httpd_php8_databases_separated/files/midias/check-green.png)
+- PHP8-FPM ![img.png](./httpd_php8_databases_separated/files/midias/check-green.png)
 - DATABASES
-  - MYSQL
-  - MSSQL
-  - PGSQL
-  - MONGO
+  - MYSQL 
+  - MSSQL ![img.png](./httpd_php8_databases_separated/files/midias/check-green.png)
+  - PGSQL ![img.png](./httpd_php8_databases_separated/files/midias/check-green.png)
+  - MONGO ![img.png](./httpd_php8_databases_separated/files/midias/check-green.png)
   - FIREBIRD
-  - ORACLE (All right reserved to oracle.com - &copy; 2022 Oracle) (oraclelinux)
+  - ORACLE (All right reserved to oracle.com - &copy; 2022 Oracle) (oraclelinux) ![img.png](./httpd_php8_databases_separated/files/midias/check-green.png)
   - SQLITE
   - REDIS
 
