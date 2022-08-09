@@ -10,6 +10,7 @@ ENV DIR_MS_MONGODB "/var/www/webserver/microservice-mongodb"
 ENV DIR_MS_POSTGRES "/var/www/webserver/microservice-postgres"
 ENV DIR_MS_MSSQL "/var/www/webserver/microservice-mssql"
 ENV DIR_MS_FIREBIRD "/var/www/webserver/microservice-firebird"
+ENV DIR_MS_MYSQL57 "/var/www/webserver/microservice-mysql57"
 
 WORKDIR "/opt"
 
@@ -237,6 +238,17 @@ RUN printf ";priority=30\nextension=pdo_interbase.so\n" > $DIR_PHP_INI_FILES/pdo
 #RUN docker-php-ext-install pdo_interbase
 RUN phpenmod interbase pdo_interbase
 RUN mv php-8.1.3-interbase-1.1.1-linux-x64.so /opt/interbase/
+
+RUN cd -
+
+#---------------------------------------------------------------------------------------------------------
+## MYSQL
+#---------------------------------------------------------------------------------------------------------
+RUN mkdir -p /opt/mysql
+
+RUN docker-php-ext-install pdo_mysql
+RUN docker-php-ext-install mysqli && docker-php-ext-enable mysqli
+RUN phpenmod mysqli mysql pdo_mysql
 
 RUN cd -
 

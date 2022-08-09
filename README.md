@@ -370,6 +370,8 @@ http://${WEBSERVER_ADDRESS}:38080/microservice-mssql/
 
 # How to use Firebird
 
+> NOTE: Firebird is not operating correctly, please don't use it
+
 > VERSION
 
 <pre>3.0.1</pre>
@@ -441,6 +443,32 @@ SELECT * FROM users;
 
 <pre>
 http://${WEBSERVER_ADDRESS}:38080/microservice-firebird/
+</pre>
+
+-------------
+
+# How to use MYSQL 5.7
+
+- After build container, drivers and application
+
+<pre>
+CREATE TABLE users (
+    id serial NOT NULL,
+    name VARCHAR(250) NOT NULL,
+    age INTEGER,
+    PRIMARY KEY (id)
+);
+
+INSERT INTO users (id, name, age) VALUES ('94734987', 'Amanda Barros', 33);
+INSERT INTO users (id, name, age) VALUES ('12734983', 'Marcos Silva', 34);
+
+SELECT * FROM users;
+</pre>
+
+- Access the application test URL:
+
+<pre>
+http://${WEBSERVER_ADDRESS}:38080/microservice-mysql57/
 </pre>
 
 ---------------
