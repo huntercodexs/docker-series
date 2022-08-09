@@ -22,6 +22,8 @@ environment to development using HTTP(Apache2) + PHP + Databases(see bellow).
 - PHP8-FPM ![img.png](./httpd_php8_databases_separated/files/midias/check-green.png)
 - DATABASES
   - MYSQL ![img.png](./httpd_php8_databases_separated/files/midias/check-silver.png)
+    - 5.7 ![img.png](./httpd_php8_databases_separated/files/midias/check-silver.png)
+    - 5.0 ![img.png](./httpd_php8_databases_separated/files/midias/check-silver.png)
   - MSSQL ![img.png](./httpd_php8_databases_separated/files/midias/check-green.png)
   - PGSQL ![img.png](./httpd_php8_databases_separated/files/midias/check-green.png)
   - MONGO ![img.png](./httpd_php8_databases_separated/files/midias/check-green.png)
