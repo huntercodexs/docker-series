@@ -12,6 +12,7 @@ ENV DIR_MS_MSSQL "/var/www/webserver/microservice-mssql"
 ENV DIR_MS_FIREBIRD "/var/www/webserver/microservice-firebird"
 ENV DIR_MS_MYSQL57 "/var/www/webserver/microservice-mysql57"
 ENV DIR_MS_MYSQL80 "/var/www/webserver/microservice-mysql80"
+ENV DIR_MS_SQLITE "/var/www/webserver/microservice-sqlite"
 
 WORKDIR "/opt"
 
@@ -24,6 +25,8 @@ RUN apt-get update && apt-get upgrade -y \
 	zlib1g-dev \
 	libpng-dev \
 	libxml2-dev
+
+RUN apt update
 
 #---------------------------------------------------------------------------------------------------------
 ## LIBRARIES
@@ -210,7 +213,7 @@ RUN mv mssql-tools microsoft/
 RUN cd -
 
 #---------------------------------------------------------------------------------------------------------
-## FIREBIRD [IS NOT WORKING CORRECTLY WHEN USE THE PHP APPLICATION]
+## FIREBIRD [IS NOT AVAILABLE]
 #---------------------------------------------------------------------------------------------------------
 RUN mkdir -p /opt/firebird
 
@@ -226,7 +229,7 @@ COPY ./shared/conf/firebird-client.conf /etc/firebird/3.0/firebird.conf
 RUN cd -
 
 #---------------------------------------------------------------------------------------------------------
-## INTERBASE [IS NOT DONE]
+## INTERBASE [IS NOT AVAILABLE]
 #---------------------------------------------------------------------------------------------------------
 RUN mkdir -p /opt/interbase
 
@@ -250,6 +253,17 @@ RUN mkdir -p /opt/mysql
 RUN docker-php-ext-install pdo_mysql
 RUN docker-php-ext-install mysqli && docker-php-ext-enable mysqli
 RUN phpenmod mysqli mysql pdo_mysql
+
+RUN cd -
+
+#---------------------------------------------------------------------------------------------------------
+## SQLITE (LOCALHOST)
+#---------------------------------------------------------------------------------------------------------
+RUN mkdir -p /opt/sqlite
+
+RUN apt-get install sqlite3 -y
+RUN apt-get install libsqlite3-dev -y
+RUN docker-php-ext-install pdo_sqlite
 
 RUN cd -
 

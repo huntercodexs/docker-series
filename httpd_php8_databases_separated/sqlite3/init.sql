@@ -5,12 +5,10 @@
 -- Enter ".help" for usage hints.
 -- sqlite> CREATE TABLE users(
 --    ...>     id INT PRIMARY KEY NOT NULL UNIQUE,
---    ...>     name TEXT NOT NULL ,
---    ...>     age INT NOT NULL,
---    ...>     email TEXT NOT NULL UNIQUE
+--    ...>     name TEXT NOT NULL
 --    ...> );
--- sqlite> INSERT INTO users(id, name, age, email) VALUES (1, 'Paloma dos Santos', 30, 'paloma@email.com');
--- sqlite> INSERT INTO users(id, name, age, email) VALUES (2, 'Jaime dos Santos', 32, 'jaime@email.com');
+-- sqlite> INSERT INTO users(id, name) VALUES (1, 'Paloma dos Santos');
+-- sqlite> INSERT INTO users(id, name) VALUES (2, 'Jaime dos Santos');
 -- sqlite> SELECT * FROM users;
 -- 1|Paloma dos Santos|30|paloma@email.com
 -- 2|Jaime dos Santos|32|jaime@email.com
@@ -18,13 +16,10 @@
 
 CREATE TABLE users(
     id INT PRIMARY KEY NOT NULL UNIQUE,
-    name TEXT NOT NULL ,
-    age INT NOT NULL,
-    email TEXT NOT NULL UNIQUE
+    name TEXT NOT NULL
 );
 
-INSERT INTO users(id, name, age, email) VALUES (1, 'Paloma dos Santos', 30, 'paloma@email.com');
-INSERT INTO users(id, name, age, email) VALUES (2, 'Jaime dos Santos', 32, 'jaime@email.com');
+INSERT INTO users(id, name) VALUES (1, 'John Smith Wiz');
 
 SELECT * FROM users;
 

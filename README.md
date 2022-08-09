@@ -36,10 +36,10 @@ environment to development using HTTP(Apache2) + PHP + Databases(see bellow).
   - PGSQL ![img.png](./httpd_php8_databases_separated/files/midias/check-green.png)
   - MONGO ![img.png](./httpd_php8_databases_separated/files/midias/check-green.png)
   - FIREBIRD ![img.png](./httpd_php8_databases_separated/files/midias/unavailable.png)
-  - INTERBASE ![img.png](./httpd_php8_databases_separated/files/midias/check-silver.png)
+  - INTERBASE ![img.png](./httpd_php8_databases_separated/files/midias/unavailable.png)
   - ORACLE ![img.png](./httpd_php8_databases_separated/files/midias/check-green.png)
     <small>** (All right reserved to oracle.com - &copy; 2022 Oracle) (oraclelinux)</small>
-  - SQLITE ![img.png](./httpd_php8_databases_separated/files/midias/check-silver.png)
+  - SQLITE ![img.png](./httpd_php8_databases_separated/files/midias/check-green.png)
   - REDIS ![img.png](./httpd_php8_databases_separated/files/midias/check-silver.png)
 
 > <p style="color: orange">IMPORTANT</p>
@@ -479,6 +479,8 @@ SELECT * FROM users;
 http://${WEBSERVER_ADDRESS}:38080/microservice-mysql57/
 </pre>
 
+-------------
+
 # How to use MYSQL 8.0
 
 - After build container, drivers and application
@@ -501,6 +503,33 @@ SELECT * FROM users;
 
 <pre>
 http://${WEBSERVER_ADDRESS}:38080/microservice-mysql80/
+</pre>
+
+-------------
+
+# How to use SQLITE
+
+- Prepare sqlite database
+
+<pre>
+root@0fe895af4841:/opt# cd sqlite/
+root@0fe895af4841:/opt/sqlite# sqlite3 dbname1.db
+SQLite version 3.34.1 2021-01-20 14:10:07
+Enter ".help" for usage hints.
+sqlite> CREATE TABLE users(
+    id INT PRIMARY KEY NOT NULL UNIQUE,
+    name TEXT NOT NULL
+);
+sqlite> INSERT INTO users(id, name) VALUES (1, 'John Smith Wiz');
+sqlite> SELECT * FROM users;
+1|John Smith Wiz
+sqlite> .quit
+</pre>
+
+- Access the application test URL:
+
+<pre>
+http://${WEBSERVER_ADDRESS}:38080/microservice-sqlite/
 </pre>
 
 ---------------
