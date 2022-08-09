@@ -47,3 +47,7 @@ composer.*
 #Firebird Database
 /httpd_php8_databases_separated/firebird/logs
 /httpd_php8_databases_separated/firebird/data/databases/*.fdb
+#MYSQL 5
+/httpd_php8_databases_separated/mysql-57/lib
+#MYSQL 8
+/httpd_php8_databases_separated/mysql-80/lib
