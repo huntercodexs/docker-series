@@ -11,6 +11,7 @@ ENV DIR_MS_POSTGRES "/var/www/webserver/microservice-postgres"
 ENV DIR_MS_MSSQL "/var/www/webserver/microservice-mssql"
 ENV DIR_MS_FIREBIRD "/var/www/webserver/microservice-firebird"
 ENV DIR_MS_MYSQL57 "/var/www/webserver/microservice-mysql57"
+ENV DIR_MS_MYSQL80 "/var/www/webserver/microservice-mysql80"
 
 WORKDIR "/opt"
 

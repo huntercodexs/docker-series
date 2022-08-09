@@ -12,6 +12,14 @@ environment to development using HTTP(Apache2) + PHP + Databases(see bellow).
 
 -------------
 
+# About project
+
+![img.png](./httpd_php8_databases_separated/files/midias/project-diagram.png)
+
+...
+
+-------------
+
 # Dockers Containers Databases
 
 > ![img.png](./httpd_php8_databases_separated/files/midias/check-green.png) Available
@@ -22,8 +30,8 @@ environment to development using HTTP(Apache2) + PHP + Databases(see bellow).
 - PHP8-FPM ![img.png](./httpd_php8_databases_separated/files/midias/check-green.png)
 - DATABASES
   - MYSQL ![img.png](./httpd_php8_databases_separated/files/midias/check-silver.png)
-    - 5.7 ![img.png](./httpd_php8_databases_separated/files/midias/check-silver.png)
-    - 5.0 ![img.png](./httpd_php8_databases_separated/files/midias/check-silver.png)
+    - 5.7 ![img.png](./httpd_php8_databases_separated/files/midias/check-green.png)
+    - 8.0 ![img.png](./httpd_php8_databases_separated/files/midias/check-green.png)
   - MSSQL ![img.png](./httpd_php8_databases_separated/files/midias/check-green.png)
   - PGSQL ![img.png](./httpd_php8_databases_separated/files/midias/check-green.png)
   - MONGO ![img.png](./httpd_php8_databases_separated/files/midias/check-green.png)
@@ -469,6 +477,30 @@ SELECT * FROM users;
 
 <pre>
 http://${WEBSERVER_ADDRESS}:38080/microservice-mysql57/
+</pre>
+
+# How to use MYSQL 8.0
+
+- After build container, drivers and application
+
+<pre>
+CREATE TABLE users (
+    id serial NOT NULL,
+    name VARCHAR(250) NOT NULL,
+    age INTEGER,
+    PRIMARY KEY (id)
+);
+
+INSERT INTO users (id, name, age) VALUES ('94734987', 'Amanda Barros', 33);
+INSERT INTO users (id, name, age) VALUES ('12734983', 'Marcos Silva', 34);
+
+SELECT * FROM users;
+</pre>
+
+- Access the application test URL:
+
+<pre>
+http://${WEBSERVER_ADDRESS}:38080/microservice-mysql80/
 </pre>
 
 ---------------
