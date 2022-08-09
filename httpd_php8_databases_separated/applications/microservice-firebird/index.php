@@ -9,9 +9,9 @@ echo "Connecting...";
 try {
 
     $con = new PDO(
-        "firebird:dbname=firebird:33050/etc/firebird/3.0/databases/dbname1.fdb",
-        "sysdba",
-        "123@Mudar!1");
+        "firebird:dbname=firebird:33050/etc/firebird/3.0/databases/dbname2.fdb",
+        "SYSDBA",
+        "123@fB$");
 
     echo "<h1>Connected Successful !</h1>";
 

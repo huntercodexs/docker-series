@@ -162,6 +162,7 @@ services:
     firebird:
         env_file: .env
         container_name: firebird
+        privileged: true
         build:
             context: ./firebird
             dockerfile: firebird.dockerfile
@@ -176,9 +177,10 @@ services:
             - ./firebird/data/:/etc/firebird/3.0/
         environment:
             TZ: ${FIREBIRD_TIMEZONE}
-            ISC_PASSWORD: ${FIREBIRD_ISC_PASSWORD}
+            FIREBIRD_DATABASE: ${FIREBIRD_DBNAME}
             FIREBIRD_USER: ${FIREBIRD_USER}
-            FIREBIRD_DBNAME: ${FIREBIRD_DBNAME}
+            FIREBIRD_PASS: ${FIREBIRD_ISC_PASSWORD}
+            ISC_PASSWORD: ${FIREBIRD_ISC_PASSWORD}
         tty: true
         networks:
             - default

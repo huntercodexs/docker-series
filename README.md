@@ -14,7 +14,9 @@ environment to development using HTTP(Apache2) + PHP + Databases(see bellow).
 
 # Dockers Containers Databases
 
-> ![img.png](./httpd_php8_databases_separated/files/midias/check-green.png) Available ![img.png](./httpd_php8_databases_separated/files/midias/check-silver.png) Pending
+> ![img.png](./httpd_php8_databases_separated/files/midias/check-green.png) Available
+> ![img.png](./httpd_php8_databases_separated/files/midias/check-silver.png) Pending
+> ![img.png](./httpd_php8_databases_separated/files/midias/unavailable.png) Unavailable
 
 - HTTPD ![img.png](./httpd_php8_databases_separated/files/midias/check-green.png)
 - PHP8-FPM ![img.png](./httpd_php8_databases_separated/files/midias/check-green.png)
@@ -23,7 +25,7 @@ environment to development using HTTP(Apache2) + PHP + Databases(see bellow).
   - MSSQL ![img.png](./httpd_php8_databases_separated/files/midias/check-green.png)
   - PGSQL ![img.png](./httpd_php8_databases_separated/files/midias/check-green.png)
   - MONGO ![img.png](./httpd_php8_databases_separated/files/midias/check-green.png)
-  - FIREBIRD ![img.png](./httpd_php8_databases_separated/files/midias/check-silver.png)
+  - FIREBIRD ![img.png](./httpd_php8_databases_separated/files/midias/unavailable.png)
   - INTERBASE ![img.png](./httpd_php8_databases_separated/files/midias/check-silver.png)
   - ORACLE ![img.png](./httpd_php8_databases_separated/files/midias/check-green.png)
     ** (All right reserved to oracle.com - &copy; 2022 Oracle) (oraclelinux)
@@ -403,7 +405,7 @@ host: 192.168.0.174
 port: 33050
 path: /etc/firebird/3.0/databases/dbname1.fdb
 username: sysdba
-password: ${FIREBIRD_PASSWORD}
+password: ${FIREBIRD_PASSWORD} or masterkey
 jdbc-url: jdbc:firebirdsql://192.168.0.174:33050//etc/firebird/3.0/databases/dbname1.fdb
 Reference library file: Jaybird-3.0.12-JDK_1.8.zip (https://firebirdsql.org/en/jdbc-driver/)
   jaybird-3.0.12.jar

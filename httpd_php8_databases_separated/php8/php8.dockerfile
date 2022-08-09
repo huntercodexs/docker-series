@@ -208,7 +208,7 @@ RUN mv mssql-tools microsoft/
 RUN cd -
 
 #---------------------------------------------------------------------------------------------------------
-## FIREBIRD
+## FIREBIRD [IS NOT WORKING CORRECTLY WHEN USE THE PHP APPLICATION]
 #---------------------------------------------------------------------------------------------------------
 RUN mkdir -p /opt/firebird
 
@@ -216,13 +216,15 @@ RUN cd /opt/firebird
 
 RUN apt install -y firebird-dev
 RUN docker-php-ext-install pdo_firebird
+RUN docker-php-ext-configure pdo_firebird --with-pdo-firebird
+RUN phpenmod firebird pdo_firebird
 
 COPY ./shared/conf/firebird-client.conf /etc/firebird/3.0/firebird.conf
 
 RUN cd -
 
 #---------------------------------------------------------------------------------------------------------
-## INTERBASE
+## INTERBASE [IS NOT DONE]
 #---------------------------------------------------------------------------------------------------------
 RUN mkdir -p /opt/interbase
 

@@ -69,7 +69,8 @@ RUN export DEBIAN_FRONTEND
 RUN ldconfig
 
 RUN apt-get update -y
-RUN apt-get install firebird3.0-server -y
+RUN apt-get install -y firebird-dev firebird3.0 firebird3.0-common firebird3.0-server
+#RUN apt-get install firebird3.0-server -y
 RUN dpkg-preconfigure firebird3.0-server
 
 EXPOSE 3050
