@@ -199,6 +199,9 @@ services:
             MYSQL_USERNAME: ${MYSQL80_USERNAME}
             MYSQL_PASSWORD: ${MYSQL80_PASSWORD}
             MYSQL_ROOT_PASSWORD: ${MYSQL80_ROOT_PASSWORD}
+        networks:
+            - default
+            - webserver_network
     #----------------------------------------------------------------------------------------
     mysql-57:
         env_file: .env
@@ -213,7 +216,11 @@ services:
             MYSQL_USERNAME: ${MYSQL57_USERNAME}
             MYSQL_PASSWORD: ${MYSQL57_PASSWORD}
             MYSQL_ROOT_PASSWORD: ${MYSQL57_ROOT_PASSWORD}
+        networks:
+            - default
+            - webserver_network
     #----------------------------------------------------------------------------------------
+    # NOTE: The sqlite don't can used remotely, so it is used inside php8 container
     sqlite3:
         env_file: .env
         container_name: sqlite3
@@ -233,26 +240,32 @@ services:
               read_only: false
         stdin_open: true
         tty: true
+        networks:
+            - default
+            - webserver_network
     #----------------------------------------------------------------------------------------
-#    redis:
-#        env_file: .env
-#        container_name: redis
-#        build:
-#            context: ./redis
-#        ports:
-#            - ${REDIS_PORT}:6379
-#        volumes:
-#            - type: bind
-#              source: ./redis/data
-#              target: /data/
-#              read_only: false
-#            - type: bind
-#              source: ./redis/redis.conf
-#              target: /etc/redis/redis.conf
-#              read_only: false
-#        command: redis-server --requirepass ${REDIS_AUTH}
-#        tty: true
-#    #-----------------------------------------------------------------------------------------
+    redis:
+        env_file: .env
+        container_name: redis
+        build:
+            context: ./redis
+        ports:
+            - ${REDIS_PORT}:6379
+        volumes:
+            - type: bind
+              source: ./redis/data
+              target: /data/
+              read_only: false
+            - type: bind
+              source: ./redis/redis.conf
+              target: /etc/redis/redis.conf
+              read_only: false
+        command: redis-server --requirepass ${REDIS_AUTH}
+        tty: true
+        networks:
+            - default
+            - webserver_network
+    #-----------------------------------------------------------------------------------------
 
 networks:
     webserver_network:

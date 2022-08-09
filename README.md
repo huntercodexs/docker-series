@@ -40,7 +40,7 @@ environment to development using HTTP(Apache2) + PHP + Databases(see bellow).
   - ORACLE ![img.png](./httpd_php8_databases_separated/files/midias/check-green.png)
     <small>** (All right reserved to oracle.com - &copy; 2022 Oracle) (oraclelinux)</small>
   - SQLITE ![img.png](./httpd_php8_databases_separated/files/midias/check-green.png)
-  - REDIS ![img.png](./httpd_php8_databases_separated/files/midias/check-silver.png)
+  - REDIS ![img.png](./httpd_php8_databases_separated/files/midias/check-green.png)
 
 > <p style="color: orange">IMPORTANT</p>
 
@@ -530,6 +530,18 @@ sqlite> .quit
 
 <pre>
 http://${WEBSERVER_ADDRESS}:38080/microservice-sqlite/
+</pre>
+
+-------------
+
+# How to use REDIS
+
+> IMPORTANT: Redis is not a database engine, it is used to make a cache when the application require
+
+- Access the application test URL:
+
+<pre>
+http://${WEBSERVER_ADDRESS}:38080/microservice-redis/
 </pre>
 
 ---------------
