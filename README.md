@@ -29,7 +29,7 @@ environment to development using HTTP(Apache2) + PHP + Databases(see bellow).
 - HTTPD ![img.png](./httpd_php8_databases_separated/files/midias/check-green.png)
 - PHP8-FPM ![img.png](./httpd_php8_databases_separated/files/midias/check-green.png)
 - DATABASES
-  - MYSQL ![img.png](./httpd_php8_databases_separated/files/midias/check-silver.png)
+  - MYSQL ![img.png](./httpd_php8_databases_separated/files/midias/check-green.png)
     - 5.7 ![img.png](./httpd_php8_databases_separated/files/midias/check-green.png)
     - 8.0 ![img.png](./httpd_php8_databases_separated/files/midias/check-green.png)
   - MSSQL ![img.png](./httpd_php8_databases_separated/files/midias/check-green.png)
@@ -38,7 +38,7 @@ environment to development using HTTP(Apache2) + PHP + Databases(see bellow).
   - FIREBIRD ![img.png](./httpd_php8_databases_separated/files/midias/unavailable.png)
   - INTERBASE ![img.png](./httpd_php8_databases_separated/files/midias/check-silver.png)
   - ORACLE ![img.png](./httpd_php8_databases_separated/files/midias/check-green.png)
-    ** (All right reserved to oracle.com - &copy; 2022 Oracle) (oraclelinux)
+    <small>** (All right reserved to oracle.com - &copy; 2022 Oracle) (oraclelinux)</small>
   - SQLITE ![img.png](./httpd_php8_databases_separated/files/midias/check-silver.png)
   - REDIS ![img.png](./httpd_php8_databases_separated/files/midias/check-silver.png)
 
