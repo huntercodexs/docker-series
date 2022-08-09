@@ -14,19 +14,21 @@ environment to development using HTTP(Apache2) + PHP + Databases(see bellow).
 
 # Dockers Containers Databases
 
-> ![img.png](./httpd_php8_databases_separated/files/midias/check-green.png) Available ![img.png](./httpd_php8_databases_separated/files/midias/check-silver.png) Disabled
+> ![img.png](./httpd_php8_databases_separated/files/midias/check-green.png) Available ![img.png](./httpd_php8_databases_separated/files/midias/check-silver.png) Pending
 
 - HTTPD ![img.png](./httpd_php8_databases_separated/files/midias/check-green.png)
 - PHP8-FPM ![img.png](./httpd_php8_databases_separated/files/midias/check-green.png)
 - DATABASES
-  - MYSQL 
+  - MYSQL ![img.png](./httpd_php8_databases_separated/files/midias/check-silver.png)
   - MSSQL ![img.png](./httpd_php8_databases_separated/files/midias/check-green.png)
   - PGSQL ![img.png](./httpd_php8_databases_separated/files/midias/check-green.png)
   - MONGO ![img.png](./httpd_php8_databases_separated/files/midias/check-green.png)
-  - FIREBIRD
-  - ORACLE (All right reserved to oracle.com - &copy; 2022 Oracle) (oraclelinux) ![img.png](./httpd_php8_databases_separated/files/midias/check-green.png)
-  - SQLITE
-  - REDIS
+  - FIREBIRD ![img.png](./httpd_php8_databases_separated/files/midias/check-silver.png)
+  - INTERBASE ![img.png](./httpd_php8_databases_separated/files/midias/check-silver.png)
+  - ORACLE ![img.png](./httpd_php8_databases_separated/files/midias/check-green.png)
+    ** (All right reserved to oracle.com - &copy; 2022 Oracle) (oraclelinux)
+  - SQLITE ![img.png](./httpd_php8_databases_separated/files/midias/check-silver.png)
+  - REDIS ![img.png](./httpd_php8_databases_separated/files/midias/check-silver.png)
 
 > <p style="color: orange">IMPORTANT</p>
 
@@ -269,7 +271,7 @@ postgres=#
 
 <pre>
 CREATE USER devel SUPERUSER INHERIT CREATEDB CREATEROLE;
-ALTER USER devel PASSWORD '123@Mudar#';
+ALTER USER devel PASSWORD '${POSTGRES_PASSWORD}';
 </pre>
 
 - List all users
@@ -358,6 +360,83 @@ GO
 
 <pre>
 http://${WEBSERVER_ADDRESS}:38080/microservice-mssql/
+</pre>
+
+-------------
+
+# How to use Firebird
+
+> VERSION
+
+<pre>3.0.1</pre>
+
+> SETTINGS
+
+- Before build the firebird container, use the firebird/data folder path (in this project) to set up the configurations 
+that should be used in the Server:
+
+<pre>
+databases.conf
+fbintl.conf
+fbtrace.conf
+firebird.conf
+plugins.conf
+SYSDBA.password
+</pre>
+
+> CONNECTION AND RUN
+
+- Install correct driver in your SGDB tool (example: DBeaver) get the driver in the follow address:
+
+<pre>
+https://firebirdsql.org/en/jdbc-driver/
+</pre>
+
+- Below is the visual sample to Firebird Connection from DBeaver
+
+  ![img.png](httpd_php8_databases_separated/firebird/midias/Firebird-Connection-Details-From-DBeaver.png)
+
+- Sample data connection
+
+<pre>
+host: 192.168.0.174
+port: 33050
+path: /etc/firebird/3.0/databases/dbname1.fdb
+username: sysdba
+password: ${FIREBIRD_PASSWORD}
+jdbc-url: jdbc:firebirdsql://192.168.0.174:33050//etc/firebird/3.0/databases/dbname1.fdb
+Reference library file: Jaybird-3.0.12-JDK_1.8.zip (https://firebirdsql.org/en/jdbc-driver/)
+  jaybird-3.0.12.jar
+  connector-api-1.5.jar
+  antlr-runtime-4.7.jar
+</pre>
+
+- Connect using terminal
+
+<pre>
+# isql-fb
+</pre>
+
+- Create a database and table
+
+<pre>
+SQL>CREATE DATABASE '/etc/firebird/3.0/databases/dbname1.fdb'
+CON>user 'SYSDBA' password 'masterkey';
+
+CREATE TABLE users (
+id INT NOT NULL PRIMARY KEY,
+name VARCHAR(250) NOT NULL
+);
+
+INSERT INTO users (id, name) VALUES ('94734987', 'John Smith Suisse');
+
+SELECT * FROM users;
+</pre>
+
+- Access the application test URL:
+
+<pre>
+http://${WEBSERVER_ADDRESS}:38080/microservice-firebird/
 </pre>
 
 ---------------

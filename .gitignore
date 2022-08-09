@@ -44,3 +44,6 @@ composer.*
 /httpd_php8_databases_separated/postgres/PostgresSQL
 #MSSQL Database
 /httpd_php8_databases_separated/mssql/data
+#Firebird Database
+/httpd_php8_databases_separated/firebird/logs
+/httpd_php8_databases_separated/firebird/data/databases/*.fdb

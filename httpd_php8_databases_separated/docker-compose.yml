@@ -159,6 +159,31 @@ services:
             - default
             - webserver_network
     #----------------------------------------------------------------------------------------
+    firebird:
+        env_file: .env
+        container_name: firebird
+        build:
+            context: ./firebird
+            dockerfile: firebird.dockerfile
+            args:
+                TZ: ${FIREBIRD_TIMEZONE}
+                ISC_PASSWORD: ${FIREBIRD_ISC_PASSWORD}
+                FIREBIRD_USER: ${FIREBIRD_USER}
+                FIREBIRD_DBNAME: ${FIREBIRD_DBNAME}
+        ports:
+            - ${FIREBIRD_PORT}:3050
+        volumes:
+            - ./firebird/data/:/etc/firebird/3.0/
+        environment:
+            TZ: ${FIREBIRD_TIMEZONE}
+            ISC_PASSWORD: ${FIREBIRD_ISC_PASSWORD}
+            FIREBIRD_USER: ${FIREBIRD_USER}
+            FIREBIRD_DBNAME: ${FIREBIRD_DBNAME}
+        tty: true
+        networks:
+            - default
+            - webserver_network
+    #----------------------------------------------------------------------------------------
 #    mysql-80:
 #        env_file: .env
 #        image: mysql:8.0

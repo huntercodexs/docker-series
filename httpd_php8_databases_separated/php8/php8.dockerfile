@@ -9,6 +9,7 @@ ENV DIR_MS_ORACLE "/var/www/webserver/microservice-oraclelinux"
 ENV DIR_MS_MONGODB "/var/www/webserver/microservice-mongodb"
 ENV DIR_MS_POSTGRES "/var/www/webserver/microservice-postgres"
 ENV DIR_MS_MSSQL "/var/www/webserver/microservice-mssql"
+ENV DIR_MS_FIREBIRD "/var/www/webserver/microservice-firebird"
 
 WORKDIR "/opt"
 
@@ -50,6 +51,7 @@ RUN apt install -y lsof
 RUN apt install -y alien
 RUN apt install -y vim
 
+#---------------------------------------------------------------------------------------------------------
 #RUN apt install -y ldconfig
 #---------------------------------------------------------------------------------------------------------
 RUN apt-get install -y libaio1
@@ -206,6 +208,37 @@ RUN mv mssql-tools microsoft/
 RUN cd -
 
 #---------------------------------------------------------------------------------------------------------
+## FIREBIRD
+#---------------------------------------------------------------------------------------------------------
+RUN mkdir -p /opt/firebird
+
+RUN cd /opt/firebird
+
+RUN apt install -y firebird-dev
+RUN docker-php-ext-install pdo_firebird
+
+COPY ./shared/conf/firebird-client.conf /etc/firebird/3.0/firebird.conf
+
+RUN cd -
+
+#---------------------------------------------------------------------------------------------------------
+## INTERBASE
+#---------------------------------------------------------------------------------------------------------
+RUN mkdir -p /opt/interbase
+
+RUN cd /opt/interbase
+
+RUN wget https://github.com/FirebirdSQL/php-firebird/releases/download/v1.1.1/php-8.1.3-interbase-1.1.1-linux-x64.so
+RUN cp php-8.1.3-interbase-1.1.1-linux-x64.so $DIR_PHP_EXTENSIONS/interbase.so
+RUN printf ";priority=20\nextension=interbase.so\n" > $DIR_PHP_INI_FILES/interbase.ini
+RUN printf ";priority=30\nextension=pdo_interbase.so\n" > $DIR_PHP_INI_FILES/pdo_interbase.ini
+#RUN docker-php-ext-install pdo_interbase
+RUN phpenmod interbase pdo_interbase
+RUN mv php-8.1.3-interbase-1.1.1-linux-x64.so /opt/interbase/
+
+RUN cd -
+
+#---------------------------------------------------------------------------------------------------------
 ## WEBSERVER SETTINGS FINAL
 #---------------------------------------------------------------------------------------------------------
 RUN mkdir -p $DIR_WEBSERVER
@@ -226,7 +259,7 @@ RUN cp -r $DIR_PHP_EXTENSIONS/ /home/php8/php8-extensions/
 RUN chown nobody:nogroup /home/php8 -R
 RUN chmod 777 /home/php8 -R
 
-COPY ./shared/php8-ini/php/php.ini $DIR_PHP_INI/php.ini
+COPY ./shared/ini/php/php.ini $DIR_PHP_INI/php.ini
 
 EXPOSE 9000
 CMD ["php-fpm"]
