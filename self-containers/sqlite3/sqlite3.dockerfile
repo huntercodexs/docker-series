@@ -7,13 +7,13 @@ RUN apt-get update -y && apt-get upgrade -y
 RUN apt-get install build-essential tar wget nano curl gcc make -y
 
 ## PREPARE
-RUN mkdir -p /data/sqlite3/
-RUN chmod 777 /data/sqlite3 -R
+RUN mkdir -p /opt/sqlite3
+RUN chmod 777 /opt/sqlite3 -R
 
 ## COPY SOURCE CODE
-COPY ./sqliteDB/ /data/sqlite3/
+COPY ./sqliteDB/ /opt/sqlite3
 
-RUN cd /data/sqlite3/
+RUN cd /opt/sqlite3
 
 RUN apt-get install gnupg2 -y
 
@@ -22,7 +22,7 @@ RUN apt-get install libsqlite3-dev -y
 
 ### CONFIGURE & INSTALATION
 #RUN chmod 777 /data -R
-#RUN cd /data/sqlite3/ \
+#RUN cd /opt/sqlite3 \
 #    ./configure \
 #    make \
 #    make install \
@@ -32,6 +32,8 @@ RUN sqlite3 --version
 
 ## PORT ACCESS
 EXPOSE 5050
+
+WORKDIR /opt/sqlite3
 
 ### PROCESS FINALLY
 CMD ["bash"]
