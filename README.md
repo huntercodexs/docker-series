@@ -34,7 +34,7 @@ Please use the branch selection to access others configurations to most need and
 
 - Mysql 5.7 ![img.png](./self-containers/files/midias/check-green.png)
 - Mysql 8.0 ![img.png](./self-containers/files/midias/check-green.png)
-- Mssql ![img.png](./self-containers/files/midias/check-silver.png)
+- Mssql ![img.png](./self-containers/files/midias/check-green.png)
 - Oracle ![img.png](./self-containers/files/midias/check-silver.png)
 - SQLite3 ![img.png](./self-containers/files/midias/check-silver.png)
 - Firebird ![img.png](./self-containers/files/midias/check-silver.png)
