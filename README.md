@@ -37,7 +37,7 @@ Please use the branch selection to access others configurations to most need and
 - Mssql ![img.png](./self-containers/files/midias/check-green.png)
 - Oracle ![img.png](./self-containers/files/midias/check-silver.png)
 - SQLite3 ![img.png](./self-containers/files/midias/check-silver.png)
-- Firebird ![img.png](./self-containers/files/midias/unavailable.png)
+- Firebird ![img.png](./self-containers/files/midias/check-silver.png)
 - Interbase ![img.png](./self-containers/files/midias/unavailable.png)
 - Mongo ![img.png](./self-containers/files/midias/check-silver.png)
 - Postgres ![img.png](./self-containers/files/midias/check-silver.png)

@@ -8,6 +8,7 @@
 DATABASE_ZIPFILE="LINUX.X64_193000_db_home.zip"
 INSTANCE_ORACLE="docker-images/OracleDatabase/SingleInstance/dockerfiles"
 INSTANCE_VERSION="${INSTANCE_ORACLE}/19.3.0"
+DOCKER_USERNAME=`cat .env | grep "DOCKER_USERNAME" | cut -d \= -f2 | sed -r 's/[^0-9a-zA-Z\_\ \-]//g'`
 
 echo "**************************************************************************************************"
 echo "Welcome to Oracle Builder!"
@@ -15,14 +16,17 @@ echo "**************************************************************************
 echo "Continue ? Press [Enter] to continue, [Ctrl+C] to cancel: "
 read OP
 
-docker login
+echo "**************************************************************************************************"
+echo "Docker Hub Login for username: ${DOCKER_USERNAME} !"
+echo "**************************************************************************************************"
+docker login -u ${DOCKER_USERNAME}
 
 sudo mkdir -p ./oracle/oracleData
 sudo chmod 777 ./oracle/oracleData
 sudo chown nobody:nogroup ./oracle/oracleData
 
 # Current Folder Content
-# ${DATABASE_ZIPFILE} (Required, this file should be downloaded before builder)
+# ${DATABASE_ZIP_FILE} (Required, this file should be downloaded before builder)
 cd ./oracle/oracleData/
 
 if ! ls docker-images >> /dev/null 2>&1
@@ -34,13 +38,13 @@ else
     echo -ne "\n"
 fi
 
-if ! ls database/${DATABASE_ZIPFILE}
+if ! ls ../database_zip_file/${DATABASE_ZIPFILE}
 then
-    echo "[ERROR] Missing file: database/${DATABASE_ZIPFILE}"
+    echo "[ERROR] Missing file: ../database_zip_file/${DATABASE_ZIPFILE}"
     exit
 fi
 
-cp -rfv database/${DATABASE_ZIPFILE} ${INSTANCE_VERSION}/
+cp -rfv ../database_zip_file/${DATABASE_ZIPFILE} ${INSTANCE_VERSION}/
 
 if ! ls ${INSTANCE_VERSION}/${DATABASE_ZIPFILE}
 then
