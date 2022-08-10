@@ -297,7 +297,6 @@ services:
               read_only: true
         tty: true
     #----------------------------------------------------------------------------------------
-    #----------------------------------------------------------------------------------------
     #
     # NOTE: JUST WORK WITH JAR FILE !
     # After changes in the current project and generated jar file, copy it into docker container openjdk
