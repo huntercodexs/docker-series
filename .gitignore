@@ -28,3 +28,4 @@ self-containers/oracle/oracleData/enterprise/**
 /self-containers/app/generic/index.html
 /self-containers/nodejs/app/node_modules/
 /self-containers/mysql-57/lib/**
+/self-containers/mysql-80/lib/**
