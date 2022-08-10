@@ -1,4 +1,4 @@
-# Apache 2
+# Nginx
 
 - To run nginx from this project use
 

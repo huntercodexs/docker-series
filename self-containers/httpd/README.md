@@ -1,4 +1,4 @@
-# Apache 2
+# Httpd
 
 - To run httpd from this project use
 
