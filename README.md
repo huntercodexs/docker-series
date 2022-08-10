@@ -19,7 +19,7 @@ Please use the branch selection to access others configurations to most need and
 > Servers
 
 - Apache2 ![img.png](./self-containers/files/midias/check-green.png)
-- Nginx ![img.png](./self-containers/files/midias/check-silver.png)
+- Nginx ![img.png](./self-containers/files/midias/check-green.png)
 - Httpd ![img.png](./self-containers/files/midias/check-silver.png)
 
 > Distro Linux
