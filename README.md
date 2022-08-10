@@ -24,11 +24,11 @@ Please use the branch selection to access others configurations to most need and
 
 > Distro Linux
 
-- Ubuntu 20.04 ![img.png](./self-containers/files/midias/check-silver.png)
-- Ubuntu 18.04 ![img.png](./self-containers/files/midias/check-silver.png)
 - Alpine ![img.png](./self-containers/files/midias/check-silver.png)
 - CentOS ![img.png](./self-containers/files/midias/check-silver.png)
 - Amazon EC2 ![img.png](./self-containers/files/midias/check-silver.png)
+- Ubuntu 20.04 ![img.png](./self-containers/files/midias/check-silver.png)
+- Ubuntu 18.04 ![img.png](./self-containers/files/midias/check-silver.png)
 
 > Databases
 
@@ -46,9 +46,9 @@ Please use the branch selection to access others configurations to most need and
 
 - Zipkin ![img.png](./self-containers/files/midias/check-silver.png)
 - Prometheus ![img.png](./self-containers/files/midias/check-silver.png)
-- Elasticsearch ![img.png](./self-containers/files/midias/check-silver.png)
-- Logstash ![img.png](./self-containers/files/midias/check-silver.png)
 - Kibana ![img.png](./self-containers/files/midias/check-silver.png)
+- Logstash ![img.png](./self-containers/files/midias/check-silver.png)
+- Elasticsearch ![img.png](./self-containers/files/midias/check-silver.png)
 
 > Dashboards
 
@@ -56,8 +56,8 @@ Please use the branch selection to access others configurations to most need and
 
 > Stack
 
-- Java (open-jdk) ![img.png](./self-containers/files/midias/check-silver.png)
 - PHP ![img.png](./self-containers/files/midias/check-silver.png)
+- Java (open-jdk) ![img.png](./self-containers/files/midias/check-silver.png)
 - Python ![img.png](./self-containers/files/midias/check-silver.png)
 - Nodejs ![img.png](./self-containers/files/midias/check-silver.png)
 
