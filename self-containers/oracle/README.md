@@ -24,14 +24,15 @@ xe - Express Edition
 
 - Database file: LINUX.X64_193000_db_home.zip
 - This file can be downloaded in https://www.oracle.com/database/technologies/oracle-database-software-downloads.html
-- Put the LINUX.X64_193000_db_home.zip inside oracle/database before run the docker-compose
 
 > STEPS BEFORE BUILD
 
+- Put the LINUX.X64_193000_db_home.zip inside oracle/database before run the docker-compose
 - Unzip the oraclelinux-database-scripts-19c.tar.bz2 file inside the oracle/database folder:
 <pre>
 tar -xvf oraclelinux-database-scripts-19c.tar.bz2
 </pre>
+- Create the oradata folder in oracle path
 - Check if oracle/oradata is empty or just have the dbconfig/ and ORCLCDB/ folders
 
 > STEPS AFTER BUILD
@@ -52,8 +53,8 @@ docker exec -it oraclelinux /bin/bash
 
 Create User
 <pre>
-sqlplus sys/${YOUR_ORACLE_PASSWORD_@ORCLPDB1 as sysdb}
-CREATE USER DEVEL IDENTIFIED BY ${YOUR_ORACLE_PASSWORD_}
+sqlplus sys/${YOUR_ORACLE_PASSWORD_}@ORCLPDB1 as sysdba
+CREATE USER DEVEL IDENTIFIED BY ${YOUR_ORACLE_PASSWORD_};
 GRANT CREATE SESSION, CREATE TABLE TO DEVEL;
 ALTER USER DEVEL QUOTA 50m ON SYSTEM;
 CREATE SMALLFILE TABLESPACE DEVEL DATAFILE '/opt/oracle/oradata/ORCLCDB/ORCLPDB1/devel.dbf' SIZE 1G;
@@ -65,13 +66,19 @@ EXIT;
 
 Connect on database using the new user
 <pre>
-sqlplus devel/${YOUR_ORACLE_PASSWORD_@ORCLPDB1}
+sqlplus devel/${YOUR_ORACLE_PASSWORD_}@ORCLPDB1
 </pre>
 
-- Access the microservice Oracle Linux:
+- Access the Database Oracle Linux:
 
 <pre>
-http://${WEBSERVER_ADDRESS}:38080/microservice-oraclelinux/
+Host: ${DATABASE_ORACLE_SERVER_IP}
+Port: 1521
+Database: ORCLPDB1 [Service Name]
+Authentication: Oracle Database Native
+Username: DEVEL
+Role: Normal
+Password: ${YOUR_ORACLE_PASSWORD_}
 </pre>
 
 > Database Connection Sample
