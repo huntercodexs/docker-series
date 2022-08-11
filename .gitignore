@@ -31,3 +31,4 @@ self-containers/oracle/oracleData/enterprise/**
 /self-containers/mysql-80/lib/**
 /self-containers/oracle/database/**
 /self-containers/oracle/oradata/**
+/self-containers/firebird/data/databases/*.fdb
