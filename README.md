@@ -32,7 +32,7 @@ docker and docker-compose
 
 - Alpine ![img.png](./self-containers/files/midias/check-green.png)
 - CentOS ![img.png](./self-containers/files/midias/check-green.png)
-- Amazon Linux ![img.png](./self-containers/files/midias/check-silver.png)
+- Amazon Linux ![img.png](./self-containers/files/midias/check-green.png)
 - Ubuntu 20.04 ![img.png](./self-containers/files/midias/check-green.png)
 - Ubuntu 18.04 ![img.png](./self-containers/files/midias/check-green.png)
 
