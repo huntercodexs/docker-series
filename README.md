@@ -25,7 +25,7 @@ Please use the branch selection to access others configurations to most need and
 > Distro Linux
 
 - Alpine ![img.png](./self-containers/files/midias/check-green.png)
-- CentOS ![img.png](./self-containers/files/midias/check-silver.png)
+- CentOS ![img.png](./self-containers/files/midias/check-green.png)
 - Amazon EC2 ![img.png](./self-containers/files/midias/check-silver.png)
 - Ubuntu 20.04 ![img.png](./self-containers/files/midias/check-silver.png)
 - Ubuntu 18.04 ![img.png](./self-containers/files/midias/check-silver.png)
