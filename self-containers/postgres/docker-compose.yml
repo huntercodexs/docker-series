@@ -15,7 +15,7 @@ services:
             TZ: GMT
         volumes:
             - type: bind
-              source: ./postgres/PostgresSQL
+              source: ./PostgresSQL
               target: /var/lib/postgresql/data/
               read_only: false
         tty: true

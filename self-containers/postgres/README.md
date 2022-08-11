@@ -12,6 +12,7 @@ docker-compose start postgres (in others case)
 - Get the superuser postgres in CLI container postgres, and open the postgres database terminal:
 
 <pre>
+user@ubuntu:$ docker exec -it postgres /bin/bash
 root@c63de647b32a:/# su - postgres
 postgres@c63de647b32a:~$ psql 
 psql (14.4 (Debian 14.4-1.pgdg110+1))
@@ -54,4 +55,18 @@ CREATE TABLE users (
 
 INSERT INTO users (id, name, age) VALUES ('94734987', 'John Smith Wiz', 33);
 INSERT INTO users (id, name, age) VALUES ('12734983', 'Solange Smart Wow', 34);
+SELECT * FROM users;
 </pre>
+
+- Connect to postgres database with DBeaver
+
+<pre>
+Host: ${DATABASE_SERVER_ADDRESS}
+Port: 5432
+Database: postgres
+Authentication: Database Native
+Username: postgres
+Password: ${POSTGRES_PASSWORD}
+</pre>
+
+![img.png](./midias/Postgres-Database-Connection-Sample.png)
