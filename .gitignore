@@ -32,3 +32,4 @@ self-containers/oracle/oracleData/enterprise/**
 /self-containers/oracle/database/**
 /self-containers/oracle/oradata/**
 /self-containers/firebird/data/databases/*.fdb
+/self-containers/mongodb/mongo/MongoDB/**
