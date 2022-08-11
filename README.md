@@ -10,6 +10,12 @@ Please use the branch selection to access others configurations to most need and
 
 -----------------
 
+# Docker Setup
+
+docker and docker-compose
+
+-----------------
+
 # Dockers Configurations Contained
 
 > ![img.png](./self-containers/files/midias/check-green.png) Available
@@ -26,16 +32,16 @@ Please use the branch selection to access others configurations to most need and
 
 - Alpine ![img.png](./self-containers/files/midias/check-green.png)
 - CentOS ![img.png](./self-containers/files/midias/check-green.png)
-- Amazon EC2 ![img.png](./self-containers/files/midias/check-silver.png)
-- Ubuntu 20.04 ![img.png](./self-containers/files/midias/check-silver.png)
-- Ubuntu 18.04 ![img.png](./self-containers/files/midias/check-silver.png)
+- Amazon Linux ![img.png](./self-containers/files/midias/check-silver.png)
+- Ubuntu 20.04 ![img.png](./self-containers/files/midias/check-green.png)
+- Ubuntu 18.04 ![img.png](./self-containers/files/midias/check-green.png)
 
 > Databases
 
 - Mysql 5.7 ![img.png](./self-containers/files/midias/check-green.png)
 - Mysql 8.0 ![img.png](./self-containers/files/midias/check-green.png)
 - Mssql ![img.png](./self-containers/files/midias/check-green.png)
-- Oracle ![img.png](./self-containers/files/midias/check-green.png)
+- Oracle Linux ![img.png](./self-containers/files/midias/check-green.png)
 - SQLite3 ![img.png](./self-containers/files/midias/check-green.png)
 - Firebird ![img.png](./self-containers/files/midias/check-green.png)
 - Interbase ![img.png](./self-containers/files/midias/unavailable.png)
