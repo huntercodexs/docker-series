@@ -39,7 +39,7 @@ Please use the branch selection to access others configurations to most need and
 - SQLite3 ![img.png](./self-containers/files/midias/check-green.png)
 - Firebird ![img.png](./self-containers/files/midias/check-green.png)
 - Interbase ![img.png](./self-containers/files/midias/unavailable.png)
-- MongoDB ![img.png](./self-containers/files/midias/check-silver.png)
+- MongoDB ![img.png](./self-containers/files/midias/check-green.png)
 - Postgres ![img.png](./self-containers/files/midias/check-silver.png)
 
 > Tools, Logs and Tracer
