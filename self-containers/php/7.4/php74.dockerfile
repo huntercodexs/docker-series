@@ -119,10 +119,6 @@ RUN curl -sS https://getcomposer.org/installer | php -- --install-dir=/usr/local
 #ENV ORACLE_HOME="/usr/lib/oracle/11.2/client64/"
 #ENV PATH="/usr/lib/oracle/11.2/:$PATH"
 
-#TODO: Tentar usar baixando os drivers diretamente do PECL
-#RUN pecl install oci8
-#RUN pecl install pdo_oci
-
 #RUN mkdir -p /data/oracle_files/
 #COPY ./oracle/instantclient/*.rpm /data/oracle_files/
 #COPY ./oracle/lib /data/oracle_files/

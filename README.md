@@ -70,7 +70,7 @@ docker and docker-compose
   - 5.6 ![img.png](./self-containers/files/midias/check-silver.png)
   - 7.1 ![img.png](./self-containers/files/midias/check-silver.png)
   - 7.4 ![img.png](./self-containers/files/midias/check-silver.png)
-  - 8.0 ![img.png](./self-containers/files/midias/check-silver.png)
+  - 8.0 ![img.png](./self-containers/files/midias/check-green.png)
   - 8.1 ![img.png](./self-containers/files/midias/check-green.png)
 - Java (open-jdk) ![img.png](./self-containers/files/midias/check-silver.png)
 - Python
