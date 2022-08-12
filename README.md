@@ -58,8 +58,8 @@ docker and docker-compose
 
 > Dashboards
 
-- Grafana ![img.png](./self-containers/files/midias/check-silver.png)
-- Grafana Ubuntu ![img.png](./self-containers/files/midias/check-silver.png)
+- Grafana ![img.png](./self-containers/files/midias/check-green.png)
+- Grafana Ubuntu ![img.png](./self-containers/files/midias/check-green.png)
 
 > Stack
 
