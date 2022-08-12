@@ -1,0 +1,28 @@
+version: "3.7"
+services:
+    
+    #----------------------------------------------------------------------------------------
+    php81:
+        env_file: .env
+        container_name: php81
+        build:
+            context: ./
+            dockerfile: php81.dockerfile
+        privileged: true
+        environment:
+            PHP_IDE_CONFIG: ${PHP_IDE_CONFIG}
+        ports:
+            - ${PHP_PORT}:9000
+        volumes:
+            - type: bind
+              source: ./app/
+              target: /var/www/app
+              read_only: false
+        networks:
+            - default
+            - open_network
+    #----------------------------------------------------------------------------------------
+
+networks:
+    open_network:
+        external: true

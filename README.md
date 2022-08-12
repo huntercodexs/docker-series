@@ -63,9 +63,14 @@ docker and docker-compose
 
 > Stack
 
-- PHP ![img.png](./self-containers/files/midias/check-silver.png)
+- PHP-5.6 ![img.png](./self-containers/files/midias/check-silver.png)
+- PHP-7.1 ![img.png](./self-containers/files/midias/check-silver.png)
+- PHP-7.4 ![img.png](./self-containers/files/midias/check-silver.png)
+- PHP-8.0 ![img.png](./self-containers/files/midias/check-silver.png)
+- PHP-8.1 ![img.png](./self-containers/files/midias/check-green.png)
 - Java (open-jdk) ![img.png](./self-containers/files/midias/check-silver.png)
-- Python ![img.png](./self-containers/files/midias/check-silver.png)
+- Python-2 ![img.png](./self-containers/files/midias/check-silver.png)
+- Python-3 ![img.png](./self-containers/files/midias/check-silver.png)
 - Nodejs ![img.png](./self-containers/files/midias/check-silver.png)
 
 > Others
