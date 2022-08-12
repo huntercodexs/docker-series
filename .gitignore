@@ -1,6 +1,7 @@
 trash
 *-tar
 *.jar
+*.jar.original
 *.deb
 *.exec
 *.run
@@ -34,3 +35,5 @@ self-containers/oracle/oracleData/enterprise/**
 /self-containers/firebird/data/databases/*.fdb
 /self-containers/mongodb/mongo/MongoDB/**
 /self-containers/postgres/PostgresSQL/**
+/self-containers/java/openjdk-8u212/simple-api-demo/.idea/**
+/self-containers/java/openjdk-8u212/simple-api-demo/target/**

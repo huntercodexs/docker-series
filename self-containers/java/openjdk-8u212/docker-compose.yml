@@ -1,0 +1,34 @@
+version: "3.7"
+services:
+    
+    #----------------------------------------------------------------------------------------
+    openjdk-8u212:
+        env_file: .env
+        #Use image
+        #image: openjdk:8u212
+        container_name: openjdk-8u212
+        #Use Builder
+        build:
+            context: .
+            dockerfile: openjdk-8u212.dockerfile
+        ports:
+            - ${OPENJDK_8U212_PORT}:31890
+        volumes:
+            - type: bind
+              source: ./simple-api-demo/target/SIMPLE-API-DEMO-22.01.1-SNAPSHOT.jar
+              target: /home/openjdk8u212/simple-api-demo/SIMPLE-API-DEMO-22.01.1-SNAPSHOT.jar
+              read_only: false
+            - type: bind
+              source: ./simple-api-demo/src/main/resources/application.properties
+              target: /home/openjdk8u212/simple-api-demo/application.properties
+              read_only: false
+        tty: true
+        networks:
+            - default
+            - open_network
+        command: "java -jar /home/openjdk8u212/simple-api-demo/SIMPLE-API-DEMO-22.01.1-SNAPSHOT.jar"
+    #----------------------------------------------------------------------------------------
+
+networks:
+    open_network:
+        external: true
