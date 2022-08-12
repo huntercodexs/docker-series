@@ -14,10 +14,29 @@ services:
         ports:
             - ${PHP_PORT}:9000
         volumes:
-            - type: bind
-              source: ./app/
-              target: /var/www/app
-              read_only: false
+            - ./applications/:/var/www/webserver/
+        networks:
+            - default
+            - open_network
+    #----------------------------------------------------------------------------------------
+    webserver-php81:
+        env_file: .env
+        image: httpd:2.4.54
+        container_name: webserver-php81
+        ports:
+            - ${WEBSERVER_PORT1}:80
+            - ${WEBSERVER_PORT2}:443
+        privileged: true
+        environment:
+            PHP_IDE_CONFIG: ${PHP_IDE_CONFIG}
+        volumes:
+            - ./webserver/:/home/webserver/
+            - ./applications/:/var/www/webserver/
+        tty: true
+        depends_on:
+            - php81
+        links:
+            - php81
         networks:
             - default
             - open_network
@@ -26,3 +45,4 @@ services:
 networks:
     open_network:
         external: true
+        
