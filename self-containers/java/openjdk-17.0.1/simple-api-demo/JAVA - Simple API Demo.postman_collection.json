@@ -1,0 +1,74 @@
+{
+	"info": {
+		"_postman_id": "63cf2919-0707-42f6-a30c-b9eef27adf80",
+		"name": "JAVA - Simple API Demo",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "Test",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://192.168.0.174:31890/api/simple-api-demo",
+					"protocol": "http",
+					"host": [
+						"192",
+						"168",
+						"0",
+						"174"
+					],
+					"port": "31890",
+					"path": [
+						"api",
+						"simple-api-demo"
+					]
+				}
+			},
+			"response": [
+				{
+					"name": "Test",
+					"originalRequest": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://192.168.0.174:31890/api/simple-api-demo",
+							"protocol": "http",
+							"host": [
+								"192",
+								"168",
+								"0",
+								"174"
+							],
+							"port": "31890",
+							"path": [
+								"api",
+								"simple-api-demo"
+							]
+						}
+					},
+					"status": "OK",
+					"code": 200,
+					"_postman_previewlanguage": "plain",
+					"header": [
+						{
+							"key": "Content-Type",
+							"value": "text/plain;charset=UTF-8"
+						},
+						{
+							"key": "Content-Length",
+							"value": "24"
+						},
+						{
+							"key": "Date",
+							"value": "Fri, 12 Aug 2022 22:54:47 GMT"
+						}
+					],
+					"cookie": [],
+					"body": "OK, it is working fine !"
+				}
+			]
+		}
+	]
+}

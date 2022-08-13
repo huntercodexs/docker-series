@@ -81,7 +81,7 @@ docker and docker-compose
   - openjdk-11.0.6 ![img.png](./self-containers/files/midias/check-silver.png)
   - openjdk-11.0.15 ![img.png](./self-containers/files/midias/check-silver.png)
   - openjdk-11.0.15.1 ![img.png](./self-containers/files/midias/check-silver.png)
-  - openjdk-17.0.1 ![img.png](./self-containers/files/midias/check-silver.png)
+  - openjdk-17.0.1 ![img.png](./self-containers/files/midias/check-green.png)
   - openjdk-17.0.2 ![img.png](./self-containers/files/midias/check-silver.png)
   - openjdk-17.0.4 ![img.png](./self-containers/files/midias/check-silver.png)
 - Python
