@@ -71,6 +71,10 @@ docker volumes ls
 docker system prune -a
 docker rmi -v ${IMAGE_ID}
 docker network create ${NETWORK_NAME}
+
+**
+docker exec -it ${CONTAINER_NAME} [${COMMAND}[OPTIONS]]
+**
 </pre>
 
 > Installing Docker Compose
@@ -186,7 +190,7 @@ docker-compose unpause
 
 > Others
 
-- Redis ![img.png](./self-containers/files/midias/check-silver.png)
+- Redis ![img.png](./self-containers/files/midias/check-green.png)
 - Swagger ![img.png](./self-containers/files/midias/check-silver.png)
 - Jenkins ![img.png](./self-containers/files/midias/check-silver.png)
 
