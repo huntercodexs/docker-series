@@ -12,7 +12,102 @@ Please use the branch selection to access others configurations to most need and
 
 # Docker Setup
 
-docker and docker-compose
+> Installing Docker
+
+- Update OS
+
+<pre>
+$ sudo apt update
+</pre>
+
+- Install Pre Requisites
+
+<pre>
+$ sudo apt install apt-transport-https ca-certificates curl software-properties-common
+</pre>
+
+- Add the GPG Key from official docker repository
+
+<pre>
+$ curl -fsSL https://download.docker.com/linux/ubuntu/gpg | sudo apt-key add -
+</pre>
+
+- Add the docker repository APT sources
+
+<pre>
+$ sudo add-apt-repository "deb [arch=amd64] https://download.docker.com/linux/ubuntu focal stable"
+</pre>
+
+- Make sure thar will be to install the docker-ce
+
+<pre>
+$ apt-cache policy docker-ce
+$ sudo apt install docker-ce
+</pre>
+
+- Check docker status
+
+<pre>
+$ sudo systemctl status docker
+</pre>
+
+- Make docker command to current user (not root)
+
+<pre>
+$ sudo usermod -aG docker ${USER}
+$ su - ${USER}
+$ sudo usermod -aG docker username
+</pre>
+
+> Any Docker Commands Helper
+
+<pre>
+docker ps
+docker run
+docker images ls
+docker image ls
+docker container ls
+docker volumes ls
+docker system prune -a
+docker rmi -v ${IMAGE_ID}
+docker network create ${NETWORK_NAME}
+</pre>
+
+> Installing Docker Compose
+
+- Installing the current release of docker-comopse
+
+<pre>
+$ sudo curl -L "https://github.com/docker/compose/releases/download/1.26.0/docker-compose-$(uname -s)-$(uname -m)" -o /usr/local/bin/docker-compose
+</pre>
+
+- Make docker-compose executable
+
+<pre>
+$ sudo chmod +x /usr/local/bin/docker-compose
+</pre>
+
+- Check the docker-compose version installed
+
+<pre>
+$ docker-compose --version
+</pre>
+
+> Any ker Compose Commands Helper
+
+<pre>
+docker-compose ps
+docker-compose --build
+docker-compose up --build
+docker-compose up -d
+docker-compose up
+docker-compose start
+docker-compose stop
+docker-compose down [--volumes]
+docker-compose logs
+docker-compose pause
+docker-compose unpause
+</pre>
 
 -----------------
 
