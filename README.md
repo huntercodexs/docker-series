@@ -185,7 +185,7 @@ docker-compose unpause
   - openjdk-17.0.4 ![img.png](./self-containers/files/midias/check-silver.png)
 - Python
   - 2.0 ![img.png](./self-containers/files/midias/check-silver.png)
-  - 3.0 ![img.png](./self-containers/files/midias/check-silver.png)
+  - 3.0 ![img.png](./self-containers/files/midias/check-green.png)
 - Nodejs ![img.png](./self-containers/files/midias/check-silver.png)
 
 > Others
