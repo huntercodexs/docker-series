@@ -28,6 +28,6 @@ $ npm install -g nodemon
 - Access and test application
 
 <pre>
-http://${SERVER_IP}:3000
+http://${SERVER_IP}:33000
 </pre>
 

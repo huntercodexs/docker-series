@@ -152,10 +152,10 @@ docker-compose unpause
 
 > Tools, Logs and Tracer
 
+- Logstash ![img.png](./self-containers/files/midias/check-silver.png)
+- Kibana ![img.png](./self-containers/files/midias/check-silver.png)
 - Zipkin ![img.png](./self-containers/files/midias/check-silver.png)
 - Prometheus ![img.png](./self-containers/files/midias/check-silver.png)
-- Kibana ![img.png](./self-containers/files/midias/check-silver.png)
-- Logstash ![img.png](./self-containers/files/midias/check-silver.png)
 - Elasticsearch ![img.png](./self-containers/files/midias/check-silver.png)
 
 > Dashboards
@@ -186,7 +186,9 @@ docker-compose unpause
 - Python
   - 2.0 ![img.png](./self-containers/files/midias/check-silver.png)
   - 3.0 ![img.png](./self-containers/files/midias/check-green.png)
-- Nodejs ![img.png](./self-containers/files/midias/check-silver.png)
+- Nodejs
+  - 10.1.9 ![img.png](./self-containers/files/midias/check-silver.png)
+  - 18.7.0 ![img.png](./self-containers/files/midias/check-green.png)
 
 > Others
 

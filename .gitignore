@@ -7,7 +7,7 @@ trash
 *.run
 .idea
 nodes
-**/node_modules/**
+node_modules
 /docker-elk/
 /elkstack792/
 /micro-services/
