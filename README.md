@@ -196,8 +196,9 @@ docker-compose unpause
 - Swagger ![img.png](./self-containers/files/midias/check-silver.png)
 - Jenkins
   - 2.0 (Ubuntu-20.04) ![img.png](./self-containers/files/midias/check-green.png)
-  - 2.46.2 (Official) ![img.png](./self-containers/files/midias/check-silver.png)
+  - 2.46.2 (Official) ![img.png](./self-containers/files/midias/unavailable.png)
   - 2.60.3 (Official) ![img.png](./self-containers/files/midias/unavailable.png)
+  - 2.190.1 (Official) ![img.png](./self-containers/files/midias/unavailable.png)
 
 -----------------
 

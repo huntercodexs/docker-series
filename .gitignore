@@ -40,4 +40,6 @@ self-containers/oracle/oracleData/enterprise/**
 /self-containers/java/**/simple-api-demo/target/**
 /self-containers/python/3.0/pysimple/.cache/**
 /self-containers/python/3.0/pysimple/.local/**
+/self-containers/jenkins/2.46.2/share/**
 /self-containers/jenkins/2.60.3/share/**
+/self-containers/jenkins/2.190.1/share/**
