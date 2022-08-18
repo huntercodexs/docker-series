@@ -28,9 +28,9 @@ self-containers/oracle/oracleData/enterprise/**
 /self-containers/app/jshunter/.gitignore
 /self-containers/app/phphunter/index.php
 /self-containers/app/generic/index.html
-/self-containers/nodejs/app/node_modules/
-/self-containers/mysql-57/lib/**
-/self-containers/mysql-80/lib/**
+/self-containers/nodejs/**/app/node_modules/
+/self-containers/mysql/mysql-57/lib/**
+/self-containers/mysql/mysql-80/lib/**
 /self-containers/oracle/database/**
 /self-containers/oracle/oradata/**
 /self-containers/firebird/data/databases/*.fdb

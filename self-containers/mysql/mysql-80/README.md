@@ -4,9 +4,9 @@
 
 <pre>
 git clone https://github.com/huntercodexs/docker-series.git .
-cd self-containers/mysql-80
-docker-compose up --build mysql-80 (in first time)
-docker-compose start mysql-80 (in others case)
+cd self-containers/mysql/mysql-80
+docker-compose up --build (in first time)
+docker-compose start (in others case)
 </pre>
 
 - Access the database

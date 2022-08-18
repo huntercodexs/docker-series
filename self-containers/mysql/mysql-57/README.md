@@ -4,9 +4,9 @@
 
 <pre>
 git clone https://github.com/huntercodexs/docker-series.git .
-cd self-containers/mysql-57
-docker-compose up --build mysql-57 (in first time)
-docker-compose start mysql-57 (in others case)
+cd self-containers/mysql/mysql-57
+docker-compose up --build (in first time)
+docker-compose start (in others case)
 </pre>
 
 - Access the database

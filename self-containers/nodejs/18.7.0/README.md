@@ -1,10 +1,10 @@
-# NODEJS
+# NODEJS 18.7.0
 
 > Run nodejs from this project use
 
 <pre>
 git clone https://github.com/huntercodexs/docker-series.git .
-cd self-containers/nodejs
+cd self-containers/nodejs/18.7.0
 docker-compose up --build (in first time)
 docker-compose start (in others case)
 </pre>

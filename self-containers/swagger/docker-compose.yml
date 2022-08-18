@@ -7,7 +7,7 @@ services:
         image: swaggerapi/swagger-ui
         container_name: swagger-ui
 #        build:
-#            context: ./
+#            context: ./swagger-ui
 #            dockerfile: swagger-ui.dockerfile
         ports:
             - ${SWAGGER_UI_PORT}:8080
@@ -23,7 +23,7 @@ services:
         image: swaggerapi/swagger-editor
         container_name: swagger-editor
 #        build:
-#            context: ./
+#            context: ./swagger-editor
 #            dockerfile: swagger-editor.dockerfile
         ports:
            - ${SWAGGER_EDITOR_PORT}:8080
@@ -39,7 +39,7 @@ services:
         image: swaggerapi/swagger-generator
         container_name: swagger-generator
 #        build:
-#            context: ./
+#            context: ./swagger-generator
 #            dockerfile: swagger-generator.dockerfile
         ports:
             - ${SWAGGER_GENERATOR_PORT}:8080
