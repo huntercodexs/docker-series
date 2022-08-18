@@ -1,0 +1,73 @@
+version: "3.7"
+services:
+
+    #----------------------------------------------------------------------------------------
+    nginx-php80:
+        env_file: .env
+        container_name: nginx-php80
+        image: nginx:latest
+        privileged: true
+        ports:
+            - ${NGINX_PORT}:80
+        environment:
+            #ENVIRONEMT DETAILS
+            PHP_IDE_CONFIG: ${PHP_IDE_CONFIG}
+        volumes:
+            - type: bind
+              source: ./applications/
+              target: /var/www/applications
+              read_only: false
+            - type: bind
+              source: ./nginx/nginx.conf
+              target: /etc/nginx/nginx.conf
+              read_only: true
+            - type: bind
+              source: ./nginx/applications.conf
+              target: /etc/nginx/conf.d/default.conf
+              read_only: true
+        links:
+            - php80
+            - php81
+        depends_on:
+            - php80
+            - php81
+    #----------------------------------------------------------------------------------------
+    php80:
+        env_file: .env
+        container_name: php80
+        build:
+            context: ./php/8.0
+            dockerfile: php80.dockerfile
+        privileged: true
+        environment:
+            PHP_IDE_CONFIG: ${PHP_IDE_CONFIG}
+        ports:
+            - ${PHP80_PORT}:9000
+        volumes:
+            - ./applications/php80/:/var/www/applications/php80/
+        networks:
+            - default
+            - open_network
+    #----------------------------------------------------------------------------------------
+    php81:
+        env_file: .env
+        container_name: php81
+        build:
+            context: ./php/8.0
+            dockerfile: php81.dockerfile
+        privileged: true
+        environment:
+            PHP_IDE_CONFIG: ${PHP_IDE_CONFIG}
+        ports:
+            - ${PHP81_PORT}:9000
+        volumes:
+            - ./applications/php81/:/var/www/applications/php81/
+        networks:
+            - default
+            - open_network
+    #----------------------------------------------------------------------------------------
+
+networks:
+    open_network:
+        external: true
+        
