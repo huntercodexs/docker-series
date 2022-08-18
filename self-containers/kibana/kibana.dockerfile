@@ -1,0 +1,11 @@
+FROM kibana:7.9.2
+
+# UPDATE
+
+# LIBS
+
+# ESSENTIALS
+
+# OTHERS
+
+EXPOSE 5601
