@@ -1,0 +1,48 @@
+version: "3.7"
+services:
+    
+    #----------------------------------------------------------------------------------------
+    php72:
+        env_file: .env
+        container_name: php72
+        build:
+            context: ./
+            dockerfile: php72.dockerfile
+        privileged: true
+        environment:
+            PHP_IDE_CONFIG: ${PHP_IDE_CONFIG}
+        ports:
+            - ${PHP_PORT}:9000
+        volumes:
+            - ./applications/:/var/www/webserver/
+        networks:
+            - default
+            - open_network
+    #----------------------------------------------------------------------------------------
+    webserver-php72:
+        env_file: .env
+        image: httpd:2.4.54
+        container_name: webserver-php72
+        ports:
+            - ${WEBSERVER_PORT1}:80
+            - ${WEBSERVER_PORT2}:443
+        privileged: true
+        environment:
+            PHP_IDE_CONFIG: ${PHP_IDE_CONFIG}
+        volumes:
+            - ./webserver/:/home/webserver/
+            - ./applications/:/var/www/webserver/
+        tty: true
+        depends_on:
+            - php72
+        links:
+            - php72
+        networks:
+            - default
+            - open_network
+    #----------------------------------------------------------------------------------------
+
+networks:
+    open_network:
+        external: true
+        
