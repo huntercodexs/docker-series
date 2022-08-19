@@ -10,21 +10,11 @@ services:
         ports:
             - ${NGINX_PORT}:80
         environment:
-            #ENVIRONEMT DETAILS
             PHP_IDE_CONFIG: ${PHP_IDE_CONFIG}
         volumes:
-            - type: bind
-              source: ./applications/
-              target: /var/www/applications
-              read_only: false
-            - type: bind
-              source: ./nginx/nginx.conf
-              target: /etc/nginx/nginx.conf
-              read_only: true
-            - type: bind
-              source: ./nginx/applications/
-              target: /etc/nginx/conf.d/
-              read_only: true
+            - ./nginx/nginx.conf:/etc/nginx/nginx.conf
+            - ./nginx/conf.d:/etc/nginx/conf.d/
+            - ./applications:/var/www/applications/
         working_dir: /etc/nginx
         links:
             - php80
@@ -48,7 +38,7 @@ services:
         ports:
             - ${PHP80_PORT}:9000
         volumes:
-            - ./applications/php80/:/var/www/applications/php80/
+            - ./applications:/var/www/applications/
         networks:
             - default
             - open_network
@@ -65,7 +55,7 @@ services:
         ports:
             - ${PHP81_PORT}:9000
         volumes:
-            - ./applications/php81/:/var/www/applications/php81/
+            - ./applications:/var/www/applications/
         networks:
             - default
             - open_network

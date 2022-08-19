@@ -26,11 +26,19 @@ $ docker-compose start (in others case)
 
 - Before build and start project set the following files configurations:
 
-> php.ini
+<pre>
+- php.ini (nginx_php8/php/8.0/conf/php.ini)
+- nginx.conf (nginx_php8/nginx/nginx.conf)
+- php80.conf (nginx_php8/nginx/conf.d/php80.conf)
+- php81.conf (nginx_php8/nginx/conf.d/php81.conf)
+</pre>
 
-> nginx.conf
+- Access the application
 
-> applications.conf
+<pre>
+http://192.168.0.174:38080/php80/index.php
+http://192.168.0.174:38080/php81/index.php
+</pre>
 
 -----------------
 
