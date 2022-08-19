@@ -2,9 +2,9 @@ version: "3.7"
 services:
 
     #----------------------------------------------------------------------------------------
-    nginx-php80:
+    nginx:
         env_file: .env
-        container_name: nginx-php80
+        container_name: nginx
         image: nginx:latest
         privileged: true
         ports:
@@ -22,15 +22,19 @@ services:
               target: /etc/nginx/nginx.conf
               read_only: true
             - type: bind
-              source: ./nginx/applications.conf
-              target: /etc/nginx/conf.d/default.conf
+              source: ./nginx/applications/
+              target: /etc/nginx/conf.d/
               read_only: true
+        working_dir: /etc/nginx
         links:
             - php80
             - php81
         depends_on:
             - php80
             - php81
+        networks:
+            - default
+            - open_network
     #----------------------------------------------------------------------------------------
     php80:
         env_file: .env
@@ -53,7 +57,7 @@ services:
         env_file: .env
         container_name: php81
         build:
-            context: ./php/8.0
+            context: ./php/8.1
             dockerfile: php81.dockerfile
         privileged: true
         environment:
