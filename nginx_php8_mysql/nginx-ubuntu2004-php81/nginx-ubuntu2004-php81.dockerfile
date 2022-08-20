@@ -50,3 +50,4 @@ RUN useradd --no-create-home nginx
 EXPOSE 9090
 EXPOSE 39000
 
+CMD ["nginx", "-g", "daemon off;"]

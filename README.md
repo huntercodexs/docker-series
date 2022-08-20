@@ -44,10 +44,12 @@ CREATE DATABASE database CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci;
 - Access the application
 
 <pre>
-http://192.168.0.174:38080/php80/mysql/5-7/index.php
-http://192.168.0.174:38080/php80/mysql/8-0/index.php
-http://192.168.0.174:38080/php81/mysql/5-7/index.php
-http://192.168.0.174:38080/php81/mysql/8-0/index.php
+#PHP-8.0
+http://192.168.0.174:38080/mysql/5-7/index.php
+http://192.168.0.174:38080/mysql/8-0/index.php
+#PHP-8.1
+http://192.168.0.174:39000/mysql/5-7/index.php
+http://192.168.0.174:39000/mysql/8-0/index.php
 </pre>
 
 -----------------
