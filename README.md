@@ -1,6 +1,6 @@
 # Docker Series
 
-The Docker Series to most containers dockerized
+The project to most containers using docker
 
 -----------------
 
