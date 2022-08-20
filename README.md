@@ -1,223 +1,132 @@
+
 # Docker Series
 
-The project to most containers using docker
+The Docker Series to most containers dockerized
 
 -----------------
 
 # About
 
-Please use the branch selection to access others configurations to most need and purposes
+This branch set up the complete environment to run PHP and NGINX as Webserver
 
------------------
-
-# Docker Setup
-
-> Installing Docker
-
-- Update OS
-
-<pre>
-$ sudo apt update
-</pre>
-
-- Install Pre Requisites
-
-<pre>
-$ sudo apt install apt-transport-https ca-certificates curl software-properties-common
-</pre>
-
-- Add the GPG Key from official docker repository
-
-<pre>
-$ curl -fsSL https://download.docker.com/linux/ubuntu/gpg | sudo apt-key add -
-</pre>
-
-- Add the docker repository APT sources
-
-<pre>
-$ sudo add-apt-repository "deb [arch=amd64] https://download.docker.com/linux/ubuntu focal stable"
-</pre>
-
-- Make sure thar will be to install the docker-ce
-
-<pre>
-$ apt-cache policy docker-ce
-$ sudo apt install docker-ce
-</pre>
-
-- Check docker status
-
-<pre>
-$ sudo systemctl status docker
-</pre>
-
-- Make docker command to current user (not root)
-
-<pre>
-$ sudo usermod -aG docker ${USER}
-$ su - ${USER}
-$ sudo usermod -aG docker username
-</pre>
-
-> Docker Commands Helper
-
-<pre>
-docker ps
-docker run
-docker images ls
-docker image ls
-docker container ls
-docker volumes ls
-docker system prune -a
-docker rmi -v ${IMAGE_ID}
-docker network create ${NETWORK_NAME}
-
-**
-docker exec -it ${CONTAINER_NAME} [${COMMAND}[OPTIONS]]
-**
-</pre>
-
-> Installing Docker Compose
-
-- Installing the current release of docker-comopse
-
-<pre>
-$ sudo curl -L "https://github.com/docker/compose/releases/download/1.26.0/docker-compose-$(uname -s)-$(uname -m)" -o /usr/local/bin/docker-compose
-</pre>
-
-- Make docker-compose executable
-
-<pre>
-$ sudo chmod +x /usr/local/bin/docker-compose
-</pre>
-
-- Check the docker-compose version installed
-
-<pre>
-$ docker-compose --version
-</pre>
-
-> Docker Compose Commands Helper
-
-<pre>
-docker-compose ps
-docker-compose --build
-docker-compose up --build
-docker-compose up -d
-docker-compose up
-docker-compose start
-docker-compose stop
-docker-compose down [--volumes]
-docker-compose logs
-docker-compose pause
-docker-compose unpause
-</pre>
-
------------------
-
-# Dockers Configurations Contained
-
-> ![img.png](./self-containers/files/midias/check-green.png) Available
-> ![img.png](./self-containers/files/midias/check-silver.png) Pending
-> ![img.png](./self-containers/files/midias/unavailable.png) Unavailable
-
-> Servers
-
-- <a href="https://github.com/huntercodexs/docker-series/tree/master/self-containers/apache2">Apache2</a> ![img.png](./self-containers/files/midias/check-green.png)
-- <a href="https://github.com/huntercodexs/docker-series/tree/master/self-containers/nginx">Nginx</a> ![img.png](./self-containers/files/midias/check-green.png)
-- <a href="https://github.com/huntercodexs/docker-series/tree/master/self-containers/httpd">HTTPD</a> 
-  - <a href="https://github.com/huntercodexs/docker-series/tree/master/self-containers/httpd/2.4.54">2.4.54</a> ![img.png](./self-containers/files/midias/check-green.png)
-- <a href="https://github.com/huntercodexs/docker-series/tree/master/self-containers/tomcat">Tomcat</a>
-  - <a href="https://github.com/huntercodexs/docker-series/tree/master/self-containers/tomcat/9.0">9.0</a> ![img.png](./self-containers/files/midias/check-green.png)
-
-> Distro Linux
-
-- <a href="https://github.com/huntercodexs/docker-series/tree/master/self-containers/alpine">Alpine</a> ![img.png](./self-containers/files/midias/check-green.png)
-- <a href="https://github.com/huntercodexs/docker-series/tree/master/self-containers/centos">CentOS</a> ![img.png](./self-containers/files/midias/check-green.png)
-- <a href="https://github.com/huntercodexs/docker-series/tree/master/self-containers/amazonlinux">Amazon Linux</a> ![img.png](./self-containers/files/midias/check-green.png)
-- <a href="https://github.com/huntercodexs/docker-series/tree/master/self-containers/ubuntu">Ubuntu</a>
-  - <a href="https://github.com/huntercodexs/docker-series/tree/master/self-containers/ubuntu/ubuntu1804">18.04 LTS</a> ![img.png](./self-containers/files/midias/check-green.png)
-  - <a href="https://github.com/huntercodexs/docker-series/tree/master/self-containers/ubuntu/ubuntu2004">20.04 LTS</a> ![img.png](./self-containers/files/midias/check-green.png)
-
-> Databases
-
-- <a href="https://github.com/huntercodexs/docker-series/tree/master/self-containers/mysql">MySQL</a>
-  - <a href="https://github.com/huntercodexs/docker-series/tree/master/self-containers/mysql/mysql-57">5.7</a> ![img.png](./self-containers/files/midias/check-green.png)
-  - <a href="https://github.com/huntercodexs/docker-series/tree/master/self-containers/mysql/mysql-80">8.0</a> ![img.png](./self-containers/files/midias/check-green.png)
-- <a href="https://github.com/huntercodexs/docker-series/tree/master/self-containers/microsoft/mssql">MsSQL</a> ![img.png](./self-containers/files/midias/check-green.png)
-- <a href="https://github.com/huntercodexs/docker-series/tree/master/self-containers/oracle">Oracle Linux 19c</a> ![img.png](./self-containers/files/midias/check-green.png)
-- <a href="https://github.com/huntercodexs/docker-series/tree/master/self-containers/sqlite3">SQLite3</a> ![img.png](./self-containers/files/midias/check-green.png)
-- <a href="https://github.com/huntercodexs/docker-series/tree/master/self-containers/firebird">Firebird</a> ![img.png](./self-containers/files/midias/check-green.png)
-- Interbase ![img.png](./self-containers/files/midias/unavailable.png)
-- <a href="https://github.com/huntercodexs/docker-series/tree/master/self-containers/mongodb">MongoDB</a> ![img.png](./self-containers/files/midias/check-green.png)
-- <a href="https://github.com/huntercodexs/docker-series/tree/master/self-containers/postgres">Postgres</a> ![img.png](./self-containers/files/midias/check-green.png)
-
-> Tools, Logs and Tracer
-
-- <a href="https://github.com/huntercodexs/docker-series/tree/master/self-containers/elasticsearch">Elasticsearch</a> ![img.png](./self-containers/files/midias/check-green.png)
-- <a href="https://github.com/huntercodexs/docker-series/tree/master/self-containers/logstash">Logstash</a> ![img.png](./self-containers/files/midias/check-green.png)
-- <a href="https://github.com/huntercodexs/docker-series/tree/master/self-containers/kibana">Kibana</a> ![img.png](./self-containers/files/midias/check-green.png)
-- <a href="https://github.com/huntercodexs/docker-series/tree/master/self-containers/zipkin">Zipkin</a> ![img.png](./self-containers/files/midias/check-green.png)
-- <a href="https://github.com/huntercodexs/docker-series/tree/master/self-containers/prometheus">Prometheus</a> ![img.png](./self-containers/files/midias/check-green.png)
-
-> Dashboards
-
-- <a href="https://github.com/huntercodexs/docker-series/tree/master/self-containers/grafana">Grafana</a> ![img.png](./self-containers/files/midias/check-green.png)
-- <a href="https://github.com/huntercodexs/docker-series/tree/master/self-containers/grafana-ubuntu">Grafana Ubuntu</a> ![img.png](./self-containers/files/midias/check-green.png)
-
-> Stack
-
-- <a href="https://github.com/huntercodexs/docker-series/tree/master/self-containers/php">PHP</a>
-  - <a href="https://github.com/huntercodexs/docker-series/tree/master/self-containers/php/5.6">5.6</a> ![img.png](./self-containers/files/midias/check-green.png)
-  - <a href="https://github.com/huntercodexs/docker-series/tree/master/self-containers/php/7.1">7.1</a> ![img.png](./self-containers/files/midias/check-green.png)
-  - <a href="https://github.com/huntercodexs/docker-series/tree/master/self-containers/php/7.2">7.2</a> ![img.png](./self-containers/files/midias/check-green.png)
-  - <a href="https://github.com/huntercodexs/docker-series/tree/master/self-containers/php/7.4">7.4</a> ![img.png](./self-containers/files/midias/check-green.png)
-  - <a href="https://github.com/huntercodexs/docker-series/tree/master/self-containers/php/8.0">8.0</a> ![img.png](./self-containers/files/midias/check-green.png)
-  - <a href="https://github.com/huntercodexs/docker-series/tree/master/self-containers/php/8.1">8.1</a> ![img.png](./self-containers/files/midias/check-green.png)
-- <a href="https://github.com/huntercodexs/docker-series/tree/master/self-containers/java">Java</a>
-  - <a href="https://github.com/huntercodexs/docker-series/tree/master/self-containers/java/openjdk-8u212">openjdk-8u212</a> ![img.png](./self-containers/files/midias/check-green.png)
-  - openjdk-8u221 ![img.png](./self-containers/files/midias/check-silver.png)
-  - openjdk-8u231 ![img.png](./self-containers/files/midias/check-silver.png)
-  - openjdk-8u333 ![img.png](./self-containers/files/midias/check-silver.png)
-  - openjdk-11 ![img.png](./self-containers/files/midias/check-silver.png)
-  - openjdk-11.0.6 ![img.png](./self-containers/files/midias/check-silver.png)
-  - openjdk-11.0.15 ![img.png](./self-containers/files/midias/check-silver.png)
-  - openjdk-11.0.15.1 ![img.png](./self-containers/files/midias/check-silver.png)
-  - <a href="https://github.com/huntercodexs/docker-series/tree/master/self-containers/java/openjdk-17.0.1">openjdk-17.0.1</a> ![img.png](./self-containers/files/midias/check-green.png)
-  - openjdk-17.0.2 ![img.png](./self-containers/files/midias/check-silver.png)
-  - openjdk-17.0.4 ![img.png](./self-containers/files/midias/check-silver.png)
-- <a href="https://github.com/huntercodexs/docker-series/tree/master/self-containers/python">Python</a>
-  - <a href="https://github.com/huntercodexs/docker-series/tree/master/self-containers/python/2.0">2.0</a> ![img.png](./self-containers/files/midias/check-silver.png)
-  - <a href="https://github.com/huntercodexs/docker-series/tree/master/self-containers/python/3.0">3.0</a> ![img.png](./self-containers/files/midias/check-green.png)
-- <a href="https://github.com/huntercodexs/docker-series/tree/master/self-containers/nodejs">Nodejs</a>
-  - 10.1.9 ![img.png](./self-containers/files/midias/check-silver.png)
-  - <a href="https://github.com/huntercodexs/docker-series/tree/master/self-containers/nodejs/18.7.0">18.7.0</a> ![img.png](./self-containers/files/midias/check-green.png)
-
-> Others
-
-- <a href="https://github.com/huntercodexs/docker-series/tree/master/self-containers/redis">Redis</a> ![img.png](./self-containers/files/midias/check-green.png)
-- <a href="https://github.com/huntercodexs/docker-series/tree/master/self-containers/swagger">Swagger</a> 
-  - <a href="https://github.com/huntercodexs/docker-series/tree/master/self-containers/swagger/swagger-ui">Swagger UI</a> ![img.png](./self-containers/files/midias/check-green.png)
-  - <a href="https://github.com/huntercodexs/docker-series/tree/master/self-containers/swagger/swagger-editor">Editor</a> ![img.png](./self-containers/files/midias/check-green.png)
-  - <a href="https://github.com/huntercodexs/docker-series/tree/master/self-containers/swagger/swagger-generator">Generator</a> ![img.png](./self-containers/files/midias/check-green.png)
-- <a href="https://github.com/huntercodexs/docker-series/tree/master/self-containers/jenkins">Jenkins</a> ![img.png](./self-containers/files/midias/check-green.png)
-  - <a href="https://github.com/huntercodexs/docker-series/tree/master/self-containers/jenkins/2.0">2.0 (Ubuntu-20.04)</a> ![img.png](./self-containers/files/midias/check-green.png)
-  - <a href="https://github.com/huntercodexs/docker-series/tree/master/self-containers/jenkins/2.46.2">2.46.2 (Official)</a> ![img.png](./self-containers/files/midias/unavailable.png)
-  - <a href="https://github.com/huntercodexs/docker-series/tree/master/self-containers/jenkins/2.60.3">2.60.3 (Official)</a> ![img.png](./self-containers/files/midias/unavailable.png)
-  - <a href="https://github.com/huntercodexs/docker-series/tree/master/self-containers/jenkins/2.190.1">2.190.1 (Official)</a> ![img.png](./self-containers/files/midias/unavailable.png)
-  - <a href="https://github.com/huntercodexs/docker-series/tree/master/self-containers/jenkins/2.346.3">2.346.3 (Official)</a> ![img.png](./self-containers/files/midias/check-green.png)
 
 -----------------
 
 # How to use
 
-> Access the folder path in this project to run any self-container, by example: apache2 
-
-- Steps do run
+- Before build and start project set the following files configurations:
 
 <pre>
-git clone https://github.com/huntercodexs/docker-series.git .
-cd self-containers/apache2
-docker-compose up --build apache2 (in first time)
-docker-compose start apache2 (in others case)
+- php.ini (nginx_php8_mysql/php/8.0/conf/php.ini)
+- nginx.conf (nginx_php8_mysql/nginx/nginx.conf)
+- php80.conf (nginx_php8_mysql/nginx/conf.d/php80.conf)
+- php81.conf (nginx_php8_mysql/nginx/conf.d/php81.conf)
 </pre>
+
+- Access the folder path in this project to run php8 together nginx, as below:
+
+<pre>
+$ git clone https://github.com/huntercodexs/docker-series.git .
+$ git checkout nginx_php8_mysql
+$ cd nginx_php8_mysql
+$ docker-compose up --build (in first time)
+$ docker-compose start (in others case)
+</pre>
+
+- Create a Database in mysql container 5.7 and 8.0
+
+<pre>
+CREATE DATABASE database CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci;
+</pre>
+
+- Use the script init.sql (nginx_php8_mysql/mysql/init.sql) to populate a database
+
+- Access the application
+
+<pre>
+#PHP-8.0
+http://192.168.0.174:38080/mysql/5-7/index.php
+http://192.168.0.174:38080/mysql/8-0/index.php
+#PHP-8.1
+http://192.168.0.174:39000/mysql/5-7/index.php
+http://192.168.0.174:39000/mysql/8-0/index.php
+</pre>
+
+-----------------
+# NGINX
+
+- Content
+<pre>
+/var/www/html: The actual web content, which by default only consists of the default Nginx page you saw earlier, is served out of the /var/www/html directory. This can be changed by altering Nginx configuration files.
+</pre>
+
+- Server Configuration
+<pre>
+/etc/nginx: The Nginx configuration directory. All of the Nginx configuration files reside here.
+
+/etc/nginx/nginx.conf: The main Nginx configuration file. This can be modified to make changes to the Nginx global configuration.
+
+/etc/nginx/sites-available/: The directory where per-site server blocks can be stored. Nginx will not use the configuration files found in this directory unless they are linked to the sites-enabled directory. Typically, all server block configuration is done in this directory, and then enabled by linking to the other directory.
+
+/etc/nginx/sites-enabled/: The directory where enabled per-site server blocks are stored. Typically, these are created by linking to configuration files found in the sites-available directory.
+
+/etc/nginx/snippets: This directory contains configuration fragments that can be included elsewhere in the Nginx configuration. Potentially repeatable configuration segments are good candidates for refactoring into snippets.
+</pre>
+
+- Server Logs
+<pre>
+/var/log/nginx/access.log: Every request to your web server is recorded in this log file unless Nginx is configured to do otherwise.
+/var/log/nginx/error.log: Any Nginx errors will be recorded in this log.
+</pre>
+
+-----------------
+
+# PHP-8.0
+
+> FEATURES AVAILABLE
+
+- XDEBUG
+- OPCACHE
+- MBSTRING
+- BCMATH
+- COMPOSER
+- REDIS
+- PDO
+- MSSQL
+- MYSQL
+- MONGODB
+- POSTGRES
+- SQLITE3
+- FIREBIRD
+- INTERBASE
+
+-----------------
+
+# PHP-8.1
+
+> FEATURES AVAILABLE
+
+- XDEBUG
+- OPCACHE
+- MBSTRING
+- BCMATH
+- COMPOSER
+- REDIS
+- PDO
+- MSSQL
+- MYSQL
+- MONGODB
+- POSTGRES
+- SQLITE3
+- FIREBIRD
+- INTERBASE
+- ORACLE
+
+-----------------
+
+# MYSQL
+
+> AVAILABLE VERSIONS
+
+- 5.7
+- 8.0

@@ -1,18 +1,18 @@
 FROM php:8.1.0-fpm
 
-ENV DIR_WEBSERVER "/var/www/webserver"
+ENV DIR_WEBSERVER "/var/www/applications"
 ENV DIR_PHP_EXTENSIONS "/usr/local/lib/php/extensions/no-debug-non-zts-20210902"
 ENV DIR_PHP_INI "/usr/local/etc/php"
 ENV DIR_PHP_INI_FILES "/usr/local/etc/php/conf.d"
 
-ENV DIR_MS_ORACLE "/var/www/webserver/microservice-oraclelinux"
-ENV DIR_MS_MONGODB "/var/www/webserver/microservice-mongodb"
-ENV DIR_MS_POSTGRES "/var/www/webserver/microservice-postgres"
-ENV DIR_MS_MSSQL "/var/www/webserver/microservice-mssql"
-ENV DIR_MS_FIREBIRD "/var/www/webserver/microservice-firebird"
-ENV DIR_MS_MYSQL57 "/var/www/webserver/microservice-mysql57"
-ENV DIR_MS_MYSQL80 "/var/www/webserver/microservice-mysql80"
-ENV DIR_MS_SQLITE "/var/www/webserver/microservice-sqlite"
+ENV DIR_MS_ORACLE "/var/www/applications/microservice-oraclelinux"
+ENV DIR_MS_MONGODB "/var/www/applications/microservice-mongodb"
+ENV DIR_MS_POSTGRES "/var/www/applications/microservice-postgres"
+ENV DIR_MS_MSSQL "/var/www/applications/microservice-mssql"
+ENV DIR_MS_FIREBIRD "/var/www/applications/microservice-firebird"
+ENV DIR_MS_MYSQL57 "/var/www/applications/microservice-mysql57"
+ENV DIR_MS_MYSQL80 "/var/www/applications/microservice-mysql80"
+ENV DIR_MS_SQLITE "/var/www/applications/microservice-sqlite"
 
 WORKDIR "/opt"
 

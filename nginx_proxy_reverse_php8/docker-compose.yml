@@ -1,0 +1,138 @@
+version: "3.7"
+services:
+    
+    #----------------------------------------------------------------------------------------
+    nginx-ubuntu2004-php81:
+        env_file: .env
+        container_name: nginx-ubuntu2004-php81
+        build:
+            context: ./nginx-ubuntu2004-php81
+            dockerfile: nginx-ubuntu2004-php81.dockerfile
+        privileged: true
+        ports:
+            - ${NGINX_UBUNTU2004_PORT}:80
+        environment:
+            PHP_IDE_CONFIG: ${PHP_IDE_CONFIG}
+        volumes:
+            - ./applications/php81:/var/www/applications/
+            #-----------------------------------------------------------------
+            ### ENABLE THE FOLLOW VOLUMES JUST AFTER BUILD
+            #-----------------------------------------------------------------
+            #- ./server-nginx/etc/nginx/nginx.conf:/etc/nginx/nginx.conf
+            #- ./server-nginx/etc/nginx/conf.d:/etc/nginx/conf.d
+            #- ./server-nginx/etc/nginx/sites-available:/etc/nginx/sites-available
+            #- ./server-nginx/etc/nginx/sites-enabled:/etc/nginx/sites-enabled
+            #- ./server-nginx/etc/nginx/snippets:/etc/nginx/snippets
+        working_dir: /etc/nginx
+        links:
+            - php81
+        depends_on:
+            - php81
+        tty: true
+        networks:
+            - default
+            - open_network
+    #----------------------------------------------------------------------------------------
+    nginx-php80:
+        env_file: .env
+        container_name: nginx-php80
+        image: nginx:latest
+        privileged: true
+        ports:
+            - ${NGINX_PORT}:80
+        environment:
+            PHP_IDE_CONFIG: ${PHP_IDE_CONFIG}
+        volumes:
+            - ./nginx-php80/etc/nginx/nginx.conf:/etc/nginx/nginx.conf
+            - ./nginx-php80/etc/nginx/conf.d:/etc/nginx/conf.d
+            - ./nginx-php80/etc/nginx/sites-available:/etc/nginx/sites-available
+            - ./nginx-php80/etc/nginx/sites-enabled:/etc/nginx/sites-enabled
+            - ./nginx-php80/etc/nginx/snippets:/etc/nginx/snippets
+            - ./applications/php80:/var/www/applications/
+        working_dir: /etc/nginx
+        links:
+            - php80
+        depends_on:
+            - php80
+        tty: true
+        networks:
+            - default
+            - open_network
+    #----------------------------------------------------------------------------------------
+    php80:
+        env_file: .env
+        container_name: php80
+        build:
+            context: ./php/8.0
+            dockerfile: php80.dockerfile
+        privileged: true
+        environment:
+            PHP_IDE_CONFIG: ${PHP_IDE_CONFIG}
+        ports:
+            - ${PHP80_PORT}:9000
+        volumes:
+            - ./applications/php80:/var/www/applications/
+        tty: true
+        networks:
+            - default
+            - open_network
+    #----------------------------------------------------------------------------------------
+    php81:
+        env_file: .env
+        container_name: php81
+        build:
+            context: ./php/8.1
+            dockerfile: php81.dockerfile
+        privileged: true
+        environment:
+            PHP_IDE_CONFIG: ${PHP_IDE_CONFIG}
+        ports:
+            - ${PHP81_PORT}:9000
+        volumes:
+            - ./applications/php81:/var/www/applications/
+        tty: true
+        networks:
+            - default
+            - open_network
+    #----------------------------------------------------------------------------------------
+    mysql-80:
+        env_file: .env
+        image: mysql:8.0
+        container_name: mysql80
+        ports:
+            - ${MYSQL80_PORT}:3306
+        volumes:
+            - ./mysql/8.0/lib:/var/lib/mysql/
+        environment:
+            MYSQL_DATABASE: ${MYSQL80_DATABASE}
+            MYSQL_USERNAME: ${MYSQL80_USERNAME}
+            MYSQL_PASSWORD: ${MYSQL80_PASSWORD}
+            MYSQL_ROOT_PASSWORD: ${MYSQL80_ROOT_PASSWORD}
+        tty: true
+        networks:
+            - default
+            - open_network
+    #----------------------------------------------------------------------------------------
+    mysql-57:
+        env_file: .env
+        image: mysql:5.7
+        container_name: mysql57
+        ports:
+            - ${MYSQL57_PORT}:3306
+        volumes:
+            - ./mysql/5.7/lib:/var/lib/mysql/
+        environment:
+            MYSQL_DATABASE: ${MYSQL57_DATABASE}
+            MYSQL_USERNAME: ${MYSQL57_USERNAME}
+            MYSQL_PASSWORD: ${MYSQL57_PASSWORD}
+            MYSQL_ROOT_PASSWORD: ${MYSQL57_ROOT_PASSWORD}
+        tty: true
+        networks:
+            - default
+            - open_network
+    #----------------------------------------------------------------------------------------
+    
+networks:
+    open_network:
+        external: true
+        
