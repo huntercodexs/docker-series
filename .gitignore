@@ -1,11 +1,12 @@
-trash
 *-tar
 *.jar
 *.jar.original
 *.deb
 *.exec
 *.run
-.idea
 nodes
+.idea
 node_modules
-
+trash
+/nginx_php8_mysql/mysql/5.7/lib/**
+/nginx_php8_mysql/mysql/8.0/lib/**
