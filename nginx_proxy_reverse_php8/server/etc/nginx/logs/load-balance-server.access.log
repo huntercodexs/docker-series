@@ -1,0 +1,8 @@
+192.168.0.203 - - [21/Aug/2022:01:52:00 +0000] "GET / HTTP/1.1" 200 41 "-" "Mozilla/5.0 (X11; Ubuntu; Linux x86_64; rv:103.0) Gecko/20100101 Firefox/103.0" "-"
+192.168.0.203 - - [21/Aug/2022:01:52:00 +0000] "GET /favicon.ico HTTP/1.1" 404 275 "http://192.168.0.174:38084/" "Mozilla/5.0 (X11; Ubuntu; Linux x86_64; rv:103.0) Gecko/20100101 Firefox/103.0" "-"
+192.168.0.203 - - [21/Aug/2022:01:52:02 +0000] "GET / HTTP/1.1" 200 41 "-" "Mozilla/5.0 (X11; Ubuntu; Linux x86_64; rv:103.0) Gecko/20100101 Firefox/103.0" "-"
+192.168.0.203 - - [21/Aug/2022:01:52:02 +0000] "GET /favicon.ico HTTP/1.1" 404 275 "http://192.168.0.174:38084/" "Mozilla/5.0 (X11; Ubuntu; Linux x86_64; rv:103.0) Gecko/20100101 Firefox/103.0" "-"
+192.168.0.203 - - [21/Aug/2022:01:56:08 +0000] "GET / HTTP/1.1" 200 41 "-" "Mozilla/5.0 (X11; Ubuntu; Linux x86_64; rv:103.0) Gecko/20100101 Firefox/103.0" "-"
+192.168.0.203 - - [21/Aug/2022:01:57:28 +0000] "GET / HTTP/1.1" 200 82289 "-" "Mozilla/5.0 (X11; Ubuntu; Linux x86_64; rv:103.0) Gecko/20100101 Firefox/103.0" "-"
+192.168.0.203 - - [21/Aug/2022:01:57:31 +0000] "GET / HTTP/1.1" 200 82454 "-" "Mozilla/5.0 (X11; Ubuntu; Linux x86_64; rv:103.0) Gecko/20100101 Firefox/103.0" "-"
+192.168.0.203 - - [21/Aug/2022:01:57:31 +0000] "GET /favicon.ico HTTP/1.1" 404 275 "http://192.168.0.174:38084/" "Mozilla/5.0 (X11; Ubuntu; Linux x86_64; rv:103.0) Gecko/20100101 Firefox/103.0" "-"

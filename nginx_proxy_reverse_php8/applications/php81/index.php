@@ -1,4 +1,4 @@
 <?php
-echo "NGINX is running...";
+echo "PHP-8.1 is running ..";
 phpinfo();
 exit;
