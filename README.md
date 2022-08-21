@@ -1,13 +1,13 @@
 
-# Docker Series
+# NGINX + REVERSE PROXY + PHP
 
-The Docker Series to most containers dockerized
+Dockerized project using Nginx server
 
 -----------------
 
 # About
 
-This branch set up the complete environment to run PHP and NGINX as Webserver
+This branch set up the complete environment to run PHP and NGINX as Webserver with reverse proxy included
 
 
 -----------------
@@ -33,23 +33,14 @@ $ docker-compose up --build (in first time)
 $ docker-compose start (in others case)
 </pre>
 
-- Create a Database in mysql container 5.7 and 8.0
-
-<pre>
-CREATE DATABASE database CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci;
-</pre>
-
-- Use the script init.sql (nginx_php8_mysql/mysql/init.sql) to populate a database
-
 - Access the application
 
 <pre>
 #PHP-8.0
-http://192.168.0.174:38080/mysql/5-7/index.php
-http://192.168.0.174:38080/mysql/8-0/index.php
-#PHP-8.1
-http://192.168.0.174:39000/mysql/5-7/index.php
-http://192.168.0.174:39000/mysql/8-0/index.php
+http://192.168.0.174:38081/
+http://192.168.0.174:38082/
+http://192.168.0.174:38083/
+http://192.168.0.174:38084/
 </pre>
 
 -----------------
@@ -57,7 +48,8 @@ http://192.168.0.174:39000/mysql/8-0/index.php
 
 - Content
 <pre>
-/var/www/html: The actual web content, which by default only consists of the default Nginx page you saw earlier, is served out of the /var/www/html directory. This can be changed by altering Nginx configuration files.
+/var/www/html: The actual web content, which by default only consists of the default Nginx page you saw earlier, 
+is served out of the /var/www/html directory. This can be changed by altering Nginx configuration files.
 </pre>
 
 - Server Configuration
@@ -90,15 +82,6 @@ http://192.168.0.174:39000/mysql/8-0/index.php
 - MBSTRING
 - BCMATH
 - COMPOSER
-- REDIS
-- PDO
-- MSSQL
-- MYSQL
-- MONGODB
-- POSTGRES
-- SQLITE3
-- FIREBIRD
-- INTERBASE
 
 -----------------
 
@@ -111,22 +94,4 @@ http://192.168.0.174:39000/mysql/8-0/index.php
 - MBSTRING
 - BCMATH
 - COMPOSER
-- REDIS
-- PDO
-- MSSQL
-- MYSQL
-- MONGODB
-- POSTGRES
-- SQLITE3
-- FIREBIRD
-- INTERBASE
-- ORACLE
 
------------------
-
-# MYSQL
-
-> AVAILABLE VERSIONS
-
-- 5.7
-- 8.0
