@@ -37,11 +37,11 @@ $ docker-compose start (in others case)
 - Access and test
 
 <pre>
-http://192.168.0.174:38085
-http://192.168.0.174:38085/pages/
-http://192.168.0.174:38085/page/1/
-http://192.168.0.174:38085/page/2/
-http://192.168.0.174:38085/page/3/
+http://{WEBSERVER_IP_ADDRESS}:38085
+http://{WEBSERVER_IP_ADDRESS}:38085/pages/
+http://{WEBSERVER_IP_ADDRESS}:38085/page/1/
+http://{WEBSERVER_IP_ADDRESS}:38085/page/2/
+http://{WEBSERVER_IP_ADDRESS}:38085/page/3/
 </pre>
 
 -----------------
