@@ -1,5 +1,5 @@
 
-# NGINX + REVERSE PROXY + PHP
+# NGINX WITH REVERSE PROXY
 
 Dockerized project using Nginx server
 
@@ -7,8 +7,10 @@ Dockerized project using Nginx server
 
 # About
 
-This branch set up the complete environment to run PHP and NGINX as Webserver with reverse proxy included
+This branch set up the environment to run NGINX as Webserver with internal reverse proxy, below can see the diagram that 
+explain with more details:
 
+![img.png](nginx_reverse_proxy/files/media/NGINX-REVERSE-PROXY-SAMPLE.png)
 
 -----------------
 
@@ -17,34 +19,33 @@ This branch set up the complete environment to run PHP and NGINX as Webserver wi
 - Before build and start project set the following files configurations:
 
 <pre>
-- php.ini (nginx_php8_mysql/php/8.0/conf/php.ini)
-- nginx.conf (nginx_php8_mysql/nginx/nginx.conf)
-- php80.conf (nginx_php8_mysql/nginx/conf.d/php80.conf)
-- php81.conf (nginx_php8_mysql/nginx/conf.d/php81.conf)
+- nginx.conf (nginx_reverse_proxy/etc/nginx/nginx.conf)
+- nginx.conf (nginx_reverse_proxy/etc/nginx/conf/public-server.conf)
+- nginx.conf (nginx_reverse_proxy/etc/nginx/conf/private-server.conf)
 </pre>
 
 - Access the folder path in this project to run php8 together nginx, as below:
 
 <pre>
 $ git clone https://github.com/huntercodexs/docker-series.git .
-$ git checkout nginx_php8_mysql
-$ cd nginx_php8_mysql
+$ git checkout nginx_reverse_proxy
+$ cd nginx_reverse_proxy
 $ docker-compose up --build (in first time)
 $ docker-compose start (in others case)
 </pre>
 
-- Access the application
+- Access and test
 
 <pre>
-#PHP-8.0
-http://192.168.0.174:38081/
-http://192.168.0.174:38082/
-http://192.168.0.174:38083/
-http://192.168.0.174:38084/
+http://192.168.0.174:38085
+http://192.168.0.174:38085/pages/
+http://192.168.0.174:38085/page/1/
+http://192.168.0.174:38085/page/2/
+http://192.168.0.174:38085/page/3/
 </pre>
 
 -----------------
-# NGINX
+# About NGINX
 
 - Content
 <pre>
@@ -70,28 +71,3 @@ is served out of the /var/www/html directory. This can be changed by altering Ng
 /var/log/nginx/access.log: Every request to your web server is recorded in this log file unless Nginx is configured to do otherwise.
 /var/log/nginx/error.log: Any Nginx errors will be recorded in this log.
 </pre>
-
------------------
-
-# PHP-8.0
-
-> FEATURES AVAILABLE
-
-- XDEBUG
-- OPCACHE
-- MBSTRING
-- BCMATH
-- COMPOSER
-
------------------
-
-# PHP-8.1
-
-> FEATURES AVAILABLE
-
-- XDEBUG
-- OPCACHE
-- MBSTRING
-- BCMATH
-- COMPOSER
-
