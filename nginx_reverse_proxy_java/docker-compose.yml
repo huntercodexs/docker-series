@@ -1,7 +1,7 @@
 version: "3.7"
 services:
     
-    #----------------------------------------------------------------------------------------
+    #------------------------------------------------------------
     nginx:
         env_file: .env
         container_name: nginx
@@ -14,40 +14,29 @@ services:
             - ./etc/nginx/proxy.conf:/etc/nginx/proxy.conf
             - ./etc/nginx/fastcgi.conf:/etc/nginx/fastcgi.conf
             - ./etc/nginx/mime.types:/etc/nginx/mime.types
-            - ./etc/nginx/conf:/etc/nginx/conf
-            - ./etc/nginx/logs:/etc/nginx/logs
+            - ./etc/nginx/conf.d/:/etc/nginx/conf.d/
+            - ./etc/nginx/logs/:/var/log/nginx/
+            - ./htdocs/:/var/www/htdocs/
         working_dir: /etc/nginx
         tty: true
         networks:
-            - default
-            - open_network
-            - reverse_proxy
-    #----------------------------------------------------------------------------------------
-    # MICROSERVICES CONTAINER
-    #
-    # NOTE: JUST WORK WITH JAR FILE !
-    # After changes in the current project and generated jar file, copy it into docker container openjdk
-    # and run the command "docker-compose up --build" to feature update
-    #
+            default:
+            open_network:
+            reverse_proxy:
+                ipv4_address: 10.0.0.2
+    #------------------------------------------------------------
     openjdk-8u212:
-        image: openjdk:8u212
+        env_file: .env
         container_name: openjdk-8u212
-        ports:
-            - ${MICROSERVICE_PORT1}:38001
-            - ${MICROSERVICE_PORT2}:38002
-            - ${MICROSERVICE_PORT3}:38003
-        volumes:
-            - ./microservices/users:/home/openjdk/microservices/users
-            - ./microservices/sales:/home/openjdk/microservices/sales
-            - ./microservices/supplies:/home/openjdk/microservices/supplies
-        command:
-            - "java -jar /home/openjdk/microservices/users/SIMPLE-API-USERS-22.01.1-SNAPSHOT.jar &"
-            - "java -jar /home/openjdk/microservices/users/SIMPLE-API-SALES-22.01.1-SNAPSHOT.jar &"
-            - "java -jar /home/openjdk/microservices/users/SIMPLE-API-SUPPLIES-22.01.1-SNAPSHOT.jar &"
+        build:
+            context: .
+            dockerfile: openjdk-8u212.dockerfile
+        privileged: true
         tty: true
         networks:
-            - reverse_proxy
-    #----------------------------------------------------------------------------------------
+            reverse_proxy:
+                ipv4_address: 10.0.0.3
+    #------------------------------------------------------------
     
 networks:
     open_network:

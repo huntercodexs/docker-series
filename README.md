@@ -5,6 +5,16 @@ Dockerized project using Nginx Reverse Proxy and JAVA
 
 -----------------
 
+# Requisites
+
+- Nginx
+- Java (openjdk-8u212)
+- Postman
+- Shell Script
+- ** Linux Knowledge
+
+-----------------
+
 # About
 
 This branch set up the environment to run NGINX as Webserver with reverse proxy to contact JAVA microservices, below can 
@@ -16,6 +26,8 @@ see the diagram that explain with more details:
 
 # How to use
 
+> CONFIGURATION
+
 - Before build and start project set the following files configurations:
 
 <pre>
@@ -24,7 +36,21 @@ see the diagram that explain with more details:
 - reverse-proxy-java.log (nginx_reverse_proxy_java/etc/nginx/logs/reverse-proxy-java.log)
 </pre>
 
-- Access the folder path in this project to run php8 together nginx, as below:
+> SERVICES
+
+- Before build and start project set the microservices in script below
+
+<pre>
+- microservices-start.sh (nginx_reverse_proxy_java/microservices/microservices-start.sh)
+</pre>
+
+- Put all "jar files microservices" inside "microservices folder path", see bellow the sample image from IDE:
+
+![img.png](nginx_reverse_proxy_java/files/media/MICROSERVICES-STRUCTURE-SAMPLE.png)
+
+> RUN AND TEST
+
+- Access the folder path in this project to run nginx_reverse_proxy_java, as below:
 
 <pre>
 $ git clone https://github.com/huntercodexs/docker-series.git .
@@ -34,17 +60,37 @@ $ docker-compose up --build (in first time)
 $ docker-compose start (in others case)
 </pre>
 
-- Access and test
+- Run the microservices in openjdk-8u212 container
 
 <pre>
-[GET] http://${WEBSERVER_IP_ADDRESS}:85/api/v1/users
-[GET] http://${WEBSERVER_IP_ADDRESS}:85/api/v1/sales
-[GET] http://${WEBSERVER_IP_ADDRESS}:85/api/v1/supplies
+$ docker exec -it openjdk-8u212 /bin/bash
 </pre>
 
-> Use the postman file to make a tests above: NGINX-REVERSE-PROXY-JAVA.postman
+<pre>
+root@25f8c997da0a:/home/openjdk8u212# microservices-start
+</pre>
 
-> The microservices are placed in this project on folder microservices
+<pre>
+root@25f8c997da0a:/home/openjdk8u212# ps -ef
+UID          PID    PPID  C STIME TTY          TIME CMD
+root           1       0  0 12:48 pts/0    00:00:00 bash
+root           7       0  0 12:48 pts/1    00:00:00 /bin/bash
+root          15       1 63 12:49 pts/1    00:00:11 java -jar SIMPLE-API-USERS-22.01.1-SNAPSHOT.jar
+root          16       1 63 12:49 pts/1    00:00:11 java -jar SIMPLE-API-SALES-22.01.1-SNAPSHOT.jar
+root          17       1 55 12:49 pts/1    00:00:09 java -jar SIMPLE-API-SUPPLIES-22.01.1-SNAPSHOT.jar
+</pre>
+
+- Access and test - API
+
+<pre>
+[GET] http://${WEBSERVER_IP_ADDRESS}:38085/api/v1/users
+[GET] http://${WEBSERVER_IP_ADDRESS}:38085/api/v1/sales
+[GET] http://${WEBSERVER_IP_ADDRESS}:38085/api/v1/supplies
+</pre>
+
+> Use the postman file to make a tests above: "JAVA - NGINX REVERSE PROXY.postman_collection.json"
+
+> The microservices are localized in this project on folder nginx_reverse_proxy_java/microservices
 
 -----------------
 # About NGINX

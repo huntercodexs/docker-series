@@ -1,0 +1,183 @@
+{
+	"info": {
+		"_postman_id": "08535e35-f089-46a6-9344-9b7ab0f215fb",
+		"name": "JAVA - NGINX REVERSE PROXY",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "Users",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://192.168.0.174:38085/api/v1/users",
+					"protocol": "http",
+					"host": [
+						"192",
+						"168",
+						"0",
+						"174"
+					],
+					"port": "38085",
+					"path": [
+						"api",
+						"v1",
+						"users"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Sales",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://192.168.0.174:38085/api/v1/sales",
+					"protocol": "http",
+					"host": [
+						"192",
+						"168",
+						"0",
+						"174"
+					],
+					"port": "38085",
+					"path": [
+						"api",
+						"v1",
+						"sales"
+					]
+				}
+			},
+			"response": [
+				{
+					"name": "Sales",
+					"originalRequest": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://192.168.0.174:38085/api/v1/sales",
+							"protocol": "http",
+							"host": [
+								"192",
+								"168",
+								"0",
+								"174"
+							],
+							"port": "38085",
+							"path": [
+								"api",
+								"v1",
+								"sales"
+							]
+						}
+					},
+					"status": "OK",
+					"code": 200,
+					"_postman_previewlanguage": "plain",
+					"header": [
+						{
+							"key": "Server",
+							"value": "nginx/1.23.1"
+						},
+						{
+							"key": "Date",
+							"value": "Mon, 22 Aug 2022 18:08:30 GMT"
+						},
+						{
+							"key": "Content-Type",
+							"value": "text/plain;charset=UTF-8"
+						},
+						{
+							"key": "Content-Length",
+							"value": "24"
+						},
+						{
+							"key": "Connection",
+							"value": "keep-alive"
+						}
+					],
+					"cookie": [],
+					"body": "OK, it is working fine !"
+				}
+			]
+		},
+		{
+			"name": "Supplies",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://192.168.0.174:38085/api/v1/supplies",
+					"protocol": "http",
+					"host": [
+						"192",
+						"168",
+						"0",
+						"174"
+					],
+					"port": "38085",
+					"path": [
+						"api",
+						"v1",
+						"supplies"
+					]
+				}
+			},
+			"response": [
+				{
+					"name": "Supplies",
+					"originalRequest": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://192.168.0.174:38085/api/v1/supplies",
+							"protocol": "http",
+							"host": [
+								"192",
+								"168",
+								"0",
+								"174"
+							],
+							"port": "38085",
+							"path": [
+								"api",
+								"v1",
+								"supplies"
+							]
+						}
+					},
+					"status": "OK",
+					"code": 200,
+					"_postman_previewlanguage": "plain",
+					"header": [
+						{
+							"key": "Server",
+							"value": "nginx/1.23.1"
+						},
+						{
+							"key": "Date",
+							"value": "Mon, 22 Aug 2022 18:08:43 GMT"
+						},
+						{
+							"key": "Content-Type",
+							"value": "text/plain;charset=UTF-8"
+						},
+						{
+							"key": "Content-Length",
+							"value": "24"
+						},
+						{
+							"key": "Connection",
+							"value": "keep-alive"
+						}
+					],
+					"cookie": [],
+					"body": "OK, it is working fine !"
+				}
+			]
+		}
+	]
+}

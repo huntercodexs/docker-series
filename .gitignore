@@ -1,6 +1,5 @@
 trash
 *-tar
-*.jar
 *.jar.original
 *.deb
 *.exec
