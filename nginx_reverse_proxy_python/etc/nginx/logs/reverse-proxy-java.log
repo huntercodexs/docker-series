@@ -1,0 +1,4 @@
+192.168.0.203 - - [22/Aug/2022:18:07:29 +0000] "GET /api/v1/users HTTP/1.1" 502 157 "-" "PostmanRuntime/7.28.4" "-"
+192.168.0.203 - - [22/Aug/2022:18:08:05 +0000] "GET /api/v1/users HTTP/1.1" 200 24 "-" "PostmanRuntime/7.28.4" "-"
+192.168.0.203 - - [22/Aug/2022:18:08:30 +0000] "GET /api/v1/sales HTTP/1.1" 200 24 "-" "PostmanRuntime/7.28.4" "-"
+192.168.0.203 - - [22/Aug/2022:18:08:43 +0000] "GET /api/v1/supplies HTTP/1.1" 200 24 "-" "PostmanRuntime/7.28.4" "-"
