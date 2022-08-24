@@ -1,14 +1,14 @@
 
-# NGINX + REVERSE PROXY + JAVA
+# NGINX + REVERSE PROXY + PYTHON (UWSGI)
 
-Dockerized project using Nginx Reverse Proxy and JAVA
+Dockerized project using Nginx Reverse Proxy and PYTHON
 
 -----------------
 
 # Requisites
 
 - Nginx
-- Java (openjdk-8u212)
+- Python
 - Postman
 - Shell Script
 - ** Linux Knowledge
@@ -17,10 +17,10 @@ Dockerized project using Nginx Reverse Proxy and JAVA
 
 # About
 
-This branch set up the environment to run NGINX as Webserver with reverse proxy to contact JAVA microservices, below can 
+This branch set up the environment to run NGINX as Webserver with reverse proxy to contact PYTHON microservices, below can 
 see the diagram that explain with more details:
 
-![img.png](nginx_reverse_proxy_java/files/media/NGINX-REVERSE-PROXY-JAVA-SAMPLE.png)
+![img.png](nginx_reverse_proxy_python/files/media/NGINX-REVERSE-PROXY-PYTHON-SAMPLE.png)
 
 -----------------
 
@@ -31,9 +31,9 @@ see the diagram that explain with more details:
 - Before build and start project set the following files configurations:
 
 <pre>
-- nginx.conf (nginx_reverse_proxy_java/etc/nginx/nginx.conf)
-- reverse-proxy-ms-java-server.conf (nginx_reverse_proxy_java/etc/nginx/conf/reverse-proxy-ms-java-server.conf)
-- reverse-proxy-java.log (nginx_reverse_proxy_java/etc/nginx/logs/reverse-proxy-java.log)
+- nginx.conf (nginx_reverse_proxy_python/etc/nginx/nginx.conf)
+- reverse-proxy-python-server.conf (nginx_reverse_proxy_python/etc/nginx/conf/reverse-proxy-python-server.conf)
+- reverse-proxy-python.log (nginx_reverse_proxy_python/etc/nginx/logs/reverse-proxy-python.log)
 </pre>
 
 > SERVICES
@@ -41,21 +41,21 @@ see the diagram that explain with more details:
 - Before build and start project set the microservices in script below
 
 <pre>
-- microservices-start.sh (nginx_reverse_proxy_java/microservices/microservices-start.sh)
+- microservices-start.sh (nginx_reverse_proxy_python/microservices/microservices-start.sh)
 </pre>
 
 - Put all "jar files microservices" inside "microservices folder path", see bellow the sample image from IDE:
 
-![img.png](nginx_reverse_proxy_java/files/media/MICROSERVICES-STRUCTURE-SAMPLE.png)
+![img.png](nginx_reverse_proxy_python/files/media/MICROSERVICES-STRUCTURE-SAMPLE.png)
 
 > RUN AND TEST
 
-- Access the folder path in this project to run nginx_reverse_proxy_java, as below:
+- Access the folder path in this project to run nginx_reverse_proxy_python, as below:
 
 <pre>
 $ git clone https://github.com/huntercodexs/docker-series.git .
-$ git checkout nginx_reverse_proxy_java
-$ cd nginx_reverse_proxy_java
+$ git checkout nginx_reverse_proxy_python
+$ cd nginx_reverse_proxy_python
 $ docker-compose up --build (in first time)
 $ docker-compose start (in others case)
 </pre>
@@ -88,9 +88,9 @@ root          17       1 55 12:49 pts/1    00:00:09 java -jar SIMPLE-API-SUPPLIE
 [GET] http://${WEBSERVER_IP_ADDRESS}:38085/api/v1/supplies
 </pre>
 
-> Use the postman file to make a tests above: "JAVA - NGINX REVERSE PROXY.postman_collection.json"
+> Use the postman file to make a tests above: "PYTHON - NGINX REVERSE PROXY.postman_collection.json"
 
-> The microservices are localized in this project on folder nginx_reverse_proxy_java/microservices
+> The microservices are localized in this project on folder nginx_reverse_proxy_python/microservices
 
 -----------------
 # About NGINX

@@ -10,13 +10,13 @@ services:
         ports:
             - ${NGINX_PORT}:85
         volumes:
-            - ./etc/nginx/nginx.conf:/etc/nginx/nginx.conf
-            - ./etc/nginx/proxy.conf:/etc/nginx/proxy.conf
-            - ./etc/nginx/fastcgi.conf:/etc/nginx/fastcgi.conf
-            - ./etc/nginx/mime.types:/etc/nginx/mime.types
-            - ./etc/nginx/conf.d/:/etc/nginx/conf.d/
-            - ./etc/nginx/logs/:/var/log/nginx/
-            - ./htdocs/:/var/www/htdocs/
+            - ./server/etc/nginx/nginx.conf:/etc/nginx/nginx.conf
+            - ./server/etc/nginx/proxy.conf:/etc/nginx/proxy.conf
+            - ./server/etc/nginx/fastcgi.conf:/etc/nginx/fastcgi.conf
+            - ./server/etc/nginx/mime.types:/etc/nginx/mime.types
+            - ./server/etc/nginx/conf.d/:/etc/nginx/conf.d/
+            - ./server/etc/nginx/logs/:/var/log/nginx/
+            - ./server/htdocs/:/var/www/htdocs/
         working_dir: /etc/nginx
         tty: true
         networks:
@@ -25,17 +25,17 @@ services:
             reverse_proxy:
                 ipv4_address: 10.0.0.2
     #------------------------------------------------------------
-    openjdk-8u212:
-        env_file: .env
-        container_name: openjdk-8u212
-        build:
-            context: .
-            dockerfile: openjdk-8u212.dockerfile
-        privileged: true
-        tty: true
-        networks:
-            reverse_proxy:
-                ipv4_address: 10.0.0.3
+#    openjdk-8u212:
+#        env_file: .env
+#        container_name: openjdk-8u212
+#        build:
+#            context: .
+#            dockerfile: openjdk-8u212.dockerfile
+#        privileged: true
+#        tty: true
+#        networks:
+#            reverse_proxy:
+#                ipv4_address: 10.0.0.3
     #------------------------------------------------------------
     
 networks:
