@@ -1,5 +1,5 @@
 
-# NGINX + REVERSE PROXY + PYTHON (UWSGI)
+# NGINX + REVERSE PROXY + PYTHON
 
 Dockerized project using Nginx Reverse Proxy and PYTHON
 
@@ -20,7 +20,8 @@ Dockerized project using Nginx Reverse Proxy and PYTHON
 This branch set up the environment to run NGINX as Webserver with reverse proxy to contact PYTHON microservices, below can 
 see the diagram that explain with more details:
 
-![img.png](nginx_reverse_proxy_python/files/media/NGINX-REVERSE-PROXY-PYTHON-SAMPLE.png)
+> NOTE: Using docker is not possible execute systemctl as a service manager, so give a look in th file 
+> nginx_reverse_proxy_python/applications/applications-deploy.sh and see with more details this issue.
 
 -----------------
 
@@ -41,12 +42,9 @@ see the diagram that explain with more details:
 - Before build and start project set the microservices in script below
 
 <pre>
-- microservices-start.sh (nginx_reverse_proxy_python/microservices/microservices-start.sh)
+- applications-deploy.sh (nginx_reverse_proxy_python/microservices/applications-deploy.sh)
 </pre>
 
-- Put all "jar files microservices" inside "microservices folder path", see bellow the sample image from IDE:
-
-![img.png](nginx_reverse_proxy_python/files/media/MICROSERVICES-STRUCTURE-SAMPLE.png)
 
 > RUN AND TEST
 
@@ -60,37 +58,24 @@ $ docker-compose up --build (in first time)
 $ docker-compose start (in others case)
 </pre>
 
-- Run the microservices in openjdk-8u212 container
+- Run the microservices in nginx_uwsgi_python container
 
 <pre>
-$ docker exec -it openjdk-8u212 /bin/bash
+$ docker exec -it nginx_uwsgi_python /bin/bash
 </pre>
 
 <pre>
-root@25f8c997da0a:/home/openjdk8u212# microservices-start
-</pre>
-
-<pre>
-root@25f8c997da0a:/home/openjdk8u212# ps -ef
-UID          PID    PPID  C STIME TTY          TIME CMD
-root           1       0  0 12:48 pts/0    00:00:00 bash
-root           7       0  0 12:48 pts/1    00:00:00 /bin/bash
-root          15       1 63 12:49 pts/1    00:00:11 java -jar SIMPLE-API-USERS-22.01.1-SNAPSHOT.jar
-root          16       1 63 12:49 pts/1    00:00:11 java -jar SIMPLE-API-SALES-22.01.1-SNAPSHOT.jar
-root          17       1 55 12:49 pts/1    00:00:09 java -jar SIMPLE-API-SUPPLIES-22.01.1-SNAPSHOT.jar
+root@25f8c997da0a:/home/python/applications# applications-deploy
 </pre>
 
 - Access and test - API
 
 <pre>
-[GET] http://${WEBSERVER_IP_ADDRESS}:38085/api/v1/users
-[GET] http://${WEBSERVER_IP_ADDRESS}:38085/api/v1/sales
-[GET] http://${WEBSERVER_IP_ADDRESS}:38085/api/v1/supplies
+[GET] http://${WEBSERVER_IP_ADDRESS}:38085/app1/
+[GET] http://${WEBSERVER_IP_ADDRESS}:38085/app2/
 </pre>
 
 > Use the postman file to make a tests above: "PYTHON - NGINX REVERSE PROXY.postman_collection.json"
-
-> The microservices are localized in this project on folder nginx_reverse_proxy_python/microservices
 
 -----------------
 # About NGINX

@@ -2,10 +2,12 @@ version: "3.7"
 services:
     
     #------------------------------------------------------------
-    nginx:
+    nginx_uwsgi_python:
         env_file: .env
-        container_name: nginx
-        image: nginx:latest
+        container_name: nginx_uwsgi_python
+        build:
+            context: .
+            dockerfile: nginx-ubuntu2004.dockerfile
         privileged: true
         ports:
             - ${NGINX_PORT}:85
@@ -15,37 +17,19 @@ services:
             - ./server/etc/nginx/fastcgi.conf:/etc/nginx/fastcgi.conf
             - ./server/etc/nginx/mime.types:/etc/nginx/mime.types
             - ./server/etc/nginx/conf.d/:/etc/nginx/conf.d/
+            - ./server/etc/nginx/sites-available/:/etc/nginx/sites-available/
+            - ./server/etc/nginx/sites-enabled/:/etc/nginx/sites-enabled/
             - ./server/etc/nginx/logs/:/var/log/nginx/
             - ./server/htdocs/:/var/www/htdocs/
-        working_dir: /etc/nginx
+            - ./applications/:/home/python3/applications/
+        working_dir: /home/python3/applications
         tty: true
         networks:
             default:
             open_network:
-            reverse_proxy:
-                ipv4_address: 10.0.0.2
-    #------------------------------------------------------------
-#    openjdk-8u212:
-#        env_file: .env
-#        container_name: openjdk-8u212
-#        build:
-#            context: .
-#            dockerfile: openjdk-8u212.dockerfile
-#        privileged: true
-#        tty: true
-#        networks:
-#            reverse_proxy:
-#                ipv4_address: 10.0.0.3
     #------------------------------------------------------------
     
 networks:
     open_network:
         external: true
-    reverse_proxy:
-        external: false
-        internal: true
-        driver: bridge
-        ipam:
-            config:
-                - subnet: 10.0.0.0/16
         
