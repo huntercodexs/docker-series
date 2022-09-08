@@ -7,11 +7,11 @@ To create a complete web environment using reverse proxy with apache2
 
 # Information
 
-Please use the branch selection to access others configurations to most need and purposes
+Please use the branch selection to access others containers and environments configurations
 
 -------------
 
-# Dockers Configurations Contained
+# Docker Configuration Contained
 
 - HTTPD - 2.4.54 (Using Reverse Proxy)
 - PHP8 - 8.1.0 (FPM)
@@ -21,11 +21,12 @@ Please use the branch selection to access others configurations to most need and
 # About
 
 This branch set up the environment to run HTTPD (apache2) as Webserver with reverse proxy to contact PHP applications 
-in the webserver folder path /var/www/webserver .
+in the INTERNAL WEBSERVER folder path /var/www/webserver that are been placed in the INTERNAL LAN (RESTRICT ACCESS) trough 
+PROXY SERVER.
 
 Below can see the diagram that explain with more details this environment:
 
-[IMAGE]
+![img.png](httpd_php8_reverse_proxy/files/midias/HTTPD_PHP8_REVERSE_PROXY.png)
 
 -------------
 
@@ -68,17 +69,20 @@ Include /usr/local/apache2/conf/proxy.conf
 # How to use
 
 - Firstly check/set the all files below:
-  - httpd_php8_reverse_proxy/.env
-  - httpd_php8_reverse_proxy/docker-compose.yml
-  - httpd_php8_reverse_proxy/applications/sales/index.php
-  - httpd_php8_reverse_proxy/applications/supplies/index.php
-  - httpd_php8_reverse_proxy/php8/php8.dockerfile
-  - httpd_php8_reverse_proxy/proxy/conf/httpd.conf
-  - httpd_php8_reverse_proxy/proxy/conf/proxy.conf
-  - httpd_php8_reverse_proxy/proxy/proxy.sh
-  - httpd_php8_reverse_proxy/webserver/conf/httpd.conf
-  - httpd_php8_reverse_proxy/webserver/conf/webserver.conf
-  - httpd_php8_reverse_proxy/webserver/webserver.sh
+
+<pre>
+httpd_php8_reverse_proxy/.env
+httpd_php8_reverse_proxy/docker-compose.yml
+httpd_php8_reverse_proxy/applications/sales/index.php
+httpd_php8_reverse_proxy/applications/supplies/index.php
+httpd_php8_reverse_proxy/php8/php8.dockerfile
+httpd_php8_reverse_proxy/proxy/conf/httpd.conf
+httpd_php8_reverse_proxy/proxy/conf/proxy.conf
+httpd_php8_reverse_proxy/proxy/proxy.sh
+httpd_php8_reverse_proxy/webserver/conf/httpd.conf
+httpd_php8_reverse_proxy/webserver/conf/webserver.conf
+httpd_php8_reverse_proxy/webserver/webserver.sh
+</pre>
 
 - Run the docker-compose command to build a project:
 <pre>
@@ -87,8 +91,8 @@ docker-compose up --build
 
 - Access the sample application to test this environment:
 <pre>
-http://{WEBSERVER_IP}:38081/sales/
-http://{WEBSERVER_IP}:38081/supplies/
+http://{WEBSERVER_IP}:38081/erp/default/sales/
+http://{WEBSERVER_IP}:38081/erp/input/supplies/
 </pre>
 
 ------------
