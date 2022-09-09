@@ -1,12 +1,12 @@
 # Docker Series
 
-The project to most containers using docker
+A project to work with many docker container
 
 -----------------
 
 # About
 
-Please use the branch selection to access others configurations to most need and purposes
+Please use the branch selection to access others environment configurations
 
 -----------------
 
@@ -211,13 +211,13 @@ docker-compose unpause
 
 # How to use
 
-> Access the folder path in this project to run any self-container, by example: apache2 
+> Access the folder path /self-container in this project to run any container, by example: apache2 
 
 - Steps do run
 
 <pre>
 git clone https://github.com/huntercodexs/docker-series.git .
 cd self-containers/apache2
-docker-compose up --build apache2 (in first time)
-docker-compose start apache2 (in others case)
+docker-compose up --build (in first time)
+docker-compose start (in others case)
 </pre>
