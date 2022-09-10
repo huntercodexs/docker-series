@@ -2,12 +2,12 @@
 # ELK + PROMETHEUS + GRAFANA + ZIPKIN USING DOCKER
 Docker Series - A project to work with many docker container
 
----------------------------------------------------------------------------------------------------------------------
+<hr />
 
 
 # Specification
 
----------------------------------------------------------------------------------------------------------------------
+<hr />
 
 > NOTE: Use the same stack version to ELK (recommended)
 
@@ -26,7 +26,7 @@ Docker Series - A project to work with many docker container
 
 # How to use
 
----------------------------------------------------------------------------------------------------------------------
+<hr />
 
 - Clone this project from GitHub
 
@@ -71,7 +71,7 @@ docker network create open_network
 
 # Commands
 
----------------------------------------------------------------------------------------------------------------------
+<hr />
 
 1. Access zipkin container
 
@@ -81,7 +81,7 @@ docker exec -it ${CONTAINER-ID} sh
 
 # Container Services
 
----------------------------------------------------------------------------------------------------------------------
+<hr />
 
 <pre>
 NAME                COMMAND                  SERVICE             STATUS              PORTS
