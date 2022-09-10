@@ -29,10 +29,22 @@ user@host$ docker-compose up --build (in first time)
 user@host$ docker-compose start (in others case)
 </pre>
 
+- Create a Network if needed
+
+<pre>
+docker network create open_network
+</pre>
+
 - Set up the apache2 server configurations (see more details in docker-compose.yml)
 
 <pre>
 app.local.conf
+</pre>
+
+- Access the webserver application
+
+<pre>
+http://${WEBSERVER_ADDRESS}:38000
 </pre>
 
 -------------------

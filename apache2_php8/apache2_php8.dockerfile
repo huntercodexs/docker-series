@@ -179,4 +179,3 @@ COPY ./app/* /var/www/html/
 EXPOSE 80
 EXPOSE 8080
 EXPOSE 38989
-
