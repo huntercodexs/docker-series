@@ -6,16 +6,16 @@
 <pre>
 git clone https://github.com/huntercodexs/docker-series.git .
 cd self-containers/openjdk-8u212
-docker-compose up --build openjdk-8u212 (in first time)
-docker-compose start openjdk-8u212 (in others case)
+docker-compose up --build (in first time)
+docker-compose start (in others case)
 </pre>
 
 - Access the openjdk-8u212 application 
 
-> NOTE: JUST USE WITH JAR FILE !
+> NOTE: BEFORE RUN GENERATE THE JAR FILE FROM PROJECT simple-api-demo !
 
 <pre>
-After changes in the current project and generated jar file, copy it into docker container openjdk
+After changes in the current project and generated jar file, copy it into docker container openjdk-8u212
 and run the command "docker-compose up openjdk-8u212" to feature update or execute directly command as
 
 docker exec -it openjdk-8u212 java -jar /home/openjdk8u212/simple-api-demo/SIMPLE-API-DEMO-22.01.1-SNAPSHOT.jar
@@ -25,18 +25,18 @@ response: OK, it is working fine !
 
 </pre>
 
-> POSTMAN
+- POSTMAN FILE
 
 JAVA - Simple API Demo.postman_collection.json
 
-> HELP
+- HELP
 
 To install more than one version of the JDKs in your Linux environment develop, use this hints:
 
 - Download the file: jdk-8u212-linux-x64.tar.gz
 <pre>
-https://www.oracle.com/br/java/technologies/javase/javase8u211-later-archive-downloads.html
 ** Login is required **
+https://www.oracle.com/br/java/technologies/javase/javase8u211-later-archive-downloads.html
 </pre>
 
 - Unzip the file downloaded

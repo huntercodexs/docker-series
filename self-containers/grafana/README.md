@@ -5,8 +5,8 @@
 <pre>
 git clone https://github.com/huntercodexs/docker-series.git .
 cd self-containers/grafana
-docker-compose up --build grafana (in first time)
-docker-compose start grafana (in others case)
+docker-compose up --build (in first time)
+docker-compose start (in others case)
 </pre>
 
 - Access the grafana web dashboard

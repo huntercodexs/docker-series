@@ -1,6 +1,6 @@
 # NODEJS 18.7.0
 
-> Run nodejs from this project use
+- Run nodejs from this project use
 
 <pre>
 git clone https://github.com/huntercodexs/docker-series.git .
@@ -9,14 +9,17 @@ docker-compose up --build (in first time)
 docker-compose start (in others case)
 </pre>
 
-> FEATURES
+- Modules
 
-- NODEMON
-- EXPRESS
 
-> How to use
+<pre>
+nodemon
+express
+</pre>
 
-- After up container or errors occurs check/run the commands below:
+# How to use
+
+- After the container is up or errors occurs check/run the commands below:
 
 <pre>
 $ npm init

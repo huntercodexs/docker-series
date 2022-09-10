@@ -4,9 +4,9 @@
 
 <pre>
 git clone https://github.com/huntercodexs/docker-series.git .
-cd self-containers/php74
-docker-compose up --build php74 (in first time)
-docker-compose start php74 (in others case)
+cd self-containers/php/7.4
+docker-compose up --build (in first time)
+docker-compose start (in others case)
 </pre>
 
 > FEATURES AVAILABLE

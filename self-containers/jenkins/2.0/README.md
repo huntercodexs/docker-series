@@ -4,9 +4,9 @@
 
 <pre>
 git clone https://github.com/huntercodexs/docker-series.git .
-cd self-containers/jenkins
-docker-compose up --build jenkins (in first time)
-docker-compose start jenkins (in others case)
+cd self-containers/jenkins/2.0
+docker-compose up --build (in first time)
+docker-compose start (in others case)
 </pre>
 
 > AFTER BUILD

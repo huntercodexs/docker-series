@@ -2,7 +2,7 @@ version: "3.7"
 services:
     
     #----------------------------------------------------------------------------------------
-    # NOTE: The sqlite don't can used remotely, so it is used inside php8 container
+    # NOTE: The sqlite don't can used remotely
     sqlite3:
         env_file: .env
         container_name: sqlite3

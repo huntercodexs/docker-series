@@ -1,4 +1,4 @@
-FROM kibana:7.9.2
+FROM kibana:${GENERAL_STACK_VERSION}
 
 # UPDATE
 

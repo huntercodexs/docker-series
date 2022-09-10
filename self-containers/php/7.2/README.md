@@ -4,7 +4,7 @@
 
 <pre>
 $ git clone https://github.com/huntercodexs/docker-series.git .
-$ cd self-containers/php72
+$ cd self-containers/php/7.2
 $ docker-compose up --build (in first time)
 $ docker-compose start (in others case)
 </pre>

@@ -3,7 +3,7 @@ services:
     
     #----------------------------------------------------------------------------------------
     apache2:
-        env_file: ../.env
+        env_file: .env
         image: httpd:2.4.54
         container_name: apache2
         ports:

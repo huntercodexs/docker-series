@@ -2,23 +2,6 @@ version: "3.7"
 services:
     
     #----------------------------------------------------------------------------------------
-    php56:
-        env_file: .env
-        container_name: php56
-        build:
-            context: ./
-            dockerfile: php56.dockerfile
-        privileged: true
-        environment:
-            PHP_IDE_CONFIG: ${PHP_IDE_CONFIG}
-        ports:
-            - ${PHP_PORT}:9000
-        volumes:
-            - ./applications/:/var/www/webserver/
-        networks:
-            - default
-            - open_network
-    #----------------------------------------------------------------------------------------
     webserver-php56:
         env_file: .env
         image: httpd:2.4.54
@@ -37,6 +20,23 @@ services:
             - php56
         links:
             - php56
+        networks:
+            - default
+            - open_network
+    #----------------------------------------------------------------------------------------
+    php56:
+        env_file: .env
+        container_name: php56
+        build:
+            context: ./
+            dockerfile: php56.dockerfile
+        privileged: true
+        environment:
+            PHP_IDE_CONFIG: ${PHP_IDE_CONFIG}
+        ports:
+            - ${PHP_PORT}:9000
+        volumes:
+            - ./applications/:/var/www/webserver/
         networks:
             - default
             - open_network

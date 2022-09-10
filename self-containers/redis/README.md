@@ -1,17 +1,19 @@
 # REDIS
 
-> EXECUTE
-
 - To run redis from this project use
 
 <pre>
 git clone https://github.com/huntercodexs/docker-series.git .
 cd self-containers/redis
-docker-compose up --build redis (in first time)
-docker-compose start redis (in others case)
+docker-compose up --build (in first time)
+docker-compose start (in others case)
 </pre>
 
-> HELPER
+# How to use
+
+<pre>
+docker exec -it redis /bin/bash
+</pre>
 
 <pre>
 root@3e760fd49412:/opt# redis-cli 

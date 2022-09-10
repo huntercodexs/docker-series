@@ -10,11 +10,11 @@ services:
             - ${MSSQL_PORT}:1433
         volumes:
             - type: bind
-              source: ./mssql
+              source: ./mssql/lib
               target: /var/lib/mssql/data/
               read_only: false
             - type: bind
-              source: ./mssql/data
+              source: ./mssql/opt
               target: /var/opt/mssql/data/
               read_only: false
         environment:

@@ -22,7 +22,7 @@ xe - Express Edition
 
 > <p style="color: red">REQUIRED</p>
 
-- Database file: LINUX.X64_193000_db_home.zip
+- Database file: LINUX.X64_193000_db_home.zip (in this case)
 - This file can be downloaded in https://www.oracle.com/database/technologies/oracle-database-software-downloads.html
 
 > STEPS BEFORE BUILD

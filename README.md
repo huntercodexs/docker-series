@@ -125,6 +125,7 @@ docker-compose unpause
 
 - <a href="https://github.com/huntercodexs/docker-series/tree/master/self-containers/apache2">Apache2</a> ![img.png](./self-containers/files/midias/check-green.png)
 - <a href="https://github.com/huntercodexs/docker-series/tree/master/self-containers/nginx">Nginx</a> ![img.png](./self-containers/files/midias/check-green.png)
+  - <a href="https://github.com/huntercodexs/docker-series/tree/master/self-containers/nginx-ssl">Nginx + Let's Encrypt</a> ![img.png](./self-containers/files/midias/check-silver.png)
 - <a href="https://github.com/huntercodexs/docker-series/tree/master/self-containers/httpd">HTTPD</a> 
   - <a href="https://github.com/huntercodexs/docker-series/tree/master/self-containers/httpd/2.4.54">2.4.54</a> ![img.png](./self-containers/files/midias/check-green.png)
 - <a href="https://github.com/huntercodexs/docker-series/tree/master/self-containers/tomcat">Tomcat</a>

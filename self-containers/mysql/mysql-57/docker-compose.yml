@@ -9,7 +9,7 @@ services:
         ports:
             - ${MYSQL57_PORT}:3306
         volumes:
-            - "./lib:/var/lib/mysql/"
+            - ./lib:/var/lib/mysql/
         environment:
             MYSQL_DATABASE: ${MYSQL57_DATABASE}
             MYSQL_USERNAME: ${MYSQL57_USERNAME}

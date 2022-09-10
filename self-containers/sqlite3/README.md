@@ -5,8 +5,8 @@
 <pre>
 git clone https://github.com/huntercodexs/docker-series.git .
 cd self-containers/sqlite3
-docker-compose up --build sqlite3 (in first time)
-docker-compose start sqlite3 (in others case)
+docker-compose up --build (in first time)
+docker-compose start (in others case)
 </pre>
 
 - Prepare and access the sqlite database

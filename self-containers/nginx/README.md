@@ -5,8 +5,8 @@
 <pre>
 git clone https://github.com/huntercodexs/docker-series.git .
 cd self-containers/nginx
-docker-compose up --build nginx (in first time)
-docker-compose start nginx (in others case)
+docker-compose up --build (in first time)
+docker-compose start (in others case)
 </pre>
 
 - Access the application web in

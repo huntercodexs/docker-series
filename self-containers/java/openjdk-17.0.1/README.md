@@ -6,13 +6,13 @@
 <pre>
 git clone https://github.com/huntercodexs/docker-series.git .
 cd self-containers/openjdk-1701
-docker-compose up --build openjdk-1701 (in first time)
-docker-compose start openjdk-1701 (in others case)
+docker-compose up --build (in first time)
+docker-compose start (in others case)
 </pre>
 
 - Access the openjdk-1701 application 
 
-> NOTE: JUST USE WITH JAR FILE !
+> NOTE: BEFORE RUN GENERATE THE JAR FILE FROM PROJECT simple-api-demo !
 
 <pre>
 After changes in the current project and generated jar file, copy it into docker container openjdk
@@ -25,18 +25,18 @@ response: OK, it is working fine !
 
 </pre>
 
-> POSTMAN
+- POSTMAN FILE
 
 JAVA - Simple API Demo.postman_collection.json
 
-> HELP
+- HELP
 
 To install more than one version of the JDKs in your Linux environment develop, use this hints:
 
 - Download the file: jdk-17.0.1_linux-x64_bin.tar.gz
 <pre>
-https://www.oracle.com/br/java/technologies/javase/javase8u211-later-archive-downloads.html
 ** Login is required **
+https://www.oracle.com/br/java/technologies/javase/javase8u211-later-archive-downloads.html
 </pre>
 
 - Unzip the file downloaded

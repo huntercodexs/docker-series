@@ -5,8 +5,8 @@
 <pre>
 git clone https://github.com/huntercodexs/docker-series.git .
 cd self-containers/postgres
-docker-compose up --build postgres (in first time)
-docker-compose start postgres (in others case)
+docker-compose up --build (in first time)
+docker-compose start (in others case)
 </pre>
 
 - Get the superuser postgres in CLI container postgres, and open the postgres database terminal:

@@ -1,4 +1,4 @@
-FROM logstash:7.9.2
+FROM logstash:${GENERAL_STACK_VERSION}
 
 # UPDATE
 

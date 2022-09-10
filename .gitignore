@@ -13,6 +13,7 @@ node_modules
 /micro-services/
 sources-docker-compose.yml
 self-containers/sqlite3/sqliteDB/databases/**.db
+/self-containers/sqlite3/sqliteDB/sqlite-autoconf/**
 self-containers/mssql/data/**
 self-containers/postgres/PostgreSQL/**
 self-containers/mongo/MongoDB/**

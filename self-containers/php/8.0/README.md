@@ -4,9 +4,9 @@
 
 <pre>
 git clone https://github.com/huntercodexs/docker-series.git .
-cd self-containers/php80
-docker-compose up --build php80 (in first time)
-docker-compose start php80 (in others case)
+cd self-containers/php/8.0
+docker-compose up --build (in first time)
+docker-compose start (in others case)
 </pre>
 
 > FEATURES AVAILABLE

@@ -1,6 +1,6 @@
 # PYTHON 3
 
-> Run python 3 from this project use
+- Run python 3 from this project use
 
 <pre>
 git clone https://github.com/huntercodexs/docker-series.git .
@@ -9,7 +9,7 @@ docker-compose up --build (in first time)
 docker-compose start (in others case)
 </pre>
 
-> How to use
+# How to use
 
 - After up container check/run the commands below:
 

@@ -1,12 +1,13 @@
-# MSSQL
+
+# MSSQL + MSSQL-TOOLS
 
 - To run mssql from this project use
 
 <pre>
 git clone https://github.com/huntercodexs/docker-series.git .
 cd self-containers/microsoft
-docker-compose up --build mssql mssql-tools (in first time)
-docker-compose start mssql mssql-tools (in others case)
+docker-compose up --build (in first time)
+docker-compose start (in others case)
 </pre>
 
 - Access the database

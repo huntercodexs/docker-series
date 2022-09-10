@@ -4,9 +4,9 @@
 
 <pre>
 git clone https://github.com/huntercodexs/docker-series.git .
-cd self-containers/php56
-docker-compose up --build php56 (in first time)
-docker-compose start php56 (in others case)
+cd self-containers/php/5.6
+docker-compose up --build (in first time)
+docker-compose start (in others case)
 </pre>
 
 > FEATURES AVAILABLE
