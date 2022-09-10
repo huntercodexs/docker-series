@@ -1,13 +1,10 @@
 # ELK + PROMETHEUS + GRAFANA USING DOCKER
 
----
-
 Docker Series - A project to work with many docker container
 
+---
 
 # Specification
-
----
 
 - Stack Version (ELK) : 7.9.2
 - Docker
@@ -15,10 +12,9 @@ Docker Series - A project to work with many docker container
 
 > Please see the .env file to more details
 
+---
 
 # How to use
-
----
 
 - Clone this project from GitHub
 
@@ -56,3 +52,5 @@ docker network create open_network
    
 6. Grafana Ubuntu
 <pre>http://localhost:3000/login</pre>
+
+---
