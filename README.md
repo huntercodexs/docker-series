@@ -1,16 +1,15 @@
 
-# Docker Series
+# NGINX + PHP8 + MYSQL5 + MYSQL8
+Docker Series - A project to work with many docker container
 
-The Docker Series to most containers dockerized
-
------------------
+---
 
 # About
 
 This branch set up the complete environment to run PHP and NGINX as Webserver
 
 
------------------
+---
 
 # How to use
 
@@ -52,7 +51,7 @@ http://192.168.0.174:39000/mysql/5-7/index.php
 http://192.168.0.174:39000/mysql/8-0/index.php
 </pre>
 
------------------
+---
 # NGINX
 
 - Content
@@ -79,7 +78,7 @@ http://192.168.0.174:39000/mysql/8-0/index.php
 /var/log/nginx/error.log: Any Nginx errors will be recorded in this log.
 </pre>
 
------------------
+---
 
 # PHP-8.0
 
@@ -100,7 +99,7 @@ http://192.168.0.174:39000/mysql/8-0/index.php
 - FIREBIRD
 - INTERBASE
 
------------------
+---
 
 # PHP-8.1
 
@@ -122,7 +121,7 @@ http://192.168.0.174:39000/mysql/8-0/index.php
 - INTERBASE
 - ORACLE
 
------------------
+---
 
 # MYSQL
 
