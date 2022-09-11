@@ -1,12 +1,12 @@
 
 # ELK + PROMETHEUS + GRAFANA + ZIPKIN + MYSQL USING DOCKER
 
----
 Docker Series - A project to work with many docker container
+
+---
 
 # Specification
 
----
 
 > NOTE: Use the same stack version to ELK (recommended) 
 
@@ -22,9 +22,9 @@ Docker Series - A project to work with many docker container
 
 > Please see the .env file to more details
 
-# How to use
-
 ---
+
+# How to use
 
 - Clone this project from GitHub
 
@@ -66,9 +66,9 @@ docker network create open_network
 7. Grafana Ubuntu
 <pre>http://localhost:3000/login</pre>
 
-# Commands
-
 ---
+
+# Commands
 
 1. Access zipkin container
 
@@ -76,9 +76,9 @@ docker network create open_network
 docker exec -it ${CONTAINER-ID|CONTAINER-NAME} sh
 </pre>
 
-# Container Services
-
 ---
+
+# Container Services
 
 <pre>
 NAME                COMMAND                  SERVICE             STATUS              PORTS
@@ -90,3 +90,6 @@ logstash            "/usr/local/bin/dock…"   logstash            running      
 prometheus          "/bin/prometheus --c…"   prometheus          running             0.0.0.0:9090->9090/tcp
 zipkin              "start-zipkin"           zipkin              running (healthy)   0.0.0.0:9411->9411/tcp
 </pre>
+
+---
+
