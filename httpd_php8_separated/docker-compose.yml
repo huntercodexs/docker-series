@@ -12,6 +12,8 @@ services:
         privileged: true
         volumes:
             - ./webserver/:/home/webserver/
+            - ./webserver/conf/httpd.conf:/usr/local/apache2/conf/httpd.conf
+            - ./webserver/conf/webserver.conf:/usr/local/apache2/conf/webserver.conf
             - ./applications/:/var/www/webserver/
         tty: true
         depends_on:
@@ -19,7 +21,8 @@ services:
         links:
             - php8
         networks:
-            - webserver_network
+            - default
+            - open_network
     #----------------------------------------------------------------------------------------
     php8:
         env_file: .env
@@ -32,9 +35,11 @@ services:
         volumes:
             - ./applications/:/var/www/webserver/
         networks:
-            - webserver_network
+            - default
+            - open_network
+            
     #----------------------------------------------------------------------------------------
 
 networks:
-    webserver_network:
+    open_network:
         external: true
