@@ -51,3 +51,5 @@ composer.*
 /httpd_php8_databases_separated/mysql-57/lib
 #MYSQL 8
 /httpd_php8_databases_separated/mysql-80/lib
+#SQLITE3
+/httpd_php8_databases_separated/sqlite3/sqliteDB/sqlite-autoconf/**
