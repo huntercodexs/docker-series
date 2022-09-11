@@ -2,12 +2,13 @@
 # ELK + PROMETHEUS + GRAFANA + ZIPKIN USING DOCKER
 Docker Series - A project to work with many docker container
 
+---
 
 # Specification
 
 > NOTE: Use the same stack version to ELK (recommended)
 
-- Stack Version (ELK) : 7.9.2
+- Stack Version 7.9.2
 - Elasticsearch
 - Kibana
 - Logstash
@@ -19,6 +20,7 @@ Docker Series - A project to work with many docker container
 
 > Please see the .env file to more details
 
+---
 
 # How to use
 
@@ -62,6 +64,7 @@ docker network create open_network
 7. Grafana Ubuntu
 <pre>http://localhost:3000/login</pre>
 
+---
 
 # Commands
 
@@ -71,6 +74,7 @@ docker network create open_network
 docker exec -it ${CONTAINER-ID} sh
 </pre>
 
+---
 
 # Container Services
 
@@ -84,3 +88,5 @@ logstash            "/usr/local/bin/dock…"   logstash            running      
 prometheus          "/bin/prometheus --c…"   prometheus          running             0.0.0.0:9090->9090/tcp
 zipkin              "start-zipkin"           zipkin              running (healthy)   0.0.0.0:9411->9411/tcp
 </pre>
+
+---
