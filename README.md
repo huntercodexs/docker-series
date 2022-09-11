@@ -1,7 +1,6 @@
 
 # Docker Series
-
-The Docker Series to most containers dockerized
+Docker Series - A project to work with many docker container
 
 -------------
 
