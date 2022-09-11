@@ -1,11 +1,14 @@
 
-# Docker Series
+# OPENJDK-8u212 + MYSQL8
+Docker Series - A project to work with many docker container
 
-The Docker Series to most containers dockerized
+---
 
 # Information
 
 Please use the branch selection to access others configurations to most need and purposes
+
+---
 
 # Dockers Configurations Contained
 
