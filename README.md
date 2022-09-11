@@ -1,16 +1,14 @@
+# NGINX + PHP8
+Docker Series - A project to work with many docker container
 
-# Docker Series
-
-The Docker Series to most containers dockerized
-
------------------
+---
 
 # About
 
 This branch set up the complete environment to run PHP and NGINX as Webserver
 
 
------------------
+---
 
 # How to use
 
@@ -40,7 +38,7 @@ http://192.168.0.174:38080/php80/index.php
 http://192.168.0.174:38080/php81/index.php
 </pre>
 
------------------
+---
 
 # PHP-8.0
 
@@ -61,7 +59,7 @@ http://192.168.0.174:38080/php81/index.php
 - FIREBIRD
 - INTERBASE
 
------------------
+---
 
 # PHP-8.1
 
