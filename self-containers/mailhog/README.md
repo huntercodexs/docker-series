@@ -39,6 +39,6 @@ spring.mail.properties.mail.smtp.starttls.enable=true
 spring.mail.properties.mail.smtp.connectiontimeout=5000
 spring.mail.properties.mail.smtp.timeout=5000
 spring.mail.properties.mail.smtp.writetimeout=5000
-spring.mail.properties.mail.smtp.socketFactory.port=1025
+spring.mail.properties.mail.smtp.socketFactory.port=31025
 spring.mail.properties.mail.smtp.socketFactory.class=javax.net.ssl.SSLSocketFactory
 </pre>
