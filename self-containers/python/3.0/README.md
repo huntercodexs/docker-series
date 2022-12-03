@@ -6,7 +6,7 @@
 git clone https://github.com/huntercodexs/docker-series.git .
 cd self-containers/python/3.0
 docker-compose up --build (in first time)
-docker-compose start (in others case)
+docker-compose start (in the next times)
 </pre>
 
 # How to use

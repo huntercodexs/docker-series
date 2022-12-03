@@ -6,7 +6,7 @@
 git clone https://github.com/huntercodexs/docker-series.git .
 cd self-containers/jenkins/2.60.3
 docker-compose up --build jenkins-2-60-3 (in first time)
-docker-compose start jenkins-2-60-3 (in others case)
+docker-compose start jenkins-2-60-3 (in the next times)
 </pre>
 
 > AFTER BUILD

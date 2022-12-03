@@ -1,17 +1,18 @@
 # Docker Series
-Um projeto para trabalhar com muitos containers docker
+A project to work with many docker container
 
-# Idiomas
+# Languages
 
-- Language: Portugues Brazil (pt-br)  |  <a href="README-EN.md">Inglês (en)</a>
+- Language: <a href="README.md">Portuguese Brazil (pt-br)</a> | English
 
-# Sobre
+# About
 
-Por favor, use o seletor de branchs para acessar outras configurações de ambientes
+Please use the branch selection to access others environment configurations
+
 
 # Docker Setup
 
-> Instalando o Docker
+> Installing Docker
 
 - Update OS
 
@@ -19,38 +20,38 @@ Por favor, use o seletor de branchs para acessar outras configurações de ambie
 $ sudo apt update
 </pre>
 
-- Instale os pre requisitos
+- Install Pre Requisites
 
 <pre>
 $ sudo apt install apt-transport-https ca-certificates curl software-properties-common
 </pre>
 
-- Adicione a chave GPG do repositório oficial docker
+- Add the GPG Key from official docker repository
 
 <pre>
 $ curl -fsSL https://download.docker.com/linux/ubuntu/gpg | sudo apt-key add -
 </pre>
 
-- Adicione o repositório docker APT 
+- Add the docker repository APT sources
 
 <pre>
 $ sudo add-apt-repository "deb [arch=amd64] https://download.docker.com/linux/ubuntu focal stable"
 </pre>
 
-- Certifique-se de que tenha instalado o docker-ce
+- Make sure thar will be to install the docker-ce
 
 <pre>
 $ apt-cache policy docker-ce
 $ sudo apt install docker-ce
 </pre>
 
-- Verifique o status do serviço docker
+- Check docker status
 
 <pre>
 $ sudo systemctl status docker
 </pre>
 
-- Faça com que o usuário padrão tenha acesso ao comando docker
+- Make docker command to current user (not root)
 
 <pre>
 $ sudo usermod -aG docker ${USER}
@@ -58,7 +59,7 @@ $ su - ${USER}
 $ sudo usermod -aG docker username
 </pre>
 
-> Alguns comandos docker
+> Docker Commands Helper
 
 <pre>
 docker ps
@@ -79,7 +80,7 @@ docker exec -it ${CONTAINER_NAME} [${COMMAND}[OPTIONS]]
 docker exec -it mailhog-ubuntu2004 /bin/bash
 </pre>
 
-> Instalando o docker compose
+> Installing Docker Compose
 
 - Installing the current release of docker-comopse
 
@@ -87,19 +88,19 @@ docker exec -it mailhog-ubuntu2004 /bin/bash
 $ sudo curl -L "https://github.com/docker/compose/releases/download/1.26.0/docker-compose-$(uname -s)-$(uname -m)" -o /usr/local/bin/docker-compose
 </pre>
 
-- Faça com o que o docker-compose fique executável
+- Make docker-compose executable
 
 <pre>
 $ sudo chmod +x /usr/local/bin/docker-compose
 </pre>
 
-- Verifique a versão do docker-compose instalada
+- Check the docker-compose version installed
 
 <pre>
 $ docker-compose --version
 </pre>
 
-> Limpe o ambiente ou a máquina hospedeira caso seja necessário 
+> Docker Commands To Clear Environment
 
 <pre>
 docker network rm ${NETWORK_NAME}
@@ -114,7 +115,7 @@ docker system prune -a
     Are you sure you want to continue? [y/N] y
 </pre>
 
-> Alguns comandos docker-compose para ajuda
+> Docker Compose Commands Helper
 
 <pre>
 docker-compose ps
@@ -130,13 +131,14 @@ docker-compose pause
 docker-compose unpause
 </pre>
 
-# Configurações Docker Contidas
 
-> ![img.png](./self-containers/files/midias/check-green.png) Disponível
-> ![img.png](./self-containers/files/midias/check-silver.png) Pendente
-> ![img.png](./self-containers/files/midias/unavailable.png) Não Disponível
+# Dockers Configurations Contained
 
-> Servidores Web
+> ![img.png](./self-containers/files/midias/check-green.png) Available
+> ![img.png](./self-containers/files/midias/check-silver.png) Pending
+> ![img.png](./self-containers/files/midias/unavailable.png) Unavailable
+
+> Web Servers
 
 - <a href="https://github.com/huntercodexs/docker-series/tree/master/self-containers/apache2">Apache2</a> ![img.png](./self-containers/files/midias/check-green.png)
 - <a href="https://github.com/huntercodexs/docker-series/tree/master/self-containers/nginx">Nginx</a> ![img.png](./self-containers/files/midias/check-green.png)
@@ -146,12 +148,12 @@ docker-compose unpause
 - <a href="https://github.com/huntercodexs/docker-series/tree/master/self-containers/tomcat">Tomcat</a>
   - <a href="https://github.com/huntercodexs/docker-series/tree/master/self-containers/tomcat/9.0">9.0</a> ![img.png](./self-containers/files/midias/check-green.png)
 
-> Servidores de Email
+> Mail Servers
 
 - <a href="https://github.com/huntercodexs/docker-series/tree/master/self-containers/mailhog">MailHog</a> ![img.png](./self-containers/files/midias/check-green.png)
 - <a href="https://github.com/huntercodexs/docker-series/tree/master/self-containers/postfix">PostFix</a> ![img.png](./self-containers/files/midias/check-silver.png)
 
-> Distribuições Linux
+> Distro Linux
 
 - <a href="https://github.com/huntercodexs/docker-series/tree/master/self-containers/alpine">Alpine</a> ![img.png](./self-containers/files/midias/check-green.png)
 - <a href="https://github.com/huntercodexs/docker-series/tree/master/self-containers/centos">CentOS</a> ![img.png](./self-containers/files/midias/check-green.png)
@@ -160,7 +162,7 @@ docker-compose unpause
   - <a href="https://github.com/huntercodexs/docker-series/tree/master/self-containers/ubuntu/ubuntu1804">18.04 LTS</a> ![img.png](./self-containers/files/midias/check-green.png)
   - <a href="https://github.com/huntercodexs/docker-series/tree/master/self-containers/ubuntu/ubuntu2004">20.04 LTS</a> ![img.png](./self-containers/files/midias/check-green.png)
 
-> Banco de dados
+> Databases
 
 - <a href="https://github.com/huntercodexs/docker-series/tree/master/self-containers/mysql">MySQL</a>
   - <a href="https://github.com/huntercodexs/docker-series/tree/master/self-containers/mysql/mysql-57">5.7</a> ![img.png](./self-containers/files/midias/check-green.png)
@@ -173,7 +175,7 @@ docker-compose unpause
 - <a href="https://github.com/huntercodexs/docker-series/tree/master/self-containers/mongodb">MongoDB</a> ![img.png](./self-containers/files/midias/check-green.png)
 - <a href="https://github.com/huntercodexs/docker-series/tree/master/self-containers/postgres">Postgres</a> ![img.png](./self-containers/files/midias/check-green.png)
 
-> Ferramentas, Logs e Rastreadores
+> Tools, Logs and Tracer
 
 - <a href="https://github.com/huntercodexs/docker-series/tree/master/self-containers/elasticsearch">Elasticsearch</a> ![img.png](./self-containers/files/midias/check-green.png)
 - <a href="https://github.com/huntercodexs/docker-series/tree/master/self-containers/logstash">Logstash</a> ![img.png](./self-containers/files/midias/check-green.png)
@@ -186,7 +188,7 @@ docker-compose unpause
 - <a href="https://github.com/huntercodexs/docker-series/tree/master/self-containers/grafana">Grafana</a> ![img.png](./self-containers/files/midias/check-green.png)
 - <a href="https://github.com/huntercodexs/docker-series/tree/master/self-containers/grafana-ubuntu">Grafana Ubuntu</a> ![img.png](./self-containers/files/midias/check-green.png)
 
-> Linguagens
+> Stack
 
 - <a href="https://github.com/huntercodexs/docker-series/tree/master/self-containers/php">PHP</a>
   - <a href="https://github.com/huntercodexs/docker-series/tree/master/self-containers/php/5.6">5.6</a> ![img.png](./self-containers/files/midias/check-green.png)
@@ -214,7 +216,7 @@ docker-compose unpause
   - 10.1.9 ![img.png](./self-containers/files/midias/check-silver.png)
   - <a href="https://github.com/huntercodexs/docker-series/tree/master/self-containers/nodejs/18.7.0">18.7.0</a> ![img.png](./self-containers/files/midias/check-green.png)
 
-> Outros
+> Others
 
 - <a href="https://github.com/huntercodexs/docker-series/tree/master/self-containers/redis">Redis</a> ![img.png](./self-containers/files/midias/check-green.png)
 - <a href="https://github.com/huntercodexs/docker-series/tree/master/self-containers/swagger">Swagger</a> 
@@ -228,11 +230,12 @@ docker-compose unpause
   - <a href="https://github.com/huntercodexs/docker-series/tree/master/self-containers/jenkins/2.190.1">2.190.1 (Official)</a> ![img.png](./self-containers/files/midias/unavailable.png)
   - <a href="https://github.com/huntercodexs/docker-series/tree/master/self-containers/jenkins/2.346.3">2.346.3 (Official)</a> ![img.png](./self-containers/files/midias/check-green.png)
 
-# Como usar este projeto
- 
-> Acesse a pasta /self-container deste projeto para rodar algum container, exemplo: apache2
 
-- Etapas para rodar o container
+# How to use
+
+> Access the folder path /self-container in this project to run any container, by example: apache2 
+
+- Steps do run
 
 <pre>
 git clone https://github.com/huntercodexs/docker-series.git .

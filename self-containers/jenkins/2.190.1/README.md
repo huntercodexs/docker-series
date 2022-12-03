@@ -6,7 +6,7 @@
 git clone https://github.com/huntercodexs/docker-series.git .
 cd self-containers/jenkins/2.190.1
 docker-compose up --build jenkins-2-190-1 (in first time)
-docker-compose start jenkins-2-190-1 (in others case)
+docker-compose start jenkins-2-190-1 (in the next times)
 </pre>
 
 > AFTER BUILD
