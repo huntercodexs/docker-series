@@ -17,5 +17,8 @@ RUN go get github.com/mailhog/MailHog
 # RUN THE MAIL HOG
 CMD ~/go/bin/MailHog
 
+# SHARED FOLDER
+RUN mkdir -p /home/mailhog/files/
+
 EXPOSE 8025
 EXPOSE 1025

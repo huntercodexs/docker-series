@@ -17,7 +17,8 @@ docker-compose start (in next times)
 http://${MAIL_SERVER_IP}:${MAILHOG_PORT}
 
 [Example]
-http://localhost:38085
+http://${WEBSERVER-ADDRESS-IP}:38025 (mailhog)
+http://${WEBSERVER-ADDRESS-IP}:48025 (mailhog-ubuntu2004)
 </pre>
 
 - To use MailHog as Mail Server Tests
