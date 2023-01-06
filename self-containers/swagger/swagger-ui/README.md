@@ -1,6 +1,6 @@
 # SWAGGER UI
 
-- To run swagger-ui from this project use
+- How to run swagger-ui from this project use
 
 <pre>
 git clone https://github.com/huntercodexs/docker-series.git .

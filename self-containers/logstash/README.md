@@ -1,6 +1,6 @@
 # LOGSTASH
 
-- To run logstash from this project use
+- How to run logstash from this project use
 
 <pre>
 git clone https://github.com/huntercodexs/docker-series.git .

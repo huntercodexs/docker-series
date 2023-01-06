@@ -1,6 +1,6 @@
 # Grafana Ubuntu
 
-- To run grafana-ubuntu from this project use
+- How to run grafana-ubuntu from this project use
 
 <pre>
 git clone https://github.com/huntercodexs/docker-series.git .

@@ -1,6 +1,6 @@
 # KIBANA
 
-- To run kibana from this project use
+- How to run kibana from this project use
 
 <pre>
 git clone https://github.com/huntercodexs/docker-series.git .

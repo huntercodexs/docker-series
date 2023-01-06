@@ -1,6 +1,6 @@
 # MYSQL-80
 
-- To run mysql-80 from this project use
+- How to run mysql-80 from this project use
 
 <pre>
 git clone https://github.com/huntercodexs/docker-series.git .

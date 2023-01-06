@@ -1,6 +1,6 @@
 # UBUNTU 18.04
 
-- To run ubuntu1804 from this project use
+- How to run ubuntu1804 from this project use
 
 <pre>
 git clone https://github.com/huntercodexs/docker-series.git .

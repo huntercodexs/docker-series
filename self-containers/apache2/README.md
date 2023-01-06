@@ -1,6 +1,6 @@
 # Apache 2
 
-- To run apache2 from this project use
+- How to run apache2 from this project use
 
 <pre>
 git clone https://github.com/huntercodexs/docker-series.git .

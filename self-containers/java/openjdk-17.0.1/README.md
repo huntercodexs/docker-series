@@ -1,7 +1,7 @@
 
 # JAVA (openjdk-1701)
 
-- To run openjdk-1701 from this project use
+- How to run openjdk-1701 from this project use
 
 <pre>
 git clone https://github.com/huntercodexs/docker-series.git .

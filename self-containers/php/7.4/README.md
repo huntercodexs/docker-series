@@ -1,6 +1,6 @@
 # PHP-7.4
 
-- To run php74 from this project use
+- How to run php74 from this project use
 
 <pre>
 git clone https://github.com/huntercodexs/docker-series.git .

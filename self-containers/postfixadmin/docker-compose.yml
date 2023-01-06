@@ -12,6 +12,8 @@ services:
             MYSQL_DATABASE: ${POSTFIXADMIN_DB_NAME}
             MYSQL_USER: ${POSTFIXADMIN_DB_USER}
             MYSQL_PASSWORD: ${POSTFIXADMIN_DB_PASSWORD}
+        ports:
+            - ${POSTFIXADMIN_DB_PORT}
         networks:
             - default
             - open_network
@@ -30,10 +32,10 @@ services:
             POSTFIXADMIN_DB_NAME: ${POSTFIXADMIN_DB_NAME}
             POSTFIXADMIN_SETUP_PASSWORD: ${POSTFIXADMIN_SETUP_PASSWORD}
         ports:
-            - ${POSTFIXADMIN_HTTP_PORT}:80
+            - ${POSTFIXADMIN_HTTP_GUEST_PORT}:${POSTFIXADMIN_HTTP_PORT}
         volumes:
             - ./share/:/home/postfixadmin/files/
-            #- ./config/config.local.php:/var/www/html/config.local.php
+            - ./config/config.local.php:/var/www/html/config.local.php
         depends_on:
             - postfixadmin_db
         tty: true

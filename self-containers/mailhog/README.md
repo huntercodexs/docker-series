@@ -1,6 +1,6 @@
 # MAILHOG
 
-- To run mailhog from this project use
+- How to run mailhog from this project use
 
 <pre>
 git clone https://github.com/huntercodexs/docker-series.git .
@@ -11,7 +11,7 @@ docker-compose start (in next times)
 
 # Details
 
-- To make access in the MailHog Http Webserver
+- How to make access in the MailHog Http Webserver
 
 <pre>
 http://${MAIL_SERVER_IP}:${MAILHOG_PORT}
@@ -21,7 +21,7 @@ http://${WEBSERVER-ADDRESS-IP}:38025 (mailhog)
 http://${WEBSERVER-ADDRESS-IP}:48025 (mailhog-ubuntu2004)
 </pre>
 
-- To use MailHog as Mail Server Tests
+- How to use MailHog as Mail Server Tests
 
 <pre>
 [SMTP HOST]

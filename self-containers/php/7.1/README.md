@@ -1,6 +1,6 @@
 # PHP-7.1
 
-- To run php71 from this project use
+- How to run php71 from this project use
 
 <pre>
 git clone https://github.com/huntercodexs/docker-series.git .

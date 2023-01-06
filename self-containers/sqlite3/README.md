@@ -1,6 +1,6 @@
 # SQLITE3
 
-- To run sqlite3 from this project use
+- How to run sqlite3 from this project use
 
 <pre>
 git clone https://github.com/huntercodexs/docker-series.git .

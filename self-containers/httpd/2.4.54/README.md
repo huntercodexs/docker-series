@@ -1,6 +1,6 @@
 # Httpd 2.4.54
 
-- To run httpd from this project use
+- How to run httpd from this project use
 
 <pre>
 git clone https://github.com/huntercodexs/docker-series.git .

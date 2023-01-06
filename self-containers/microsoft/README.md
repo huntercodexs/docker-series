@@ -1,7 +1,7 @@
 
 # MSSQL + MSSQL-TOOLS
 
-- To run mssql from this project use
+- How to run mssql from this project use
 
 <pre>
 git clone https://github.com/huntercodexs/docker-series.git .

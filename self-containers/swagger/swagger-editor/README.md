@@ -1,6 +1,6 @@
 # SWAGGER EDITOR
 
-- To run swagger-editor from this project use
+- How to run swagger-editor from this project use
 
 <pre>
 git clone https://github.com/huntercodexs/docker-series.git .

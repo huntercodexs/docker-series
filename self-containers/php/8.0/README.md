@@ -1,6 +1,6 @@
 # PHP-8.0
 
-- To run php80 from this project use
+- How to run php80 from this project use
 
 <pre>
 git clone https://github.com/huntercodexs/docker-series.git .
