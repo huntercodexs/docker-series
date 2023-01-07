@@ -36,6 +36,7 @@ services:
         volumes:
             - ./share/:/home/postfixadmin/files/
             - ./config/config.local.php:/var/www/html/config.local.php
+            - ./config/config.inc.php:/var/www/html/config.inc.php
         depends_on:
             - postfixadmin_db
         tty: true

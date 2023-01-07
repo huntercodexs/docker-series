@@ -151,7 +151,7 @@ docker-compose unpause
 > Mail Servers
 
 - <a href="https://github.com/huntercodexs/docker-series/tree/master/self-containers/mailhog">MailHog</a> ![img.png](./self-containers/files/midias/check-green.png)
-- <a href="https://github.com/huntercodexs/docker-series/tree/master/self-containers/postfix">PostFix</a> ![img.png](./self-containers/files/midias/check-silver.png)
+- <a href="https://github.com/huntercodexs/docker-series/tree/master/self-containers/postfixadmin">PostFix Admin</a> ![img.png](./self-containers/files/midias/check-green.png)
 
 > Distro Linux
 
