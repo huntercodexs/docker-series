@@ -1,0 +1,48 @@
+version: "3.7"
+services:
+    
+    #----------------------------------------------------------------------------------------
+    ec2_java_rabbitmq:
+        env_file: .env
+        container_name: ec2_java_rabbitmq
+        build:
+            context: .
+            dockerfile: ec2_java_rabbitmq.dockerfile
+        ports:
+            - ${EC2_JAVA_RABBITMQ_RPM_PORT}:35900
+        privileged: true
+        tty: true
+        volumes:
+            - ./shared/:/home/shared/
+        networks:
+            - default
+            - open_network
+        depends_on:
+            - mysql8
+        links:
+            - mysql8
+    #----------------------------------------------------------------------------------------
+    mysql8:
+        env_file: .env
+        image: mysql:8.0
+        container_name: mysql8
+        ports:
+            - ${MYSQL80_PORT}:3306
+        volumes:
+            - type: bind
+              source: ./mysql8
+              target: /var/lib/mysql/
+              read_only: false
+        environment:
+            MYSQL_DATABASE: ${MYSQL80_DATABASE}
+            MYSQL_USERNAME: ${MYSQL80_USERNAME}
+            MYSQL_PASSWORD: ${MYSQL80_PASSWORD}
+            MYSQL_ROOT_PASSWORD: ${MYSQL80_ROOT_PASSWORD}
+        tty: true
+        networks:
+            - open_network
+    #----------------------------------------------------------------------------------------
+
+networks:
+    open_network:
+        external: true
