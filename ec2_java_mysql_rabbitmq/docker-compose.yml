@@ -10,6 +10,8 @@ services:
             dockerfile: ec2_java_rabbitmq.dockerfile
         ports:
             - ${EC2_JAVA_RABBITMQ_RPM_PORT}:35900
+            - ${SERVICE_DISCOVERY_PORT}:8761
+            - ${API_GATEWAY_PORT}:8765
         privileged: true
         tty: true
         volumes:
@@ -21,6 +23,24 @@ services:
             - mysql8
         links:
             - mysql8
+    #----------------------------------------------------------------------------------------
+    rabbitmq:
+        env_file: .env
+        image: rabbitmq:3.9.8
+        container_name: rabbitmq
+        ports:
+            - ${RABBITMQ_PORT}:5672
+        volumes:
+            - type: bind
+              source: ./rabbitmq
+              target: /var/lib/rabbitmq/
+              read_only: false
+        environment:
+            RABBITMQ_DEFAULT_USER: ${RABBITMQ_DEFAULT_USER}
+            RABBITMQ_DEFAULT_PASS: ${RABBITMQ_DEFAULT_PASS}
+        tty: true
+        networks:
+            - open_network
     #----------------------------------------------------------------------------------------
     mysql8:
         env_file: .env
