@@ -16,3 +16,4 @@ sources-docker-compose.yml
 /ec2_java_mysql_rabbitmq/jre/**
 /ec2_java_mysql_rabbitmq/mysql8/**
 /ec2_java_mysql_rabbitmq/shared/**
+/ec2_java_mysql_rabbitmq/rabbitmq/**

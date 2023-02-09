@@ -44,6 +44,8 @@ JAVA
 
 # How to use
 
+- Run
+
 <pre>
 git clone https://github.com/huntercodexs/docker-series.git .
 cd ec2_java_mysql_rabbitmq
@@ -51,6 +53,8 @@ docker-compose up --build (in first time)
 docker-compose start (in the next times)
 docker exec -it ec2_java_rabbitmq /bin/bash
 </pre>
+
+- Mysql
 
 If you get the follow error
 
@@ -62,3 +66,15 @@ ALTER USER 'root'@'%' IDENTIFIED WITH mysql_native_password BY 'root123';
 FLUSH PRIVILEGES;
 </pre>
 
+- RabbitMQ
+
+Next step to run rabbitmq inside ec2_java_rabbitmq container
+
+<pre>
+rabbitmq-plugins enable rabbitmq_management &
+rabbitmq-server start &
+rabbitmqctl list_users
+rabbitmqctl authenticate_user guest guest
+</pre>
+
+In the rabbitmq container everything is fine, so you can use as is
