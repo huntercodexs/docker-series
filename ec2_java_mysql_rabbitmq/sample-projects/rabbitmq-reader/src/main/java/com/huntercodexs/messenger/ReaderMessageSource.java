@@ -1,0 +1,12 @@
+package com.huntercodexs.messenger;
+
+import org.springframework.cloud.stream.annotation.Input;
+import org.springframework.messaging.SubscribableChannel;
+
+public interface ReaderMessageSource {
+
+    String ORDERS_INPUT = "OrdersChannel";
+    @Input("OrdersChannel")
+    SubscribableChannel readOrder();
+
+}

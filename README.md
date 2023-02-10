@@ -87,3 +87,13 @@ Use "rabbitmq-plugins list" commando to view a complete list of plugins
 
 # Run the sample projects
 
+> Remember, these projects are just a sample to demonstrate how work this project EC2 + JAVA + MYSQL + RABBITMQ
+
+To run the sample projects contained in this project get the project files into folder sample-projects, and follow the bellow:
+
+- open each project in your prefer IDE
+- run the "mvn package"
+- take the generated jar file
+- edit the application.properties file with the correct settings
+- finally use the result files in the folder app/project-name (example: app/service_discovery)
+
