@@ -1,13 +1,13 @@
-# AMAZONLINUX RPM
+# FEDORA RPM
 
-- How to run amazonlinux rpm from this project use
+- How to run fedora rpm from this project use
 
 <pre>
 git clone https://github.com/huntercodexs/docker-series.git .
-cd self-containers/rpm/amazonlinux
+cd self-containers/rpm/fedora
 docker-compose up --build (in first time)
 docker-compose start (in the next times)
-docker exec -u rpmuser -it amazonlinux-rpm /bin/bash
+docker exec -u rpmuser -it fedora-rpm /bin/bash
 </pre>
 
 
