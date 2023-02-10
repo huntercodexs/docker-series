@@ -23,7 +23,7 @@ services:
         links:
             - mysql8
             - rabbitmq
-        command: "java -jar /home/shared/SERVICE-DISCOVERY-22.01.1-SNAPSHOT.jar"
+        command: "/usr/bin/java -jar /home/shared/SERVICE-DISCOVERY-22.01.1-SNAPSHOT.jar --spring.config.location=/home/shared/application.properties"
     #----------------------------------------------------------------------------------------
     ec2_api_gateway:
         env_file: .env
@@ -46,7 +46,28 @@ services:
         links:
             - mysql8
             - rabbitmq
-        command: "java -jar /home/shared/API-GATEWAY-22.01.1-SNAPSHOT.jar"
+        command: "/usr/bin/java -jar /home/shared/API-GATEWAY-22.01.1-SNAPSHOT.jar --spring.config.location=/home/shared/application.properties"
+    #----------------------------------------------------------------------------------------
+    ec2_rabbitmq_reader:
+        env_file: .env
+        container_name: ec2_rabbitmq_reader
+        build:
+            context: .
+            dockerfile: ec2_rabbitmq_reader.dockerfile
+        privileged: true
+        tty: true
+        volumes:
+            - ./app/rabbitmq_reader/:/home/shared/
+        networks:
+            - default
+            - open_network
+        depends_on:
+            - mysql8
+            - rabbitmq
+        links:
+            - mysql8
+            - rabbitmq
+        command: "/usr/bin/java -jar /home/shared/RABBITMQ-READER-22.01.1-SNAPSHOT.jar --spring.config.location=/home/shared/application.properties"
     #----------------------------------------------------------------------------------------
     ec2_application_demo:
         env_file: .env
@@ -67,7 +88,7 @@ services:
         links:
             - mysql8
             - rabbitmq
-        command: "java -jar /home/shared/APPLICATION-DEMO-22.01.1-SNAPSHOT.jar"
+        command: "/usr/bin/java -jar /home/shared/APPLICATION-DEMO-22.01.1-SNAPSHOT.jar --spring.config.location=/home/shared/application.properties"
     #----------------------------------------------------------------------------------------
     rabbitmq:
         env_file: .env

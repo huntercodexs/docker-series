@@ -77,4 +77,13 @@ rabbitmqctl list_users
 rabbitmqctl authenticate_user guest guest
 </pre>
 
-In the rabbitmq container everything is fine, so you can use as is
+In the rabbitmq container everything is fine, so you can use as is, however you can still enable few plugins, as example: 
+
+<pre>
+rabbitmq-plugins enable rabbitmq_management
+</pre>
+
+Use "rabbitmq-plugins list" commando to view a complete list of plugins
+
+# Run the sample projects
+

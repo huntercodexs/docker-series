@@ -12,6 +12,7 @@ node_modules
 /elkstack792/
 /micro-services/
 sources-docker-compose.yml
+application.properties
 
 /ec2_java_mysql_rabbitmq/jre/**
 /ec2_java_mysql_rabbitmq/mysql8/**
