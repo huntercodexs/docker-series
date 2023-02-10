@@ -45,3 +45,6 @@ self-containers/oracle/oracleData/enterprise/**
 /self-containers/jenkins/2.60.3/share/**
 /self-containers/jenkins/2.190.1/share/**
 /self-containers/jenkins/2.346.3/share/**
+/self-containers/messenger/rabbitmq-3.9.8/lib/.erlang.cookie
+/self-containers/messenger/rabbitmq-3.9.8/lib/.bash_history
+/self-containers/messenger/rabbitmq-3.9.8/lib/mnesia/**
