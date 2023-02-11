@@ -6,6 +6,7 @@ trash
 *.exec
 *.run
 .idea
+application.properties
 nodes
 node_modules
 /docker-elk/
