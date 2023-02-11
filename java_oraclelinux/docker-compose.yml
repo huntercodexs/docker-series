@@ -15,6 +15,10 @@ services:
         tty: true
         networks:
             - open_network
+        depends_on:
+            - oraclelinux
+        links:
+            - oraclelinux
         #command: "java -jar /home/openjdk8u212/JAVA-ORACLELINUX-22.01.1-SNAPSHOT.jar --spring.config.location=/home/openjdk8u212/application.properties"
     #----------------------------------------------------------------------------------------
     oraclelinux:
