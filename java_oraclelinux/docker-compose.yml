@@ -1,0 +1,42 @@
+version: "3.7"
+services:
+    
+    #----------------------------------------------------------------------------------------
+    openjdk-8u212:
+        env_file: .env
+        container_name: openjdk-8u212
+        build:
+            context: .
+            dockerfile: openjdk-8u212.dockerfile
+        ports:
+            - ${OPENJDK_8U212_PORT}:38001
+        volumes:
+            - ./app/:/home/openjdk8u212/
+        tty: true
+        networks:
+            - open_network
+        #command: "java -jar /home/openjdk8u212/JAVA-ORACLELINUX-22.01.1-SNAPSHOT.jar --spring.config.location=/home/openjdk8u212/application.properties"
+    #----------------------------------------------------------------------------------------
+    oraclelinux:
+        env_file: .env
+        container_name: oraclelinux
+        build:
+            context: ./oracle/database
+            dockerfile: oraclelinux.dockerfile
+            args:
+                DB_EDITION: ${DB_EDITION}
+                ORACLE_PASSWORD: ${ORACLELINUX_PASSWORD}
+        volumes:
+            - ./oracle/share:/home/oracle/share
+            - ./oracle/oradata:/opt/oracle/oradata
+        ports:
+            - ${ORACLELINUX_PORT1}:1521
+            - ${ORACLELINUX_PORT2}:5500
+        tty: true
+        networks:
+            - open_network
+    #----------------------------------------------------------------------------------------
+
+networks:
+    open_network:
+        external: true
