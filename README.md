@@ -8,6 +8,8 @@ Simple Environment to simulate a workflow
 
 # How to use
 
+> NOTE: As a main tip always start the oraclelinux before that anyone other container
+
 - Run Container
 
 <pre>
@@ -47,7 +49,6 @@ tar -xvf oraclelinux-database-scripts-19c.tar.bz2
 - Have sure that the oracle/oradata is empty or just have the dbconfig/ and ORCLCDB/ folders
 - The builder of this container is very long and need a long time to finish correctly
 - Use the command docker-compose up --build to run in first time
-- After the first build use docker-compose up -d oraclelinux or docker-compose start oraclelinux
 
 > <p style="color: greenyellow">STEPS AFTER BUILD</p>
 
@@ -55,7 +56,43 @@ tar -xvf oraclelinux-database-scripts-19c.tar.bz2
 
 Set Password Administration
 <pre>
+docker-compose start oraclelinux
+
+docker-compose ps
+oraclelinux     /bin/sh -c exec $ORACLE_BA ...   Up (healthy)   0.0.0.0:1521->1521/tcp,:::1521->1521/tcp, 0.0.0.0:5500->5500/tcp,:::5500->5500/tcp
+</pre>
+
+<pre>
 docker exec -it oraclelinux ./setPassword.sh ${YOUR_ORACLE_PASSWORD}
+
+OUTPUT COMMAND ****************************************************************************************
+The Oracle base remains unchanged with value /opt/oracle
+
+SQL*Plus: Release 19.0.0.0.0 - Production on Sat Feb 11 21:20:12 2023
+Version 19.3.0.0.0
+
+Copyright (c) 1982, 2019, Oracle.  All rights reserved.
+
+
+Connected to:
+Oracle Database 19c Enterprise Edition Release 19.0.0.0.0 - Production
+Version 19.3.0.0.0
+
+SQL> 
+User altered.
+
+SQL> 
+User altered.
+
+SQL> 
+Session altered.
+
+SQL> 
+User altered.
+
+SQL> Disconnected from Oracle Database 19c Enterprise Edition Release 19.0.0.0.0 - Production
+Version 19.3.0.0.0
+********************************************************************************************************
 </pre>
 
 - Access the database container
@@ -69,10 +106,11 @@ Create User
 <pre>
 sqlplus sys/${YOUR_ORACLE_PASSWORD}@ORCLPDB1 as sysdba
 CREATE USER DEVEL IDENTIFIED BY ${YOUR_ORACLE_PASSWORD};
-GRANT CREATE SESSION, CREATE TABLE TO DEVEL;
+GRANT CREATE SESSION, CREATE TABLE, CREATE SEQUENCE TO DEVEL;
 ALTER USER DEVEL QUOTA 50m ON SYSTEM;
-CREATE SMALLFILE TABLESPACE DEVEL DATAFILE '/opt/oracle/oradata/ORCLCDB/ORCLPDB1/devel.dbf' SIZE 1G;
+CREATE SMALLFILE TABLESPACE DEVEL DATAFILE '/opt/oracle/oradata/ORCLCDB/ORCLPDB1/DEVEL.dbf' SIZE 1G;
 ALTER DATABASE DEFAULT TABLESPACE DEVEL;
+ALTER USER DEVEL QUOTA 100M ON DEVEL;
 SELECT * FROM ALL_USERS au;
 SELECT * FROM ALL_USERS au WHERE au.USERNAME = 'DEVEL';
 EXIT;
@@ -80,7 +118,7 @@ EXIT;
 
 Connect on database using the new user
 <pre>
-sqlplus devel/${YOUR_ORACLE_PASSWORD}@ORCLPDB1
+sqlplus DEVEL/${YOUR_ORACLE_PASSWORD}@ORCLPDB1
 </pre>
 
 - Access the Database Oracle Linux:
@@ -102,6 +140,16 @@ Password: ${YOUR_ORACLE_PASSWORD}
 > Enterprise Manager
 
 ![img.png](./java_oraclelinux/oracle/midias/Oracle-Database-EM.png)
+
+- After the first build use 
+
+<pre>docker-compose up -d oraclelinux</pre>
+or
+<pre>docker-compose start oraclelinux</pre>
+and finally
+<pre>docker-compose start openjdk-8u212</pre>
+
+Not forgot that modify the application.properties
 
 - Access the Enterprise Manager:
 
@@ -125,21 +173,30 @@ https://${WEBSERVER_ADDRESS}:5500/em
 - Access JAVA OPENJDK container
 
 <pre>
-docker-compose start (in the next times)
-docker exec -it java_oraclelinux /bin/bash
+docker exec -it openjdk-8u212 /bin/bash
 </pre>
 
-# Run the sample projects
+- Final Result
 
-> Remember, the project is just to demonstration how work this project JAVA + ORACLE
+<pre>
+user@host$ docker-compose ps
+    Name                   Command                  State                                             Ports                                       
+--------------------------------------------------------------------------------------------------------------------------------------------------
+openjdk-8u212   java -jar /home/openjdk8u2 ...   Up             0.0.0.0:38001->38001/tcp,:::38001->38001/tcp                                      
+oraclelinux     /bin/sh -c exec $ORACLE_BA ...   Up (healthy)   0.0.0.0:1521->1521/tcp,:::1521->1521/tcp, 0.0.0.0:5500->5500/tcp,:::5500->5500/tcp
+</pre>
+
+# About the sample project
+
+> Remember, the sample project is just to demonstration how work this project JAVA + ORACLE
 
 To run the sample projects contained in this project get the project files into folder sample-project, and follow the bellow:
 
-- open each project in your prefer IDE
+- open the project in your prefer IDE
 - run the "mvn package"
 - take the generated jar file
 - edit the application.properties file with the correct settings
-- finally use the result files in the folder app
+- finally put the resulted jar file and application.properties in the folder app/
 
 > TIPS: Use the "JAVA + ORACLE.postman_collection.json" POSTMAN file to make tests
 
