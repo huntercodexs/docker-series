@@ -6,7 +6,7 @@ trash
 *.exec
 *.run
 .idea
-application.properties
+java_mssql/app/application.properties
 nodes
 node_modules
 /docker-elk/
