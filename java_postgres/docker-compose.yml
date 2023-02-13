@@ -1,0 +1,46 @@
+version: "3.7"
+services:
+    
+    #----------------------------------------------------------------------------------------
+    openjdk-8u212:
+        env_file: .env
+        container_name: openjdk-8u212
+        build:
+            context: .
+            dockerfile: openjdk-8u212.dockerfile
+        ports:
+            - ${OPENJDK_8U212_PORT}:38001
+        volumes:
+            - ./app/:/home/openjdk8u212/
+        tty: true
+        networks:
+            - default
+            - open_network
+        depends_on:
+            - postgres
+        links:
+            - postgres
+        #command: "java -jar /home/openjdk8u212/JAVA-POSTGRES-22.01.1-SNAPSHOT.jar --spring.config.location=/home/openjdk8u212/application.properties"
+    #----------------------------------------------------------------------------------------
+    postgres:
+        env_file: .env
+        container_name: postgres
+        image: postgres
+        ports:
+            - ${POSTGRES_PORT}:5432
+        environment:
+            POSTGRES_DB: ${POSTGRES_DB}
+            POSTGRES_USER: ${POSTGRES_USER}
+            POSTGRES_PASSWORD: ${POSTGRES_PASSWORD}
+            TZ: GMT
+        volumes:
+            - ./postgres/PostgresSQL:/var/lib/postgresql/data/
+        tty: true
+        networks:
+            - default
+            - open_network
+    #----------------------------------------------------------------------------------------
+
+networks:
+    open_network:
+        external: true
