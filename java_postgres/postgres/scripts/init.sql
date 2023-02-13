@@ -11,10 +11,10 @@ CREATE USER test WITH PASSWORD '123Mudar!';
 GRANT ALL PRIVILEGES ON DATABASE "dbname" to test;
 
 CREATE TABLE customers (
-    id SERIAL NOT NULL,
-    age INT NOT NULL,
-    email VARCHAR(255) NOT NULL,
-    name VARCHAR(255) NOT NULL,
+    id serial NOT NULL,
+    name VARCHAR(250) NOT NULL,
+    email VARCHAR(250) NOT NULL,
+    age INTEGER,
     PRIMARY KEY (id)
 );
 
