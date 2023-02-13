@@ -1,78 +1,47 @@
+# JAVA + MONGODB
+Simple Environment to simulate a workflow
 
-# JAVA (openjdk-8u212)
+# Requisites
 
-- How to run openjdk-8u212 from this project use
+- Java 8
+- MongoDB
 
-<pre>
-git clone https://github.com/huntercodexs/docker-series.git .
-cd self-containers/openjdk-8u212
-docker-compose up --build (in first time)
-docker-compose start (in the next times)
-</pre>
+# How to use
 
-- Access the openjdk-8u212 application
+Firstly get the project and checkout the correct branch
 
-> NOTE: BEFORE RUN GENERATE THE JAR FILE FROM PROJECT simple-api-demo !
+> NOTE: Check if folder mongo/MongoDB exists and is empty
 
 <pre>
-After changes in the current project and generated jar file, copy it into docker container openjdk-8u212
-and run the command "docker-compose up openjdk-8u212" to feature update or execute directly command as
-
-docker exec -it openjdk-8u212 java -jar /home/openjdk8u212/simple-api-demo/SIMPLE-API-DEMO-22.01.1-SNAPSHOT.jar
-
-request sample: [GET] http://${SERVER_IP}:31890/api/simple-api-demo
-response: OK, it is working fine !
-
+user@host$: git clone https://github.com/huntercodexs/docker-series.git .
+user@host$: git checkout java_mongodb
+user@host$: cd java_mongodb
 </pre>
 
-- POSTMAN FILE
-
-JAVA - Simple API Demo.postman_collection.json
-
-- HELP
-
-To install more than one version of the JDKs in your Linux environment develop, use this hints:
-
-- Download the file: jdk-8u212-linux-x64.tar.gz
-<pre>
-** Login is required **
-https://www.oracle.com/br/java/technologies/javase/javase8u211-later-archive-downloads.html
-</pre>
-
-- Unzip the file downloaded
-<pre>
-tar -xvf jdk-8u212-linux-x64.tar.gz
-jdk1.8.0_212
-</pre>
-
-- Put the folder extracted in a path used by IDE, by example IntelliJ
-<pre>
-/home/${USER}/.jdks/jdk1.8.0_212
-</pre>
-
-- Set the IDE runnable file to compile and execute the jar and java files
-<pre>
-JDK Home Path: /home/${USER}/.jdks/jdk1.8.0_212
-</pre>
-
-# MONGODB
-
-- BEFORE RUN
-
-Edit the .env file to create correctly to Mongo Express and MongoDB access.
-
-- BUILD AND RUN
+Next, set up the .env file and after make a builder to mongo database and openjdk (java)
 
 <pre>
-git clone https://github.com/huntercodexs/docker-series.git .
-cd self-containers/mongodb
-docker-compose up --build (in first time)
-docker-compose start (in the next times)
+user@host$: docker-compose up --build
+user@host$: Ctrl+C
+user@host$: docker-compose start
 </pre>
 
-- AFTER BUILD
+Output sample
 
-> Access the MongoDB Express
+<pre>
+user@host$: docker-compose ps
+    Name                   Command               State                      Ports                    
+-----------------------------------------------------------------------------------------------------
+mongo           docker-entrypoint.sh mongod      Up      0.0.0.0:27017->27017/tcp,:::27017->27017/tcp
+mongo-express   tini -- /docker-entrypoint ...   Up      0.0.0.0:38091->8081/tcp,:::38091->8081/tcp  
+openjdk-8u212   bash                             Up      0.0.0.0:38001->38001/tcp,:::38001->38001/tcp
+</pre>
+
+- MongoDB
+
+> NOTE: Edit the .env file to create correctly to Mongo Express and MongoDB access.
+
+- Access the MongoDB Express
 
 <pre>
 http://${WEBSERVER_ADDRESS}:38091/
@@ -80,11 +49,27 @@ username: ${MONGO_EXPRESS_USERNAME}
 password: ${MONGO_EXPRESS_PASSWORD}
 </pre>
 
-- Create a database: dbname
+- Create a database: demo
 
-![img.png](./midias/Mongo-Express-Dashboard.png)
+![img.png](./java_mongodb/mongodb/midias/Mongo-Express-Dashboard.png)
 
-- Create a collection: users
-- Create a documents(index): id, name
+- Create a collection: customers
+- Create a documents(index): id, name, email, age
 
-Enjoy !
+# About the sample project
+
+> Remember, the sample project is just to demonstration how work this project JAVA + MONGODB
+
+To run the sample projects contained in this project get the project files into folder sample-project, and follow the bellow:
+
+- open the project in your prefer IDE
+- run the "mvn package"
+- take the generated jar file
+- edit the application.properties file with the correct settings
+- finally put the resulted jar file and application.properties in the folder app/
+
+> TIPS: Use the "JAVA + MONGODB.postman_collection.json" POSTMAN file to make tests
+
+<pre>
+./java_oraclelinux/sample-project/java-oraclelinux/JAVA + MONGODB.postman_collection.json
+</pre>
