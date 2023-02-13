@@ -201,9 +201,31 @@ To run the sample projects contained in this project get the project files into 
 - edit the application.properties file with the correct settings
 - finally use the result files in the folder app
 
+Application Properties Sample
+
+<pre>
+# APPLICATION SETTINGS
+#-----------------------------------------------------------------------------------------------------------------------
+server.port=38001
+api.prefix=/api/v1
+server.error.whitelabel.enabled=true
+spring.main.allow-bean-definition-overriding=true
+
+# SPRING JPA CONFIG
+#-------------------------------------------------------------------------------------------------------------------
+spring.datasource.url=jdbc:postgresql://192.168.0.174:5432/postgres
+spring.datasource.username=postgres
+spring.datasource.password=pgsql1Ipw
+spring.jpa.hibernate.ddl-auto=update
+spring.jpa.show-sql=true
+spring.jpa.properties.hibernate.format_sql=true
+spring.jpa.properties.hibernate.dialect=org.hibernate.dialect.PostgreSQL9Dialect
+spring.jpa.properties.hibernate.temp.use_jdbc_metadata_defaults=false
+</pre>
+
 > TIPS: Use the "JAVA + POSTGRES.postman_collection.json" POSTMAN file to make tests
 
 <pre>
-./java_postgres/sample-project/java-mssql/JAVA + POSTGRES.postman_collection.json
+./java_postgres/sample-project/java-postgres/JAVA + POSTGRES.postman_collection.json
 </pre>
 

@@ -9,3 +9,4 @@ trash
 nodes
 node_modules
 /java_postgres/postgres/PostgresSQL/
+/java_postgres/app/application.properties

@@ -20,7 +20,7 @@ services:
             - postgres
         links:
             - postgres
-        #command: "java -jar /home/openjdk8u212/JAVA-POSTGRES-22.01.1-SNAPSHOT.jar --spring.config.location=/home/openjdk8u212/application.properties"
+        command: "java -jar /home/openjdk8u212/JAVA-POSTGRES-22.01.1-SNAPSHOT.jar --spring.config.location=/home/openjdk8u212/application.properties"
     #----------------------------------------------------------------------------------------
     postgres:
         env_file: .env
