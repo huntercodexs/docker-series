@@ -9,3 +9,4 @@ trash
 nodes
 node_modules
 /java_mongodb/mongodb/mongo/MongoDB/
+/java_mongodb/app/application.properties

@@ -1,0 +1,72 @@
+{
+	"info": {
+		"_postman_id": "897e5805-a256-4ebc-88d0-1f572d53bfbd",
+		"name": "JAVA - JAVA + DATABASES",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "LIST ALL",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://192.168.0.203:38001/api/v1/customers",
+					"protocol": "http",
+					"host": [
+						"192",
+						"168",
+						"0",
+						"203"
+					],
+					"port": "38001",
+					"path": [
+						"api",
+						"v1",
+						"customers"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "CREATE",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"name\": \"marcos\",\n    \"email\": \"marcos@email.com\",\n    \"age\": 39\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://192.168.0.203:38001/api/v1/customers",
+					"protocol": "http",
+					"host": [
+						"192",
+						"168",
+						"0",
+						"203"
+					],
+					"port": "38001",
+					"path": [
+						"api",
+						"v1",
+						"customers"
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}
