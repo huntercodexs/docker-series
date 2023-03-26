@@ -1,0 +1,23 @@
+version: "3.7"
+services:
+    
+    #----------------------------------------------------------------------------------------
+    ssl-generator:
+        env_file: .env
+        container_name: ssl-generator
+        build:
+            context: ./
+            dockerfile: ssl-generator.dockerfile
+        ports:
+            - ${SSL_GENERATOR_PORT}:35900
+        volumes:
+            - ./share/:/home/ubuntu/
+        tty: true
+        networks:
+            - default
+            - open_network
+    #----------------------------------------------------------------------------------------
+
+networks:
+    open_network:
+        external: true

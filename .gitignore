@@ -48,4 +48,5 @@ self-containers/oracle/oracleData/enterprise/**
 /self-containers/messenger/rabbitmq-3.9.8/lib/.erlang.cookie
 /self-containers/messenger/rabbitmq-3.9.8/lib/.bash_history
 /self-containers/messenger/rabbitmq-3.9.8/lib/mnesia/**
-
+/self-containers/ssl-generator/share/ssl/*.key
+/self-containers/ssl-generator/share/ssl/*.crt
