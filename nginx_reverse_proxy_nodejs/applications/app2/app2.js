@@ -3,7 +3,7 @@ const express = require('express')
 const app2 = express()
 const port = 3002
 
-app2.get('/', (req, res) => {
+app2.get('/app2', (req, res) => {
     res.send('The NodeJS App2 is running from Docker Container !---')
 })
 

@@ -1,6 +1,6 @@
 FROM node:18.7.0
 
-ENV APP_SOURCE "./app"
+ENV APP_SOURCE "./applications/app2"
 ENV DIR_APP "/home/nodejs/app"
 ENV DIR_MODULES "/home/nodejs"
 
@@ -22,7 +22,7 @@ COPY $APP_SOURCE $DIR_APP
 #SETUP USER TO RUN APP
 RUN chown nobody:nogroup $DIR_APP -R
 
-CMD ["nodemon", "app.js"]
+CMD ["nodemon", "app1.js"]
 
-EXPOSE 3000
+EXPOSE 3001
 EXPOSE 8080
