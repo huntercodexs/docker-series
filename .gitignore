@@ -48,3 +48,4 @@ self-containers/oracle/oracleData/enterprise/**
 /self-containers/messenger/rabbitmq-3.9.8/lib/.erlang.cookie
 /self-containers/messenger/rabbitmq-3.9.8/lib/.bash_history
 /self-containers/messenger/rabbitmq-3.9.8/lib/mnesia/**
+

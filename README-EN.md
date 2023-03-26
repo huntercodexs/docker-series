@@ -147,6 +147,10 @@ docker-compose unpause
   - <a href="https://github.com/huntercodexs/docker-series/tree/master/self-containers/httpd/2.4.54">2.4.54</a> ![img.png](./self-containers/files/midias/check-green.png)
 - <a href="https://github.com/huntercodexs/docker-series/tree/master/self-containers/tomcat">Tomcat</a>
   - <a href="https://github.com/huntercodexs/docker-series/tree/master/self-containers/tomcat/9.0">9.0</a> ![img.png](./self-containers/files/midias/check-green.png)
+- <a href="https://github.com/huntercodexs/docker-series/tree/master/self-containers/nexus">Nexus</a>
+  - <a href="https://github.com/huntercodexs/docker-series/tree/master/self-containers/nexus/nexus3">Nexus 3</a> ![img.png](./self-containers/files/midias/check-green.png)
+  - <a href="https://github.com/huntercodexs/docker-series/tree/master/self-containers/nexus/nexus-traefik">Nexus Traefik</a> ![img.png](./self-containers/files/midias/check-silver.png)
+- <a href="https://github.com/huntercodexs/docker-series/tree/master/self-containers/artifactory">Artifactory</a> ![img.png](./self-containers/files/midias/check-silver.png)
 
 > Mail Servers
 

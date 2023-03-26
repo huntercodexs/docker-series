@@ -1,0 +1,22 @@
+version: "3.7"
+services:
+    
+    #----------------------------------------------------------------------------------------
+    nexus3:
+        container_name: nexus3
+        image: sonatype/nexus3
+        restart: always
+        privileged: true
+        ports:
+            - ${NEXUS_PORT}:8081
+        volumes:
+            - ./nexus-data:/nexus-data
+            - ./nexus-data:/sonatype-work
+        tty: true
+        networks:
+            - open_network
+    #----------------------------------------------------------------------------------------
+
+networks:
+    open_network:
+        external: true
