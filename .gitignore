@@ -11,5 +11,5 @@ node_modules
 /elkstack792/
 /micro-services/
 sources-docker-compose.yml
-/nginx_reverse_proxy_python/applications/app1/app1env
-/nginx_reverse_proxy_python/applications/app2/app2env
+/nginx_reverse_proxy_nodejs/applications/app1/app1env
+/nginx_reverse_proxy_nodejs/applications/app2/app2env

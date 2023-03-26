@@ -1,0 +1,64 @@
+version: "3.7"
+services:
+    
+    #----------------------------------------------------------------------------------------
+    nginx_nodejs:
+        env_file: .env
+        container_name: nginx_nodejs
+        build:
+            context: .
+            dockerfile: nginx-ubuntu2004.dockerfile
+        privileged: true
+        ports:
+            - ${NGINX_PORT}:85
+        volumes:
+            - ./server/etc/nginx/nginx.conf:/etc/nginx/nginx.conf
+            - ./server/etc/nginx/proxy.conf:/etc/nginx/proxy.conf
+            - ./server/etc/nginx/fastcgi.conf:/etc/nginx/fastcgi.conf
+            - ./server/etc/nginx/mime.types:/etc/nginx/mime.types
+            - ./server/etc/nginx/conf.d/:/etc/nginx/conf.d/
+            - ./server/etc/nginx/sites-available/:/etc/nginx/sites-available/
+            - ./server/etc/nginx/sites-enabled/:/etc/nginx/sites-enabled/
+            - ./server/etc/nginx/logs/:/var/log/nginx/
+            - ./server/htdocs/:/var/www/htdocs/
+            - ./applications/:/home/nodejs/applications/
+        working_dir: /home/nodejs/applications
+        tty: true
+        networks:
+            - open_network
+    #----------------------------------------------------------------------------------------
+    nodejs_app1:
+        env_file: .env
+        #image: node
+        build:
+            context: ./
+            dockerfile: nodejs_app1.dockerfile
+        container_name: nodejs_app1
+        ports:
+            - ${NODEJS_PORT1}:3001
+        volumes:
+            - ./applications/app1:/home/nodejs/app
+        tty: true
+        networks:
+            - open_network
+    #----------------------------------------------------------------------------------------
+    nodejs_app2:
+        env_file: .env
+        #image: node
+        build:
+            context: ./
+            dockerfile: nodejs_app2.dockerfile
+        container_name: nodejs_app2
+        ports:
+            - ${NODEJS_PORT2}:3002
+        volumes:
+            - ./applications/app2:/home/nodejs/app
+        tty: true
+        networks:
+            - open_network
+    #----------------------------------------------------------------------------------------
+    
+networks:
+    open_network:
+        external: true
+        

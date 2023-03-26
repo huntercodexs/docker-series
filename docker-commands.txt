@@ -32,5 +32,5 @@ curl localhost:9200
 telnet localhost 5000
 
 # Kibana Links
-http://localhost:5601/app/home#/
-http://localhost:5601/app/dev_tools#/console
+http://localhost:5601/app1/home#/
+http://localhost:5601/app1/dev_tools#/console

@@ -1,6 +1,6 @@
 FROM ubuntu:20.04
 
-ENV DIR_APPS "/home/python3/applications"
+ENV DIR_APPS "/home/nodejs/applications"
 
 RUN mkdir -p $DIR_APPS
 RUN chmod 777 $DIR_APPS
@@ -57,18 +57,6 @@ COPY ./server/htdocs/ /var/www/htdocs/
 COPY ./applications/ $DIR_APPS/
 
 RUN useradd --no-create-home nginx
-
-#------------------------------------------------------------------------------------------------------
-## PYTHON-3
-#------------------------------------------------------------------------------------------------------
-RUN apt install -y python3-pip python3-dev build-essential libssl-dev libffi-dev python3-setuptools
-RUN apt install -y python3-venv
-
-# TRY START APPLICATIONS
-COPY ./applications/applications-deploy.sh /usr/bin/applications-deploy
-
-USER root
-RUN applications-deploy
 
 #------------------------------------------------------------------------------------------------------
 ## FINISHED SETTINGS
