@@ -58,10 +58,11 @@ Configure Nginx
 
 <pre>
     server_name huntercodexs.com;
-	listen 443 ssl default_server;
-	listen [::]:443 ssl default_server;
-	ssl_certificate /etc/nginx/ssl/huntercodexs.crt;
-	ssl_certificate_key /etc/nginx/ssl/nginx.key;
+    listen 443 ssl default_server;
+    listen [::]:443 ssl default_server;
+
+    ssl_certificate /etc/nginx/ssl/huntercodexs.crt;
+    ssl_certificate_key /etc/nginx/ssl/nginx.key;
 </pre>
 
 Restart Nginx
