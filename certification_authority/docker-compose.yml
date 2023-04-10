@@ -13,7 +13,7 @@ services:
         ports:
             - ${CA_SERVER_PORT}:35900
         volumes:
-            - ./share/:/home/causer/
+            - ./share/:/home/causer/share/
         tty: true
         networks:
             - default
