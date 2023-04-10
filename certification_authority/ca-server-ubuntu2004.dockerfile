@@ -58,6 +58,8 @@ RUN echo 'set_var EASYRSA_DIGEST         "sha512"' >> vars
 RUN echo -ne '.\n' | ./easyrsa build-ca nopass
 # Share the ca file in tmp folder path
 RUN cat $CADIR/pki/ca.crt >> /tmp/ca.crt
+RUN chmod 700 -R $CADIR
+RUN chown causer:causer -R $CADIR
 RUN ls
 RUN echo "EASY RSA FINISHED........................................................."
 
