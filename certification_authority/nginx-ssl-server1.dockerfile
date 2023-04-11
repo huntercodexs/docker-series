@@ -23,6 +23,7 @@ RUN apt install build-essential -y \
 
 # NGINX
 RUN apt-get install nginx -y
+RUN adduser nginx
 
 # LIBS
 RUN apt install openssl -y

@@ -19,6 +19,7 @@ user@server: docker network create open_network (if required)
 Access the CA SERVER and execute the procedures below
 
 <pre>
+user@server: docker-compose start
 user@server: docker exec -it caserver /bin/bash
 </pre>
 
@@ -28,6 +29,7 @@ Get the ca.crt file in the CA SERVER
 
 <pre>
 user@server: ls /tmp/ca.crt
+user@server: cp /tmp/ca.crt /home/causer/share/easy-rsa/
 </pre>
 
 Get access to NGINX SERVER
@@ -69,26 +71,30 @@ user@server: ls /home/causer/easy-rsa/pki/issued/$NGINX_SSL_1_COMMON_NAME.crt
 Set up the webserver (NGINX)
 
 <pre>
-copied from CA SERVER /tmp/ca.crt
-copied from CA SERVER /tmp/$NGINX_SSL_1_COMMON_NAME.crt
+
+# copied from CA SERVER /tmp/ca.crt
+# copied from CA SERVER /tmp/$NGINX_SSL_1_COMMON_NAME.crt
+
 user@server: cp /tmp/pki/ca.crt /etc/nginx/ssl/
 user@server: cp /tmp/$NGINX_SSL_1_COMMON_NAME.crt /etc/nginx/ssl/
 user@server: cat /etc/nginx/ssl/$NGINX_SSL_1_COMMON_NAME.crt /etc/nginx/ssl/ca.crt >> /etc/nginx/ssl/$NGINX_SSL_1_COMMON_NAME.chained.crt
 user@server: chmod 600 -R /etc/nginx/ssl/
 user@server: sudo vi /etc/nginx/sites-available/$NGINX_SSL_1_COMMON_NAME (ex: huntercodexs.local)
 
+
 server {
     listen 443;
     listen [::]:443;
     server_name huntercodexs.local;
     client_max_body_size 20M;
- 
-    ssl on;
-    ssl_certificate /etc/nginx/ssl/$NGINX_SSL_1_COMMON_NAME.chained.crt;
-    ssl_certificate_key /etc/nginx/ssl/$NGINX_SSL_1_COMMON_NAME.key;    
-    ssl_protocols TLSv1 TLSv1.1 TLSv1.2; 
-    ssl_prefer_server_ciphers on;
-    ssl_ciphers 'EECDH+AESGCM:EDH+AESGCM:AES256+EECDH:AES256+EDH';
+
+    #uncomment these line
+    #ssl on;
+    #ssl_certificate /etc/nginx/ssl/$NGINX_SSL_1_COMMON_NAME.chained.crt;
+    #ssl_certificate_key /etc/nginx/ssl/$NGINX_SSL_1_COMMON_NAME.key;    
+    #ssl_protocols TLSv1 TLSv1.1 TLSv1.2; 
+    #ssl_prefer_server_ciphers on;
+    #ssl_ciphers 'EECDH+AESGCM:EDH+AESGCM:AES256+EECDH:AES256+EDH';
 }
 
 user@server: sudo service nginx restart
