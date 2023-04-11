@@ -1,5 +1,6 @@
 FROM ubuntu:20.04
 
+# SERVER SETTINGS (ENV)
 ARG CA_SERVER_COUNTRY
 ARG CA_SERVER_PROVINCE
 ARG CA_SERVER_CITY
@@ -8,9 +9,9 @@ ARG CA_SERVER_EMAIL
 ARG CA_SERVER_ORGANIZATION_UNIT_NAME
 ARG CA_SERVER_ALGORITHM
 ARG CA_SERVER_DIGEST
-
 ENV HOMEDIR=/home/causer
 ENV CADIR=$HOMEDIR/easy-rsa
+
 ENV TZ=America/Sao_Paulo
 RUN ln -snf /usr/share/zoneinfo/$TZ /etc/localtime && echo $TZ > /etc/timezone
 
@@ -67,6 +68,7 @@ RUN echo 'set_var EASYRSA_REQ_OU         "$CA_SERVER_ORGANIZATION_UNIT_NAME"' >>
 RUN echo 'set_var EASYRSA_ALGO           "$CA_SERVER_ALGORITHM"' >> vars
 RUN echo 'set_var EASYRSA_DIGEST         "$CA_SERVER_DIGEST"' >> vars
 RUN echo -ne '.\n' | ./easyrsa build-ca nopass
+
 # Share the ca file in tmp folder path
 RUN cat $CADIR/pki/ca.crt >> /tmp/ca.crt
 RUN chmod 700 -R $CADIR

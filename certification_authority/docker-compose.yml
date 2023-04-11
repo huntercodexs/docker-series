@@ -41,14 +41,15 @@ services:
                 NGINX_SSL_1_CITY: ${NGINX_SSL_1_CITY}
                 NGINX_SSL_1_ORGANIZATION: ${NGINX_SSL_1_ORGANIZATION}
                 NGINX_SSL_1_ORGANIZATION_UNIT_NAME: ${NGINX_SSL_1_ORGANIZATION_UNIT_NAME}
-                NGINX_SSL_1_COMMOM_NAME: ${NGINX_SSL_1_COMMOM_NAME}
+                NGINX_SSL_1_COMMON_NAME: ${NGINX_SSL_1_COMMON_NAME}
                 NGINX_SSL_1_EMAIL_ADDRESS: ${NGINX_SSL_1_EMAIL_ADDRESS}
         ports:
             - ${NGINX_SSL_1_HTTP_PORT}:80
             - ${NGINX_SSL_1_HTTPS_PORT}:443
         volumes:
             - ./share/:/home/ubuntu/
-            - ./nginx/:/etc/nginx/
+            - ./app1/:/var/www/app
+            - ./nginx-ssl-server-1/:/etc/nginx/
         tty: true
         networks:
             open_network:
