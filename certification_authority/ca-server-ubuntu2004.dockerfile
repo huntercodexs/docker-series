@@ -59,6 +59,7 @@ RUN cd $CADIR/
 RUN ./easyrsa init-pki
 RUN touch vars
 RUN ls
+
 RUN echo 'set_var EASYRSA_REQ_COUNTRY    "$CA_SERVER_COUNTRY"' > varsx
 RUN echo 'set_var EASYRSA_REQ_PROVINCE   "$CA_SERVER_PROVINCE"' >> vars
 RUN echo 'set_var EASYRSA_REQ_CITY       "$CA_SERVER_CITY"' >> vars
@@ -67,7 +68,8 @@ RUN echo 'set_var EASYRSA_REQ_EMAIL      "$CA_SERVER_EMAIL"' >> vars
 RUN echo 'set_var EASYRSA_REQ_OU         "$CA_SERVER_ORGANIZATION_UNIT_NAME"' >> vars
 RUN echo 'set_var EASYRSA_ALGO           "$CA_SERVER_ALGORITHM"' >> vars
 RUN echo 'set_var EASYRSA_DIGEST         "$CA_SERVER_DIGEST"' >> vars
-RUN echo -ne '.\n' | ./easyrsa build-ca nopass
+
+RUN echo "$CA_SERVER_ORG\n" | ./easyrsa build-ca nopass
 
 # Share the ca file in tmp folder path
 RUN cat $CADIR/pki/ca.crt >> /tmp/ca.crt

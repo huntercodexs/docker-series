@@ -32,3 +32,27 @@ ls -ltr /etc/nginx/ssl/huntercodexs.local.key;
 nginx help
 nginx -help
 nginx --help
+ls -ltr
+ls -ltr
+cd ssl/
+ls -ltr
+cat huntercodexs.local.crt
+ls -ltr
+cat huntercodexs.local.chained.crt
+ls -ltr
+cd ..
+ls -ltr
+cat sites-enabled/huntercodexs.local 
+ls -ltr /etc/nginx/ssl/huntercodexs.local.crt
+nginx -t
+ls -ltr
+cp /home/nginx/ca.crt /etc/nginx/ssl/
+cp /home/nginx/$NGINX_SSL_1_COMMON_NAME.crt /etc/nginx/ssl/
+cd /etc/nginx/ssl/
+chmod 600 -R /etc/nginx/ssl/
+sudo chmod 600 -R /etc/nginx/ssl/
+ls -ltr
+sudo vi /etc/nginx/sites-enabled/$NGINX_SSL_1_COMMON_NAME
+vi /etc/nginx/sites-enabled/$NGINX_SSL_1_COMMON_NAME
+ls -ltr 
+ls -ltr ssl/
