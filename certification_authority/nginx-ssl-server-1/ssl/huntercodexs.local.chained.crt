@@ -1,0 +1,90 @@
+Certificate:
+    Data:
+        Version: 3 (0x2)
+        Serial Number:
+            95:6d:c4:82:c5:eb:3c:31:62:42:b4:e6:5e:87:1a:e5
+        Signature Algorithm: ecdsa-with-SHA512
+        Issuer: CN=-ne .
+        Validity
+            Not Before: Apr 12 01:31:02 2023 GMT
+            Not After : Mar 27 01:31:02 2026 GMT
+        Subject: C=BR, ST=SaoPaulo, L=Taubate, O=Huntercodexs, OU=Software-1, CN=huntercodexs.local/emailAddress=huntercodexs@gmail.com
+        Subject Public Key Info:
+            Public Key Algorithm: rsaEncryption
+                RSA Public-Key: (2048 bit)
+                Modulus:
+                    00:db:e3:6a:18:a4:96:68:81:ab:d6:de:6e:55:64:
+                    87:6f:be:c2:a1:86:b0:74:2a:b2:b4:f6:25:31:dd:
+                    72:6b:fd:49:9f:e6:24:15:c1:5c:92:ef:9e:6a:2f:
+                    13:2b:18:59:82:a4:0f:f5:a6:00:69:97:6b:dc:4f:
+                    ec:94:a3:fb:e7:97:a0:38:2c:63:49:ac:e4:89:a6:
+                    bb:94:6f:46:75:08:f8:b3:e6:7c:31:2a:e3:59:c5:
+                    e3:85:eb:c0:18:b5:38:d0:29:6d:91:fa:36:fd:a5:
+                    5c:14:7a:17:89:52:7e:31:09:c2:6a:89:b6:f4:0b:
+                    58:f4:2b:2a:3c:25:c0:e6:b4:25:2b:5f:31:dc:4c:
+                    9b:0e:09:bb:4c:83:3b:59:b6:12:f7:5e:8c:cf:86:
+                    a2:db:c1:7f:5f:9a:e8:84:c9:ad:5f:0a:76:40:22:
+                    f7:6f:24:43:6b:b5:e6:76:19:65:7f:32:5c:c6:73:
+                    28:33:aa:0b:2c:35:23:95:23:91:45:a7:43:2a:f2:
+                    a5:86:8d:be:dc:3a:bf:11:2c:76:b9:02:6b:b7:ab:
+                    45:1d:c7:f2:00:48:9a:df:c7:48:66:05:c0:e6:c9:
+                    a7:3f:6e:29:dd:78:51:b7:a2:4d:e9:20:41:10:a1:
+                    37:c6:4b:39:ae:9a:b7:e9:be:52:d4:e8:5a:36:8f:
+                    ba:47
+                Exponent: 65537 (0x10001)
+        X509v3 extensions:
+            X509v3 Basic Constraints: 
+                CA:FALSE
+            X509v3 Subject Key Identifier: 
+                F5:C2:0A:59:36:EF:96:74:35:79:B3:CE:F0:50:45:09:FE:12:74:DA
+            X509v3 Authority Key Identifier: 
+                keyid:40:53:C9:3B:B5:8D:4D:BA:AD:E2:92:FE:1E:E8:E6:B9:CC:31:47:D1
+                DirName:/CN=-ne .
+                serial:0C:E8:08:2F:08:DD:09:48:D6:29:36:1E:BF:ED:AC:14:AE:7B:38:0F
+
+            X509v3 Extended Key Usage: 
+                TLS Web Server Authentication
+            X509v3 Key Usage: 
+                Digital Signature, Key Encipherment
+            X509v3 Subject Alternative Name: 
+                DNS:huntercodexs.local
+    Signature Algorithm: ecdsa-with-SHA512
+         30:65:02:30:56:ee:55:4b:a2:34:b5:02:e3:32:7c:50:0a:ee:
+         61:d1:92:e5:e7:4a:fd:83:d8:94:89:bb:fb:23:5e:98:f7:68:
+         a1:96:6a:06:28:36:99:ba:ab:a0:1f:74:dd:d9:d3:de:02:31:
+         00:db:86:72:6e:44:cf:e1:51:d9:90:a5:e8:57:a1:95:6f:e7:
+         5e:6d:b9:61:e0:47:b7:1d:a7:36:7f:a5:f8:b3:0f:77:4d:95:
+         62:2d:a7:74:8c:42:27:27:1d:f2:96:63:31
+-----BEGIN CERTIFICATE-----
+MIIDWTCCAt+gAwIBAgIRAJVtxILF6zwxYkK05l6HGuUwCgYIKoZIzj0EAwQwEDEO
+MAwGA1UEAwwFLW5lIC4wHhcNMjMwNDEyMDEzMTAyWhcNMjYwMzI3MDEzMTAyWjCB
+ojELMAkGA1UEBhMCQlIxETAPBgNVBAgMCFNhb1BhdWxvMRAwDgYDVQQHDAdUYXVi
+YXRlMRUwEwYDVQQKDAxIdW50ZXJjb2RleHMxEzARBgNVBAsMClNvZnR3YXJlLTEx
+GzAZBgNVBAMMEmh1bnRlcmNvZGV4cy5sb2NhbDElMCMGCSqGSIb3DQEJARYWaHVu
+dGVyY29kZXhzQGdtYWlsLmNvbTCCASIwDQYJKoZIhvcNAQEBBQADggEPADCCAQoC
+ggEBANvjahiklmiBq9beblVkh2++wqGGsHQqsrT2JTHdcmv9SZ/mJBXBXJLvnmov
+EysYWYKkD/WmAGmXa9xP7JSj++eXoDgsY0ms5Immu5RvRnUI+LPmfDEq41nF44Xr
+wBi1ONApbZH6Nv2lXBR6F4lSfjEJwmqJtvQLWPQrKjwlwOa0JStfMdxMmw4Ju0yD
+O1m2EvdejM+GotvBf1+a6ITJrV8KdkAi928kQ2u15nYZZX8yXMZzKDOqCyw1I5Uj
+kUWnQyrypYaNvtw6vxEsdrkCa7erRR3H8gBImt/HSGYFwObJpz9uKd14UbeiTekg
+QRChN8ZLOa6at+m+UtToWjaPukcCAwEAAaOBuzCBuDAJBgNVHRMEAjAAMB0GA1Ud
+DgQWBBT1wgpZNu+WdDV5s87wUEUJ/hJ02jBLBgNVHSMERDBCgBRAU8k7tY1Nuq3i
+kv4e6Oa5zDFH0aEUpBIwEDEOMAwGA1UEAwwFLW5lIC6CFAzoCC8I3QlI1ik2Hr/t
+rBSuezgPMBMGA1UdJQQMMAoGCCsGAQUFBwMBMAsGA1UdDwQEAwIFoDAdBgNVHREE
+FjAUghJodW50ZXJjb2RleHMubG9jYWwwCgYIKoZIzj0EAwQDaAAwZQIwVu5VS6I0
+tQLjMnxQCu5h0ZLl50r9g9iUibv7I16Y92ihlmoGKDaZuqugH3Td2dPeAjEA24Zy
+bkTP4VHZkKXoV6GVb+debblh4Ee3Hac2f6X4sw93TZViLad0jEInJx3ylmMx
+-----END CERTIFICATE-----
+-----BEGIN CERTIFICATE-----
+MIIB6TCCAXCgAwIBAgIUDOgILwjdCUjWKTYev+2sFK57OA8wCgYIKoZIzj0EAwQw
+EDEOMAwGA1UEAwwFLW5lIC4wHhcNMjMwNDEyMDAwNzU0WhcNMzMwNDA5MDAwNzU0
+WjAQMQ4wDAYDVQQDDAUtbmUgLjB2MBAGByqGSM49AgEGBSuBBAAiA2IABGKrqaW7
+flYsm/cAJk6WKTiDI0Hrbiz+e/QB9J7QoU+y1fh54t5MdVrAyLLju/OrxaE7JUOK
+FJyrcGirTfH/64fGtuHi1ZKEntZFjAS1pKA//ARw4W/ccRiJim+YoRu366OBijCB
+hzAdBgNVHQ4EFgQUQFPJO7WNTbqt4pL+HujmucwxR9EwSwYDVR0jBEQwQoAUQFPJ
+O7WNTbqt4pL+HujmucwxR9GhFKQSMBAxDjAMBgNVBAMMBS1uZSAughQM6AgvCN0J
+SNYpNh6/7awUrns4DzAMBgNVHRMEBTADAQH/MAsGA1UdDwQEAwIBBjAKBggqhkjO
+PQQDBANnADBkAjByqUmz8qS0u/9evwnMNDWcD4SyIVtpvvj2KPtjT0VwhGqqn0t6
+RN6+B4a+6U8muqICMG8G/1ljAnYBtZZKnlMGgic8bCVuhcQXP3K8nmY8BgyhxhJw
+nSoYKtmsDOiw20WRuA==
+-----END CERTIFICATE-----
