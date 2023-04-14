@@ -19,7 +19,17 @@ Below we have a graphic example of how the project resources work and interact
 
 > NOTE: TO execute this project just copy and paste the commands below, is not needed to make any other things
 
-Firstly, edit the .env file to create an CA SERVER information and NGINX SERVER settings, as example:
+Firstly, get the project from GitHub using git clone
+
+<pre>
+user@host: git clone https://github.com/huntercodexs/docker-series.git .
+user@host: git checkout certificate_authorities
+user@host: cd certificate_authorities/
+user@host: docker-compose up --build (in first time)
+user@host: docker-compose start (in others case)
+</pre>
+
+Now, edit the .env file to create an CA SERVER information and NGINX SERVER settings, as example:
 
 <pre>
 CA_SERVER_PORT=35900
