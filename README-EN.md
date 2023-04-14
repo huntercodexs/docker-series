@@ -131,8 +131,20 @@ docker-compose pause
 docker-compose unpause
 </pre>
 
+# How to use
 
-# Dockers Configurations Contained
+> Access the folder path /self-container in this project to run any container, by example: apache2
+
+- Steps do run
+
+<pre>
+git clone https://github.com/huntercodexs/docker-series.git .
+cd self-containers/apache2
+docker-compose up --build (in first time)
+docker-compose start (in the next times)
+</pre>
+
+# Dockers Configurations via Docker-Compose
 
 > ![img.png](./self-containers/files/midias/check-green.png) Available
 > ![img.png](./self-containers/files/midias/check-silver.png) Pending
@@ -244,15 +256,29 @@ docker-compose unpause
   - <a href="https://github.com/huntercodexs/docker-series/tree/master/self-containers/messenger/rabbitmq-3.9.8">RabbitMQ 3.9.8 (Official)</a> ![img.png](./self-containers/files/midias/check-green.png)
 - <a href="https://github.com/huntercodexs/docker-series/tree/master/self-containers/ssl-generator">SSL Generator</a> ![img.png](./self-containers/files/midias/check-green.png)
 
-# How to use
+# Pre-Configured Environments
 
-> Access the folder path /self-container in this project to run any container, by example: apache2 
-
-- Steps do run
-
-<pre>
-git clone https://github.com/huntercodexs/docker-series.git .
-cd self-containers/apache2
-docker-compose up --build (in first time)
-docker-compose start (in the next times)
-</pre>
+- <a href="https://github.com/huntercodexs/docker-series/tree/apache2_php8">Apache2 + PHP8</a> ![img.png](./self-containers/files/midias/check-green.png)
+- <a href="https://github.com/huntercodexs/docker-series/tree/certificate_authorities">Certificate Authorities</a> ![img.png](./self-containers/files/midias/check-green.png)
+- <a href="https://github.com/huntercodexs/docker-series/tree/ec2_java_mysql_rabbitmq">EC2 Java + Mysql + Rabbit</a> ![img.png](./self-containers/files/midias/check-green.png)
+- <a href="https://github.com/huntercodexs/docker-series/tree/elk_prometheus_grafana_v1">ELK + Prometheus + Grafana</a> ![img.png](./self-containers/files/midias/check-green.png)
+- <a href="https://github.com/huntercodexs/docker-series/tree/elk_prometheus_grafana_zipkin_mysql_v1">ELK + Prometheus + Grafana + Zipkin + Mysql</a> ![img.png](./self-containers/files/midias/check-green.png)
+- <a href="https://github.com/huntercodexs/docker-series/tree/elk_prometheus_grafana_zipkin_v1">ELK + Prometheus + Grafana + Zipkin</a> ![img.png](./self-containers/files/midias/check-green.png)
+- <a href="https://github.com/huntercodexs/docker-series/tree/elk_zipkin_v1">ELK + Zipkin</a> ![img.png](./self-containers/files/midias/check-green.png)
+- <a href="https://github.com/huntercodexs/docker-series/tree/httpd_php8_databases_separated">HTTPD + PHP8 + DATABASES</a> ![img.png](./self-containers/files/midias/check-green.png)
+- <a href="https://github.com/huntercodexs/docker-series/tree/httpd_php8_reverse_proxy">HTTPD + PHP8 + REVERSE_PROXY</a> ![img.png](./self-containers/files/midias/check-green.png)
+- <a href="https://github.com/huntercodexs/docker-series/tree/httpd_php8_separated">HTTPD + PHP8</a> ![img.png](./self-containers/files/midias/check-green.png)
+- <a href="https://github.com/huntercodexs/docker-series/tree/java_mongodb">JAVA + MONGODB</a> ![img.png](./self-containers/files/midias/check-green.png)
+- <a href="https://github.com/huntercodexs/docker-series/tree/java_mssql">JAVA + MSSQL</a> ![img.png](./self-containers/files/midias/check-green.png)
+- <a href="https://github.com/huntercodexs/docker-series/tree/java_oraclelinux">JAVA + ORACLE</a> ![img.png](./self-containers/files/midias/check-green.png)
+- <a href="https://github.com/huntercodexs/docker-series/tree/java_postgres">JAVA + POSTGRES</a> ![img.png](./self-containers/files/midias/check-green.png)
+- <a href="https://github.com/huntercodexs/docker-series/tree/nginx_php8_mysql">NGINX + PHP8 + MYSQL</a> ![img.png](./self-containers/files/midias/check-green.png)
+- <a href="https://github.com/huntercodexs/docker-series/tree/nginx_php8">NGINX + PHP8</a> ![img.png](./self-containers/files/midias/check-green.png)
+- <a href="https://github.com/huntercodexs/docker-series/tree/nginx_reverse_proxy_java">NGINX WITH REVERSE PROXY + JAVA</a> ![img.png](./self-containers/files/midias/check-green.png)
+- <a href="https://github.com/huntercodexs/docker-series/tree/nginx_reverse_proxy_nodejs">NGINX WITH REVERSE PROXY + NODEJS</a> ![img.png](./self-containers/files/midias/check-green.png)
+- <a href="https://github.com/huntercodexs/docker-series/tree/nginx_reverse_proxy_php8">NGINX WITH REVERSE PROXY + PHP8</a> ![img.png](./self-containers/files/midias/check-green.png)
+- <a href="https://github.com/huntercodexs/docker-series/tree/nginx_reverse_proxy_python">NGINX WITH REVERSE PROXY + PYTHON</a> ![img.png](./self-containers/files/midias/check-green.png)
+- <a href="https://github.com/huntercodexs/docker-series/tree/nginx_reverse_proxy">NGINX WITH REVERSE PROXY</a> ![img.png](./self-containers/files/midias/check-green.png)
+- <a href="https://github.com/huntercodexs/docker-series/tree/openjdk8_212_mysql8">OPENJDK8 + MYSQL8</a> ![img.png](./self-containers/files/midias/check-green.png)
+- <a href="https://github.com/huntercodexs/docker-series/tree/php8_apache_mysql">PHP8 + APACHE + MYSQL</a> ![img.png](./self-containers/files/midias/check-green.png)
+- <a href="https://github.com/huntercodexs/docker-series/tree/php8_apache">PHP8 + APACHE</a> ![img.png](./self-containers/files/midias/check-green.png)
