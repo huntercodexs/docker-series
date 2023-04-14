@@ -1,12 +1,69 @@
-# CERTIFICATION AUTHORITY
-
+# CERTIFICATE AUTHORITIES
+A project to simulate a complete environment using SSL layer - HTTPS Protocol
 
 # Information
 
-![ssl-project-demo.png](./certification_authority/midias/ssl-project-demo.png)
+This project aims to offer a viable means for testing during development and
+the preparation of applications that use end-to-end encryption in their communications. At the end of
+project it will be possible to run a complete environment simulating a private network controlled by
+certificates and a certification authority, in addition to ensuring that an application that needs to use
+the TLS/SSL layer can be run for testing purposes.
 
+> IMPORTANT: This project should not be used in a production environment
 
-# How to use
+Below we have a graphic example of how the project resources work and interact
+
+![ssl-project-demo.png](./certification_authority/midias/ssl-project-demo-CA-Server.png)
+
+# Usage
+
+> NOTE: TO execute this project just copy and paste the commands below, is not needed to make any other things
+
+Firstly, edit the .env file to create an CA SERVER information and NGINX SERVER settings, as example:
+
+<pre>
+CA_SERVER_PORT=35900
+CA_SERVER_COUNTRY=BR
+CA_SERVER_PROVINCE=SaoPaulo
+CA_SERVER_CITY=Taubate
+CA_SERVER_ORG=Huntercodexs
+CA_SERVER_EMAIL=huntercodexs@gmail.com
+CA_SERVER_ORGANIZATION_UNIT_NAME=Softwares
+CA_SERVER_ALGORITHM=ec
+CA_SERVER_DIGEST=sha512
+
+# SETUP NGINX SSL SERVER 1
+NGINX_SSL_1_HTTP_PORT=38080
+NGINX_SSL_1_HTTPS_PORT=33443
+NGINX_SSL_1_COUNTRY=BR
+NGINX_SSL_1_STATE=SaoPaulo
+NGINX_SSL_1_CITY=Taubate
+NGINX_SSL_1_ORGANIZATION=Huntercodexs
+NGINX_SSL_1_ORGANIZATION_UNIT_NAME=Nginx-Server-Ssl-1
+NGINX_SSL_1_COMMON_NAME=huntercodexs.local
+NGINX_SSL_1_EMAIL_ADDRESS=huntercodexs@gmail.com
+</pre>
+
+It's possible to use many servers as needed, just pay attention in the following files:
+
+<pre>
+.env
+docker-compose.yml
+nginx-ssl-server{NUMBER-SERVER}.dockerfile
+</pre>
+
+# Lets to get started (commands)
+
+In the first time you should be warrantied that all the folders path are been empty without 
+crt, req, csr or key certificate files, so you can use the script reset.sh placed in the 
+root in this project.
+
+<pre>
+./certification_authority/reset.sh
+or
+cd certification_authority/
+./reset.sh
+</pre>
 
 Run the container
 
@@ -99,6 +156,7 @@ causer@caserver: cp /home/nginx/$NGINX_SSL_1_COMMON_NAME.crt /etc/nginx/ssl/
 causer@caserver: cp /tmp/$NGINX_SSL_1_COMMON_NAME.key /etc/nginx/ssl/
 causer@caserver: cd /etc/nginx/ssl/
 causer@caserver: cat /etc/nginx/ssl/$NGINX_SSL_1_COMMON_NAME.crt /etc/nginx/ssl/ca.crt >> /etc/nginx/ssl/$NGINX_SSL_1_COMMON_NAME.chained.crt
+causer@caserver: su root
 causer@caserver: chmod 755 -R /etc/nginx/ssl/
 </pre>
 
@@ -145,12 +203,6 @@ Edit the /etc/hosts
 {IP-ADDRESS}	{DOMAIN-NAME} #Example: huntercodexs.local
 </pre>
 
-Get access to app running in NGINX
-
-<pre>
-https://{ADDRESS}:{PORT}
-</pre>
-
 If needed revoke the CA use
 
 <pre>
@@ -158,4 +210,37 @@ user@host: docker exec -it caserver /bin/bash
 causer@caserver: cd /home/causer/easy-rsa
 causer@caserver: ./easyrsa revoke $NGINX_SSL_1_COMMON_NAME
 </pre>
+
+# Browsers - Firefox Configure
+
+If you are used the Mozilla Firefox to access the application in the webserver, you needed 
+to do the follow settings
+
+- Get the ca.crt certificate file from CA SERVER
+- Click in Edit (menu bar)
+- Choose Settings
+- CLick in Privacy and Security (manu bar left side)
+- Scroll the screen until  Security->Certificates
+- Click in See certificates
+- Go to the tab Authorities
+- Click in Import
+- Select the ca.crt certificate file (from the CA SERVER)
+- Click in OK to import the certificate file
+- Check if is required to import the ca.crt certificate file in the local machine or others servers (user@host)
+- So, just enjoy the environment using HTTPS protocol
+
+Get access to app running in NGINX
+
+<pre>
+https://{ADDRESS}:{PORT} #Example: https://huntercodexs.local:33443
+https://{ADDRESS}:{PORT} #Example: https://huntercodexs.local:33443/contact.html
+
+#Non HTTPS
+http://{ADDRESS}:{PORT} #Example: http://huntercodexs.local:38080
+http://{ADDRESS}:{PORT} #Example: http://huntercodexs.local:38080/contact.html
+</pre>
+
+# Specific SSL process - GoDaddy
+
+![ssl-project-demo.png](./certification_authority/midias/ssl-project-demo-GoDaddy.png)
 

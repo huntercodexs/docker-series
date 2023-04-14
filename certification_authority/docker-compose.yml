@@ -47,7 +47,8 @@ services:
             - ${NGINX_SSL_1_HTTP_PORT}:80
             - ${NGINX_SSL_1_HTTPS_PORT}:443
         volumes:
-            - ./app1/:/var/www/app
+            - ./app1/:/var/www/app1
+            - ./app2/:/var/www/app2
             - ./share/nginx-ssl-1/:/home/nginx/
             - ./nginx-ssl-server-1/:/etc/nginx/
         tty: true

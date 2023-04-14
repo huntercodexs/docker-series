@@ -23,3 +23,5 @@ rm -rfv ./nginx-ssl-server-1/ssl/*.crt
 rm -rfv ./nginx-ssl-server-1/ssl/*.csr
 rm -rfv ./nginx-ssl-server-1/ssl/*.req
 rm -rfv ./nginx-ssl-server-1/ssl/*.key
+
+echo "OK !"

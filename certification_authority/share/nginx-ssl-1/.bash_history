@@ -63,3 +63,10 @@ cp /tmp/$NGINX_SSL_1_COMMON_NAME.key /etc/nginx/ssl/
 cd /etc/nginx/ssl/
 cat /etc/nginx/ssl/$NGINX_SSL_1_COMMON_NAME.crt /etc/nginx/ssl/ca.crt >> /etc/nginx/ssl/$NGINX_SSL_1_COMMON_NAME.chained.crt
 chmod 755 -R /etc/nginx/ssl/
+cp /home/nginx/ca.crt /etc/nginx/ssl/
+cp /home/nginx/$NGINX_SSL_1_COMMON_NAME.crt /etc/nginx/ssl/
+cp /tmp/$NGINX_SSL_1_COMMON_NAME.key /etc/nginx/ssl/
+cd /etc/nginx/ssl/
+cat /etc/nginx/ssl/$NGINX_SSL_1_COMMON_NAME.crt /etc/nginx/ssl/ca.crt >> /etc/nginx/ssl/$NGINX_SSL_1_COMMON_NAME.chained.crt
+ls -ltr
+chmod 755 -R /etc/nginx/ssl/
