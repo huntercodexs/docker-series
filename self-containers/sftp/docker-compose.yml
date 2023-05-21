@@ -2,21 +2,20 @@ version: "3.7"
 services:
     
     #----------------------------------------------------------------------------------------
-    ftp-server:
+    sftp-server:
         env_file: .env
-        container_name: ftp-server
+        container_name: sftp-server
         build:
             context: ./
-            dockerfile: ftp-server.dockerfile
+            dockerfile: sftp-server.dockerfile
         ports:
-            - ${FTP_HOST_PORT}:22
+            - ${SFTP_HOST_PORT}:${SFTP_PORT}
         volumes:
-            - ./uploads/:/home/foo/upload
+            - ./uploads/:${SFTP_PATH}
         tty: true
         networks:
-            - default
             - open_network
-        command: foo:pass:1001
+        command: ${SFTP_USER}:${SFTP_PASS}:${SFTP_UID}
     #----------------------------------------------------------------------------------------
 
 networks:
