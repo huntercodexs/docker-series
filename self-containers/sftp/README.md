@@ -1,10 +1,10 @@
-# FTP SERVER
+# SFTP SERVER
 
-- How to run ftp from this project use
+- How to run sftp from this project use
 
 <pre>
 git clone https://github.com/huntercodexs/docker-series.git .
-cd self-containers/ubuntu/ftp
+cd self-containers/sftp
 docker-compose up --build (in first time)
 docker-compose start (in the next times)
 </pre>
