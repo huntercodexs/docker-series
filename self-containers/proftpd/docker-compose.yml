@@ -1,0 +1,30 @@
+version: "3.7"
+services:
+    
+    #----------------------------------------------------------------------------------------
+    proftpd-server:
+        env_file: .env
+        container_name: proftpd-server
+        build:
+            context: ./
+            dockerfile: proftpd-server.dockerfile
+            args:
+                PROFTPD_PORT: ${PROFTPD_PORT}
+                PROFTPD_GROUP: ${PROFTPD_GROUP}
+                PROFTPD_USER: ${PROFTPD_USER}
+                PROFTPD_PASS: ${PROFTPD_PASS}
+                PROFTPD_UID: ${PROFTPD_UID}
+                PROFTPD_PATH: ${PROFTPD_PATH}
+                PROFTPD_SHELL: ${PROFTPD_SHELL}
+        ports:
+            - ${PROFTPD_HOST_PORT}:${PROFTPD_PORT}
+        volumes:
+            - ./shared/:/home/ubuntu/shared/
+        tty: true
+        networks:
+            - open_network
+    #----------------------------------------------------------------------------------------
+
+networks:
+    open_network:
+        external: true
