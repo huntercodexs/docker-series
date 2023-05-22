@@ -8,11 +8,11 @@ Access the .env file and change the following parameters
 PROFTPD_HOST_PORT=35021
 PROFTPD_SERVER_NAME=PROFTPD-SERVER-LOCAL
 PROFTPD_PORT=21
-PROFTPD_GROUP=sftp-group
-PROFTPD_USER=sftp-user
-PROFTPD_PASS=sftp-pass
+PROFTPD_GROUP=proftpd-group
+PROFTPD_USER=proftpd-user
+PROFTPD_PASS=proftpd-pass
 PROFTPD_UID=1001
-PROFTPD_PATH=/home/sftp-user/uploads/
+PROFTPD_PATH=upload/
 PROFTPD_SHELL=/bin/bash
 </pre>
 
@@ -36,11 +36,11 @@ Creating proftpd-server ... done
 Attaching to proftpd-server
 proftpd-server    |  [DEBUG] HOST PORT  >>> 35021
 proftpd-server    |  [DEBUG] PROFTPD PORT  >>> 21
-proftpd-server    |  [DEBUG] GROUP >>> sftp-group
-proftpd-server    |  [DEBUG] USER  >>> sftp-user
-proftpd-server    |  [DEBUG] PASS  >>> sftp-pass
+proftpd-server    |  [DEBUG] GROUP >>> proftpd-group
+proftpd-server    |  [DEBUG] USER  >>> proftpd-user
+proftpd-server    |  [DEBUG] PASS  >>> proftpd-pass
 proftpd-server    |  [DEBUG] UID   >>> 1001
-proftpd-server    |  [DEBUG] PATH  >>> /home/sftp-user/uploads/
+proftpd-server    |  [DEBUG] PATH  >>> /home/proftpd-user/uploads/
 proftpd-server    |  [DEBUG] SHELL >>> /bin/bash
 proftpd-server    | Group created successfully
 proftpd-server    | User created successfully
@@ -55,7 +55,7 @@ proftpd-server    | PROFTPD IS UP
 <pre>
      Name            Command        State                   Ports                 
 ----------------------------------------------------------------------------------
-proftpd-server   create-sftp-user   Up      0.0.0.0:35021->21/tcp,:::35021->21/tcp
+proftpd-server   create-proftpd-user   Up      0.0.0.0:35021->21/tcp,:::35021->21/tcp
 </pre>
 
 - Connect to Proftpd Server using FileZilla

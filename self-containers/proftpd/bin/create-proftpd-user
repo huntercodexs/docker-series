@@ -29,6 +29,7 @@ echo " [DEBUG] SHELL >>> ${PROFTPD_SHELL}"
 }
 
 mkdir -p "/home/${PROFTPD_USER}/.ssh"
+mkdir -p "/home/${PROFTPD_USER}/${PROFTPD_PATH}"
 chown ${PROFTPD_USER}:${PROFTPD_GROUP} "/home/${PROFTPD_USER}"
 chmod 777 "/home/${PROFTPD_USER}" -R
 echo "${PROFTPD_USER}:${PROFTPD_PASS}" | chpasswd

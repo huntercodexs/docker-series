@@ -27,13 +27,12 @@ RUN apt-get upgrade -y
 
 # PROFTPD
 RUN apt install proftpd -y
-RUN mkdir -p $PROFTPD_PATH
 
 # OPENSSH
 RUN apt install openssh-server -y
 
-COPY ./bin/create-sftp-user /usr/local/bin/create-sftp-user
+COPY ./bin/create-proftpd-user /usr/local/bin/create-proftpd-user
 
 EXPOSE $PROFTPD_PORT
 
-ENTRYPOINT ["create-sftp-user"]
+ENTRYPOINT ["create-proftpd-user"]
