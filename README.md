@@ -191,6 +191,7 @@ docker-compose start (in the next times)
 - Interbase ![img.png](./self-containers/files/midias/unavailable.png)
 - <a href="https://github.com/huntercodexs/docker-series/tree/master/self-containers/mongodb">MongoDB</a> ![img.png](./self-containers/files/midias/check-green.png)
 - <a href="https://github.com/huntercodexs/docker-series/tree/master/self-containers/postgres">Postgres</a> ![img.png](./self-containers/files/midias/check-green.png)
+- <a href="https://github.com/huntercodexs/docker-series/tree/master/self-containers/h2-database">H2 Database</a> ![img.png](./self-containers/files/midias/check-green.png)
 
 > Ferramentas, Logs e Rastreadores
 

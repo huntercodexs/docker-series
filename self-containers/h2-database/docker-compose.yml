@@ -1,0 +1,38 @@
+version: "3.7"
+services:
+    
+    #----------------------------------------------------------------------------------------
+    h2-database:
+        env_file: .env
+        container_name: h2-database
+        build:
+            context: ./
+            dockerfile: h2-database.dockerfile
+            args:
+                H2DATABASE_DBNAME: ${H2DATABASE_DBNAME}
+                H2DATABASE_USERNAME: ${H2DATABASE_USERNAME}
+                H2DATABASE_GROUP: ${H2DATABASE_GROUP}
+                H2DATABASE_HOME: ${H2DATABASE_HOME}
+                H2DATABASE_VERSION: ${H2DATABASE_VERSION}
+                H2DATABASE_ZIPFILE: ${H2DATABASE_ZIPFILE}
+                H2DATABASE_HOST_PORT: ${H2DATABASE_HOST_PORT}
+                H2DATABASE_HOST_ADDITIONAL_PORT: ${H2DATABASE_HOST_ADDITIONAL_PORT}
+                H2DATABASE_HOST_TCP_PORT: ${H2DATABASE_HOST_TCP_PORT}
+                H2DATABASE_TCP_SERVER_PORT: ${H2DATABASE_TCP_SERVER_PORT}
+                H2DATABASE_HOST_HTTP_PORT: ${H2DATABASE_HOST_HTTP_PORT}
+                H2DATABASE_HTTP_SERVER_PORT: ${H2DATABASE_HTTP_SERVER_PORT}
+                H2DATABASE_ADMIN_PASSWORD: ${H2DATABASE_ADMIN_PASSWORD}
+        ports:
+            - ${H2DATABASE_HOST_PORT}:${H2DATABASE_HOST_ADDITIONAL_PORT}
+            - ${H2DATABASE_HOST_TCP_PORT}:${H2DATABASE_TCP_SERVER_PORT}
+            - ${H2DATABASE_HOST_HTTP_PORT}:${H2DATABASE_HTTP_SERVER_PORT}
+        volumes:
+            - ./share/:/home/ubuntu/share/
+        tty: true
+        networks:
+            - open_network
+    #----------------------------------------------------------------------------------------
+
+networks:
+    open_network:
+        external: true

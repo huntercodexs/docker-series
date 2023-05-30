@@ -12,6 +12,7 @@ trash
 *.csr
 *.req
 *.key
+*.csv
 nodes
 node_modules
 /docker-elk/
