@@ -57,3 +57,4 @@ self-containers/oracle/oracleData/enterprise/**
 /self-containers/messenger/rabbitmq-3.9.8/lib/mnesia/**
 /self-containers/ssl-generator/share/ssl/*.key
 /self-containers/ssl-generator/share/ssl/*.crt
+/self-containers/sftp/uploads/*.txt

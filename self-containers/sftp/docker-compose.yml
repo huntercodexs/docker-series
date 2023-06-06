@@ -12,6 +12,7 @@ services:
             - ${SFTP_HOST_PORT}:${SFTP_PORT}
         volumes:
             - ./uploads/:${SFTP_PATH}
+            - ./downloads/:${SFTP_PATH_DOWNLOAD}
         tty: true
         networks:
             - open_network
