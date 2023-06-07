@@ -18,24 +18,24 @@ services:
             - open_network
         command: ${SFTP_USER}:${SFTP_PASS}:${SFTP_UID}
     #----------------------------------------------------------------------------------------
-    oraclelinux:
-        env_file: .env
-        container_name: oraclelinux
-        build:
-            context: ./oracle/database
-            dockerfile: oraclelinux.dockerfile
-            args:
-                DB_EDITION: ${DB_EDITION}
-                ORACLE_PASSWORD: ${ORACLELINUX_PASSWORD}
-        volumes:
-            - ./oracle/share:/home/oracle/share
-            - ./oracle/oradata:/opt/oracle/oradata
-        ports:
-            - ${ORACLELINUX_PORT1}:1521
-            - ${ORACLELINUX_PORT2}:5500
-        tty: true
-        networks:
-            - open_network
+#    oraclelinux:
+#        env_file: .env
+#        container_name: oraclelinux
+#        build:
+#            context: ./oracle/database
+#            dockerfile: oraclelinux.dockerfile
+#            args:
+#                DB_EDITION: ${DB_EDITION}
+#                ORACLE_PASSWORD: ${ORACLELINUX_PASSWORD}
+#        volumes:
+#            - ./oracle/share:/home/oracle/share
+#            - ./oracle/oradata:/opt/oracle/oradata
+#        ports:
+#            - ${ORACLELINUX_PORT1}:1521
+#            - ${ORACLELINUX_PORT2}:5500
+#        tty: true
+#        networks:
+#            - open_network
     #----------------------------------------------------------------------------------------
     mysql-80:
         env_file: .env

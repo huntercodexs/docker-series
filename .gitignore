@@ -13,3 +13,6 @@ trash
 *.csv
 *.jar
 *.jar.original
+/h2_mysql_oracle_sftp_mailhog/mysql-80/lib/*
+h2_mysql_oracle_sftp_mailhog/sftp/uploads/*.txt*
+h2_mysql_oracle_sftp_mailhog/sftp/downloads/*.txt*
