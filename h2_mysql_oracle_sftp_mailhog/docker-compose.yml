@@ -6,17 +6,97 @@ services:
         env_file: .env
         container_name: sftp-server
         build:
-            context: ./
+            context: ./sftp
             dockerfile: sftp-server.dockerfile
         ports:
             - ${SFTP_HOST_PORT}:${SFTP_PORT}
         volumes:
-            - ./uploads/:${SFTP_PATH}
-            - ./downloads/:${SFTP_PATH_DOWNLOAD}
+            - ./sftp/uploads/:${SFTP_PATH}
+            - ./sftp/downloads/:${SFTP_PATH_DOWNLOAD}
         tty: true
         networks:
             - open_network
         command: ${SFTP_USER}:${SFTP_PASS}:${SFTP_UID}
+    #----------------------------------------------------------------------------------------
+    oraclelinux:
+        env_file: .env
+        container_name: oraclelinux
+        build:
+            context: ./oracle/database
+            dockerfile: oraclelinux.dockerfile
+            args:
+                DB_EDITION: ${DB_EDITION}
+                ORACLE_PASSWORD: ${ORACLELINUX_PASSWORD}
+        volumes:
+            - ./oracle/share:/home/oracle/share
+            - ./oracle/oradata:/opt/oracle/oradata
+        ports:
+            - ${ORACLELINUX_PORT1}:1521
+            - ${ORACLELINUX_PORT2}:5500
+        tty: true
+        networks:
+            - open_network
+    #----------------------------------------------------------------------------------------
+    mysql-80:
+        env_file: .env
+        image: mysql:8.0
+        container_name: mysql-80
+        ports:
+            - ${MYSQL80_PORT}:3306
+        volumes:
+            - ./mysql-80/lib:/var/lib/mysql/
+        environment:
+            MYSQL_DATABASE: ${MYSQL80_DATABASE}
+            MYSQL_USERNAME: ${MYSQL80_USERNAME}
+            MYSQL_PASSWORD: ${MYSQL80_PASSWORD}
+            MYSQL_ROOT_PASSWORD: ${MYSQL80_ROOT_PASSWORD}
+        tty: true
+        networks:
+            - open_network
+    #----------------------------------------------------------------------------------------
+    mailhog:
+        env_file: .env
+        container_name: mailhog
+        image: mailhog/mailhog:latest
+        restart: always
+        ports:
+            - ${MAILHOG_HTTP_PORT}:8025
+            - ${MAILHOG_SMTP_PORT}:1025
+        volumes:
+            - ./mailhog/share/:/home/mailhog/files/
+        tty: true
+        networks:
+            - open_network
+    #----------------------------------------------------------------------------------------
+    h2-database:
+        env_file: .env
+        container_name: h2-database
+        build:
+            context: ./h2-database
+            dockerfile: h2-database.dockerfile
+            args:
+                H2DATABASE_DBNAME: ${H2DATABASE_DBNAME}
+                H2DATABASE_USERNAME: ${H2DATABASE_USERNAME}
+                H2DATABASE_GROUP: ${H2DATABASE_GROUP}
+                H2DATABASE_HOME: ${H2DATABASE_HOME}
+                H2DATABASE_VERSION: ${H2DATABASE_VERSION}
+                H2DATABASE_ZIPFILE: ${H2DATABASE_ZIPFILE}
+                H2DATABASE_HOST_PORT: ${H2DATABASE_HOST_PORT}
+                H2DATABASE_HOST_ADDITIONAL_PORT: ${H2DATABASE_HOST_ADDITIONAL_PORT}
+                H2DATABASE_HOST_TCP_PORT: ${H2DATABASE_HOST_TCP_PORT}
+                H2DATABASE_TCP_SERVER_PORT: ${H2DATABASE_TCP_SERVER_PORT}
+                H2DATABASE_HOST_HTTP_PORT: ${H2DATABASE_HOST_HTTP_PORT}
+                H2DATABASE_HTTP_SERVER_PORT: ${H2DATABASE_HTTP_SERVER_PORT}
+                H2DATABASE_ADMIN_PASSWORD: ${H2DATABASE_ADMIN_PASSWORD}
+        ports:
+            - ${H2DATABASE_HOST_PORT}:${H2DATABASE_HOST_ADDITIONAL_PORT}
+            - ${H2DATABASE_HOST_TCP_PORT}:${H2DATABASE_TCP_SERVER_PORT}
+            - ${H2DATABASE_HOST_HTTP_PORT}:${H2DATABASE_HTTP_SERVER_PORT}
+        volumes:
+            - ./h2-database/share/:/home/ubuntu/share/
+        tty: true
+        networks:
+            - open_network
     #----------------------------------------------------------------------------------------
 
 networks:

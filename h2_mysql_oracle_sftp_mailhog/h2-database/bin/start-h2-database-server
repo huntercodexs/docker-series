@@ -1,0 +1,43 @@
+#!/bin/bash
+set -Eeo pipefail
+
+# shellcheck disable=2154
+trap 's=$?; echo "$0: Error on line "$LINENO": $BASH_COMMAND"; exit $s' ERR
+
+# Debugging
+echo " [DEBUG] H2DATABASE_DBNAME               >>> ${H2DATABASE_DBNAME}"
+echo " [DEBUG] H2DATABASE_USERNAME             >>> ${H2DATABASE_USERNAME}"
+echo " [DEBUG] H2DATABASE_GROUP                >>> ${H2DATABASE_GROUP}"
+echo " [DEBUG] H2DATABASE_HOME                 >>> ${H2DATABASE_HOME}"
+echo " [DEBUG] H2DATABASE_VERSION              >>> ${H2DATABASE_VERSION}"
+echo " [DEBUG] H2DATABASE_ZIPFILE              >>> ${H2DATABASE_ZIPFILE}"
+echo " [DEBUG] H2DATABASE_HOST_PORT            >>> ${H2DATABASE_HOST_PORT}"
+echo " [DEBUG] H2DATABASE_HOST_ADDITIONAL_PORT >>> ${H2DATABASE_HOST_ADDITIONAL_PORT}"
+echo " [DEBUG] H2DATABASE_HOST_TCP_PORT        >>> ${H2DATABASE_HOST_TCP_PORT}"
+echo " [DEBUG] H2DATABASE_TCP_SERVER_PORT      >>> ${H2DATABASE_TCP_SERVER_PORT}"
+echo " [DEBUG] H2DATABASE_HOST_HTTP_PORT       >>> ${H2DATABASE_HOST_HTTP_PORT}"
+echo " [DEBUG] H2DATABASE_HTTP_SERVER_PORT     >>> ${H2DATABASE_HTTP_SERVER_PORT}"
+
+JAR_FILENAME=$(echo ${H2DATABASE_ZIPFILE} | cut -d \. -f1)
+
+echo " [DEBUG] JAR_FILENAME >>> ${JAR_FILENAME}"
+
+# H2 Database process
+{
+    cd ${H2DATABASE_HOME}/database/
+    unzip -o ${H2DATABASE_ZIPFILE}
+    cd h2/
+    chmod 777 * -R
+    chmod 777 .* -R
+    ls -ltr
+    ./build.sh jar
+    cd bin/
+    # Embedding mode
+    #/usr/bin/java -jar ${JAR_FILENAME}.jar
+    # Server mode
+    #/usr/bin/java -cp h2*.jar org.h2.tools.Server -tcp -tcpAllowOthers
+    #/usr/bin/java -jar h2*.jar -web -webAllowOthers -tcp -tcpAllowOthers -browser -webPort ${H2DATABASE_HTTP_SERVER_PORT} -tcpPort ${H2DATABASE_TCP_SERVER_PORT} -tcpPassword ${H2DATABASE_ADMIN_PASSWORD}
+    /usr/bin/java -jar h2*.jar -web -webAllowOthers -tcp -tcpAllowOthers -browser -webPort ${H2DATABASE_HTTP_SERVER_PORT} -tcpPort ${H2DATABASE_TCP_SERVER_PORT} -tcpPassword ${H2DATABASE_ADMIN_PASSWORD}
+} || {
+    echo "Error: H2 Database server not running..."
+}
