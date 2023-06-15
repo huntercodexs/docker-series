@@ -15,6 +15,7 @@ trash
 *.csv
 nodes
 node_modules
+h2_mysql_oracle_sftp_mailhog/
 /docker-elk/
 /elkstack792/
 /micro-services/
