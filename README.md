@@ -104,6 +104,7 @@ pass: root123
 
 - Definitions and Variables
 
+<pre>
 ORACLE-DATABASE-USER: DEVEL (in many cases should be SYS or SYSTEM)
 ORACLE-DATABASE-USER-LOWERCASE: devel
 ORACLE-DATABASE-PDB: ORCLPDB1
@@ -112,6 +113,7 @@ ORACLE-DATABASE-ROLE: Normal (in many cases can be SYSDBA)
 ORACLE-DATABASE-AUTH-MODE: Oracle Database Native
 ORACLE-DATABASE-PORT: 1521
 ORACLE-DATABASE-TABLESPACE: /opt/oracle/oradata/ORCLCDB/{{ORACLE-DATABASE-PDB}}/{{ORACLE-DATABASE-USER-LOWERCASE}}.dbf
+</pre>
 
 > <p style="color: orange">IMPORTANT</p>    
 
