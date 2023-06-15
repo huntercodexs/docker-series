@@ -20,6 +20,9 @@ docker-compose start (in the next times)
 docker-compose ps (check the containers status)
 </pre>
 
+Result should be
+![docker-compose-ps.png](./h2_mysql_oracle_sftp_mailhog/files/docker-compose-ps.png)
+
 # H2 DATABASE (JAVA)
 
 - Tip
