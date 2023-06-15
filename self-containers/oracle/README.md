@@ -4,6 +4,7 @@
 
 - Definitions and Variables
 
+<pre>
 ORACLE-DATABASE-USER: DEVEL (in many cases should be SYS or SYSTEM)
 ORACLE-DATABASE-USER-LOWERCASE: devel
 ORACLE-DATABASE-PDB: ORCLPDB1
@@ -12,6 +13,7 @@ ORACLE-DATABASE-ROLE: Normal (in many cases can be SYSDBA)
 ORACLE-DATABASE-AUTH-MODE: Oracle Database Native
 ORACLE-DATABASE-PORT: 1521
 ORACLE-DATABASE-TABLESPACE: /opt/oracle/oradata/ORCLCDB/{{ORACLE-DATABASE-PDB}}/{{ORACLE-DATABASE-USER-LOWERCASE}}.dbf
+</pre>
 
 > <p style="color: orange">IMPORTANT</p>    
 
@@ -124,11 +126,11 @@ Password: {{ORACLE-PASSWORD}}
 
 > Database Connection Sample
 
-![img.png](./h2_mysql_oracle_sftp_mailhog/oracle/midias/DBeaver-Oracle-Connection-Details.png)
+![img.png](./midias/DBeaver-Oracle-Connection-Details.png)
 
 > Enterprise Manager
 
-![img.png](./h2_mysql_oracle_sftp_mailhog/oracle/midias/Oracle-Database-EM.png)
+![img.png](./midias/Oracle-Database-EM.png)
 
 - Access the Enterprise Manager:
 
