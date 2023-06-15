@@ -59,7 +59,7 @@ H2DATABASE_HTTP_SERVER_PORT=8085
 - Access the H2 Database via HTTP (console)
 
 <pre>
-http://{server-address}:38085
+http://{server-address}}:38085
 </pre>
 
 ![h2-database-access.png](./h2_mysql_oracle_sftp_mailhog/h2-database/midias/h2-database-access.png)
@@ -102,7 +102,18 @@ pass: root123
 
 # How to use Oracle
 
-> <p style="color: orange">IMPORTANT</p>
+- Definitions and Variables
+
+ORACLE-DATABASE-USER: DEVEL (in many cases should be SYS or SYSTEM)
+ORACLE-DATABASE-USER-LOWERCASE: devel
+ORACLE-DATABASE-PDB: ORCLPDB1
+ORACLE-PASSWORD: oracle1Ipw
+ORACLE-DATABASE-ROLE: Normal (in many cases can be SYSDBA)
+ORACLE-DATABASE-AUTH-MODE: Oracle Database Native
+ORACLE-DATABASE-PORT: 1521
+ORACLE-DATABASE-TABLESPACE: /opt/oracle/oradata/ORCLCDB/{{ORACLE-DATABASE-PDB}}/{{ORACLE-DATABASE-USER-LOWERCASE}}.dbf
+
+> <p style="color: orange">IMPORTANT</p>    
 
 - The builder of this container is very long and need a long time to finish correctly
 - Use the command docker-compose up --build to run in first time
@@ -141,7 +152,8 @@ tar -xvf oraclelinux-database-scripts-19c.tar.bz2
 
 Set Password Administration
 <pre>
-docker exec -it oraclelinux ./setPassword.sh ${YOUR_ORACLE_PASSWORD}
+docker-compose start oraclelinux
+docker exec -it oraclelinux ./setPassword.sh {{YOUR_ORACLE_PASSWORD}}
 </pre>
 
 - Access the database container
@@ -151,34 +163,63 @@ docker exec -it oraclelinux /bin/bash
 
 - GUEST(inside oraclelinux):
 
-Create User
+- Create User
 <pre>
-sqlplus sys/${YOUR_ORACLE_PASSWORD_}@ORCLPDB1 as sysdba
-CREATE USER DEVEL IDENTIFIED BY ${YOUR_ORACLE_PASSWORD_};
-GRANT CREATE SESSION, CREATE TABLE TO DEVEL;
-ALTER USER DEVEL QUOTA 50m ON SYSTEM;
-CREATE SMALLFILE TABLESPACE DEVEL DATAFILE '/opt/oracle/oradata/ORCLCDB/ORCLPDB1/devel.dbf' SIZE 1G;
-ALTER DATABASE DEFAULT TABLESPACE DEVEL;
+sqlplus sys/{{ORACLE-PASSWORD}}@{{ORACLE-DATABASE-PDB}} as sysdba
+CREATE USER {{ORACLE-DATABASE-USER}} IDENTIFIED BY {{ORACLE-PASSWORD}};
+GRANT CREATE SESSION, CREATE TABLE TO {{ORACLE-DATABASE-USER}};
+ALTER USER {{ORACLE-DATABASE-USER}} QUOTA 50m ON SYSTEM;
+CREATE SMALLFILE TABLESPACE {{ORACLE-DATABASE-USER}} DATAFILE '{{ORACLE-DATABASE-TABLESPACE}}' SIZE 1G;
+ALTER DATABASE DEFAULT TABLESPACE {{ORACLE-DATABASE-USER}};
 SELECT * FROM ALL_USERS au;
-SELECT * FROM ALL_USERS au WHERE au.USERNAME = 'DEVEL';
+SELECT * FROM ALL_USERS au WHERE au.USERNAME = '{{ORACLE-DATABASE-USER}}';
 EXIT;
 </pre>
 
-Connect on database using the new user
+- Add user
+
 <pre>
-sqlplus devel/${YOUR_ORACLE_PASSWORD_}@ORCLPDB1
+docker exec -it oraclelinux /bin/bash
+sqlplus sys/{{ORACLE-PASSWORD}}@{{ORACLE-DATABASE-PDB}} as sysdba
+CREATE USER {{ORACLE-DATABASE-USER}} IDENTIFIED BY {{ORACLE-PASSWORD}};
+GRANT CREATE SESSION, CREATE TABLE TO {{ORACLE-DATABASE-USER}};
+ALTER USER {{ORACLE-DATABASE-USER}} QUOTA UNLIMITED ON SYSTEM;
+CREATE SMALLFILE TABLESPACE {{ORACLE-DATABASE-USER}} DATAFILE '{{ORACLE-DATABASE-TABLESPACE}}' SIZE 1G;
+ALTER DATABASE DEFAULT TABLESPACE {{ORACLE-DATABASE-USER}};
+ALTER USER {{ORACLE-DATABASE-USER}} QUOTA UNLIMITED ON SYSTEM;
+GRANT ALL PRIVILEGES TO {{ORACLE-DATABASE-USER}};
+SELECT * FROM ALL_USERS au;
+SELECT * FROM ALL_USERS au WHERE au.USERNAME = '{{ORACLE-DATABASE-USER}}';
+EXIT;
+</pre>
+
+- Get ORACLE-DATABASE-PDB available from oracle
+
+<pre>
+** to get this value exec in the current terminal:
+SQL> show pdbs;
+
+CON_ID CON_NAME			  OPEN MODE  RESTRICTED
+---------- ------------------------------ ---------- ----------
+3 ORCLORACLE-DATABASE-PDB1			  READ WRITE NO
+SQL>EXIT;
+</pre>
+
+- Connect on database using the new user
+<pre>
+sqlplus {{ORACLE-DATABASE-USER}}/{{ORACLE-PASSWORD}}@{{ORACLE-DATABASE-PDB}}
 </pre>
 
 - Access the Database Oracle Linux:
 
 <pre>
-Host: ${DATABASE_ORACLE_SERVER_IP}
-Port: 1521
-Database: ORCLPDB1 [Service Name]
-Authentication: Oracle Database Native
-Username: DEVEL
-Role: Normal
-Password: ${YOUR_ORACLE_PASSWORD_}
+Host: {{DATABASE_ORACLE_SERVER_IP}}
+Port: {{ORACLE-DATABASE-PORT}}
+Database: {{ORACLE-DATABASE-PDB}} [Service Name]
+Authentication:{{ORACLE-DATABASE-AUTH-MODE}}
+Username: {{ORACLE-DATABASE-USER}}
+Role: {{ORACLE-DATABASE-ROLE}}
+Password: {{ORACLE-PASSWORD}}
 </pre>
 
 > Database Connection Sample
@@ -192,18 +233,10 @@ Password: ${YOUR_ORACLE_PASSWORD_}
 - Access the Enterprise Manager:
 
 <pre>
-https://${WEBSERVER_ADDRESS}:5500/em
+https://{{WEBSERVER_ADDRESS}}:5500/em
   > username: sys
-  > password: ${YOUR_ORACLE_PASSWORD}
-  > container name: ORCLPDB1
-  ** to get this value exec in the current terminal:
-  SQL> show pdbs;
-  
-  CON_ID CON_NAME			  OPEN MODE  RESTRICTED
-  ---------- ------------------------------ ---------- ----------
-   3 ORCLPDB1			  READ WRITE NO
-  SQL> 
-  
+  > password: {{YOUR_ORACLE_PASSWORD}}
+  > container name: {{ORACLE-DATABASE-PDB}}
 </pre>
 
 * All rights reserved to ORACLE - https://www.oracle.com/
@@ -224,21 +257,21 @@ https://${WEBSERVER_ADDRESS}:5500/em
 - How to make access in the MailHog Http Webserver
 
 <pre>
-http://${MAIL_SERVER_IP}:${MAILHOG_PORT}
+http://{{MAIL_SERVER_IP}}:{{MAILHOG_PORT}}
 
 [Example]
-http://${WEBSERVER-ADDRESS-IP}:38025 (mailhog)
-http://${WEBSERVER-ADDRESS-IP}:48025 (mailhog-ubuntu2004)
+http://{{WEBSERVER-ADDRESS-IP}}:38025 (mailhog)
+http://{{WEBSERVER-ADDRESS-IP}}:48025 (mailhog-ubuntu2004)
 </pre>
 
 - How to use MailHog as Mail Server Tests
 
 <pre>
 [SMTP HOST]
-${MAIL_SERVER_IP}
+{{MAIL_SERVER_IP}}
 
 [SMTP PORT]
-${MAILHOG_SMTP_PORT}
+{{MAILHOG_SMTP_PORT}}
 
 [Example (Java Mail Sender)]
 spring.mail.host=localhost
