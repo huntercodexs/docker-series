@@ -9,6 +9,7 @@ trash
 nodes
 node_modules
 LINUX.X64_193000_db_home.zip
+h2_mysql_oracle_sftp_mailhog/
 /java_oracle/app/application.properties
 /java_oraclelinux/oracle/database/*.sh
 /java_oraclelinux/oracle/database/*.ee
