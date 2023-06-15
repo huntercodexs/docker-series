@@ -13,6 +13,7 @@ Base project to homologation and tests environment
 
 <pre>
 git clone https://github.com/huntercodexs/docker-series.git .
+git checkout h2_mysql_oracle_sftp_mailhog
 cd h2_mysql_oracle_sftp_mailhog
 docker-compose up --build (in first time)
 docker-compose start (in the next times)
@@ -32,7 +33,7 @@ Configure the file .env as bellow
 
 > NOTE: Get the version and zip filename in the https://www.h2database.com/html/download.html
 
-![h2-database-download.png](./h2-database/midias/h2-database-download.png)
+![h2-database-download.png](./h2_mysql_oracle_sftp_mailhog/h2-database/midias/h2-database-download.png)
 
 <pre>
 H2DATABASE_VERSION=version-2.1.214
@@ -58,7 +59,7 @@ H2DATABASE_HTTP_SERVER_PORT=8085
 http://{server-address}:38085
 </pre>
 
-![h2-database-access.png](./h2-database/midias/h2-database-access.png)
+![h2-database-access.png](./h2_mysql_oracle_sftp_mailhog/h2-database/midias/h2-database-access.png)
 
 - Access the H2 Database via TCP/IP
 
@@ -88,7 +89,7 @@ spring.datasource.jdbcUrl=jdbc:h2:tcp://localhost:39095/~/db-h2-test;INIT=RUNSCR
 - Access the database
 
 <pre>
-server: 192.168.0.174
+server: 192.168.0.174 (Use the current IP from your machine)
 port: 3708
 user: root
 pass: root123
@@ -179,11 +180,11 @@ Password: ${YOUR_ORACLE_PASSWORD_}
 
 > Database Connection Sample
 
-![img.png](./oracle/midias/DBeaver-Oracle-Connection-Details.png)
+![img.png](./h2_mysql_oracle_sftp_mailhog/oracle/midias/DBeaver-Oracle-Connection-Details.png)
 
 > Enterprise Manager
 
-![img.png](./oracle/midias/Oracle-Database-EM.png)
+![img.png](./h2_mysql_oracle_sftp_mailhog/oracle/midias/Oracle-Database-EM.png)
 
 - Access the Enterprise Manager:
 
@@ -210,9 +211,9 @@ https://${WEBSERVER_ADDRESS}:5500/em
 
 - Filezilla Connection Example
 
-![sftp-filezilla-setup-1.png](./sftp/midias/sftp-filezilla-setup-1.png)
+![sftp-filezilla-setup-1.png](./h2_mysql_oracle_sftp_mailhog/sftp/midias/sftp-filezilla-setup-1.png)
 
-![sftp-filezilla-setup-1.png](./sftp/midias/sftp-filezilla-setup-2.png)
+![sftp-filezilla-setup-1.png](./h2_mysql_oracle_sftp_mailhog/sftp/midias/sftp-filezilla-setup-2.png)
 
 
 # MAILHOG
