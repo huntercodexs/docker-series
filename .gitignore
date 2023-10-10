@@ -16,3 +16,13 @@ trash
 nodes
 node_modules
 
+databases/firebird
+databases/h2-database
+databases/microsoft
+databases/mongodb
+databases/mysql
+databases/oracle
+databases/postgres
+databases/redis
+databases/sqlite3
+
