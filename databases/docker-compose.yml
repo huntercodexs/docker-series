@@ -7,8 +7,8 @@ services:
         container_name: firebird
         privileged: true
         build:
-            context: ./
-            dockerfile: firebird/firebird.dockerfile
+            context: ./firebird
+            dockerfile: firebird.dockerfile
             args:
                 TZ: ${FIREBIRD_TIMEZONE}
                 ISC_PASSWORD: ${FIREBIRD_ISC_PASSWORD}
@@ -33,8 +33,8 @@ services:
         env_file: .env
         container_name: h2-database
         build:
-            context: ./
-            dockerfile: h2-database/h2-database.dockerfile
+            context: ./h2-database
+            dockerfile: h2-database.dockerfile
             args:
                 H2DATABASE_DBNAME: ${H2DATABASE_DBNAME}
                 H2DATABASE_USERNAME: ${H2DATABASE_USERNAME}
@@ -178,25 +178,25 @@ services:
             - default
             - open_network
     #----------------------------------------------------------------------------------------
-    oraclelinux:
-        env_file: .env
-        container_name: oraclelinux
-        build:
-            context: ./
-            dockerfile: oracle/database/oraclelinux.dockerfile
-            args:
-                DB_EDITION: ${DB_EDITION}
-                ORACLE_PASSWORD: ${ORACLELINUX_PASSWORD}
-        volumes:
-            - ./oracle/share:/home/oracle/share
-            - ./oracle/oradata:/opt/oracle/oradata
-        ports:
-            - ${ORACLELINUX_PORT1}:1521
-            - ${ORACLELINUX_PORT2}:5500
-        tty: true
-        networks:
-            - default
-            - open_network
+#    oraclelinux:
+#        env_file: .env
+#        container_name: oraclelinux
+#        build:
+#            context: ./oracle
+#            dockerfile: database/oraclelinux.dockerfile
+#            args:
+#                DB_EDITION: ${DB_EDITION}
+#                ORACLE_PASSWORD: ${ORACLELINUX_PASSWORD}
+#        volumes:
+#            - ./oracle/share:/home/oracle/share
+#            - ./oracle/oradata:/opt/oracle/oradata
+#        ports:
+#            - ${ORACLELINUX_PORT1}:1521
+#            - ${ORACLELINUX_PORT2}:5500
+#        tty: true
+#        networks:
+#            - default
+#            - open_network
     #----------------------------------------------------------------------------------------
     postgres:
         env_file: .env
@@ -223,8 +223,8 @@ services:
         env_file: .env
         container_name: redis
         build:
-            context: ./
-            dockerfile: redis/redis.dockerfile
+            context: ./redis
+            dockerfile: redis.dockerfile
         ports:
             - ${REDIS_PORT}:6379
         volumes:
@@ -243,8 +243,8 @@ services:
         env_file: .env
         container_name: sqlite3
         build:
-            context: ./
-            dockerfile: sqlite3/sqlite3.dockerfile
+            context: ./sqlite3
+            dockerfile: sqlite3.dockerfile
         privileged: true
         ports:
             - ${SQLITE3_PORT}:5050
