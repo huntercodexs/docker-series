@@ -176,12 +176,38 @@ spring.datasource.jdbcUrl=jdbc:h2:tcp://localhost:39095/~/db-h2-test;INIT=RUNSCR
 
 <h3>MsSQL</h3>
 
+- Set up the .env file
+
+<pre>
+# Set the port to MSSQL
+MSSQL_PORT=1433
+MSSQL_TOOLS_PORT=31812
+
+# Set database access (strong)
+MSSQL_USERNAME=SA
+MSSQL_SA_PASSWORD=mssql1Ipw
+
+# Set license accept (Y/N)
+MSSQL_ACCEPT_EULA=Y
+
+# Set the current use for this image container
+# (Developer, Express, Standard, Enterprise, EnterpriseCore)
+MSSQL_EDITION=Express
+MSSQL_TRUSTED_CONNECTION=true
+</pre>
+
+- Settings
+
 <pre>
 server: 192.168.0.174
 port: 1433
 user: SA
 pass: mssql1Ipw
 </pre>
+
+- SGDB Configuration
+
+![mssql-connection-sgdb.png](./databases/midias/mssql-connection-sgdb.png)
 
 <h3>MongoDB</h3>
 
