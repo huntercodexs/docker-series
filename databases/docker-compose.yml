@@ -178,25 +178,25 @@ services:
             - default
             - open_network
     #----------------------------------------------------------------------------------------
-#    oraclelinux:
-#        env_file: .env
-#        container_name: oraclelinux
-#        build:
-#            context: ./oracle
-#            dockerfile: database/oraclelinux.dockerfile
-#            args:
-#                DB_EDITION: ${DB_EDITION}
-#                ORACLE_PASSWORD: ${ORACLELINUX_PASSWORD}
-#        volumes:
-#            - ./oracle/share:/home/oracle/share
-#            - ./oracle/oradata:/opt/oracle/oradata
-#        ports:
-#            - ${ORACLELINUX_PORT1}:1521
-#            - ${ORACLELINUX_PORT2}:5500
-#        tty: true
-#        networks:
-#            - default
-#            - open_network
+    oraclelinux:
+        env_file: .env
+        container_name: oraclelinux
+        build:
+            context: ./oracle
+            dockerfile: database/oraclelinux.dockerfile
+            args:
+                DB_EDITION: ${DB_EDITION}
+                ORACLE_PASSWORD: ${ORACLELINUX_PASSWORD}
+        volumes:
+            - ./oracle/share:/home/oracle/share
+            - ./oracle/oradata:/opt/oracle/oradata
+        ports:
+            - ${ORACLELINUX_PORT1}:1521
+            - ${ORACLELINUX_PORT2}:5500
+        tty: true
+        networks:
+            - default
+            - open_network
     #----------------------------------------------------------------------------------------
     postgres:
         env_file: .env
