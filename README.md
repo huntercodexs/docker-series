@@ -115,11 +115,11 @@ https://firebirdsql.org/en/jdbc-driver/
 
 <h3>H2</h3>
 
-> Settings to do before run this project
+- Settings to do before run this project
 
-Configure the file .env as bellow
+Configure the file .env as shown bellow
 
-> NOTE: Get the version and zip filename in the https://www.h2database.com/html/download.html
+> NOTE: Check the version and zip filename in the https://www.h2database.com/html/download.html
 
 ![h2-database-download.png](./databases/h2-database/midias/h2-database-download.png)
 
@@ -128,7 +128,7 @@ H2DATABASE_VERSION=version-2.1.214
 H2DATABASE_ZIPFILE=h2-2022-06-13.zip
 </pre>
 
-Set up the ports
+- Set up the ports
 
 <pre>
 H2DATABASE_HOST_PORT=35900
@@ -141,30 +141,32 @@ H2DATABASE_HOST_HTTP_PORT=38085
 H2DATABASE_HTTP_SERVER_PORT=8085
 </pre>
 
-> Access the H2 Database via HTTP (console)
+- Access the H2 Database via HTTP (console)
 
 <pre>
 http://{server-address}:38085
 </pre>
 
+> TIP: Weather occurs any error, try again ! 
+
 ![h2-database-access.png](./databases/h2-database/midias/h2-database-access.png)
 
-> Access the H2 Database via TCP/IP
+- Access the H2 Database via TCP/IP
 
 <pre>
 tcp://localhost:39095/~/db-h2-test
 </pre>
 
-> Access the H2 Database via Java Application
+- Access the H2 Database via Java Application
 
 <pre>
 spring.datasource.url=jdbc:h2:tcp://localhost:39095/~/db-h2-test
 spring.datasource.jdbcUrl=jdbc:h2:tcp://localhost:39095/~/db-h2-test
 </pre>
 
-> You can customize the script bin/start-h2-database-server to gain more effects in your environment
+> TIP: You can customize the script bin/start-h2-database-server to gain more effects in your environment
 
-> You can also create an initializer sql commands into bin/db-init.sql to charge database from tests in your
+> TIP: You can also create an initializer sql commands into bin/db-init.sql to charge database from tests in your
 > application as showed bellow
 
 <pre>

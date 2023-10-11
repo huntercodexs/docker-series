@@ -29,36 +29,36 @@ services:
             - default
             - open_network
     #----------------------------------------------------------------------------------------
-#    h2-database:
-#        env_file: .env
-#        container_name: h2-database
-#        build:
-#            context: ./h2-database
-#            dockerfile: h2-database.dockerfile
-#            args:
-#                H2DATABASE_DBNAME: ${H2DATABASE_DBNAME}
-#                H2DATABASE_USERNAME: ${H2DATABASE_USERNAME}
-#                H2DATABASE_GROUP: ${H2DATABASE_GROUP}
-#                H2DATABASE_HOME: ${H2DATABASE_HOME}
-#                H2DATABASE_VERSION: ${H2DATABASE_VERSION}
-#                H2DATABASE_ZIPFILE: ${H2DATABASE_ZIPFILE}
-#                H2DATABASE_HOST_PORT: ${H2DATABASE_HOST_PORT}
-#                H2DATABASE_HOST_ADDITIONAL_PORT: ${H2DATABASE_HOST_ADDITIONAL_PORT}
-#                H2DATABASE_HOST_TCP_PORT: ${H2DATABASE_HOST_TCP_PORT}
-#                H2DATABASE_TCP_SERVER_PORT: ${H2DATABASE_TCP_SERVER_PORT}
-#                H2DATABASE_HOST_HTTP_PORT: ${H2DATABASE_HOST_HTTP_PORT}
-#                H2DATABASE_HTTP_SERVER_PORT: ${H2DATABASE_HTTP_SERVER_PORT}
-#                H2DATABASE_ADMIN_PASSWORD: ${H2DATABASE_ADMIN_PASSWORD}
-#        ports:
-#            - ${H2DATABASE_HOST_PORT}:${H2DATABASE_HOST_ADDITIONAL_PORT}
-#            - ${H2DATABASE_HOST_TCP_PORT}:${H2DATABASE_TCP_SERVER_PORT}
-#            - ${H2DATABASE_HOST_HTTP_PORT}:${H2DATABASE_HTTP_SERVER_PORT}
-#        volumes:
-#            - ./h2-database/share/:/home/ubuntu/share/
-#        tty: true
-#        networks:
-#            - open_network
-#    #----------------------------------------------------------------------------------------
+    h2-database:
+        env_file: .env
+        container_name: h2-database
+        build:
+            context: ./h2-database
+            dockerfile: h2-database.dockerfile
+            args:
+                H2DATABASE_DBNAME: ${H2DATABASE_DBNAME}
+                H2DATABASE_USERNAME: ${H2DATABASE_USERNAME}
+                H2DATABASE_GROUP: ${H2DATABASE_GROUP}
+                H2DATABASE_HOME: ${H2DATABASE_HOME}
+                H2DATABASE_VERSION: ${H2DATABASE_VERSION}
+                H2DATABASE_ZIPFILE: ${H2DATABASE_ZIPFILE}
+                H2DATABASE_HOST_PORT: ${H2DATABASE_HOST_PORT}
+                H2DATABASE_HOST_ADDITIONAL_PORT: ${H2DATABASE_HOST_ADDITIONAL_PORT}
+                H2DATABASE_HOST_TCP_PORT: ${H2DATABASE_HOST_TCP_PORT}
+                H2DATABASE_TCP_SERVER_PORT: ${H2DATABASE_TCP_SERVER_PORT}
+                H2DATABASE_HOST_HTTP_PORT: ${H2DATABASE_HOST_HTTP_PORT}
+                H2DATABASE_HTTP_SERVER_PORT: ${H2DATABASE_HTTP_SERVER_PORT}
+                H2DATABASE_ADMIN_PASSWORD: ${H2DATABASE_ADMIN_PASSWORD}
+        ports:
+            - ${H2DATABASE_HOST_PORT}:${H2DATABASE_HOST_ADDITIONAL_PORT}
+            - ${H2DATABASE_HOST_TCP_PORT}:${H2DATABASE_TCP_SERVER_PORT}
+            - ${H2DATABASE_HOST_HTTP_PORT}:${H2DATABASE_HTTP_SERVER_PORT}
+        volumes:
+            - ./h2-database/share/:/home/ubuntu/share/
+        tty: true
+        networks:
+            - open_network
+    #----------------------------------------------------------------------------------------
 #    mssql:
 #        env_file: .env
 #        container_name: mssql
