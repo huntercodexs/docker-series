@@ -1,101 +1,101 @@
 version: "3.7"
 services:
 
-#    #----------------------------------------------------------------------------------------
-#    firebird:
-#        env_file: .env
-#        container_name: firebird
-#        privileged: true
-#        build:
-#            context: ./firebird
-#            dockerfile: firebird.dockerfile
-#            args:
-#                TZ: ${FIREBIRD_TIMEZONE}
-#                ISC_PASSWORD: ${FIREBIRD_ISC_PASSWORD}
-#                FIREBIRD_USER: ${FIREBIRD_USER}
-#                FIREBIRD_DBNAME: ${FIREBIRD_DBNAME}
-#        ports:
-#            - ${FIREBIRD_PORT}:3050
-#        volumes:
-#            - ./firebird/data/:/etc/firebird/3.0/
-#        environment:
-#            TZ: ${FIREBIRD_TIMEZONE}
-#            FIREBIRD_DATABASE: ${FIREBIRD_DBNAME}
-#            FIREBIRD_USER: ${FIREBIRD_USER}
-#            FIREBIRD_PASS: ${FIREBIRD_ISC_PASSWORD}
-#            ISC_PASSWORD: ${FIREBIRD_ISC_PASSWORD}
-#        tty: true
-#        networks:
-#            - default
-#            - open_network
-#    #----------------------------------------------------------------------------------------
-#    h2-database:
-#        env_file: .env
-#        container_name: h2-database
-#        build:
-#            context: ./h2-database
-#            dockerfile: h2-database.dockerfile
-#            args:
-#                H2DATABASE_DBNAME: ${H2DATABASE_DBNAME}
-#                H2DATABASE_USERNAME: ${H2DATABASE_USERNAME}
-#                H2DATABASE_GROUP: ${H2DATABASE_GROUP}
-#                H2DATABASE_HOME: ${H2DATABASE_HOME}
-#                H2DATABASE_VERSION: ${H2DATABASE_VERSION}
-#                H2DATABASE_ZIPFILE: ${H2DATABASE_ZIPFILE}
-#                H2DATABASE_HOST_PORT: ${H2DATABASE_HOST_PORT}
-#                H2DATABASE_HOST_ADDITIONAL_PORT: ${H2DATABASE_HOST_ADDITIONAL_PORT}
-#                H2DATABASE_HOST_TCP_PORT: ${H2DATABASE_HOST_TCP_PORT}
-#                H2DATABASE_TCP_SERVER_PORT: ${H2DATABASE_TCP_SERVER_PORT}
-#                H2DATABASE_HOST_HTTP_PORT: ${H2DATABASE_HOST_HTTP_PORT}
-#                H2DATABASE_HTTP_SERVER_PORT: ${H2DATABASE_HTTP_SERVER_PORT}
-#                H2DATABASE_ADMIN_PASSWORD: ${H2DATABASE_ADMIN_PASSWORD}
-#        ports:
-#            - ${H2DATABASE_HOST_PORT}:${H2DATABASE_HOST_ADDITIONAL_PORT}
-#            - ${H2DATABASE_HOST_TCP_PORT}:${H2DATABASE_TCP_SERVER_PORT}
-#            - ${H2DATABASE_HOST_HTTP_PORT}:${H2DATABASE_HTTP_SERVER_PORT}
-#        volumes:
-#            - ./h2-database/share/:/home/ubuntu/share/
-#        tty: true
-#        networks:
-#            - open_network
-#    #----------------------------------------------------------------------------------------
-#    mssql:
-#        env_file: .env
-#        container_name: mssql
-#        image: mcr.microsoft.com/mssql/server:2019-latest
-#        ports:
-#            - ${MSSQL_PORT}:1433
-#        volumes:
-#            - type: bind
-#              source: ./microsoft/mssql/lib
-#              target: /var/lib/mssql/data/
-#              read_only: false
-#            - type: bind
-#              source: ./microsoft/mssql/opt
-#              target: /var/opt/mssql/data/
-#              read_only: false
-#        environment:
-#            SA_PASSWORD: ${MSSQL_SA_PASSWORD}
-#            MSSQL_SA_PASSWORD: ${MSSQL_SA_PASSWORD}
-#            ACCEPT_EULA: ${MSSQL_ACCEPT_EULA}
-#            MSSQL_PID: ${MSSQL_EDITION}
-#            TRUSTED_CONNECTION: ${MSSQL_TRUSTED_CONNECTION}
-#        tty: true
-#        networks:
-#            - default
-#            - open_network
-#    #----------------------------------------------------------------------------------------
-#    mssql-tools:
-#        env_file: .env
-#        container_name: mssql-tools
-#        image:  mcr.microsoft.com/mssql-tools
-#        ports:
-#            - ${MSSQL_TOOLS_PORT}:10000
-#        tty: true
-#        networks:
-#            - default
-#            - open_network
-#    #----------------------------------------------------------------------------------------
+    #----------------------------------------------------------------------------------------
+    firebird:
+        env_file: .env
+        container_name: firebird
+        privileged: true
+        build:
+            context: ./firebird
+            dockerfile: firebird.dockerfile
+            args:
+                TZ: ${FIREBIRD_TIMEZONE}
+                ISC_PASSWORD: ${FIREBIRD_ISC_PASSWORD}
+                FIREBIRD_USER: ${FIREBIRD_USER}
+                FIREBIRD_DBNAME: ${FIREBIRD_DBNAME}
+        ports:
+            - ${FIREBIRD_PORT}:3050
+        volumes:
+            - ./firebird/data/:/etc/firebird/3.0/
+        environment:
+            TZ: ${FIREBIRD_TIMEZONE}
+            FIREBIRD_DATABASE: ${FIREBIRD_DBNAME}
+            FIREBIRD_USER: ${FIREBIRD_USER}
+            FIREBIRD_PASS: ${FIREBIRD_ISC_PASSWORD}
+            ISC_PASSWORD: ${FIREBIRD_ISC_PASSWORD}
+        tty: true
+        networks:
+            - default
+            - open_network
+    #----------------------------------------------------------------------------------------
+    h2-database:
+        env_file: .env
+        container_name: h2-database
+        build:
+            context: ./h2-database
+            dockerfile: h2-database.dockerfile
+            args:
+                H2DATABASE_DBNAME: ${H2DATABASE_DBNAME}
+                H2DATABASE_USERNAME: ${H2DATABASE_USERNAME}
+                H2DATABASE_GROUP: ${H2DATABASE_GROUP}
+                H2DATABASE_HOME: ${H2DATABASE_HOME}
+                H2DATABASE_VERSION: ${H2DATABASE_VERSION}
+                H2DATABASE_ZIPFILE: ${H2DATABASE_ZIPFILE}
+                H2DATABASE_HOST_PORT: ${H2DATABASE_HOST_PORT}
+                H2DATABASE_HOST_ADDITIONAL_PORT: ${H2DATABASE_HOST_ADDITIONAL_PORT}
+                H2DATABASE_HOST_TCP_PORT: ${H2DATABASE_HOST_TCP_PORT}
+                H2DATABASE_TCP_SERVER_PORT: ${H2DATABASE_TCP_SERVER_PORT}
+                H2DATABASE_HOST_HTTP_PORT: ${H2DATABASE_HOST_HTTP_PORT}
+                H2DATABASE_HTTP_SERVER_PORT: ${H2DATABASE_HTTP_SERVER_PORT}
+                H2DATABASE_ADMIN_PASSWORD: ${H2DATABASE_ADMIN_PASSWORD}
+        ports:
+            - ${H2DATABASE_HOST_PORT}:${H2DATABASE_HOST_ADDITIONAL_PORT}
+            - ${H2DATABASE_HOST_TCP_PORT}:${H2DATABASE_TCP_SERVER_PORT}
+            - ${H2DATABASE_HOST_HTTP_PORT}:${H2DATABASE_HTTP_SERVER_PORT}
+        volumes:
+            - ./h2-database/share/:/home/ubuntu/share/
+        tty: true
+        networks:
+            - open_network
+    #----------------------------------------------------------------------------------------
+    mssql:
+        env_file: .env
+        container_name: mssql
+        image: mcr.microsoft.com/mssql/server:2019-latest
+        ports:
+            - ${MSSQL_PORT}:1433
+        volumes:
+            - type: bind
+              source: ./microsoft/mssql/lib
+              target: /var/lib/mssql/data/
+              read_only: false
+            - type: bind
+              source: ./microsoft/mssql/opt
+              target: /var/opt/mssql/data/
+              read_only: false
+        environment:
+            SA_PASSWORD: ${MSSQL_SA_PASSWORD}
+            MSSQL_SA_PASSWORD: ${MSSQL_SA_PASSWORD}
+            ACCEPT_EULA: ${MSSQL_ACCEPT_EULA}
+            MSSQL_PID: ${MSSQL_EDITION}
+            TRUSTED_CONNECTION: ${MSSQL_TRUSTED_CONNECTION}
+        tty: true
+        networks:
+            - default
+            - open_network
+    #----------------------------------------------------------------------------------------
+    mssql-tools:
+        env_file: .env
+        container_name: mssql-tools
+        image:  mcr.microsoft.com/mssql-tools
+        ports:
+            - ${MSSQL_TOOLS_PORT}:10000
+        tty: true
+        networks:
+            - default
+            - open_network
+    #----------------------------------------------------------------------------------------
     mongo:
         env_file: .env
         container_name: mongo
