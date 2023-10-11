@@ -1,0 +1,23 @@
+version: "3.7"
+services:
+    
+    #----------------------------------------------------------------------------------------
+    bind9dns:
+        env_file: .env
+        container_name: bind9dns
+        privileged: true
+        build:
+            context: .
+            dockerfile: bind9dns.dockerfile
+        ports:
+            - ${BIND9DNS_PORT}:35900
+        volumes:
+            - ./share/:/home/bind9dns
+        tty: true
+        networks:
+            default:
+            open_network:
+    #----------------------------------------------------------------------------------------
+
+networks:
+    open_network:
