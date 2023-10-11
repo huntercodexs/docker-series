@@ -10,15 +10,29 @@ The helpful repository for all databases
 ----
 
 <pre>
-git clone https://github.com/huntercodexs/docker-series.git .
-cd docker-series
-git checkout databases
-cd databases
-./pre-requisites.sh
-docker-compose up --build (in first time)
-docker-compose start (in the next times)
+user@host:~/home/user$ git clone https://github.com/huntercodexs/docker-series.git .
+user@host:~/home/user/docker-series$ cd docker-series
+user@host:~/home/user/docker-series$ git checkout databases
+user@host:~/home/user/docker-series$ cd databases
+user@host:~/home/user/docker-series/databases$ ./pre-requisites.sh
+user@host:~/home/user/docker-series/databases$ docker-compose up --build (in first time)
+user@host:~/home/user/docker-series/databases$ docker-compose start (in the next times)
+user@host:~/home/user/docker-series/databases$ docker-compose ps
+    Name                   Command                  State                                                                      Ports                                                                
+----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+firebird        firebird                         Up             0.0.0.0:33050->3050/tcp,:::33050->3050/tcp                                                                                          
+h2-database     start-h2-database-server         Up             0.0.0.0:35900->35900/tcp,:::35900->35900/tcp, 0.0.0.0:38085->8085/tcp,:::38085->8085/tcp, 0.0.0.0:39095->9095/tcp,:::39095->9095/tcp
+mongo           docker-entrypoint.sh mongod      Up             0.0.0.0:27017->27017/tcp,:::27017->27017/tcp                                                                                        
+mongo-express   /sbin/tini -- /docker-entr ...   Up             0.0.0.0:38091->8081/tcp,:::38091->8081/tcp                                                                                          
+mssql           /opt/mssql/bin/permissions ...   Up             0.0.0.0:1433->1433/tcp,:::1433->1433/tcp                                                                                            
+mssql-tools     /bin/sh -c /bin/bash             Up             0.0.0.0:31812->10000/tcp,:::31812->10000/tcp                                                                                        
+mysql-57        docker-entrypoint.sh mysqld      Up             0.0.0.0:3357->3306/tcp,:::3357->3306/tcp, 33060/tcp                                                                                 
+mysql-80        docker-entrypoint.sh mysqld      Up             0.0.0.0:3708->3306/tcp,:::3708->3306/tcp, 33060/tcp                                                                                 
+oraclelinux     /bin/sh -c exec $ORACLE_BA ...   Up (healthy)   0.0.0.0:1521->1521/tcp,:::1521->1521/tcp, 0.0.0.0:5500->5500/tcp,:::5500->5500/tcp                                                  
+postgres        docker-entrypoint.sh postgres    Up             0.0.0.0:5432->5432/tcp,:::5432->5432/tcp                                                                                            
+redis           docker-entrypoint.sh redis ...   Up             0.0.0.0:6379->6379/tcp,:::6379->6379/tcp                                                                                            
+sqlite3         bash                             Up             0.0.0.0:31050->5050/tcp,:::31050->5050/tcp 
 </pre>
-
 
 # Documentation and Support
 
@@ -26,11 +40,11 @@ docker-compose start (in the next times)
 
 <h3>Firebird</h3>
 
-> VERSION
+- Version
 
 <pre>3.0.1</pre>
 
-> SETTINGS
+- Settings
 
 Before build the firebird container, use the firebird/data folder path (in this project) to set up the configurations
 that should be used in the Server:
@@ -44,7 +58,31 @@ plugins.conf
 SYSDBA.password
 </pre>
 
-> Sample data connection
+- Terminal Connection
+
+<pre>
+user@host:~/home/user/docker-series/databases$ docker exec -it firebird /bin/bash
+root@f6c930f8ed06:/etc/firebird/3.0# isql-fb 
+Use CONNECT or CREATE DATABASE to specify a database
+</pre>
+
+- Create Database and Table
+
+<pre>
+SQL> CREATE DATABASE '/etc/firebird/3.0/databases/dbname1.fdb';
+SQL> CREATE TABLE users (id INT NOT NULL PRIMARY KEY,name VARCHAR(250) NOT NULL);
+SQL> INSERT INTO users (id, name) VALUES ('94734987', 'John Smith Wiz');
+SQL> COMMIT;
+SQL> SELECT * FROM users;
+
+          ID NAME                                                                                                                                                                                                                                                       
+============ =============================================================================== 
+    94734987 John Smith Wiz                                                                                                                                                                                                                                             
+
+SQL> QUIT;
+</pre>
+
+- Connection SGDB
 
 <pre>
 host: 192.168.0.174
@@ -59,35 +97,19 @@ Reference library file: Jaybird-3.0.12-JDK_1.8.zip (https://firebirdsql.org/en/j
   antlr-runtime-4.7.jar
 </pre>
 
-> Connect using terminal
-
-<pre>
-# isql-fb
-</pre>
-
-> Create a database and table
-
-<pre>
-SQL>CREATE DATABASE '/etc/firebird/3.0/databases/dbname1.fdb'
-CON>user 'SYSDBA' password 'masterkey';
-
-CREATE TABLE users (
-id INT NOT NULL PRIMARY KEY,
-name VARCHAR(250) NOT NULL
-);
-
-INSERT INTO users (id, name) VALUES ('94734987', 'John Smith Suisse');
-
-SELECT * FROM users;
-</pre>
-
-> Install correct driver in your SGDB tool (example: DBeaver) get the driver in the follow address:
+- Install correct driver in your SGDB tool (example: DBeaver) get the driver in the follow address:
 
 <pre>
 https://firebirdsql.org/en/jdbc-driver/
 </pre>
 
-> Below is the visual sample to Firebird Connection from DBeaver using a correct driver
+> TIP: Use the drivers placed in the local path project
+
+<pre>
+./database/drivers/firebird/firebird-3.0.12.zip
+</pre>
+
+- Below is the visual sample to Firebird Connection from DBeaver using a correct driver
 
 ![img.png](./databases/firebird/midias/Firebird-Connection-Details-From-DBeaver.png)
 
