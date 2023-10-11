@@ -16,3 +16,12 @@ See each README file documentation before run this project
 - Postgres: [README.md](databases/postgres/README.md)
 - Redis: [README.md](databases/redis/README.md)
 - SQLite3: [README.md](databases/sqlite3/README.md)
+
+# Usage
+
+Before start the docker-compose up or docker-compose up --build, run the script pre-requisites.sh to prepare in right 
+way the environment.
+
+<pre>
+./pre-requisites.sh
+</pre>
