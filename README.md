@@ -211,13 +211,11 @@ pass: mssql1Ipw
 
 <h3>MongoDB</h3>
 
-> BEFORE RUN
+- Settings
 
 Edit the .env file to create correctly to Mongo Express and MongoDB access.
 
-> AFTER BUILD
-
-> Access the MongoDB Express
+- Access the MongoDB Express
 
 <pre>
 http://${WEBSERVER_ADDRESS}:38091/
@@ -225,12 +223,15 @@ username: ${MONGO_EXPRESS_USERNAME}
 password: ${MONGO_EXPRESS_PASSWORD}
 </pre>
 
-> Create a database: dbname
+![mongo-express-dashboard.png](./databases/midias/mongo-express-dashboard.png)
 
-![img.png](./databases/mongodb/midias/Mongo-Express-Dashboard.png)
+- Create a database: dbname
 
-> Create a collection: users
-> Create a documents(index): id, name
+- Create a collection: users
+
+- Create a documents(index): id, name
+
+![mongo-express-dashboard-collection.png](./databases/midias/mongo-express-dashboard-collection.png)
 
 <h3>MySQL-5.7</h3>
 
