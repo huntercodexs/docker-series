@@ -235,7 +235,7 @@ password: ${MONGO_EXPRESS_PASSWORD}
 
 <h3>MySQL-5.7</h3>
 
-> Access the database
+- Access the database
 
 <pre>
 server: 192.168.0.174
@@ -246,7 +246,7 @@ pass: root123
 
 <h3>MySQL-8.0</h3>
 
-> Access the database
+- Access the database
 
 <pre>
 server: 192.168.0.174

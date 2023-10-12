@@ -141,43 +141,43 @@ services:
         networks:
             - default
             - open_network
-#    #-----------------------------------------------------------------------------------------
-#    mysql-57:
-#        env_file: .env
-#        image: mysql:5.7
-#        container_name: mysql-57
-#        ports:
-#            - ${MYSQL57_PORT}:3306
-#        volumes:
-#            - ./mysql/mysql-57/lib:/var/lib/mysql/
-#        environment:
-#            MYSQL_DATABASE: ${MYSQL57_DATABASE}
-#            MYSQL_USERNAME: ${MYSQL57_USERNAME}
-#            MYSQL_PASSWORD: ${MYSQL57_PASSWORD}
-#            MYSQL_ROOT_PASSWORD: ${MYSQL57_ROOT_PASSWORD}
-#        tty: true
-#        networks:
-#            - default
-#            - open_network
-#    #----------------------------------------------------------------------------------------
-#    mysql-80:
-#        env_file: .env
-#        image: mysql:8.0
-#        container_name: mysql-80
-#        ports:
-#            - ${MYSQL80_PORT}:3306
-#        volumes:
-#            - ./mysql/mysql-80/lib:/var/lib/mysql/
-#        environment:
-#            MYSQL_DATABASE: ${MYSQL80_DATABASE}
-#            MYSQL_USERNAME: ${MYSQL80_USERNAME}
-#            MYSQL_PASSWORD: ${MYSQL80_PASSWORD}
-#            MYSQL_ROOT_PASSWORD: ${MYSQL80_ROOT_PASSWORD}
-#        tty: true
-#        networks:
-#            - default
-#            - open_network
-#    #----------------------------------------------------------------------------------------
+    #-----------------------------------------------------------------------------------------
+    mysql-57:
+        env_file: .env
+        image: mysql:5.7
+        container_name: mysql-57
+        ports:
+            - ${MYSQL57_PORT}:3306
+        volumes:
+            - ./mysql/mysql-57/lib:/var/lib/mysql/
+        environment:
+            MYSQL_DATABASE: ${MYSQL57_DATABASE}
+            MYSQL_USERNAME: ${MYSQL57_USERNAME}
+            MYSQL_PASSWORD: ${MYSQL57_PASSWORD}
+            MYSQL_ROOT_PASSWORD: ${MYSQL57_ROOT_PASSWORD}
+        tty: true
+        networks:
+            - default
+            - open_network
+    #----------------------------------------------------------------------------------------
+    mysql-80:
+        env_file: .env
+        image: mysql:8.0
+        container_name: mysql-80
+        ports:
+            - ${MYSQL80_PORT}:3306
+        volumes:
+            - ./mysql/mysql-80/lib:/var/lib/mysql/
+        environment:
+            MYSQL_DATABASE: ${MYSQL80_DATABASE}
+            MYSQL_USERNAME: ${MYSQL80_USERNAME}
+            MYSQL_PASSWORD: ${MYSQL80_PASSWORD}
+            MYSQL_ROOT_PASSWORD: ${MYSQL80_ROOT_PASSWORD}
+        tty: true
+        networks:
+            - default
+            - open_network
+    #----------------------------------------------------------------------------------------
 #    oraclelinux:
 #        env_file: .env
 #        container_name: oraclelinux
