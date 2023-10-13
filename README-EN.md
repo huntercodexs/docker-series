@@ -1,5 +1,5 @@
 # Docker Series
-A project to work with many docker container
+A repository to offer many configurations for many docker containers
 
 # Languages
 
@@ -133,15 +133,15 @@ docker-compose unpause
 
 # How to use
 
-> Access the folder path /self-container in this project to run any container, by example: apache2
+> Access the folder path /self-container in this repository to run any container, by example: apache2
 
-- Steps do run
+- Steps do run one container
 
 <pre>
-git clone https://github.com/huntercodexs/docker-series.git .
-cd self-containers/apache2
-docker-compose up --build (in first time)
-docker-compose start (in the next times)
+user@host:/home/user$ git clone https://github.com/huntercodexs/docker-series.git .
+user@host:/home/user$ cd docker-series/self-containers/apache2
+user@host:/home/user/docker-series/self-containers$ docker-compose up --build (in first time)
+user@host:/home/user/docker-series/self-containers$ docker-compose start (in the next times)
 </pre>
 
 # Dockers Configurations via Docker-Compose

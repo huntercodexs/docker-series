@@ -1,5 +1,5 @@
 # Docker Series
-Um projeto para trabalhar com muitos containers docker
+Um repositorio para oferecer muitas configurações para muitos containers docker
 
 # Idiomas
 
@@ -132,15 +132,15 @@ docker-compose unpause
 
 # Como usar este projeto
 
-> Acesse a pasta /self-container deste projeto para rodar algum container, exemplo: apache2
+> Acesse a pasta /self-container deste reporitorio para rodar algum container, exemplo: apache2
 
-- Etapas para rodar o container
+- Etapas para rodar um container
 
 <pre>
-git clone https://github.com/huntercodexs/docker-series.git .
-cd self-containers/apache2
-docker-compose up --build (in first time)
-docker-compose start (in the next times)
+user@host:/home/user$ git clone https://github.com/huntercodexs/docker-series.git .
+user@host:/home/user$ cd docker-series/self-containers/apache2
+user@host:/home/user/docker-series/self-containers$ docker-compose up --build (in first time)
+user@host:/home/user/docker-series/self-containers$ docker-compose start (in the next times)
 </pre>
 
 # Configurações Docker via Docker-Compose
