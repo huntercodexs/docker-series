@@ -5,14 +5,14 @@ The helpful repository for all databases
 # Usage
 
 <pre>
-user@host:~/home/user$ git clone https://github.com/huntercodexs/docker-series.git .
-user@host:~/home/user/docker-series$ cd docker-series
-user@host:~/home/user/docker-series$ git checkout databases
-user@host:~/home/user/docker-series$ cd databases
-user@host:~/home/user/docker-series/databases$ ./pre-requisites.sh
-user@host:~/home/user/docker-series/databases$ docker-compose up --build (in first time)
-user@host:~/home/user/docker-series/databases$ docker-compose start (in the next times)
-user@host:~/home/user/docker-series/databases$ docker-compose ps
+user@host:/home/user$ git clone https://github.com/huntercodexs/docker-series.git .
+user@host:/home/user/docker-series$ cd docker-series
+user@host:/home/user/docker-series$ git checkout databases
+user@host:/home/user/docker-series$ cd databases
+user@host:/home/user/docker-series/databases$ ./pre-requisites.sh
+user@host:/home/user/docker-series/databases$ docker-compose up --build (in first time)
+user@host:/home/user/docker-series/databases$ docker-compose start (in the next times)
+user@host:/home/user/docker-series/databases$ docker-compose ps
     Name                   Command                  State                                                                      Ports                                                                
 ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 firebird        firebird                         Up             0.0.0.0:33050->3050/tcp,:::33050->3050/tcp                                                                                          
@@ -54,7 +54,7 @@ SYSDBA.password
 - Terminal Connection
 
 <pre>
-user@host:~/home/user/docker-series/databases$ docker exec -it firebird /bin/bash
+user@host:/home/user/docker-series/databases$ docker exec -it firebird /bin/bash
 root@f6c930f8ed06:/etc/firebird/3.0# isql-fb 
 Use CONNECT or CREATE DATABASE to specify a database
 </pre>
@@ -299,7 +299,7 @@ Set up the .env file on section ORACLELINUX SETTINGS
 
 Unzip the oraclelinux-database-scripts-19c.tar.bz2 file inside the oracle/database folder:
 <pre>
-user@host:~/home/user/docker-series/databases/oracle/database$ tar -xvf oraclelinux-database-scripts-19c.tar.bz2
+user@host:/home/user/docker-series/databases/oracle/database$ tar -xvf oraclelinux-database-scripts-19c.tar.bz2
 </pre>
 Create the oradata folder in oracle path
 Check if oracle/oradata is empty or just have the dbconfig/ and ORCLCDB/ folders
@@ -331,13 +331,13 @@ Make the follow commands in the HOST(the machine where is installed the instance
 
 Set Password Administration
 <pre>
-user@host:~/home/user/docker-series/databases$ docker-compose start oraclelinux
-user@host:~/home/user/docker-series/databases$ docker exec -it oraclelinux ./setPassword.sh {{YOUR_ORACLE_PASSWORD}}
+user@host:/home/user/docker-series/databases$ docker-compose start oraclelinux
+user@host:/home/user/docker-series/databases$ docker exec -it oraclelinux ./setPassword.sh {{YOUR_ORACLE_PASSWORD}}
 </pre>
 
 Result
 <pre>
-user@host:~/home/user/docker-series/databases$ docker exec -it oraclelinux ./setPassword.sh oracle1Ipw
+user@host:/home/user/docker-series/databases$ docker exec -it oraclelinux ./setPassword.sh oracle1Ipw
 The Oracle base remains unchanged with value /opt/oracle
 
 SQL*Plus: Release 19.0.0.0.0 - Production on Thu Oct 12 15:09:12 2023
@@ -368,7 +368,7 @@ Version 19.3.0.0.0
 
 Access the database container
 <pre>
-user@host:~/home/user/docker-series/databases$ docker exec -it oraclelinux /bin/bash
+user@host:/home/user/docker-series/databases$ docker exec -it oraclelinux /bin/bash
 </pre>
 
 - Make the follow commands inside oraclelinux instance via docker (GUEST):
@@ -453,8 +453,8 @@ https://{{WEBSERVER_ADDRESS}}:5500/em
 - Get the superuser postgres in CLI container postgres, and open the postgres database terminal:
 
 <pre>
-user@host:~/home/user/docker-series/databases$ docker-compose start
-user@host:~/home/user/docker-series/databases$ docker exec -it postgres /bin/bash
+user@host:/home/user/docker-series/databases$ docker-compose start
+user@host:/home/user/docker-series/databases$ docker exec -it postgres /bin/bash
 root@c63de647b32a:/# su - postgres
 postgres@c63de647b32a:~$ psql 
 psql (14.4 (Debian 14.4-1.pgdg110+1))
@@ -522,8 +522,8 @@ SELECT * FROM users;
 - Access the container
 
 <pre>
-user@host:~/home/user/docker-series/databases$ docker-compose start
-user@host:~/home/user/docker-series/databases$ docker exec -it redis /bin/bash
+user@host:/home/user/docker-series/databases$ docker-compose start
+user@host:/home/user/docker-series/databases$ docker exec -it redis /bin/bash
 root@3e760fd49412:/opt# redis-cli 
 127.0.0.1:6379>
 </pre>
@@ -547,9 +547,9 @@ OK
 <h3>SQLite3</h3>
 
 <pre>
-user@host:~/home/user/docker-series/databases$ docker-compose up --build
-user@host:~/home/user/docker-series/databases$ docker-compose start
-user@host:~/home/user/docker-series/databases$ docker exec -it sqlite3 /bin/bash
+user@host:/home/user/docker-series/databases$ docker-compose up --build
+user@host:/home/user/docker-series/databases$ docker-compose start
+user@host:/home/user/docker-series/databases$ docker exec -it sqlite3 /bin/bash
 root@0fe895af4841:/opt/sqlite3# cd /root/db/
 root@0fe895af4841:/opt/db# sqlite3 dbname1.db
 SQLite version 3.34.1 2021-01-20 14:10:07
