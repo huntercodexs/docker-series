@@ -1,202 +1,202 @@
 version: "3.7"
 services:
 
-#    #----------------------------------------------------------------------------------------
-#    firebird:
-#        env_file: .env
-#        container_name: firebird
-#        privileged: true
-#        build:
-#            context: ./firebird
-#            dockerfile: firebird.dockerfile
-#            args:
-#                TZ: ${FIREBIRD_TIMEZONE}
-#                ISC_PASSWORD: ${FIREBIRD_ISC_PASSWORD}
-#                FIREBIRD_USER: ${FIREBIRD_USER}
-#                FIREBIRD_DBNAME: ${FIREBIRD_DBNAME}
-#        ports:
-#            - ${FIREBIRD_PORT}:3050
-#        volumes:
-#            - ./firebird/data/:/etc/firebird/3.0/
-#        environment:
-#            TZ: ${FIREBIRD_TIMEZONE}
-#            FIREBIRD_DATABASE: ${FIREBIRD_DBNAME}
-#            FIREBIRD_USER: ${FIREBIRD_USER}
-#            FIREBIRD_PASS: ${FIREBIRD_ISC_PASSWORD}
-#            ISC_PASSWORD: ${FIREBIRD_ISC_PASSWORD}
-#        tty: true
-#        networks:
-#            - default
-#            - open_network
-#    #----------------------------------------------------------------------------------------
-#    h2-database:
-#        env_file: .env
-#        container_name: h2-database
-#        build:
-#            context: ./h2-database
-#            dockerfile: h2-database.dockerfile
-#            args:
-#                H2DATABASE_DBNAME: ${H2DATABASE_DBNAME}
-#                H2DATABASE_USERNAME: ${H2DATABASE_USERNAME}
-#                H2DATABASE_GROUP: ${H2DATABASE_GROUP}
-#                H2DATABASE_HOME: ${H2DATABASE_HOME}
-#                H2DATABASE_VERSION: ${H2DATABASE_VERSION}
-#                H2DATABASE_ZIPFILE: ${H2DATABASE_ZIPFILE}
-#                H2DATABASE_HOST_PORT: ${H2DATABASE_HOST_PORT}
-#                H2DATABASE_HOST_ADDITIONAL_PORT: ${H2DATABASE_HOST_ADDITIONAL_PORT}
-#                H2DATABASE_HOST_TCP_PORT: ${H2DATABASE_HOST_TCP_PORT}
-#                H2DATABASE_TCP_SERVER_PORT: ${H2DATABASE_TCP_SERVER_PORT}
-#                H2DATABASE_HOST_HTTP_PORT: ${H2DATABASE_HOST_HTTP_PORT}
-#                H2DATABASE_HTTP_SERVER_PORT: ${H2DATABASE_HTTP_SERVER_PORT}
-#                H2DATABASE_ADMIN_PASSWORD: ${H2DATABASE_ADMIN_PASSWORD}
-#        ports:
-#            - ${H2DATABASE_HOST_PORT}:${H2DATABASE_HOST_ADDITIONAL_PORT}
-#            - ${H2DATABASE_HOST_TCP_PORT}:${H2DATABASE_TCP_SERVER_PORT}
-#            - ${H2DATABASE_HOST_HTTP_PORT}:${H2DATABASE_HTTP_SERVER_PORT}
-#        volumes:
-#            - ./h2-database/share/:/home/ubuntu/share/
-#        tty: true
-#        networks:
-#            - open_network
-#    #----------------------------------------------------------------------------------------
-#    mssql:
-#        env_file: .env
-#        container_name: mssql
-#        image: mcr.microsoft.com/mssql/server:2019-latest
-#        ports:
-#            - ${MSSQL_PORT}:1433
-#        volumes:
-#            - type: bind
-#              source: ./microsoft/mssql/lib
-#              target: /var/lib/mssql/data/
-#              read_only: false
-#            - type: bind
-#              source: ./microsoft/mssql/opt
-#              target: /var/opt/mssql/data/
-#              read_only: false
-#        environment:
-#            SA_PASSWORD: ${MSSQL_SA_PASSWORD}
-#            MSSQL_SA_PASSWORD: ${MSSQL_SA_PASSWORD}
-#            ACCEPT_EULA: ${MSSQL_ACCEPT_EULA}
-#            MSSQL_PID: ${MSSQL_EDITION}
-#            TRUSTED_CONNECTION: ${MSSQL_TRUSTED_CONNECTION}
-#        tty: true
-#        networks:
-#            - default
-#            - open_network
-#    #----------------------------------------------------------------------------------------
-#    mssql-tools:
-#        env_file: .env
-#        container_name: mssql-tools
-#        image:  mcr.microsoft.com/mssql-tools
-#        ports:
-#            - ${MSSQL_TOOLS_PORT}:10000
-#        tty: true
-#        networks:
-#            - default
-#            - open_network
-#    #----------------------------------------------------------------------------------------
-#    mongo:
-#        env_file: .env
-#        container_name: mongo
-#        image: mongo
-#        ports:
-#            - ${MONGO_PORT}:27017
-#        environment:
-#            MONGO_INITDB_ROOT_USERNAME: ${MONGO_INIT_DB_ROOT_USERNAME}
-#            MONGO_INITDB_ROOT_PASSWORD: ${MONGO_INIT_DB_ROOT_PASSWORD}
-#        volumes:
-#            - type: bind
-#              source: ./mongodb/mongo/MongoDB
-#              target: /data/db/
-#              read_only: false
-#            - type: bind
-#              source: ./mongodb/mongo/mongod.conf
-#              target: /etc/mongod.conf
-#              read_only: false
-#        tty: true
-#        networks:
-#            - default
-#            - open_network
-#    #----------------------------------------------------------------------------------------
-#    mongo-express:
-#        env_file: .env
-#        container_name: mongo-express
-#        image: mongo-express
-#        ports:
-#            - ${MONGO_EXPRESS_PORT}:8081
-#        environment:
-#            ME_CONFIG_MONGODB_SERVER: ${MONGO_EXPRESS_SERVER_DRIVER}
-#            ME_CONFIG_MONGODB_PORT: ${MONGO_EXPRESS_SERVER_PORT}
-#            ME_CONFIG_MONGODB_ADMINUSERNAME: ${MONGO_EXPRESS_SERVER_USERNAME}
-#            ME_CONFIG_MONGODB_ADMINPASSWORD: ${MONGO_EXPRESS_SERVER_PASSWORD}
-#            ME_CONFIG_MONGODB_URL: ${MONGO_EXPRESS_SERVER_URL}
-#            ME_CONFIG_BASICAUTH_USERNAME: ${MONGO_EXPRESS_USERNAME}
-#            ME_CONFIG_BASICAUTH_PASSWORD: ${MONGO_EXPRESS_PASSWORD}
-#        tty: true
-#        links:
-#            - mongo
-#        depends_on:
-#            - mongo
-#        networks:
-#            - default
-#            - open_network
-#    #-----------------------------------------------------------------------------------------
-#    mysql-57:
-#        env_file: .env
-#        image: mysql:5.7
-#        container_name: mysql-57
-#        ports:
-#            - ${MYSQL57_PORT}:3306
-#        volumes:
-#            - ./mysql/mysql-57/lib:/var/lib/mysql/
-#        environment:
-#            MYSQL_DATABASE: ${MYSQL57_DATABASE}
-#            MYSQL_USERNAME: ${MYSQL57_USERNAME}
-#            MYSQL_PASSWORD: ${MYSQL57_PASSWORD}
-#            MYSQL_ROOT_PASSWORD: ${MYSQL57_ROOT_PASSWORD}
-#        tty: true
-#        networks:
-#            - default
-#            - open_network
-#    #----------------------------------------------------------------------------------------
-#    mysql-80:
-#        env_file: .env
-#        image: mysql:8.0
-#        container_name: mysql-80
-#        ports:
-#            - ${MYSQL80_PORT}:3306
-#        volumes:
-#            - ./mysql/mysql-80/lib:/var/lib/mysql/
-#        environment:
-#            MYSQL_DATABASE: ${MYSQL80_DATABASE}
-#            MYSQL_USERNAME: ${MYSQL80_USERNAME}
-#            MYSQL_PASSWORD: ${MYSQL80_PASSWORD}
-#            MYSQL_ROOT_PASSWORD: ${MYSQL80_ROOT_PASSWORD}
-#        tty: true
-#        networks:
-#            - default
-#            - open_network
-#    #----------------------------------------------------------------------------------------
-#    oraclelinux:
-#        env_file: .env
-#        container_name: oraclelinux
-#        build:
-#            context: ./oracle/database
-#            dockerfile: oraclelinux.dockerfile
-#            args:
-#                DB_EDITION: ${DB_EDITION}
-#                ORACLE_PASSWORD: ${ORACLELINUX_PASSWORD}
-#        volumes:
-#            - ./oracle/share:/home/oracle/share
-#            - ./oracle/oradata:/opt/oracle/oradata
-#        ports:
-#            - ${ORACLELINUX_PORT1}:1521
-#            - ${ORACLELINUX_PORT2}:5500
-#        tty: true
-#        networks:
-#            - default
-#            - open_network
+    #----------------------------------------------------------------------------------------
+    firebird:
+        env_file: .env
+        container_name: firebird
+        privileged: true
+        build:
+            context: ./firebird
+            dockerfile: firebird.dockerfile
+            args:
+                TZ: ${FIREBIRD_TIMEZONE}
+                ISC_PASSWORD: ${FIREBIRD_ISC_PASSWORD}
+                FIREBIRD_USER: ${FIREBIRD_USER}
+                FIREBIRD_DBNAME: ${FIREBIRD_DBNAME}
+        ports:
+            - ${FIREBIRD_PORT}:3050
+        volumes:
+            - ./firebird/data/:/etc/firebird/3.0/
+        environment:
+            TZ: ${FIREBIRD_TIMEZONE}
+            FIREBIRD_DATABASE: ${FIREBIRD_DBNAME}
+            FIREBIRD_USER: ${FIREBIRD_USER}
+            FIREBIRD_PASS: ${FIREBIRD_ISC_PASSWORD}
+            ISC_PASSWORD: ${FIREBIRD_ISC_PASSWORD}
+        tty: true
+        networks:
+            - default
+            - open_network
+    #----------------------------------------------------------------------------------------
+    h2-database:
+        env_file: .env
+        container_name: h2-database
+        build:
+            context: ./h2-database
+            dockerfile: h2-database.dockerfile
+            args:
+                H2DATABASE_DBNAME: ${H2DATABASE_DBNAME}
+                H2DATABASE_USERNAME: ${H2DATABASE_USERNAME}
+                H2DATABASE_GROUP: ${H2DATABASE_GROUP}
+                H2DATABASE_HOME: ${H2DATABASE_HOME}
+                H2DATABASE_VERSION: ${H2DATABASE_VERSION}
+                H2DATABASE_ZIPFILE: ${H2DATABASE_ZIPFILE}
+                H2DATABASE_HOST_PORT: ${H2DATABASE_HOST_PORT}
+                H2DATABASE_HOST_ADDITIONAL_PORT: ${H2DATABASE_HOST_ADDITIONAL_PORT}
+                H2DATABASE_HOST_TCP_PORT: ${H2DATABASE_HOST_TCP_PORT}
+                H2DATABASE_TCP_SERVER_PORT: ${H2DATABASE_TCP_SERVER_PORT}
+                H2DATABASE_HOST_HTTP_PORT: ${H2DATABASE_HOST_HTTP_PORT}
+                H2DATABASE_HTTP_SERVER_PORT: ${H2DATABASE_HTTP_SERVER_PORT}
+                H2DATABASE_ADMIN_PASSWORD: ${H2DATABASE_ADMIN_PASSWORD}
+        ports:
+            - ${H2DATABASE_HOST_PORT}:${H2DATABASE_HOST_ADDITIONAL_PORT}
+            - ${H2DATABASE_HOST_TCP_PORT}:${H2DATABASE_TCP_SERVER_PORT}
+            - ${H2DATABASE_HOST_HTTP_PORT}:${H2DATABASE_HTTP_SERVER_PORT}
+        volumes:
+            - ./h2-database/share/:/home/ubuntu/share/
+        tty: true
+        networks:
+            - open_network
+    #----------------------------------------------------------------------------------------
+    mssql:
+        env_file: .env
+        container_name: mssql
+        image: mcr.microsoft.com/mssql/server:2019-latest
+        ports:
+            - ${MSSQL_PORT}:1433
+        volumes:
+            - type: bind
+              source: ./microsoft/mssql/lib
+              target: /var/lib/mssql/data/
+              read_only: false
+            - type: bind
+              source: ./microsoft/mssql/opt
+              target: /var/opt/mssql/data/
+              read_only: false
+        environment:
+            SA_PASSWORD: ${MSSQL_SA_PASSWORD}
+            MSSQL_SA_PASSWORD: ${MSSQL_SA_PASSWORD}
+            ACCEPT_EULA: ${MSSQL_ACCEPT_EULA}
+            MSSQL_PID: ${MSSQL_EDITION}
+            TRUSTED_CONNECTION: ${MSSQL_TRUSTED_CONNECTION}
+        tty: true
+        networks:
+            - default
+            - open_network
+    #----------------------------------------------------------------------------------------
+    mssql-tools:
+        env_file: .env
+        container_name: mssql-tools
+        image:  mcr.microsoft.com/mssql-tools
+        ports:
+            - ${MSSQL_TOOLS_PORT}:10000
+        tty: true
+        networks:
+            - default
+            - open_network
+    #----------------------------------------------------------------------------------------
+    mongo:
+        env_file: .env
+        container_name: mongo
+        image: mongo
+        ports:
+            - ${MONGO_PORT}:27017
+        environment:
+            MONGO_INITDB_ROOT_USERNAME: ${MONGO_INIT_DB_ROOT_USERNAME}
+            MONGO_INITDB_ROOT_PASSWORD: ${MONGO_INIT_DB_ROOT_PASSWORD}
+        volumes:
+            - type: bind
+              source: ./mongodb/mongo/MongoDB
+              target: /data/db/
+              read_only: false
+            - type: bind
+              source: ./mongodb/mongo/mongod.conf
+              target: /etc/mongod.conf
+              read_only: false
+        tty: true
+        networks:
+            - default
+            - open_network
+    #----------------------------------------------------------------------------------------
+    mongo-express:
+        env_file: .env
+        container_name: mongo-express
+        image: mongo-express
+        ports:
+            - ${MONGO_EXPRESS_PORT}:8081
+        environment:
+            ME_CONFIG_MONGODB_SERVER: ${MONGO_EXPRESS_SERVER_DRIVER}
+            ME_CONFIG_MONGODB_PORT: ${MONGO_EXPRESS_SERVER_PORT}
+            ME_CONFIG_MONGODB_ADMINUSERNAME: ${MONGO_EXPRESS_SERVER_USERNAME}
+            ME_CONFIG_MONGODB_ADMINPASSWORD: ${MONGO_EXPRESS_SERVER_PASSWORD}
+            ME_CONFIG_MONGODB_URL: ${MONGO_EXPRESS_SERVER_URL}
+            ME_CONFIG_BASICAUTH_USERNAME: ${MONGO_EXPRESS_USERNAME}
+            ME_CONFIG_BASICAUTH_PASSWORD: ${MONGO_EXPRESS_PASSWORD}
+        tty: true
+        links:
+            - mongo
+        depends_on:
+            - mongo
+        networks:
+            - default
+            - open_network
+    #-----------------------------------------------------------------------------------------
+    mysql-57:
+        env_file: .env
+        image: mysql:5.7
+        container_name: mysql-57
+        ports:
+            - ${MYSQL57_PORT}:3306
+        volumes:
+            - ./mysql/mysql-57/lib:/var/lib/mysql/
+        environment:
+            MYSQL_DATABASE: ${MYSQL57_DATABASE}
+            MYSQL_USERNAME: ${MYSQL57_USERNAME}
+            MYSQL_PASSWORD: ${MYSQL57_PASSWORD}
+            MYSQL_ROOT_PASSWORD: ${MYSQL57_ROOT_PASSWORD}
+        tty: true
+        networks:
+            - default
+            - open_network
+    #----------------------------------------------------------------------------------------
+    mysql-80:
+        env_file: .env
+        image: mysql:8.0
+        container_name: mysql-80
+        ports:
+            - ${MYSQL80_PORT}:3306
+        volumes:
+            - ./mysql/mysql-80/lib:/var/lib/mysql/
+        environment:
+            MYSQL_DATABASE: ${MYSQL80_DATABASE}
+            MYSQL_USERNAME: ${MYSQL80_USERNAME}
+            MYSQL_PASSWORD: ${MYSQL80_PASSWORD}
+            MYSQL_ROOT_PASSWORD: ${MYSQL80_ROOT_PASSWORD}
+        tty: true
+        networks:
+            - default
+            - open_network
+    #----------------------------------------------------------------------------------------
+    oraclelinux:
+        env_file: .env
+        container_name: oraclelinux
+        build:
+            context: ./oracle/database
+            dockerfile: oraclelinux.dockerfile
+            args:
+                DB_EDITION: ${DB_EDITION}
+                ORACLE_PASSWORD: ${ORACLELINUX_PASSWORD}
+        volumes:
+            - ./oracle/share:/home/oracle/share
+            - ./oracle/oradata:/opt/oracle/oradata
+        ports:
+            - ${ORACLELINUX_PORT1}:1521
+            - ${ORACLELINUX_PORT2}:5500
+        tty: true
+        networks:
+            - default
+            - open_network
     #----------------------------------------------------------------------------------------
     postgres:
         env_file: .env
