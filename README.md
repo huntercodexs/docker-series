@@ -1,44 +1,54 @@
 
 # APACHE2 + PHP8
-Docker Series - A project to work with many docker container
+An quick repository to build an environment for PHP8
 
--------------------
 
 # Information
 
-Please use the branch selection to access others environment configurations
+Please use the branch selector to access others environment configurations
 
--------------------
 
-# Dockers Configurations Contained
+# Docker Configurations Contained
 
 - Ubuntu/Apache2
 - PHP-8.0
 
--------------------
 
 # How to use
 
 - Clone this project from GitHub
 
 <pre>
-user@host$ git clone https://github.com/huntercodexs/docker-series.git .
-user@host$ git checkout apache2_php8
-user@host$ cd apache2_php8/
-user@host$ docker-compose up --build (in first time)
-user@host$ docker-compose start (in others case)
+user@host:/home/user$ git clone https://github.com/huntercodexs/docker-series.git .
+user@host:/home/user$ cd docker-series
+user@host:/home/user/docker-series$ git checkout apache2_php8
+user@host:/home/user/docker-series$ cd apache2_php8/
+user@host:/home/user/docker-series/apache2_php8$ docker-compose up --build (in first time)
+user@host:/home/user/docker-series/apache2_php8$ docker-compose start (in others case)
 </pre>
 
 - Create a Network if needed
 
 <pre>
-docker network create open_network
+user@host:/home/user/docker-series/apache2_php8$ docker network create open_network
 </pre>
 
-- Set up the apache2 server configurations (see more details in docker-compose.yml)
+- Set up the app configurations (see more details in docker-compose.yml)
 
 <pre>
-app.local.conf
+user@host:/home/user/docker-series/apache2_php8/apache2/conf$ app.local.conf
+</pre>
+
+- Set up default configurations (see more details in docker-compose.yml)
+
+<pre>
+user@host:/home/user/docker-series/apache2_php8/apache2/conf$ 000-default.local.conf
+</pre>
+
+- Set up the applications
+
+<pre>
+user@host:/home/user/docker-series/apache2_php8/app$ ls app1 app2
 </pre>
 
 - Access the webserver application
@@ -46,5 +56,3 @@ app.local.conf
 <pre>
 http://${WEBSERVER_ADDRESS}:38000
 </pre>
-
--------------------

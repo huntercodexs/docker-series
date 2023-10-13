@@ -15,10 +15,15 @@ services:
               source: ./app/
               target: /var/www/html
               read_only: false
-            # Apache2 settings
+            # App settings
             - type: bind
-              source: ./apache2/conf/app.local.conf
-              target: /etc/apache2/sites-available/app.local.conf
+              source: ./apache2/conf/app.conf
+              target: /etc/apache2/sites-available/app.conf
+              read_only: false
+            # Default settings
+            - type: bind
+              source: ./apache2/conf/000-default.conf
+              target: /etc/apache2/sites-available/000-default.conf
               read_only: false
         ports:
             - ${APACHE2_PHP8_PORT1}:80
