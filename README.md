@@ -526,14 +526,16 @@ SELECT * FROM users;
 
 <h3>Redis</h3>
 
-<pre>
-docker exec -it redis /bin/bash
-</pre>
+- Access the container
 
 <pre>
+user@host:~/home/user/docker-series/databases$ docker-compose start
+user@host:~/home/user/docker-series/databases$ docker exec -it redis /bin/bash
 root@3e760fd49412:/opt# redis-cli 
 127.0.0.1:6379>
 </pre>
+
+- Test
 
 <pre>
 root@3e760fd49412:/opt# redis-cli -h 127.0.0.1 -p 6379 -a '123@Mudar!'

@@ -218,25 +218,25 @@ services:
         networks:
             - default
             - open_network
-#    #----------------------------------------------------------------------------------------
-#    redis:
-#        env_file: .env
-#        container_name: redis
-#        build:
-#            context: ./redis
-#            dockerfile: redis.dockerfile
-#        ports:
-#            - ${REDIS_PORT}:6379
-#        volumes:
-#            - type: bind
-#              source: ./redis/data
-#              target: /data/
-#              read_only: false
-#        command: redis-server --requirepass ${REDIS_AUTH}
-#        tty: true
-#        networks:
-#            - default
-#            - open_network
+    #----------------------------------------------------------------------------------------
+    redis:
+        env_file: .env
+        container_name: redis
+        build:
+            context: ./redis
+            dockerfile: redis.dockerfile
+        ports:
+            - ${REDIS_PORT}:6379
+        volumes:
+            - type: bind
+              source: ./redis/data
+              target: /data/
+              read_only: false
+        command: redis-server --requirepass ${REDIS_AUTH}
+        tty: true
+        networks:
+            - default
+            - open_network
 #    #-----------------------------------------------------------------------------------------
 #    # NOTE: The sqlite don't can used remotely
 #    sqlite3:
