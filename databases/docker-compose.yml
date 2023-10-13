@@ -237,32 +237,32 @@ services:
         networks:
             - default
             - open_network
-#    #-----------------------------------------------------------------------------------------
-#    # NOTE: The sqlite don't can used remotely
-#    sqlite3:
-#        env_file: .env
-#        container_name: sqlite3
-#        build:
-#            context: ./sqlite3
-#            dockerfile: sqlite3.dockerfile
-#        privileged: true
-#        ports:
-#            - ${SQLITE3_PORT}:5050
-#        volumes:
-#            - type: bind
-#              source: ./sqlite3/sqliteDB/sqlite-autoconf
-#              target: /opt/sqlite3
-#              read_only: false
-#            - type: bind
-#              source: ./sqlite3/sqliteDB/databases
-#              target: /root/db/
-#              read_only: false
-#        stdin_open: true
-#        tty: true
-#        networks:
-#            - default
-#            - open_network
-#    #----------------------------------------------------------------------------------------
+    #-----------------------------------------------------------------------------------------
+    # NOTE: The sqlite don't can used remotely
+    sqlite3:
+        env_file: .env
+        container_name: sqlite3
+        build:
+            context: ./sqlite3
+            dockerfile: sqlite3.dockerfile
+        privileged: true
+        ports:
+            - ${SQLITE3_PORT}:5050
+        volumes:
+            - type: bind
+              source: ./sqlite3/sqliteDB/sqlite-autoconf
+              target: /opt/sqlite3
+              read_only: false
+            - type: bind
+              source: ./sqlite3/sqliteDB/databases
+              target: /root/db/
+              read_only: false
+        stdin_open: true
+        tty: true
+        networks:
+            - default
+            - open_network
+    #----------------------------------------------------------------------------------------
     
 networks:
     open_network:

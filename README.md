@@ -554,7 +554,9 @@ OK
 <h3>SQLite3</h3>
 
 <pre>
-user@ubuntu-desktop:~/Server/Devel/docker-series/self-containers/sqlite3$ docker exec -it sqlite3 /bin/bash
+user@host:~/home/user/docker-series/databases$ docker-compose up --build
+user@host:~/home/user/docker-series/databases$ docker-compose start
+user@host:~/home/user/docker-series/databases$ docker exec -it sqlite3 /bin/bash
 root@0fe895af4841:/opt/sqlite3# cd /root/db/
 root@0fe895af4841:/opt/db# sqlite3 dbname1.db
 SQLite version 3.34.1 2021-01-20 14:10:07
