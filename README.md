@@ -1,13 +1,8 @@
 
 # Databases
-
-----
-
 The helpful repository for all databases
 
 # Usage
-
-----
 
 <pre>
 user@host:~/home/user$ git clone https://github.com/huntercodexs/docker-series.git .
@@ -35,8 +30,6 @@ sqlite3         bash                             Up             0.0.0.0:31050->5
 </pre>
 
 # Documentation and Support
-
-----
 
 <h3>Firebird</h3>
 
