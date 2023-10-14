@@ -70,3 +70,26 @@ cd /etc/nginx/ssl/
 cat /etc/nginx/ssl/$NGINX_SSL_1_COMMON_NAME.crt /etc/nginx/ssl/ca.crt >> /etc/nginx/ssl/$NGINX_SSL_1_COMMON_NAME.chained.crt
 ls -ltr
 chmod 755 -R /etc/nginx/ssl/
+cp /home/nginx/ca.crt /etc/nginx/ssl/
+cp /home/nginx/huntercodexs.local.req.crt /etc/nginx/ssl/
+cp /tmp/huntercodexs.key /etc/nginx/ssl/
+cp /tmp/huntercodexs.local.key /etc/nginx/ssl/
+cd /etc/nginx/ssl/
+cat /etc/nginx/ssl/huntercodexs.local.crt /etc/nginx/ssl/ca.crt >> /etc/nginx/ssl/huntercodexs.local.chained.crt
+cat /etc/nginx/ssl/huntercodexs.local.req.crt /etc/nginx/ssl/ca.crt >> /etc/nginx/ssl/huntercodexs.local.chained.crt
+su root
+su root
+chmod 755 -R /etc/nginx/ssl/
+nginx -t
+ls -ltr
+cd ..
+ls -ltr
+cp /home/nginx/ca.crt /etc/nginx/ssl/
+cp /home/nginx/huntercodexs.local.crt /etc/nginx/ssl/
+cp /tmp/huntercodexs.local.key /etc/nginx/ssl/
+cd /etc/nginx/ssl/
+ls
+cat /etc/nginx/ssl/huntercodexs.local.crt /etc/nginx/ssl/ca.crt >> /etc/nginx/ssl/huntercodexs.local.chained.crt
+chmod 755 -R /etc/nginx/ssl/
+nginx -t
+nginx -t
