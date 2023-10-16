@@ -18,12 +18,21 @@ public class CustomerEntity {
     private long id;
 
     @Column
+    private int personType;
+
+    @Column
     private String name;
 
     @Column
-    private String email;
+    private String identification;
 
     @Column
-    private int age;
+    private String bornDate;
+
+    @Column
+    private String purchaseDate;
+
+    @Column
+    private String contractNumber;
 
 }

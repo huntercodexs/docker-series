@@ -23,9 +23,12 @@ public class CustomerController {
     @ResponseBody
     public ResponseEntity<?> create(@RequestBody CustomerDto customerDto) {
         CustomerEntity customerEntity = new CustomerEntity();
+        customerEntity.setPersonType(customerDto.getPersonType());
         customerEntity.setName(customerDto.getName());
-        customerEntity.setEmail(customerDto.getEmail());
-        customerEntity.setAge(customerDto.getAge());
+        customerEntity.setIdentification(customerDto.getIdentification());
+        customerEntity.setBornDate(customerDto.getBornDate());
+        customerEntity.setPurchaseDate(customerDto.getPurchaseDate());
+        customerEntity.setContractNumber(customerDto.getContractNumber());
         customerRepository.save(customerEntity);
         return ResponseEntity.ok().body("ok");
     }

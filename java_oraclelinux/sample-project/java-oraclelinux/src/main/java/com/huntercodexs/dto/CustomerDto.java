@@ -8,7 +8,11 @@ import lombok.*;
 @NoArgsConstructor
 @AllArgsConstructor(access = AccessLevel.PRIVATE)
 public class CustomerDto {
+    String id;
+    int personType;
     String name;
-    String email;
-    int age;
+    String identification;
+    String bornDate;
+    String purchaseDate;
+    String contractNumber;
 }
