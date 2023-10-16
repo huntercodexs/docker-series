@@ -2,6 +2,8 @@ package com.huntercodexs.dto;
 
 import lombok.*;
 
+import java.sql.Date;
+
 @Getter
 @Setter
 @ToString
@@ -12,7 +14,7 @@ public class CustomerDto {
     int personType;
     String name;
     String identification;
-    String bornDate;
-    String purchaseDate;
+    Date bornDate;
+    Date purchaseDate;
     String contractNumber;
 }

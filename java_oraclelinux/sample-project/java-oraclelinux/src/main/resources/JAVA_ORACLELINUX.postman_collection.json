@@ -34,7 +34,7 @@
 				"header": [],
 				"body": {
 					"mode": "raw",
-					"raw": "{\n    \"personType\": 1,\n    \"name\": \"Joana da Silva e Silva\",\n    \"identification\": \"12349034839\",\n    \"bornDate\": \"1990/09/11\",\n    \"purchaseDate\": \"2015/01/03\",\n    \"contractNumber\": \"123456\"\n}",
+					"raw": "{\n    \"personType\": 1,\n    \"name\": \"Mariana da Silva e Silva\",\n    \"identification\": \"12349034839\",\n    \"bornDate\": \"1990-09-11T10:00:00.100Z\",\n    \"purchaseDate\": \"2015-01-03T20:09:11.900Z\",\n    \"contractNumber\": \"123456\"\n}",
 					"options": {
 						"raw": {
 							"language": "json"

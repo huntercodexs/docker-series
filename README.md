@@ -18,6 +18,21 @@ user@host:/home/user$ cd docker-series.git
 user@host:/home/user/docker-series git checkout java_oraclelinux
 user@host:/home/user/docker-series$ cd java_oraclelinux
 user@host:/home/user/docker-series/java_oraclelinux$ docker-compose up --build (in first time)
+user@host:/home/user/docker-series/java_oraclelinux$ [Ctrl+C]
+</pre>
+
+Uncomment the line "command" inside docker-compose.yaml before run the command "docker-compose start"
+
+<pre>
+from
+#command: "java -jar /home/openjdk8u212/JAVA-ORACLELINUX-22.01.1-SNAPSHOT.jar --spring.config.location=/home/openjdk8u212/application.properties"
+to
+command: "java -jar /home/openjdk8u212/JAVA-ORACLELINUX-22.01.1-SNAPSHOT.jar --spring.config.location=/home/openjdk8u212/application.properties"
+</pre>
+
+And so run the docker-compose command
+
+<pre>
 user@host:/home/user/docker-series/java_oraclelinux$ docker-compose start (in the next times)
 </pre>
 
@@ -105,7 +120,7 @@ Make the follow commands in the HOST(the machine where is installed the instance
 
 Set Password Administration
 <pre>
-user@host:/home/user/docker-series/java_oraclelinux docker-compose start oraclelinux
+user@host:/home/user/docker-series/java_oraclelinux$ docker-compose start oraclelinux
 user@host:/home/user/docker-series/java_oraclelinux$ docker exec -it oraclelinux ./setPassword.sh {{YOUR_ORACLE_PASSWORD}}
 </pre>
 
@@ -255,3 +270,100 @@ To run the sample projects contained in this project get the project files into 
 <pre>
 ./java_oraclelinux/sample-project/java-oraclelinux/src/main/resources/JAVA_ORACLELINUX.postman_collection.json
 </pre>
+
+# Step by Step
+
+> NOTE: This process take a long time
+
+> NOTE: Check the permissions in the current directory and sub folders
+
+<pre>
+ 1- user@host:/home/user$ git clone https://github.com/huntercodexs/docker-series.git .
+ 
+ 2- user@host:/home/user$ cd docker-series.git
+ 
+ 3- user@host:/home/user/docker-series git checkout java_oraclelinux
+
+ 4- user@host:/home/user/docker-series$ cd java_oraclelinux
+ 
+ 5- Set up the .env file on section ORACLELINUX SETTINGS
+ 
+ 6- Put the LINUX.X64_193000_db_home.zip inside oracle/database before run the docker-compose
+    6.1- The path oracle/oradata in current container instance "should be empty"
+    6.2- Ensure that the oracle/oradata is empty or just have the dbconfig/ and ORCLCDB/ folders
+ 
+ 7- user@host:/home/user/docker-series/java_oraclelinux/oracle/database$ cd oracle/database
+ 
+ 8- user@host:/home/user/docker-series/java_oraclelinux/oracle/database$ tar -xvf oraclelinux-database-scripts-19c.tar.bz2
+ 
+ 9- user@host:/home/user/docker-series/java_oraclelinux/oracle/database$ cd ../../
+
+10- user@host:/home/user/docker-series/java_oraclelinux/oracle/database$ docker network create open_network
+
+11- user@host:/home/user/docker-series/java_oraclelinux$ docker-compose up --build
+
+12- user@host:/home/user/docker-series/java_oraclelinux$ [Ctrl+C]
+
+13- Uncomment the line "command" inside docker-compose.yml before run the command "docker-compose start"
+    from
+    #command: "java -jar /home/openjdk8u212/JAVA-ORACLELINUX-22.01.1-SNAPSHOT.jar --spring.config.location=/home/openjdk8u212/application.properties"
+    to
+    command: "java -jar /home/openjdk8u212/JAVA-ORACLELINUX-22.01.1-SNAPSHOT.jar --spring.config.location=/home/openjdk8u212/application.properties"
+
+14- user@host:/home/user/docker-series/java_oraclelinux$ docker-compose start oraclelinux
+
+15- user@host:/home/user/docker-series/java_oraclelinux$ docker exec -it oraclelinux ./setPassword.sh {{YOUR_ORACLE_PASSWORD}}
+
+16- user@host:/home/user/docker-series/java_oraclelinux$ docker exec -it oraclelinux /bin/bash
+
+17- Create User ==============
+sqlplus sys/{{ORACLELINUX_PASSWORD}}@{{ORACLELINUX_PDB}} as sysdba
+CREATE USER {{ORACLELINUX_USERNAME}} IDENTIFIED BY {{ORACLELINUX_PASSWORD}};
+GRANT CREATE SESSION, CREATE TABLE, CREATE SEQUENCE TO {{ORACLELINUX_USERNAME}};
+ALTER USER {{ORACLELINUX_USERNAME}} QUOTA 50m ON SYSTEM;
+CREATE SMALLFILE TABLESPACE {{ORACLELINUX_USERNAME}} DATAFILE '{{ORACLELINUX_DATABASE_TABLESPACE}}' SIZE 1G;
+ALTER DATABASE DEFAULT TABLESPACE {{ORACLELINUX_USERNAME}};
+ALTER USER {{ORACLELINUX_USERNAME}} QUOTA UNLIMITED ON SYSTEM;
+ALTER USER {{ORACLELINUX_USERNAME}} QUOTA UNLIMITED ON {{ORACLELINUX_TABLESPACE_NAME}};
+SELECT * FROM ALL_USERS au;
+SELECT * FROM ALL_USERS au WHERE au.USERNAME = '{{ORACLELINUX_USERNAME}}';
+EXIT; =====================
+[Ctrl+D]
+
+18- Insert Data: java_oraclelinux/oracle/scripts/init.sql (TIP: Use the SGDB to do it)
+
+19- user@host:/home/user/docker-series/java_oraclelinux$ docker-compose stop
+
+20- user@host:/home/user/docker-series/java_oraclelinux$ docker-compose start oraclelinux
+
+21- user@host:/home/user/docker-series/java_oraclelinux$ docker-compose up openjdk-8u212
+    - Don't forget to put the jar file and application.properties inside the app path
+
+22- user@host:/home/user/docker-series/java_oraclelinux$ [Ctrl+C]
+
+23- user@host:/home/user/docker-series/java_oraclelinux$ docker-compose start
+    23.1- user@host:/home/user/docker-series/java_oraclelinux$ docker exec -it openjdk-8u212 /bin/bash
+    root@0c6b773f4f35:/home/openjdk8u212# ps -ef | grep java
+    root           1       0 99 18:05 pts/0    00:00:20 java -jar /home/openjdk8u212/JAVA-ORACLELINUX-22.01.1-SNAPSHOT.jar --spring.config.location=/home/openjdk8u212/application.properties
+    root          61      54  0 18:06 pts/1    00:00:00 grep java
+    root@0c6b773f4f35:/home/openjdk8u212# [Ctrl+D]
+
+24- user@host:/home/user/docker-series/java_oraclelinux$ docker-compose ps
+        Name                   Command                  State                                             Ports                                       
+    --------------------------------------------------------------------------------------------------------------------------------------------------
+    openjdk-8u212   bash                             Up             0.0.0.0:38001->38001/tcp,:::38001->38001/tcp                                      
+    oraclelinux     /bin/sh -c exec $ORACLE_BA ...   Up (healthy)   0.0.0.0:1521->1521/tcp,:::1521->1521/tcp, 0.0.0.0:5500->5500/tcp,:::5500->5500/tcp
+
+25- #Use Postman to make tests
+    GET http://localhost:38001/api/v1/customers
+    POST http://localhost:38001/api/v1/customers
+    {
+        "personType": 1,
+        "name": "Mariana da Silva e Silva",
+        "identification": "12349034839",
+        "bornDate": "1990-09-11T10:00:00.100Z",
+        "purchaseDate": "2015-01-03T20:09:11.900Z",
+        "contractNumber": "123456"
+    }
+</pre>
+

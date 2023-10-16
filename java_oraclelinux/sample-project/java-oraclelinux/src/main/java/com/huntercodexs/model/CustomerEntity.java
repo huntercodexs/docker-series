@@ -5,6 +5,7 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
+import java.sql.Date;
 
 @Data
 @AllArgsConstructor
@@ -27,10 +28,10 @@ public class CustomerEntity {
     private String identification;
 
     @Column
-    private String bornDate;
+    private Date bornDate;
 
     @Column
-    private String purchaseDate;
+    private Date purchaseDate;
 
     @Column
     private String contractNumber;
