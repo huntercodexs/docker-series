@@ -273,6 +273,8 @@ user@host:/home/user/docker-series/self-containers$ docker-compose start (in the
 - <a href="https://github.com/huntercodexs/docker-series/tree/httpd_php8_separated">HTTPD + PHP8</a> ![img.png](./self-containers/files/midias/check-green.png)
 - <a href="https://github.com/huntercodexs/docker-series/tree/java_mongodb">JAVA + MONGODB</a> ![img.png](./self-containers/files/midias/check-green.png)
 - <a href="https://github.com/huntercodexs/docker-series/tree/java_mssql">JAVA + MSSQL</a> ![img.png](./self-containers/files/midias/check-green.png)
+- <a href="https://github.com/huntercodexs/docker-series/tree/java_mysql">JAVA + MYSQL</a> ![img.png](./self-containers/files/midias/check-green.png)
+- <a href="https://github.com/huntercodexs/docker-series/tree/java_firebird">JAVA + FIREBIRD</a> ![img.png](./self-containers/files/midias/check-green.png)
 - <a href="https://github.com/huntercodexs/docker-series/tree/java_oraclelinux">JAVA + ORACLE</a> ![img.png](./self-containers/files/midias/check-green.png)
 - <a href="https://github.com/huntercodexs/docker-series/tree/java_postgres">JAVA + POSTGRES</a> ![img.png](./self-containers/files/midias/check-green.png)
 - <a href="https://github.com/huntercodexs/docker-series/tree/nginx_php8_mysql">NGINX + PHP8 + MYSQL</a> ![img.png](./self-containers/files/midias/check-green.png)
