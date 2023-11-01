@@ -33,6 +33,7 @@ services:
             dockerfile: ec2_api_gateway.dockerfile
         ports:
             - ${API_GATEWAY_PORT}:8765
+            - ${API_GATEWAY_HEALTH_PORT}:8081
         privileged: true
         tty: true
         volumes:
@@ -43,9 +44,11 @@ services:
         depends_on:
             - mysql8
             - rabbitmq
+            - ec2_service_discovery
         links:
             - mysql8
             - rabbitmq
+            - ec2_service_discovery
         command: "/usr/bin/java -jar /home/shared/API-GATEWAY-22.01.1-SNAPSHOT.jar --spring.config.location=/home/shared/application.properties"
     #----------------------------------------------------------------------------------------
     ec2_rabbitmq_reader:
@@ -64,9 +67,13 @@ services:
         depends_on:
             - mysql8
             - rabbitmq
+            - ec2_service_discovery
+            - ec2_api_gateway
         links:
             - mysql8
             - rabbitmq
+            - ec2_service_discovery
+            - ec2_api_gateway
         command: "/usr/bin/java -jar /home/shared/RABBITMQ-READER-22.01.1-SNAPSHOT.jar --spring.config.location=/home/shared/application.properties"
     #----------------------------------------------------------------------------------------
     ec2_application_demo:
@@ -85,9 +92,13 @@ services:
         depends_on:
             - mysql8
             - rabbitmq
+            - ec2_service_discovery
+            - ec2_api_gateway
         links:
             - mysql8
             - rabbitmq
+            - ec2_service_discovery
+            - ec2_api_gateway
         command: "/usr/bin/java -jar /home/shared/APPLICATION-DEMO-22.01.1-SNAPSHOT.jar --spring.config.location=/home/shared/application.properties"
     #----------------------------------------------------------------------------------------
     rabbitmq:

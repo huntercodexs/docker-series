@@ -1,4 +1,3 @@
-trash
 *-tar
 *.jar
 *.jar.original
@@ -6,15 +5,16 @@ trash
 *.exec
 *.run
 .idea
+trash
 nodes
 node_modules
+sources-docker-compose.yml
+
 /docker-elk/
 /elkstack792/
 /micro-services/
-sources-docker-compose.yml
-application.properties
-
 /ec2_java_mysql_rabbitmq/jre/**
 /ec2_java_mysql_rabbitmq/mysql8/**
 /ec2_java_mysql_rabbitmq/shared/**
 /ec2_java_mysql_rabbitmq/rabbitmq/**
+/ec2_java_mysql_rabbitmq/app/**/**/application.properties

@@ -1,4 +1,4 @@
-FROM amazonlinux
+FROM amazonlinux:2
 
 # SHOW EXTRAS PACKAGES FROM AMAZON LIST
 RUN amazon-linux-extras

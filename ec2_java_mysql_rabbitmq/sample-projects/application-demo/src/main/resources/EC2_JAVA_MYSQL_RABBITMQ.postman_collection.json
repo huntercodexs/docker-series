@@ -1,8 +1,9 @@
 {
 	"info": {
-		"_postman_id": "06cb447c-1a02-41a2-8d5c-3b5cf6dd4cb0",
-		"name": "JAVA - EC2-JAVA-MYSQL-RABBIT",
-		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+		"_postman_id": "31c4dfee-a292-4e73-82c5-fbb31f35c88c",
+		"name": "EC2_JAVA_MYSQL_RABBITMQ",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "17383820"
 	},
 	"item": [
 		{
@@ -23,12 +24,15 @@
 					}
 				},
 				"url": {
-					"raw": "http://localhost:8765/application-demo/api/v1/welcome",
+					"raw": "http://192.168.0.204:58765/application-demo/api/v1/welcome",
 					"protocol": "http",
 					"host": [
-						"localhost"
+						"192",
+						"168",
+						"0",
+						"204"
 					],
-					"port": "8765",
+					"port": "58765",
 					"path": [
 						"application-demo",
 						"api",
@@ -54,12 +58,15 @@
 					}
 				},
 				"url": {
-					"raw": "http://localhost:8765/application-demo/api/v1/order/create",
+					"raw": "http://192.168.0.204:58765/application-demo/api/v1/order/create",
 					"protocol": "http",
 					"host": [
-						"localhost"
+						"192",
+						"168",
+						"0",
+						"204"
 					],
-					"port": "8765",
+					"port": "58765",
 					"path": [
 						"application-demo",
 						"api",
@@ -77,12 +84,15 @@
 				"method": "GET",
 				"header": [],
 				"url": {
-					"raw": "http://localhost:8765/application-demo/api/v1/order/read/XYZ0909-001-B2",
+					"raw": "http://192.168.0.204:58765/application-demo/api/v1/order/read/XYZ0909-001-B2",
 					"protocol": "http",
 					"host": [
-						"localhost"
+						"192",
+						"168",
+						"0",
+						"204"
 					],
-					"port": "8765",
+					"port": "58765",
 					"path": [
 						"application-demo",
 						"api",

@@ -21,7 +21,7 @@ public class OrderService {
 		OrderDto orderDto = new OrderDto();
 		orderDto.setId(id);
 		orderDto.setOrder(order);
-		orderDto.setMessage("Save order sucessful");
+		orderDto.setMessage("Save order successful");
 		orderDto.setResult("ok");
 		demoMessageSource.saveOrder().send(MessageBuilder.withPayload(orderDto).build());
 		log.info("SAVE ORDER SUCCESSFUL " + id);
