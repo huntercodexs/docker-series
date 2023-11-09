@@ -23,7 +23,7 @@ services:
         links:
             - mysql8
             - rabbitmq
-        command: "/usr/bin/java -jar /home/shared/SERVICE-DISCOVERY-22.01.1-SNAPSHOT.jar --spring.config.location=/home/shared/application.properties"
+        #command: "/usr/bin/java -jar /home/shared/SERVICE-DISCOVERY-22.01.1-SNAPSHOT.jar --spring.config.location=/home/shared/application.properties"
     #----------------------------------------------------------------------------------------
     ec2_api_gateway:
         env_file: .env
@@ -49,7 +49,7 @@ services:
             - mysql8
             - rabbitmq
             - ec2_service_discovery
-        command: "/usr/bin/java -jar /home/shared/API-GATEWAY-22.01.1-SNAPSHOT.jar --spring.config.location=/home/shared/application.properties"
+        #command: "/usr/bin/java -jar /home/shared/API-GATEWAY-22.01.1-SNAPSHOT.jar --spring.config.location=/home/shared/application.properties"
     #----------------------------------------------------------------------------------------
     ec2_rabbitmq_reader:
         env_file: .env
@@ -74,7 +74,7 @@ services:
             - rabbitmq
             - ec2_service_discovery
             - ec2_api_gateway
-        command: "/usr/bin/java -jar /home/shared/RABBITMQ-READER-22.01.1-SNAPSHOT.jar --spring.config.location=/home/shared/application.properties"
+        #command: "/usr/bin/java -jar /home/shared/RABBITMQ-READER-22.01.1-SNAPSHOT.jar --spring.config.location=/home/shared/application.properties"
     #----------------------------------------------------------------------------------------
     ec2_application_demo:
         env_file: .env
@@ -99,7 +99,7 @@ services:
             - rabbitmq
             - ec2_service_discovery
             - ec2_api_gateway
-        command: "/usr/bin/java -jar /home/shared/APPLICATION-DEMO-22.01.1-SNAPSHOT.jar --spring.config.location=/home/shared/application.properties"
+        #command: "/usr/bin/java -jar /home/shared/APPLICATION-DEMO-22.01.1-SNAPSHOT.jar --spring.config.location=/home/shared/application.properties"
     #----------------------------------------------------------------------------------------
     rabbitmq:
         env_file: .env
@@ -113,9 +113,14 @@ services:
               source: ./rabbitmq
               target: /var/lib/rabbitmq/
               read_only: false
+            - type: bind
+              source: ./rabbitmq/rabbitmq.conf
+              target: /etc/rabbitmq/conf.d/rabbitmq.conf
+              read_only: false
         environment:
             RABBITMQ_DEFAULT_USER: ${RABBITMQ_DEFAULT_USER}
             RABBITMQ_DEFAULT_PASS: ${RABBITMQ_DEFAULT_PASS}
+            RABBITMQ_DEFAULT_VHOST: ${RABBITMQ_DEFAULT_VHOST}
         tty: true
         networks:
             - open_network

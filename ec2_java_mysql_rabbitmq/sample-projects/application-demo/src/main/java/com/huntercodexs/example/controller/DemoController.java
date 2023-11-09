@@ -1,6 +1,6 @@
-package com.huntercodexs.controller;
+package com.huntercodexs.example.controller;
 
-import com.huntercodexs.service.OrderService;
+import com.huntercodexs.example.service.OrderService;
 import lombok.extern.slf4j.Slf4j;
 import net.minidev.json.JSONObject;
 import org.springframework.beans.factory.annotation.Autowired;

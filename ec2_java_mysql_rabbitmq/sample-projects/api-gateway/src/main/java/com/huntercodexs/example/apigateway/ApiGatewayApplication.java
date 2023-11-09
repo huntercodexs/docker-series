@@ -1,4 +1,4 @@
-package com.huntercodexs;
+package com.huntercodexs.example.apigateway;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;

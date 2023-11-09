@@ -1,6 +1,6 @@
-package com.huntercodexs;
+package com.huntercodexs.example;
 
-import com.huntercodexs.messenger.ReaderMessageSource;
+import com.huntercodexs.example.messenger.ReaderMessageSource;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.cloud.client.discovery.EnableDiscoveryClient;

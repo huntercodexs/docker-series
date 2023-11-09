@@ -1,7 +1,7 @@
-package com.huntercodexs.service;
+package com.huntercodexs.example.service;
 
-import com.huntercodexs.messenger.OrderDto;
-import com.huntercodexs.messenger.OrderMessageSource;
+import com.huntercodexs.example.messenger.OrderDto;
+import com.huntercodexs.example.messenger.OrderMessageSource;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.messaging.support.MessageBuilder;

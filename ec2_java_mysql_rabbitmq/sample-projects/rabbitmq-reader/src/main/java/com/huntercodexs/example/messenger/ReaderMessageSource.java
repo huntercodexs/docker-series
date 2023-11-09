@@ -1,4 +1,4 @@
-package com.huntercodexs.messenger;
+package com.huntercodexs.example.messenger;
 
 import org.springframework.cloud.stream.annotation.Input;
 import org.springframework.messaging.SubscribableChannel;

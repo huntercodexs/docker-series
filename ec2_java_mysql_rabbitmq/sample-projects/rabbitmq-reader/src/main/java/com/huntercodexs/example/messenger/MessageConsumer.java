@@ -1,4 +1,4 @@
-package com.huntercodexs.messenger;
+package com.huntercodexs.example.messenger;
 
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.cloud.stream.annotation.StreamListener;

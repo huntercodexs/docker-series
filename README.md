@@ -6,7 +6,7 @@ Simple Environment to simulate a messenger service workflow
 
 - Amazonlinux 2
 - Java 8
-- RabbitMQ 3.6.10
+- RabbitMQ 3.9.8
 - Mysql 8
 
 
@@ -102,7 +102,7 @@ user@host:/home/user/docker-series$ git checkout ec2_java_mysql_rabbitmq
 user@host:/home/user/docker-series$ cd ec2_java_mysql_rabbitmq
 </pre>
 
-5- Check and set up the .env file
+5- Check and set up the .env file and rabbitmq.conf file placed on ec2_java_mysql_rabbitmq/rabbitmq/rabbitmq.conf
 
 6- Build the sample projects
 
@@ -240,7 +240,9 @@ http://localhost:58761/
 </pre>
 ![service-discovery-eureka.png](ec2_java_mysql_rabbitmq/midias/service-discovery-eureka.png)
 
-13- Check the rabbit container service - list connections
+13- Check the rabbit container service
+
+List connections
 
 <pre>
 user@host:/home/user/docker-series/ec2_java_mysql_rabbitmq$ docker exec -it rabbitmq /bin/bash
@@ -283,6 +285,14 @@ GET http://192.168.0.204:58765/application-demo/api/v1/order/read/XYZ0909-001-B2
 
 # Help and Information
 
+HEALTH CHECK
+
+- http://localhost:58081/actuator/health
+
+ADMIN SERVER - SERVICES
+
+- http://localhost:58761/admin#/applications
+
 UPDATE
 
 - sudo yum update
@@ -311,4 +321,4 @@ JAVA
 
 > see https://www.oracle.com/sa/java/technologies/javase/javase8u211-later-archive-downloads.html
 
-- sudo rpm -ivh jre-8u212-linux-x64.rpm
+- sudo rpm -ivh jre-8u212-linux-x64.rpm [jre-8u212-linux-x64.rpm](ec2_java_mysql_rabbitmq/jre/jre-8u212-linux-x64.rpm)
