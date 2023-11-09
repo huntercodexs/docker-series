@@ -12,6 +12,11 @@ Simple Environment to simulate a messenger service workflow
 
 # Overview
 
+- Eureka - Service Discovery
+- Spring Boot Admin Server
+- Zuul Proxy Server - Api Gateway
+- RabbitMQ - Messenger
+
 [Diagram Draw IO]
 
 
@@ -103,6 +108,13 @@ user@host:/home/user/docker-series$ cd ec2_java_mysql_rabbitmq
 </pre>
 
 5- Check and set up the .env file and rabbitmq.conf file placed on ec2_java_mysql_rabbitmq/rabbitmq/rabbitmq.conf
+
+The rabbitmq.conf should have the follow context:
+<pre>
+default_vhost = /
+default_user = guest
+default_pass = guest
+</pre>
 
 6- Build the sample projects
 
@@ -236,11 +248,18 @@ rabbitmq                docker-entrypoint.sh rabbi ...   Up      0.0.0.0:15672->
 12- Check the discovery service - EUREKA
 
 <pre>
-http://localhost:58761/
+http://192.168.0.204:58761/
 </pre>
 ![service-discovery-eureka.png](ec2_java_mysql_rabbitmq/midias/service-discovery-eureka.png)
 
-13- Check the rabbit container service
+13- Check the spring boot admin service - ADMIN SERVER
+
+<pre>
+http://192.168.0.204:8765/admin#/applications
+</pre>
+![spring-boot-admin.png](ec2_java_mysql_rabbitmq/midias/spring-boot-admin.png)
+
+14- Check the rabbit container service
 
 List connections
 
@@ -262,7 +281,7 @@ root@1fb69d7ccc23:/# rabbitmq-plugins enable rabbitmq_management
 Access the service manager
 
 <pre>
-http://localhost:15672/
+http://192.168.0.204:15672/
 </pre>
 ![rabbitmq-login.png](ec2_java_mysql_rabbitmq/midias/rabbitmq-login.png)
 
@@ -272,7 +291,7 @@ Password: guest
 </pre>
 ![rabbitmq-manager-panel.png](ec2_java_mysql_rabbitmq/midias/rabbitmq-manager-panel.png)
 
-14- Make tests using POSTMAN EC2_JAVA_MYSQL_RABBITMQ.postman_collection.json
+15- Make tests using POSTMAN EC2_JAVA_MYSQL_RABBITMQ.postman_collection.json
 <pre>
 GET http://192.168.0.204:58765/application-demo/api/v1/welcome
 POST http://192.168.0.204:58765/application-demo/api/v1/order/create

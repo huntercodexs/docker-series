@@ -4,6 +4,7 @@
 *.deb
 *.exec
 *.run
+*.log
 .idea
 trash
 nodes
