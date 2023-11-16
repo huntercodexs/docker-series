@@ -103,7 +103,7 @@ services:
     #----------------------------------------------------------------------------------------
     rabbitmq:
         env_file: .env
-        image: rabbitmq:3.9.8
+        image: rabbitmq:3.6.10
         container_name: rabbitmq
         ports:
             - ${RABBITMQ_PORT}:5672
@@ -117,10 +117,15 @@ services:
               source: ./rabbitmq/rabbitmq.conf
               target: /etc/rabbitmq/conf.d/rabbitmq.conf
               read_only: false
+            - type: bind
+              source: ./rabbitmq/config/rabbitmq.config
+              target: /etc/rabbitmq/rabbitmq.config
+              read_only: false
         environment:
             RABBITMQ_DEFAULT_USER: ${RABBITMQ_DEFAULT_USER}
             RABBITMQ_DEFAULT_PASS: ${RABBITMQ_DEFAULT_PASS}
             RABBITMQ_DEFAULT_VHOST: ${RABBITMQ_DEFAULT_VHOST}
+            RABBITMQ_PLUGINS_DIR: ${RABBITMQ_PLUGINS_DIR}
         tty: true
         networks:
             - open_network

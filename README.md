@@ -1,23 +1,112 @@
 # EC2 (Amazonlinux) + JAVA + MYSQL + RABBITMQ
 Simple Environment to simulate a messenger service workflow
 
+![banner.png](ec2_java_mysql_rabbitmq/midias/banner.png)
 
-# Requisites
+# Resources
 
 - Amazonlinux 2
 - Java 8
-- RabbitMQ 3.9.8
+- RabbitMQ 3.6.10
 - Mysql 8
 
+# About RabbitMQ
 
-# Overview
+You may use the RabbitMQ simulator to understand better how to work the Producers, Exchanges Types, Queues, 
+Routing Keys and Consumers. Give a look in the http://tryrabbitmq.com web address and play as you want.
 
-- Eureka - Service Discovery
-- Spring Boot Admin Server
-- Zuul Proxy Server - Api Gateway
-- RabbitMQ - Messenger
+- Exchange Types
+
+The exchange type used in this project are: Direct, Fanout and Topic. You can see bellow each one in the simple 
+diagram workflow:
+
+> Direct
+
+![DIRECT.png](ec2_java_mysql_rabbitmq/midias/DIRECT.png)
+
+![DIRECT - BIND.png](ec2_java_mysql_rabbitmq/midias/DIRECT%20-%20BIND.png)
+
+> Fanout
+
+![FANOUT.png](ec2_java_mysql_rabbitmq/midias/FANOUT.png)
+
+> Topic
+
+![TOPIC.png](ec2_java_mysql_rabbitmq/midias/TOPIC.png)
+
+![TOPIC - BIND.png](ec2_java_mysql_rabbitmq/midias/TOPIC%20-%20BIND.png)
+
+> IMPORTANT: Ever when using the Messenger Service like the RabbitMQ, it's recommended to send the message (payload) for the specific 
+> exchange and then the exchange will be forward the message to correct queue thought the routing key informed in the 
+> request. It's not a good way/practice to send messages direct for the queue.
+
+One complex scenario using RabbitMQ concepts is showed below
+
+![complex-rabbitmq-simulator-scenario.png](ec2_java_mysql_rabbitmq/midias/complex-rabbitmq-simulator-scenario.png)
+
+# Repository Overview
+
+All the sample projects used in this little work are been placed on the huntercodexs GitHub account, you can download
+the latest version for each one from the respective address bellow:
+
+- Service Discovery: https://github.com/huntercodexs/service-discovery
+- Api Gateway: https://github.com/huntercodexs/api-gateway
+- Producer Demo: https://github.com/huntercodexs/producer-demo
+- Producer2 Demo: https://github.com/huntercodexs/producer2-demo
+- Consumer Demo: https://github.com/huntercodexs/consumer-demo
+- Consumer2 Demo: https://github.com/huntercodexs/consumer2-demo
+
+Ih these projects we used the following resources:
+<pre>
+- Eureka (Service Discovery) 
+- Spring Boot Admin (Service Admin)
+- Zuul Proxy Server (Api Gateway) 
+- RabbitMQ (Messenger Broker)
+</pre>
+
+Esse projeto tem como proposito apresentar o conceito de funcionamentoe fluxo de um sistema de geração e gerenciamento 
+de ordens de compra utilizando APIs, filas e banco de dados.
+
+Para facilitar a demonstração do conceito será utilizado as seguintes condições:
+
+- Uma API que recebe uma requisição REST para gerar uma ordem de compra a qual sera devidamente inserida em uma fila 
+chamada OrdensChannel. Essa API sera utilizada apenas para simular o cadastro de ordens, que deveria ser feita por uma aplicação
+frontend, a qual enviaria a requsição de geração de orden intermitente.
+
+- Um cliente via POSTMAN, que junto a API será usado para complementar um ambiente frontend integrado com seu backend, ou seja, 
+a API REST mencionada anteriormente.
+
+- Um leitor de filas RABBITMQ, ou melhor, na fila de OrdersChannel, que fara a leitura da fila e o processamento sequencial 
+de cada ordem, que por fim sera cadastrada em uma base de dados com os seguintes status:
+  - PEDENTE
+  - PROCESSANDO
+  - PROCESSADO
+  - REPROVADO
+
+- Um endpoint na API REST responsável por receber uma requisição de consulta de uma determinada ordem, fazer a consulta em 
+banco de dadose retornar o status da ordem.
+
+** Devera ser criado os seguintes exemplos: PEDENTE, PROCESSANDO, PROCESSADO e REPROVADO **
+
+Para definir cada tipo de status,devera ser utilizado os seguintes conceitos: 
+
+** Se a ordem de compra for do tipo "NAO ACEITO" então será classificada como REPROVADO. **
+** Senão devera entrar para outra fila de processamento e deixando o status definido em PROCESSANDO **
+** Ao termino do processamento devera estar junta com a outra ordem **
+
+Abaixo segue uma imagem que tem como objetivo ilustrar todo o ambiente proposto:
 
 [Diagram Draw IO]
+
+Todas as aplicações são registradas via Service Discovery (Eureka) para serem utilizadas por meio do Api Gateway (Zuul) 
+com as rotas já conhecidas pelo Zuul.
+
+A seguir temos os diagramas tecnicos de fluxo e de sequencia para mostrar detalhadamente o fluxo de processamento desse 
+pequeno sistema utilizando filas, apis e banco de dados:
+
+[Diagram Flow Draw IO]
+
+[Diagram Sequence Draw IO]
 
 
 # Usage

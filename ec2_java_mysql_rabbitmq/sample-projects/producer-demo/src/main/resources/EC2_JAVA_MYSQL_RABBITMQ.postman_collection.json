@@ -1,0 +1,109 @@
+{
+	"info": {
+		"_postman_id": "31c4dfee-a292-4e73-82c5-fbb31f35c88c",
+		"name": "EC2_JAVA_MYSQL_RABBITMQ",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "17383820"
+	},
+	"item": [
+		{
+			"name": "WELCOME",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"method": "GET",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://192.168.0.204:8765/application-demo/api/v1/welcome",
+					"protocol": "http",
+					"host": [
+						"192",
+						"168",
+						"0",
+						"204"
+					],
+					"port": "8765",
+					"path": [
+						"application-demo",
+						"api",
+						"v1",
+						"welcome"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "ORDER CREATE",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"order\": \"XYZ0909-001-B1\"\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://192.168.0.204:8765/application-demo/api/v1/order/create",
+					"protocol": "http",
+					"host": [
+						"192",
+						"168",
+						"0",
+						"204"
+					],
+					"port": "8765",
+					"path": [
+						"application-demo",
+						"api",
+						"v1",
+						"order",
+						"create"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "ORDER READ",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://192.168.0.204:8765/application-demo/api/v1/order/read/XYZ0909-001-B2",
+					"protocol": "http",
+					"host": [
+						"192",
+						"168",
+						"0",
+						"204"
+					],
+					"port": "8765",
+					"path": [
+						"application-demo",
+						"api",
+						"v1",
+						"order",
+						"read",
+						"XYZ0909-001-B2"
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}
