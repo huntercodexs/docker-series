@@ -61,53 +61,23 @@ Ih these projects we used the following resources:
 - Eureka (Service Discovery) 
 - Spring Boot Admin (Service Admin)
 - Zuul Proxy Server (Api Gateway) 
-- RabbitMQ (Messenger Broker)
+- RabbitMQ (Message Broker)
 </pre>
 
-Esse projeto tem como proposito apresentar o conceito de funcionamentoe fluxo de um sistema de geração e gerenciamento 
-de ordens de compra utilizando APIs, filas e banco de dados.
+A complete workflow including all the exchange types are been placed in the path midias from this repository an can be 
+accessed clicking here -> [scheme-diagram-full.drawio](ec2_java_mysql_rabbitmq/midias/scheme-diagram-full.drawio)
 
-Para facilitar a demonstração do conceito será utilizado as seguintes condições:
+Below we can see the diagrams that shown the flows contained in the samples projects (just a overview)
 
-- Uma API que recebe uma requisição REST para gerar uma ordem de compra a qual sera devidamente inserida em uma fila 
-chamada OrdensChannel. Essa API sera utilizada apenas para simular o cadastro de ordens, que deveria ser feita por uma aplicação
-frontend, a qual enviaria a requsição de geração de orden intermitente.
+![diagram-direct1.png](ec2_java_mysql_rabbitmq/midias/diagram-direct1.png)
 
-- Um cliente via POSTMAN, que junto a API será usado para complementar um ambiente frontend integrado com seu backend, ou seja, 
-a API REST mencionada anteriormente.
+![diagram-direct2.png](ec2_java_mysql_rabbitmq/midias/diagram-direct2.png)
 
-- Um leitor de filas RABBITMQ, ou melhor, na fila de OrdersChannel, que fara a leitura da fila e o processamento sequencial 
-de cada ordem, que por fim sera cadastrada em uma base de dados com os seguintes status:
-  - PEDENTE
-  - PROCESSANDO
-  - PROCESSADO
-  - REPROVADO
+![diagram-fanout1.png](ec2_java_mysql_rabbitmq/midias/diagram-fanout1.png)
 
-- Um endpoint na API REST responsável por receber uma requisição de consulta de uma determinada ordem, fazer a consulta em 
-banco de dadose retornar o status da ordem.
+![diagram-topic1.png](ec2_java_mysql_rabbitmq/midias/diagram-topic1.png)
 
-** Devera ser criado os seguintes exemplos: PEDENTE, PROCESSANDO, PROCESSADO e REPROVADO **
-
-Para definir cada tipo de status,devera ser utilizado os seguintes conceitos: 
-
-** Se a ordem de compra for do tipo "NAO ACEITO" então será classificada como REPROVADO. **
-** Senão devera entrar para outra fila de processamento e deixando o status definido em PROCESSANDO **
-** Ao termino do processamento devera estar junta com a outra ordem **
-
-Abaixo segue uma imagem que tem como objetivo ilustrar todo o ambiente proposto:
-
-[Diagram Draw IO]
-
-Todas as aplicações são registradas via Service Discovery (Eureka) para serem utilizadas por meio do Api Gateway (Zuul) 
-com as rotas já conhecidas pelo Zuul.
-
-A seguir temos os diagramas tecnicos de fluxo e de sequencia para mostrar detalhadamente o fluxo de processamento desse 
-pequeno sistema utilizando filas, apis e banco de dados:
-
-[Diagram Flow Draw IO]
-
-[Diagram Sequence Draw IO]
-
+![diagram-topic2.png](ec2_java_mysql_rabbitmq/midias/diagram-topic2.png)
 
 # Usage
 
