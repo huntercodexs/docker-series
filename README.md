@@ -79,7 +79,33 @@ Below we can see the diagrams that shown the flows contained in the samples proj
 
 ![diagram-topic2.png](ec2_java_mysql_rabbitmq/midias/diagram-topic2.png)
 
-# Usage
+
+# Real Use Cases
+
+**USE CASE 1**
+
+Lets to get started to illustrate in the practice how to work the RabbitMQ system. The proposal of this simple use case 
+is present one scenario with the following features:
+
+> NOTE: This real use case, will be use the exchange direct type, and using RoutingKeys
+
+![real-use-case-1.png](ec2_java_mysql_rabbitmq/midias/real-use-case-1.png)
+
+# Sample Projects
+
+> NOTE: these projects are just a sample to demonstrate how to work this project: EC2 + JAVA + MYSQL + RABBITMQ
+
+To run the sample projects contained in this project get the project files into folder sample-projects,
+and follow the bellow for each project:
+
+- open each project in your prefer IDE
+- run the "mvn package"
+- take the generated jar file
+- edit the application.properties file with the correct settings
+- finally use the result files in the folder app/project-name (example: app/service_discovery)
+
+
+# How to use this repository
 
 - Run
 
@@ -126,20 +152,6 @@ rabbitmq-plugins enable rabbitmq_management
 </pre>
 
 Use "rabbitmq-plugins list" commando to view a complete list of plugins
-
-
-# Sample projects
-
-> NOTE: these projects are just a sample to demonstrate how to work this project: EC2 + JAVA + MYSQL + RABBITMQ
-
-To run the sample projects contained in this project get the project files into folder sample-projects, 
-and follow the bellow for each project:
-
-- open each project in your prefer IDE
-- run the "mvn package"
-- take the generated jar file
-- edit the application.properties file with the correct settings
-- finally use the result files in the folder app/project-name (example: app/service_discovery)
 
 
 # Step by Step
