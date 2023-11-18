@@ -84,12 +84,57 @@ Below we can see the diagrams that shown the flows contained in the samples proj
 
 **USE CASE 1**
 
-Lets to get started to illustrate in the practice how to work the RabbitMQ system. The proposal of this simple use case 
-is present one scenario with the following features:
+Lets to get started to illustrate in the practice how to work the RabbitMQ message broker system. 
+The proposal of this simple real use case is present one scenario with the following features:
 
-> NOTE: This real use case, will be use the exchange direct type, and using RoutingKeys
+> NOTE: This real use case, will be use the exchange direct type, and using RoutingKeys [routingKey-purchase,routingKey-orders,routingKey-dispatch]
 
 ![real-use-case-1.png](ec2_java_mysql_rabbitmq/midias/real-use-case-1.png)
+
+In the above image we can see one APPLICATION PRODUCER, one RABBITMQ BROKER that contains the exchange type direct and 
+have three routing keys (bindings) to forward messages to specific queues, as example: routingKey-purchase -> queue-purchase, 
+one APPLICATION CONSUMER that get messages from specific queue contained in the exchange and make the correct process for 
+each type of message. Finally, the message are been saved in the database with the following settings:
+
+When purchase endpoint requested:
+<pre>
+TABLE: purchase
+COLUMNS: id, status, message, datetime
+SQL: INSERT INTO purchase (id, status, message, datetime) VALUES (1, "CREATED", "Message", "2022-01-01 10:00:00");
+</pre>
+
+When order endpoint requested:
+<pre>
+TABLE: purchase
+COLUMNS: status
+SQL: UPDATE TABLE purchase SET status = 'PROCESSING' WHERE id = '1';
+</pre>
+
+When dispatch endpoint requested:
+<pre>
+TABLE: purchase
+COLUMNS: status
+SQL: UPDATE TABLE purchase SET status = 'FINISHED' WHERE id = '1';
+</pre>
+
+In another way there are one application called APPLICATION STATUS that offers one endpoint /purchase/status/{purchase_id}, 
+where it is possible to consult/query one purchase status, just requesting the endpoint /purchase/status and passing the 
+correct purchase_id.
+
+Bellow we can see one abstract illustration about the operation between users and system through the web browser.
+
+![ABSTRACT-1.png](ec2_java_mysql_rabbitmq/midias/ABSTRACT-1.png)
+
+> NOTE: The INTERNAL PROCESS in the above illustration means that have a several or many others process that has been 
+> executed by the system on background mode, as example, inform the others responsible departments (order and dispatch) 
+> about the ID purchase order, but the important here is show the user interaction with the system using a 
+> web browser
+
+![ABSTRACT-1.png](ec2_java_mysql_rabbitmq/midias/ABSTRACT-2.png)
+
+Just for more clearly and technical details, follow the sequence diagram that shown the flow in the system
+
+![SEQUENCE.png](ec2_java_mysql_rabbitmq/midias/SEQUENCE.png)
 
 # Sample Projects
 
