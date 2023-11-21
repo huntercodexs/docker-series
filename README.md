@@ -1,6 +1,8 @@
 # Docker Series
 Um repositorio para oferecer muitas configurações para muitos containers docker
 
+![docker.png](self-containers/files/midias/docker.png)
+
 # Idiomas
 
 - Language: Portugues Brazil (pt-br)  |  <a href="README-EN.md">Inglês (en)</a>
