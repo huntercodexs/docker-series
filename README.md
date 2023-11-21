@@ -49,12 +49,12 @@ One complex scenario using RabbitMQ concepts is showed below
 All the sample projects used in this little work are been placed on the huntercodexs GitHub account, you can download
 the latest version for each one from the respective address bellow:
 
-- Service Discovery: https://github.com/huntercodexs/service-discovery
-- Api Gateway: https://github.com/huntercodexs/api-gateway
-- Producer Demo: https://github.com/huntercodexs/producer-demo
-- Producer2 Demo: https://github.com/huntercodexs/producer2-demo
+- Service Discovery: https://github.com/huntercodexs/service-discovery (branch: master)
+- Api Gateway: https://github.com/huntercodexs/api-gateway (branch: master)
+- Producer Demo: https://github.com/huntercodexs/producer-demo 
+- Producer2 Demo: https://github.com/huntercodexs/producer2-demo (branch: ec2_java_mysql_rabbitmq-producer)
 - Consumer Demo: https://github.com/huntercodexs/consumer-demo
-- Consumer2 Demo: https://github.com/huntercodexs/consumer2-demo
+- Consumer2 Demo: https://github.com/huntercodexs/consumer2-demo (branch: ec2_java_mysql_rabbitmq-consumer)
 
 Ih these projects we used the following resources:
 <pre>
