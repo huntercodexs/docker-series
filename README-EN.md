@@ -1,9 +1,7 @@
 # Docker Series
 A repository to offer many configurations for many docker containers
 
-<div style="text-align: center">
-<img src="self-containers/files/midias/docker.png" alt="" />
-</div>
+![docker.png](self-containers/files/midias/docker.png)
 
 # Languages
 
