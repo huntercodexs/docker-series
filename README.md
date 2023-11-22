@@ -1,6 +1,8 @@
 # JAVA + MYSQL
 Simple environment to simulate a workflow integrating Java + MYSQL
 
+![banner.png](java_mysql/midias/banner.png)
+
 # Requisites
 
 - Java 8
@@ -50,65 +52,83 @@ To run the sample projects contained in this project get the project files into 
 
 # Step by Step
 
-<pre>
 1- Clone the repository
-    user@host:/home/user$ git clone https://github.com/huntercodexs/docker-series.git .
+<pre>
+user@host:/home/user$ git clone https://github.com/huntercodexs/docker-series.git .
+</pre>
 
 2- Access the repository folder
-    user@host:/home/user$ cd docker-series
+<pre>
+user@host:/home/user$ cd docker-series
+</pre>
 
 3- Change the current branch
-    user@host:/home/user/docker-series$ git checkout java_mysql
+<pre>
+user@host:/home/user/docker-series$ git checkout java_mysql
+</pre>
 
 4- Access the java+mysql folder
-    user@host:/home/user/docker-series$ cd java_mysql
+<pre>
+user@host:/home/user/docker-series$ cd java_mysql
+</pre>
 
 5- Set up the .env file on section MYSQL 8.0 SETTINGS
 
 6- Build the containers
-    user@host:/home/user/docker-series/java_mysql$ docker network create open_network
-    user@host:/home/user/docker-series/java_mysql$ docker-compose up --build
-    
-    Maybe the openjdk is "openjdk-8u212 exited with code 1", please ignore it !
-    Check the folder and files permissions whether any error occurs, example: access denied
+<pre>
+user@host:/home/user/docker-series/java_mysql$ docker network create open_network
+user@host:/home/user/docker-series/java_mysql$ docker-compose up --build
+
+Maybe the openjdk is "openjdk-8u212 exited with code 1", please ignore it !
+Check the folder and files permissions whether any error occurs, example: access denied
+</pre>
 
 7- Create the database, table and insert data inside MYSQL Database
+<pre>
+CREATE TABLE `customers` (
+    `id` bigint NOT NULL AUTO_INCREMENT,
+    `age` int DEFAULT NULL,
+    `email` varchar(255) DEFAULT NULL,
+    `name` varchar(255) DEFAULT NULL,
+    PRIMARY KEY (`id`)
+) ENGINE=MyISAM DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 
-    CREATE TABLE `customers` (
-        `id` bigint NOT NULL AUTO_INCREMENT,
-        `age` int DEFAULT NULL,
-        `email` varchar(255) DEFAULT NULL,
-        `name` varchar(255) DEFAULT NULL,
-        PRIMARY KEY (`id`)
-    ) ENGINE=MyISAM DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
-    
-    INSERT INTO customers (name, email, age) VALUES ('Amanda Barros', 'amanda@email.com', 33);
-    INSERT INTO customers (name, email, age) VALUES ('Marcos Silva', 'marcos@email.com', 34);
+INSERT INTO customers (name, email, age) VALUES ('Amanda Barros', 'amanda@email.com', 33);
+INSERT INTO customers (name, email, age) VALUES ('Marcos Silva', 'marcos@email.com', 34);
+</pre>
 
 8- Press the buttons
-    user@host:/home/user/docker-series/java_mysql$ [Ctrl+C]
+<pre>
+user@host:/home/user/docker-series/java_mysql$ [Ctrl+C]
+</pre>
 
 9- Build the project java-mysql and get the jar file plus application.properties and put the files in app path in this project
-    
-    Check the file permissions !
+<pre>
+Check the file permissions !
+</pre>
 
 10- Start the containers
-    user@host:/home/user/docker-series/java_mysql$ docker-compose start
+<pre>
+user@host:/home/user/docker-series/java_mysql$ docker-compose start
+</pre>
 
 11- Check the status from running containers
-    user@host:/home/user/docker-series/java_mysql$ docker-compose ps
+<pre>
+user@host:/home/user/docker-series/java_mysql$ docker-compose ps
 
-        Name                  Command             State                          Ports                       
-    ---------------------------------------------------------------------------------------------------------
-    mysql-80        docker-entrypoint.sh mysqld   Up      0.0.0.0:3708->3306/tcp,:::3708->3306/tcp, 33060/tcp
-    openjdk-8u212   bash                          Up      0.0.0.0:38001->38001/tcp,:::38001->38001/tcp
+    Name                  Command             State                          Ports                       
+---------------------------------------------------------------------------------------------------------
+mysql-80        docker-entrypoint.sh mysqld   Up      0.0.0.0:3708->3306/tcp,:::3708->3306/tcp, 33060/tcp
+openjdk-8u212   bash                          Up      0.0.0.0:38001->38001/tcp,:::38001->38001/tcp
+</pre>
 
 12- Make tests using POSTMAN JAVA_MYSQL.postman_collection.json
-    GET http://localhost:38001/api/v1/customers
-    POST http://localhost:38001/api/v1/customers
-    {
-        "name": "John Smith",
-        "email": "john@email.com",
-        "age": 39
-    }
+<pre>
+GET http://localhost:38001/api/v1/customers
+POST http://localhost:38001/api/v1/customers
+{
+    "name": "John Smith",
+    "email": "john@email.com",
+    "age": 39
+}
 </pre>
