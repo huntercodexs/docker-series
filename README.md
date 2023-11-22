@@ -1,6 +1,8 @@
 # JAVA + ORACLELINUX
 Simple environment to simulate a workflow integrating Java + Oracle
 
+![banner.png](java_oraclelinux/midias/banner.png)
+
 # Requisites
 
 - Java 8
@@ -273,97 +275,168 @@ To run the sample projects contained in this project get the project files into 
 
 # Step by Step
 
+Follow the steps below to quick and easy environment creation
+
 > NOTE: This process take a long time
 
 > NOTE: Check the permissions in the current directory and sub folders
 
+1- Clone the repository
 <pre>
- 1- user@host:/home/user$ git clone https://github.com/huntercodexs/docker-series.git .
- 
- 2- user@host:/home/user$ cd docker-series.git
- 
- 3- user@host:/home/user/docker-series git checkout java_oraclelinux
+user@host:/home/user$ git clone https://github.com/huntercodexs/docker-series.git .
+</pre>
 
- 4- user@host:/home/user/docker-series$ cd java_oraclelinux
- 
- 5- Set up the .env file on section ORACLELINUX SETTINGS
- 
- 6- Put the LINUX.X64_193000_db_home.zip inside oracle/database before run the docker-compose
-    6.1- The path oracle/oradata in current container instance "should be empty"
-    6.2- Ensure that the oracle/oradata is empty or just have the dbconfig/ and ORCLCDB/ folders
- 
- 7- user@host:/home/user/docker-series/java_oraclelinux/oracle/database$ cd oracle/database
- 
- 8- user@host:/home/user/docker-series/java_oraclelinux/oracle/database$ tar -xvf oraclelinux-database-scripts-19c.tar.bz2
- 
- 9- user@host:/home/user/docker-series/java_oraclelinux/oracle/database$ cd ../../
+2- Access the repository folder
+<pre>
+user@host:/home/user$ cd docker-series.git
+</pre>
 
-10- user@host:/home/user/docker-series/java_oraclelinux/oracle/database$ docker network create open_network
+3- Change the current branch
+<pre>
+user@host:/home/user/docker-series git checkout java_oraclelinux
+</pre>
 
-11- user@host:/home/user/docker-series/java_oraclelinux$ docker-compose up --build
+4- Access the java_oraclelinux folder
+<pre>
+user@host:/home/user/docker-series$ cd java_oraclelinux
+</pre>
 
-12- user@host:/home/user/docker-series/java_oraclelinux$ [Ctrl+C]
+5- Check and set up the .env file and rabbitmq.conf file placed on ec2_java_mysql_rabbitmq/rabbitmq/rabbitmq.conf
 
-13- Uncomment the line "command" inside docker-compose.yml before run the command "docker-compose start"
-    from
-    #command: "java -jar /home/openjdk8u212/JAVA-ORACLELINUX-22.01.1-SNAPSHOT.jar --spring.config.location=/home/openjdk8u212/application.properties"
-    to
-    command: "java -jar /home/openjdk8u212/JAVA-ORACLELINUX-22.01.1-SNAPSHOT.jar --spring.config.location=/home/openjdk8u212/application.properties"
+6- Set up the .env file on section ORACLELINUX SETTINGS
 
-14- user@host:/home/user/docker-series/java_oraclelinux$ docker-compose start oraclelinux
+7- Put the LINUX.X64_193000_db_home.zip inside oracle/database before run the docker-compose
+    7.1- The path oracle/oradata in current container instance "should be empty"
+    7.2- Ensure that the oracle/oradata is empty or just have the dbconfig/ and ORCLCDB/ folders
 
-15- user@host:/home/user/docker-series/java_oraclelinux$ docker exec -it oraclelinux ./setPassword.sh {{YOUR_ORACLE_PASSWORD}}
+8- Access the oracle database path
+<pre>
+user@host:/home/user/docker-series/java_oraclelinux/oracle/database$ cd oracle/database
+</pre>
 
-16- user@host:/home/user/docker-series/java_oraclelinux$ docker exec -it oraclelinux /bin/bash
+9- Unzip source file
+<pre>
+user@host:/home/user/docker-series/java_oraclelinux/oracle/database$ tar -xvf oraclelinux-database-scripts-19c.tar.bz2
+</pre>
 
-17- Create User ==============
-sqlplus sys/{{ORACLELINUX_PASSWORD}}@{{ORACLELINUX_PDB}} as sysdba
-CREATE USER {{ORACLELINUX_USERNAME}} IDENTIFIED BY {{ORACLELINUX_PASSWORD}};
-GRANT CREATE SESSION, CREATE TABLE, CREATE SEQUENCE TO {{ORACLELINUX_USERNAME}};
-ALTER USER {{ORACLELINUX_USERNAME}} QUOTA 50m ON SYSTEM;
-CREATE SMALLFILE TABLESPACE {{ORACLELINUX_USERNAME}} DATAFILE '{{ORACLELINUX_DATABASE_TABLESPACE}}' SIZE 1G;
-ALTER DATABASE DEFAULT TABLESPACE {{ORACLELINUX_USERNAME}};
-ALTER USER {{ORACLELINUX_USERNAME}} QUOTA UNLIMITED ON SYSTEM;
-ALTER USER {{ORACLELINUX_USERNAME}} QUOTA UNLIMITED ON {{ORACLELINUX_TABLESPACE_NAME}};
-SELECT * FROM ALL_USERS au;
-SELECT * FROM ALL_USERS au WHERE au.USERNAME = '{{ORACLELINUX_USERNAME}}';
-EXIT; =====================
-[Ctrl+D]
+10- Back in the oracle root folder
+<pre>
+user@host:/home/user/docker-series/java_oraclelinux/oracle/database$ cd ../../
+</pre>
+
+11- Create a network open type
+<pre>
+user@host:/home/user/docker-series/java_oraclelinux/oracle/database$ docker network create open_network
+</pre>
+
+12- Run the docker-compose to build the project
+<pre>
+user@host:/home/user/docker-series/java_oraclelinux$ docker-compose up --build
+</pre>
+
+13- Quit the docker runner
+<pre>
+user@host:/home/user/docker-series/java_oraclelinux$ [Ctrl+C]
+</pre>
+
+14- Uncomment the line "command" inside docker-compose.yml before run the command "docker-compose start"
+<pre>
+from
+#command: "java -jar /home/openjdk8u212/JAVA-ORACLELINUX-22.01.1-SNAPSHOT.jar --spring.config.location=/home/openjdk8u212/application.properties"
+to
+command: "java -jar /home/openjdk8u212/JAVA-ORACLELINUX-22.01.1-SNAPSHOT.jar --spring.config.location=/home/openjdk8u212/application.properties"
+</pre>
+
+15- Start the docker container using docker compose
+<pre>
+user@host:/home/user/docker-series/java_oraclelinux$ docker-compose start oraclelinux
+</pre>
+
+16- Set up the password for oracle administration with SYS user
+<pre>
+user@host:/home/user/docker-series/java_oraclelinux$ docker exec -it oraclelinux ./setPassword.sh {{YOUR_ORACLE_PASSWORD}}
+</pre>
+
+17- Access the oraclelinux container
+<pre>
+user@host:/home/user/docker-series/java_oraclelinux$ docker exec -it oraclelinux /bin/bash
+</pre>
+
+17- Create User in oracle database
+<pre>
+root@host# sqlplus sys/{{ORACLELINUX_PASSWORD}}@{{ORACLELINUX_PDB}} as sysdba
+> CREATE USER {{ORACLELINUX_USERNAME}} IDENTIFIED BY {{ORACLELINUX_PASSWORD}};
+> GRANT CREATE SESSION, CREATE TABLE, CREATE SEQUENCE TO {{ORACLELINUX_USERNAME}};
+> ALTER USER {{ORACLELINUX_USERNAME}} QUOTA 50m ON SYSTEM;
+> CREATE SMALLFILE TABLESPACE {{ORACLELINUX_USERNAME}} DATAFILE '{{ORACLELINUX_DATABASE_TABLESPACE}}' SIZE 1G;
+> ALTER DATABASE DEFAULT TABLESPACE {{ORACLELINUX_USERNAME}};
+> ALTER USER {{ORACLELINUX_USERNAME}} QUOTA UNLIMITED ON SYSTEM;
+> ALTER USER {{ORACLELINUX_USERNAME}} QUOTA UNLIMITED ON {{ORACLELINUX_TABLESPACE_NAME}};
+> SELECT * FROM ALL_USERS au;
+> SELECT * FROM ALL_USERS au WHERE au.USERNAME = '{{ORACLELINUX_USERNAME}}';
+> EXIT;
+root@host# [Ctrl+D]
+</pre>
 
 18- Insert Data: java_oraclelinux/oracle/scripts/init.sql (TIP: Use the SGDB to do it)
 
-19- user@host:/home/user/docker-series/java_oraclelinux$ docker-compose stop
+19- Stop the container
+<pre>
+user@host:/home/user/docker-series/java_oraclelinux$ docker-compose stop
+</pre>
 
-20- user@host:/home/user/docker-series/java_oraclelinux$ docker-compose start oraclelinux
+20- Start the container again
+<pre>
+user@host:/home/user/docker-series/java_oraclelinux$ docker-compose start oraclelinux
+</pre>
 
-21- user@host:/home/user/docker-series/java_oraclelinux$ docker-compose up openjdk-8u212
-    - Don't forget to put the jar file and application.properties inside the app path
+21- Run the docker compose to create the container OPEN JDK
 
-22- user@host:/home/user/docker-series/java_oraclelinux$ [Ctrl+C]
+> Don't forget to put the jar file and application.properties inside the app path
 
-23- user@host:/home/user/docker-series/java_oraclelinux$ docker-compose start
-    23.1- user@host:/home/user/docker-series/java_oraclelinux$ docker exec -it openjdk-8u212 /bin/bash
-    root@0c6b773f4f35:/home/openjdk8u212# ps -ef | grep java
-    root           1       0 99 18:05 pts/0    00:00:20 java -jar /home/openjdk8u212/JAVA-ORACLELINUX-22.01.1-SNAPSHOT.jar --spring.config.location=/home/openjdk8u212/application.properties
-    root          61      54  0 18:06 pts/1    00:00:00 grep java
-    root@0c6b773f4f35:/home/openjdk8u212# [Ctrl+D]
+<pre>
+user@host:/home/user/docker-series/java_oraclelinux$ docker-compose up openjdk-8u212
+</pre>
 
-24- user@host:/home/user/docker-series/java_oraclelinux$ docker-compose ps
-        Name                   Command                  State                                             Ports                                       
-    --------------------------------------------------------------------------------------------------------------------------------------------------
-    openjdk-8u212   bash                             Up             0.0.0.0:38001->38001/tcp,:::38001->38001/tcp                                      
-    oraclelinux     /bin/sh -c exec $ORACLE_BA ...   Up (healthy)   0.0.0.0:1521->1521/tcp,:::1521->1521/tcp, 0.0.0.0:5500->5500/tcp,:::5500->5500/tcp
+22- Stop the current process
+<pre>
+user@host:/home/user/docker-series/java_oraclelinux$ [Ctrl+C]
+</pre>
 
-25- #Use Postman to make tests
-    GET http://localhost:38001/api/v1/customers
-    POST http://localhost:38001/api/v1/customers
-    {
-        "personType": 1,
-        "name": "Mariana da Silva e Silva",
-        "identification": "12349034839",
-        "bornDate": "1990-09-11T10:00:00.100Z",
-        "purchaseDate": "2015-01-03T20:09:11.900Z",
-        "contractNumber": "123456"
-    }
+23- Start all the containers
+<pre>
+user@host:/home/user/docker-series/java_oraclelinux$ docker-compose start
+</pre>
+
+24- Access the OPEN JDK container and check the process
+<pre>
+user@host:/home/user/docker-series/java_oraclelinux$ docker exec -it openjdk-8u212 /bin/bash
+root@0c6b773f4f35:/home/openjdk8u212# ps -ef | grep java
+root           1       0 99 18:05 pts/0    00:00:20 java -jar /home/openjdk8u212/JAVA-ORACLELINUX-22.01.1-SNAPSHOT.jar --spring.config.location=/home/openjdk8u212/application.properties
+root          61      54  0 18:06 pts/1    00:00:00 grep java
+root@0c6b773f4f35:/home/openjdk8u212# [Ctrl+D]
+</pre>
+
+25- Check the status form all containers
+<pre>
+user@host:/home/user/docker-series/java_oraclelinux$ docker-compose ps
+    Name                   Command                  State                                             Ports                                       
+--------------------------------------------------------------------------------------------------------------------------------------------------
+openjdk-8u212   bash                             Up             0.0.0.0:38001->38001/tcp,:::38001->38001/tcp                                      
+oraclelinux     /bin/sh -c exec $ORACLE_BA ...   Up (healthy)   0.0.0.0:1521->1521/tcp,:::1521->1521/tcp, 0.0.0.0:5500->5500/tcp,:::5500->5500/tcp
+</pre>
+
+25- Use Postman to make tests
+<pre>
+GET http://localhost:38001/api/v1/customers
+POST http://localhost:38001/api/v1/customers
+{
+    "personType": 1,
+    "name": "Mariana da Silva e Silva",
+    "identification": "12349034839",
+    "bornDate": "1990-09-11T10:00:00.100Z",
+    "purchaseDate": "2015-01-03T20:09:11.900Z",
+    "contractNumber": "123456"
+}
 </pre>
 
