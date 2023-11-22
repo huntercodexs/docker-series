@@ -1,6 +1,8 @@
 # JAVA + MONGODB
 Simple environment to simulate a workflow integrating Java + MongoDB
 
+![banner.png](java_mongodb/midias/banner.png)
+
 # Requisites
 
 - Java 8
