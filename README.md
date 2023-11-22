@@ -2,6 +2,8 @@
 # CERTIFICATE AUTHORITIES
 The repository to simulate a complete environment using SSL layer - HTTPS Protocol
 
+![banner.png](certificate_authorities/midias/banner.png)
+
 # Information
 This project aims to offer a viable means for testing during development and the preparation of applications that 
 use end-to-end encryption in their communications based on HTTPS. At the end of project it will be possible to run one 
