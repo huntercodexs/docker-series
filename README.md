@@ -1,5 +1,7 @@
 # H2 + MYSQL + ORACLE LINUX + SFTP + MAIL HOG
-Base project to homologation and tests environment
+Base project to use on sandbox and tests environment
+
+![banner.png](h2_mysql_oracle_sftp_mailhog/files/banner.png)
 
 # REQUISITES
 
@@ -12,12 +14,14 @@ Base project to homologation and tests environment
 # USAGE
 
 <pre>
-git clone https://github.com/huntercodexs/docker-series.git .
-git checkout h2_mysql_oracle_sftp_mailhog
-cd h2_mysql_oracle_sftp_mailhog
-docker-compose up --build (in first time)
-docker-compose start (in the next times)
-docker-compose ps (check the containers status)
+user@host:/home/user$ git clone https://github.com/huntercodexs/docker-series.git .
+user@host:/home/user$ cd docker-series
+user@host:/home/user/docker-series$ git checkout h2_mysql_oracle_sftp_mailhog
+user@host:/home/user/docker-series$ cd h2_mysql_oracle_sftp_mailhog
+user@host:/home/user/docker-series/h2_mysql_oracle_sftp_mailhog$ docker-compose up --build (in first time)
+user@host:/home/user/docker-series/h2_mysql_oracle_sftp_mailhog$ [Ctrl+C]
+user@host:/home/user/docker-series/h2_mysql_oracle_sftp_mailhog$ docker-compose start (in the next times)
+user@host:/home/user/docker-series/h2_mysql_oracle_sftp_mailhog$ docker-compose ps (check the containers status)
 </pre>
 
 Result should be
@@ -98,34 +102,35 @@ user: root
 pass: root123
 </pre>
 
-# ORACLE-LINUX 19c
+# About Oraclelinux 19c instance
 
-# How to use Oracle
+<h3>Oracle</h3>
 
 - Definitions and Variables
 
 <pre>
-ORACLE-DATABASE-USER: DEVEL (in many cases should be SYS or SYSTEM)
-ORACLE-DATABASE-USER-LOWERCASE: devel
-ORACLE-DATABASE-PDB: ORCLPDB1
-ORACLE-PASSWORD: oracle1Ipw
-ORACLE-DATABASE-ROLE: Normal (in many cases can be SYSDBA)
-ORACLE-DATABASE-AUTH-MODE: Oracle Database Native
-ORACLE-DATABASE-PORT: 1521
-ORACLE-DATABASE-TABLESPACE: /opt/oracle/oradata/ORCLCDB/{{ORACLE-DATABASE-PDB}}/{{ORACLE-DATABASE-USER-LOWERCASE}}.dbf
+ORACLELINUX_USERNAME: DEVEL (if error, try SYS or SYSTEM)
+ORACLELINUX_USERNAME_LOWERCASE: devel
+ORACLELINUX_PDB: ORCLPDB1
+ORACLELINUX_PASSWORD: oracle1Ipw
+ORACLELINUX_DATABASE_ROLE: Normal (in many cases can be SYSDBA)
+ORACLELINUX_DATABASE_AUTH_MODE: Oracle Database Native
+ORACLELINUX_DATABASE_PORT: 1521
+ORACLELINUX_TABLESPACE_NAME: DEVEL
+ORACLELINUX_DATABASE_TABLESPACE: /opt/oracle/oradata/ORCLCDB/{{ORACLELINUX_PDB}}/{{ORACLELINUX_USERNAME_LOWERCASE}}.dbf
 </pre>
 
-> <p style="color: orange">IMPORTANT</p>    
+> IMPORTANT
 
-- The builder of this container is very long and need a long time to finish correctly
-- Use the command docker-compose up --build to run in first time
+- The builder of this container is too long and toke a long time to finish all
+- Use the command docker-compose up --build to run on first time
 - After the first build use docker-compose up -d oraclelinux or docker-compose start oraclelinux
 
->** VERY IMPORTANT **
+> ** VERY IMPORTANT **
 - The path oracle/oradata in current container instance "should be empty"
-- Have sure that the oracle/oradata is empty or just have the dbconfig/ and ORCLCDB/ folders
+- Ensure that the oracle/oradata is empty or just have the dbconfig/ and ORCLCDB/ folders
 
-> ORACLE EDITION (see .env file):
+- ORACLE EDITION (see the .env file):
 
 <pre>
 ee - Enterprise Edition
@@ -133,117 +138,171 @@ se2 - Standard Edition
 xe - Express Edition
 </pre>
 
-> <p style="color: red">REQUIRED</p>
+> REQUIRED
 
-- Database file: LINUX.X64_193000_db_home.zip (in this case)
-- This file can be downloaded in https://www.oracle.com/database/technologies/oracle-database-software-downloads.html
-
-> STEPS BEFORE BUILD
-
-- Put the LINUX.X64_193000_db_home.zip inside oracle/database before run the docker-compose
-- Unzip the oraclelinux-database-scripts-19c.tar.bz2 file inside the oracle/database folder:
 <pre>
-tar -xvf oraclelinux-database-scripts-19c.tar.bz2
+Database file: LINUX.X64_193000_db_home.zip (in this case)
+This file can be downloaded in https://www.oracle.com/database/technologies/oracle-database-software-downloads.html
 </pre>
-- Create the oradata folder in oracle path
-- Check if oracle/oradata is empty or just have the dbconfig/ and ORCLCDB/ folders
 
-> STEPS AFTER BUILD
+- BEFORE BUILD
 
-- HOST(your machine):
+Put the LINUX.X64_193000_db_home.zip inside oracle/database before run the docker-compose
+
+Set up the .env file on section ORACLELINUX SETTINGS
+
+Unzip the oraclelinux-database-scripts-19c.tar.bz2 file inside the oracle/database folder:
+<pre>
+user@host:/home/user/docker-series/h2_mysql_oracle_sftp_mailhog/oracle/database$ tar -xvf oraclelinux-database-scripts-19c.tar.bz2
+</pre>
+
+Create the oradata folder in oracle path
+Check if oracle/oradata is empty or just have the dbconfig/ and ORCLCDB/ folders
+
+Final results from build
+<pre>
+oraclelinux    | Version 19.3.0.0.0
+oraclelinux    | The Oracle base remains unchanged with value /opt/oracle
+oraclelinux    | The Oracle base remains unchanged with value /opt/oracle
+oraclelinux    | #########################
+oraclelinux    | DATABASE IS READY TO USE!
+oraclelinux    | #########################
+oraclelinux    | The following output is now a tail of the alert.log:
+oraclelinux    | ORCLPDB1(3):Completed: ALTER DATABASE DEFAULT TABLESPACE "USERS"
+oraclelinux    | 2023-10-12T14:59:47.143786+00:00
+oraclelinux    | ALTER SYSTEM SET control_files='/opt/oracle/oradata/ORCLCDB/control01.ctl' SCOPE=SPFILE;
+oraclelinux    | 2023-10-12T14:59:47.148098+00:00
+oraclelinux    | ALTER SYSTEM SET local_listener='' SCOPE=BOTH;
+oraclelinux    |    ALTER PLUGGABLE DATABASE ORCLPDB1 SAVE STATE
+oraclelinux    | Completed:    ALTER PLUGGABLE DATABASE ORCLPDB1 SAVE STATE
+oraclelinux    | 2023-10-12T14:59:47.721280+00:00
+oraclelinux    | 
+oraclelinux    | XDB initialized.
+</pre>
+
+- AFTER BUILD
+
+Make the follow commands in the HOST(the machine where is installed the instance oraclelinux via docker):
 
 Set Password Administration
 <pre>
-docker-compose start oraclelinux
-docker exec -it oraclelinux ./setPassword.sh {{YOUR_ORACLE_PASSWORD}}
+user@host:/home/user/docker-series/h2_mysql_oracle_sftp_mailhog$ docker-compose start oraclelinux
+user@host:/home/user/docker-series/h2_mysql_oracle_sftp_mailhog$ docker exec -it oraclelinux ./setPassword.sh {{YOUR_ORACLE_PASSWORD}}
 </pre>
 
-- Access the database container
+Result
 <pre>
-docker exec -it oraclelinux /bin/bash
+user@host:/home/user/docker-series/h2_mysql_oracle_sftp_mailhog$ docker exec -it oraclelinux ./setPassword.sh oracle1Ipw
+The Oracle base remains unchanged with value /opt/oracle
+
+SQL*Plus: Release 19.0.0.0.0 - Production on Thu Oct 12 15:09:12 2023
+Version 19.3.0.0.0
+
+Copyright (c) 1982, 2019, Oracle.  All rights reserved.
+
+
+Connected to:
+Oracle Database 19c Enterprise Edition Release 19.0.0.0.0 - Production
+Version 19.3.0.0.0
+
+SQL> 
+User altered.
+
+SQL> 
+User altered.
+
+SQL> 
+Session altered.
+
+SQL> 
+User altered.
+
+SQL> Disconnected from Oracle Database 19c Enterprise Edition Release 19.0.0.0.0 - Production
+Version 19.3.0.0.0
 </pre>
 
-- GUEST(inside oraclelinux):
-
-- Create User
+Access the database container
 <pre>
-sqlplus sys/{{ORACLE-PASSWORD}}@{{ORACLE-DATABASE-PDB}} as sysdba
-CREATE USER {{ORACLE-DATABASE-USER}} IDENTIFIED BY {{ORACLE-PASSWORD}};
-GRANT CREATE SESSION, CREATE TABLE TO {{ORACLE-DATABASE-USER}};
-ALTER USER {{ORACLE-DATABASE-USER}} QUOTA 50m ON SYSTEM;
-CREATE SMALLFILE TABLESPACE {{ORACLE-DATABASE-USER}} DATAFILE '{{ORACLE-DATABASE-TABLESPACE}}' SIZE 1G;
-ALTER DATABASE DEFAULT TABLESPACE {{ORACLE-DATABASE-USER}};
+user@host:/home/user/docker-series/h2_mysql_oracle_sftp_mailhog$ docker exec -it oraclelinux /bin/bash
+</pre>
+
+- Make the follow commands inside oraclelinux instance via docker (GUEST):
+
+Create User
+<pre>
+sqlplus sys/{{ORACLELINUX_PASSWORD}}@{{ORACLELINUX_PDB}} as sysdba
+CREATE USER {{ORACLELINUX_USERNAME}} IDENTIFIED BY {{ORACLELINUX_PASSWORD}};
+GRANT CREATE SESSION, CREATE TABLE TO {{ORACLELINUX_USERNAME}};
+ALTER USER {{ORACLELINUX_USERNAME}} QUOTA 50m ON SYSTEM;
+CREATE SMALLFILE TABLESPACE {{ORACLELINUX_USERNAME}} DATAFILE '{{ORACLELINUX_DATABASE_TABLESPACE}}' SIZE 1G;
+ALTER DATABASE DEFAULT TABLESPACE {{ORACLELINUX_USERNAME}};
+ALTER USER {{ORACLELINUX_USERNAME}} QUOTA UNLIMITED ON SYSTEM;
+ALTER USER {{ORACLELINUX_USERNAME}} QUOTA UNLIMITED ON {{ORACLELINUX_TABLESPACE_NAME}};
 SELECT * FROM ALL_USERS au;
-SELECT * FROM ALL_USERS au WHERE au.USERNAME = '{{ORACLE-DATABASE-USER}}';
+SELECT * FROM ALL_USERS au WHERE au.USERNAME = '{{ORACLELINUX_USERNAME}}';
 EXIT;
 </pre>
 
-- Add user
+> TIP: User the script init.sql to make a test in the current oraclelinux instance via docker
 
-<pre>
-docker exec -it oraclelinux /bin/bash
-sqlplus sys/{{ORACLE-PASSWORD}}@{{ORACLE-DATABASE-PDB}} as sysdba
-CREATE USER {{ORACLE-DATABASE-USER}} IDENTIFIED BY {{ORACLE-PASSWORD}};
-GRANT CREATE SESSION, CREATE TABLE TO {{ORACLE-DATABASE-USER}};
-ALTER USER {{ORACLE-DATABASE-USER}} QUOTA UNLIMITED ON SYSTEM;
-CREATE SMALLFILE TABLESPACE {{ORACLE-DATABASE-USER}} DATAFILE '{{ORACLE-DATABASE-TABLESPACE}}' SIZE 1G;
-ALTER DATABASE DEFAULT TABLESPACE {{ORACLE-DATABASE-USER}};
-ALTER USER {{ORACLE-DATABASE-USER}} QUOTA UNLIMITED ON SYSTEM;
-GRANT ALL PRIVILEGES TO {{ORACLE-DATABASE-USER}};
-SELECT * FROM ALL_USERS au;
-SELECT * FROM ALL_USERS au WHERE au.USERNAME = '{{ORACLE-DATABASE-USER}}';
-EXIT;
-</pre>
+[init.sql](./h2_mysql_oracle_sftp_mailhog/oracle/scripts/init.sql)
 
-- Get ORACLE-DATABASE-PDB available from oracle
-
+Get ORACLELINUX_PDB available from oracle
 <pre>
 ** to get this value exec in the current terminal:
 SQL> show pdbs;
 
-CON_ID CON_NAME			  OPEN MODE  RESTRICTED
+    CON_ID CON_NAME			  OPEN MODE  RESTRICTED
 ---------- ------------------------------ ---------- ----------
-3 ORCLORACLE-DATABASE-PDB1			  READ WRITE NO
+	 3 ORCLPDB1			  READ WRITE NO
+
 SQL>EXIT;
 </pre>
 
-- Connect on database using the new user
+Connect on database using the new user
 <pre>
-sqlplus {{ORACLE-DATABASE-USER}}/{{ORACLE-PASSWORD}}@{{ORACLE-DATABASE-PDB}}
+sqlplus {{ORACLELINUX_USERNAME}}/{{ORACLELINUX_PASSWORD}}@{{ORACLELINUX_PDB}}
 </pre>
 
-- Access the Database Oracle Linux:
+- Configuration to access the Database Oracle Linux:
 
 <pre>
 Host: {{DATABASE_ORACLE_SERVER_IP}}
-Port: {{ORACLE-DATABASE-PORT}}
-Database: {{ORACLE-DATABASE-PDB}} [Service Name]
-Authentication:{{ORACLE-DATABASE-AUTH-MODE}}
-Username: {{ORACLE-DATABASE-USER}}
-Role: {{ORACLE-DATABASE-ROLE}}
-Password: {{ORACLE-PASSWORD}}
+Port: {{ORACLELINUX_DATABASE_PORT}}
+Database: {{ORACLELINUX_PDB}} [Service Name]
+Authentication:{{ORACLELINUX_DATABASE_AUTH_MODE}}
+Username: {{ORACLELINUX_USERNAME}}
+Role: {{ORACLELINUX_DATABASE_ROLE}}
+Password: {{ORACLELINUX_PASSWORD}}
 </pre>
 
-> Database Connection Sample
+- Database Connection Sample (User: SYS, SYSDBA)
 
-![img.png](./h2_mysql_oracle_sftp_mailhog/oracle/midias/DBeaver-Oracle-Connection-Details.png)
+![oracle-connection-sys-sample.png](./h2_mysql_oracle_sftp_mailhog/files/oracle-connection-sys-sample.png)
 
-> Enterprise Manager
+- Database Connection Sample (User: DEVEL)
 
-![img.png](./h2_mysql_oracle_sftp_mailhog/oracle/midias/Oracle-Database-EM.png)
+![oracle-connection-sys-sample.png](./h2_mysql_oracle_sftp_mailhog/files/oracle-connection-devel-sample.png)
+
+![oracle-connection-devel-query-sample.png](./h2_mysql_oracle_sftp_mailhog/files/oracle-connection-devel-query-sample.png)
+
+- Enterprise Manager
+
+![img.png](./h2_mysql_oracle_sftp_mailhog/files/Oracle-Database-EM.png)
 
 - Access the Enterprise Manager:
 
 <pre>
 https://{{WEBSERVER_ADDRESS}}:5500/em
   > username: sys
-  > password: {{YOUR_ORACLE_PASSWORD}}
-  > container name: {{ORACLE-DATABASE-PDB}}
+  > password: {{ORACLELINUX_PASSWORD}}
+  > container name: {{ORACLELINUX_PDB}}
 </pre>
+
+![oracle-enterprise-manager.png](./h2_mysql_oracle_sftp_mailhog/files/oracle-enterprise-manager.png)
 
 * All rights reserved to ORACLE - https://www.oracle.com/
 
--------------
 
 # SFTP SERVER
 
@@ -287,4 +346,193 @@ spring.mail.properties.mail.smtp.timeout=5000
 spring.mail.properties.mail.smtp.writetimeout=5000
 spring.mail.properties.mail.smtp.socketFactory.port=31025
 spring.mail.properties.mail.smtp.socketFactory.class=javax.net.ssl.SSLSocketFactory
+</pre>
+
+# Step by Step
+
+Follow the steps below to quick and easy environment creation
+
+1- Clone the repository
+
+user@host:/home/user$ git clone https://github.com/huntercodexs/docker-series.git .
+
+2- Access the repository folder
+
+user@host:/home/user$ cd docker-series
+
+3- Change the current branch
+
+user@host:/home/user/docker-series$ git checkout h2_mysql_oracle_sftp_mailhog
+
+4- Access the h2_mysql_oracle_sftp_mailhog folder
+
+user@host:/home/user/docker-series$ cd h2_mysql_oracle_sftp_mailhog
+
+5- Check and set the .env file in the following sections
+<pre>
+#### MYSQL 8.0 SETTINGS
+#### FTP SERVER SETTINGS
+#### ORACLELINUX SETTINGS
+#### MAILHOG SETTINGS
+#### H2 DATABASE SETTINGS
+</pre>
+
+6- Prepare the oracle environment
+<pre>
+Put the LINUX.X64_193000_db_home.zip inside oracle/database before run the docker-compose
+</pre>
+
+7- Unzip the oraclelinux-database-scripts-19c.tar.bz2 file inside the oracle/database folder:
+<pre>
+user@host:/home/user/docker-series/h2_mysql_oracle_sftp_mailhog/oracle/database$ tar -xvf oraclelinux-database-scripts-19c.tar.bz2
+</pre>
+
+8- Create the oradata folder in oracle path
+
+> Check if oracle/oradata is empty or just have the dbconfig/ and ORCLCDB/ folders
+
+> NOTE: Make the follow commands in the HOST(the machine where is installed the instance oraclelinux via docker):
+
+9- Build the containers
+<pre>
+user@host:/home/user/docker-series/h2_mysql_oracle_sftp_mailhog$ docker network create open_network
+user@host:/home/user/docker-series/h2_mysql_oracle_sftp_mailhog$ docker-compose up --build
+</pre>
+
+10- Stop containers and start only oraclelinux container
+<pre>
+user@host:/home/user/docker-series/h2_mysql_oracle_sftp_mailhog$ docker-compose start oraclelinux
+</pre>
+
+11- Set Password Administration
+<pre>
+user@host:/home/user/docker-series/h2_mysql_oracle_sftp_mailhog$ docker-compose start oraclelinux
+user@host:/home/user/docker-series/h2_mysql_oracle_sftp_mailhog$ docker exec -it oraclelinux ./setPassword.sh {{YOUR_ORACLE_PASSWORD}}
+</pre>
+
+Result
+<pre>
+user@host:/home/user/docker-series/h2_mysql_oracle_sftp_mailhog$ docker exec -it oraclelinux ./setPassword.sh oracle1Ipw
+The Oracle base remains unchanged with value /opt/oracle
+
+SQL*Plus: Release 19.0.0.0.0 - Production on Thu Oct 12 15:09:12 2023
+Version 19.3.0.0.0
+
+Copyright (c) 1982, 2019, Oracle.  All rights reserved.
+
+
+Connected to:
+Oracle Database 19c Enterprise Edition Release 19.0.0.0.0 - Production
+Version 19.3.0.0.0
+
+SQL> 
+User altered.
+
+SQL> 
+User altered.
+
+SQL> 
+Session altered.
+
+SQL> 
+User altered.
+
+SQL> Disconnected from Oracle Database 19c Enterprise Edition Release 19.0.0.0.0 - Production
+Version 19.3.0.0.0
+</pre>
+
+12- Access the database container
+<pre>
+user@host:/home/user/docker-series/h2_mysql_oracle_sftp_mailhog$ docker exec -it oraclelinux /bin/bash
+</pre>
+
+13- Create User
+
+> NOTE: Make the follow commands inside oraclelinux instance via docker (GUEST):
+
+<pre>
+sqlplus sys/{{ORACLELINUX_PASSWORD}}@{{ORACLELINUX_PDB}} as sysdba
+CREATE USER {{ORACLELINUX_USERNAME}} IDENTIFIED BY {{ORACLELINUX_PASSWORD}};
+GRANT CREATE SESSION, CREATE TABLE TO {{ORACLELINUX_USERNAME}};
+ALTER USER {{ORACLELINUX_USERNAME}} QUOTA 50m ON SYSTEM;
+CREATE SMALLFILE TABLESPACE {{ORACLELINUX_USERNAME}} DATAFILE '{{ORACLELINUX_DATABASE_TABLESPACE}}' SIZE 1G;
+ALTER DATABASE DEFAULT TABLESPACE {{ORACLELINUX_USERNAME}};
+ALTER USER {{ORACLELINUX_USERNAME}} QUOTA UNLIMITED ON SYSTEM;
+ALTER USER {{ORACLELINUX_USERNAME}} QUOTA UNLIMITED ON {{ORACLELINUX_TABLESPACE_NAME}};
+SELECT * FROM ALL_USERS au;
+SELECT * FROM ALL_USERS au WHERE au.USERNAME = '{{ORACLELINUX_USERNAME}}';
+EXIT;
+</pre>
+
+> TIP: User the script init.sql to make a test in the current oraclelinux instance via docker
+
+[init.sql](./h2_mysql_oracle_sftp_mailhog/oracle/scripts/init.sql)
+
+14- Get ORACLELINUX_PDB available from oracle
+<pre>
+** to get this value exec in the current terminal:
+SQL> show pdbs;
+
+    CON_ID CON_NAME			  OPEN MODE  RESTRICTED
+---------- ------------------------------ ---------- ----------
+	 3 ORCLPDB1			  READ WRITE NO
+
+SQL>EXIT;
+</pre>
+
+15- Connect on database using the new user
+<pre>
+sqlplus {{ORACLELINUX_USERNAME}}/{{ORACLELINUX_PASSWORD}}@{{ORACLELINUX_PDB}}
+</pre>
+
+16- Check the configuration to access the Database Oracle Linux:
+<pre>
+Host: {{DATABASE_ORACLE_SERVER_IP}}
+Port: {{ORACLELINUX_DATABASE_PORT}}
+Database: {{ORACLELINUX_PDB}} [Service Name]
+Authentication:{{ORACLELINUX_DATABASE_AUTH_MODE}}
+Username: {{ORACLELINUX_USERNAME}}
+Role: {{ORACLELINUX_DATABASE_ROLE}}
+Password: {{ORACLELINUX_PASSWORD}}
+</pre>
+
+17- Database Connection Sample (User: SYS, SYSDBA)
+
+![oracle-connection-sys-sample.png](./h2_mysql_oracle_sftp_mailhog/files/oracle-connection-sys-sample.png)
+
+18 - Database Connection Sample (User: DEVEL)
+
+![oracle-connection-sys-sample.png](./h2_mysql_oracle_sftp_mailhog/files/oracle-connection-devel-sample.png)
+
+![oracle-connection-devel-query-sample.png](./h2_mysql_oracle_sftp_mailhog/files/oracle-connection-devel-query-sample.png)
+
+19- Access the Enterprise Manager:
+<pre>
+https://{{WEBSERVER_ADDRESS}}:5500/em
+  > username: sys
+  > password: {{ORACLELINUX_PASSWORD}}
+  > container name: {{ORACLELINUX_PDB}}
+</pre>
+
+Enterprise Manager
+
+![Oracle-Database-EM.png](./h2_mysql_oracle_sftp_mailhog/files/Oracle-Database-EM.png)
+
+![oracle-enterprise-manager.png](./h2_mysql_oracle_sftp_mailhog/files/oracle-enterprise-manager.png)
+
+* All rights reserved to ORACLE - https://www.oracle.com/
+
+20- SFTP Connect
+
+![sftp-filezilla-setup-1.png](./h2_mysql_oracle_sftp_mailhog/files/sftp-filezilla-setup-1.png)
+
+![sftp-filezilla-setup-1.png](./h2_mysql_oracle_sftp_mailhog/files/sftp-filezilla-setup-2.png)
+
+21- Make connect to Mailhog
+<pre>
+http://{{MAIL_SERVER_IP}}:{{MAILHOG_PORT}}
+
+[Example]
+http://{{WEBSERVER-ADDRESS-IP}}:38025 (mailhog)
+http://{{WEBSERVER-ADDRESS-IP}}:48025 (mailhog-ubuntu2004)
 </pre>
