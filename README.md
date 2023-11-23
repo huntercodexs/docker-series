@@ -497,14 +497,14 @@ Password: {{ORACLELINUX_PASSWORD}}
 </pre>
 
 17- Database Connection Sample (User: SYS, SYSDBA)
-
-![oracle-connection-sys-sample.png](./h2_mysql_oracle_sftp_mailhog/files/oracle-connection-sys-sample.png)
+<pre>
+Check the details above in ORACLE LINUX 19c section
+</pre>
 
 18 - Database Connection Sample (User: DEVEL)
-
-![oracle-connection-sys-sample.png](./h2_mysql_oracle_sftp_mailhog/files/oracle-connection-devel-sample.png)
-
-![oracle-connection-devel-query-sample.png](./h2_mysql_oracle_sftp_mailhog/files/oracle-connection-devel-query-sample.png)
+<pre>
+Check the details above in ORACLE LINUX 19c section
+</pre>
 
 19- Access the Enterprise Manager:
 <pre>
@@ -514,19 +514,10 @@ https://{{WEBSERVER_ADDRESS}}:5500/em
   > container name: {{ORACLELINUX_PDB}}
 </pre>
 
-Enterprise Manager
-
-![Oracle-Database-EM.png](./h2_mysql_oracle_sftp_mailhog/files/Oracle-Database-EM.png)
-
-![oracle-enterprise-manager.png](./h2_mysql_oracle_sftp_mailhog/files/oracle-enterprise-manager.png)
-
-* All rights reserved to ORACLE - https://www.oracle.com/
-
 20- SFTP Connect
-
-![sftp-filezilla-setup-1.png](./h2_mysql_oracle_sftp_mailhog/files/sftp-filezilla-setup-1.png)
-
-![sftp-filezilla-setup-1.png](./h2_mysql_oracle_sftp_mailhog/files/sftp-filezilla-setup-2.png)
+<pre>
+Check the details above in SFTP section
+</pre>
 
 21- Make connect to Mailhog
 <pre>
