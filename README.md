@@ -501,7 +501,7 @@ Password: {{ORACLELINUX_PASSWORD}}
 Check the details above in ORACLE LINUX 19c section
 </pre>
 
-18 - Database Connection Sample (User: DEVEL)
+18- Database Connection Sample (User: DEVEL)
 <pre>
 Check the details above in ORACLE LINUX 19c section
 </pre>
