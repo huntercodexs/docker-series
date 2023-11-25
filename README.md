@@ -29,14 +29,12 @@ Result should be
 
 # H2 DATABASE (JAVA)
 
-- Tip
-
-> To use more easily this project you can use together the Spring H2 Database Demo from
+> TIP: To use more easily this project you can use together the Spring H2 Database Demo from
 > https://github.com/huntercodexs/spring-h2-database-demo
 
-- Settings to do before run this project
+Settings to do before run this project
 
-Configure the file .env as bellow
+- Configure the file .env as bellow
 
 > NOTE: Get the version and zip filename in the https://www.h2database.com/html/download.html
 
@@ -47,7 +45,7 @@ H2DATABASE_VERSION=version-2.1.214
 H2DATABASE_ZIPFILE=h2-2022-06-13.zip
 </pre>
 
-Set up the ports
+- Set up the ports
 
 <pre>
 H2DATABASE_HOST_PORT=35900
@@ -120,15 +118,13 @@ ORACLELINUX_TABLESPACE_NAME: DEVEL
 ORACLELINUX_DATABASE_TABLESPACE: /opt/oracle/oradata/ORCLCDB/{ORACLELINUX_PDB}/{ORACLELINUX_USERNAME_LOWERCASE}.dbf
 </pre>
 
-> IMPORTANT
+> IMPORTANT:
+> Use the command docker-compose up --build to run on first time
+> After the first build use docker-compose up -d oraclelinux or docker-compose start oraclelinux
 
--                                                          
-- Use the command docker-compose up --build to run on first time
-- After the first build use docker-compose up -d oraclelinux or docker-compose start oraclelinux
-
-> ** VERY IMPORTANT **
-- The path oracle/oradata in current container instance "should be empty"
-- Ensure that the oracle/oradata is empty or just have the dbconfig/ and ORCLCDB/ folders
+> VERY IMPORTANT:
+> The path oracle/oradata in current container instance "should be empty"
+> Ensure that the oracle/oradata is empty or just have the dbconfig/ and ORCLCDB/ folders
 
 - ORACLE EDITION (see the .env file):
 
@@ -301,7 +297,7 @@ https://{WEBSERVER_ADDRESS}:5500/em
 
 ![oracle-enterprise-manager.png](./h2_mysql_oracle_sftp_mailhog/files/oracle-enterprise-manager.png)
 
-* All rights reserved to ORACLE - https://www.oracle.com/
+All rights reserved to ORACLE - https://www.oracle.com/
 
 
 # SFTP SERVER
