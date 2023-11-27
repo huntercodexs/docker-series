@@ -66,7 +66,7 @@ RUN apt-get install -y tzdata
 ## ESSENTIAL
 #---------------------------------------------------------------------------------------------------------
 RUN apt-get install -y zstd
-RUN apt install -y php-common/stable
+#RUN apt install -y php-common/stable
 RUN apt-get install -y gnupg2
 
 #---------------------------------------------------------------------------------------------------------
@@ -137,12 +137,12 @@ RUN ldconfig
 
 RUN pecl channel-update pecl.php.net
 
-RUN docker-php-ext-configure pdo_oci --with-pdo-oci=instantclient,/opt/oracle/instantclient,19.3 \
-&& echo 'instantclient,/opt/oracle/instantclient/' | pecl install oci8 \
-&& docker-php-ext-install \
-        pdo_oci \
-&& docker-php-ext-enable \
-        oci8
+#RUN docker-php-ext-configure pdo_oci --with-pdo-oci=instantclient,/opt/oracle/instantclient,19.3 \
+#&& echo 'instantclient,/opt/oracle/instantclient/' | pecl install oci8 \
+#&& docker-php-ext-install \
+#        pdo_oci \
+#&& docker-php-ext-enable \
+#        oci8
 
 #---------------------------------------------------------------------------------------------------------
 ## MONGODB
@@ -151,7 +151,7 @@ RUN mkdir -p /opt/mongodb
 
 RUN pecl install mongodb
 RUN printf ";priority=60\nextension=mongodb.so\n" > $DIR_PHP_INI_FILES/mongodb.ini
-RUN phpenmod mongodb
+#RUN phpenmod mongodb
 RUN pecl config-set php_ini $DIR_PHP_INI/php.ini
 
 RUN cd /opt/mongodb
@@ -177,14 +177,14 @@ RUN mkdir -p /opt/postgres
 RUN cd /opt/postgres
 
 RUN apt install -y postgresql postgresql-contrib
-RUN wget https://archlinux.org/packages/extra/x86_64/php-pgsql/download -O php-pgsql-8.1.0-x86_64.pkg.tar.zst
-RUN tar -I zstd -xvf php-pgsql-8.1.0-x86_64.pkg.tar.zst
+RUN wget https://archlinux.org/packages/extra/x86_64/php-pgsql/download -O php-pgsql.pkg.tar.zst
+RUN tar -I zstd -xvf php-pgsql.pkg.tar.zst
 RUN cp usr/lib/php/modules/pgsql.so $DIR_PHP_EXTENSIONS/
 RUN cp usr/lib/php/modules/pdo_pgsql.so $DIR_PHP_EXTENSIONS/
 RUN printf ";priority=40\nextension=pgsql.so\n" > $DIR_PHP_INI_FILES/pgsql.ini
 RUN printf ";priority=50\nextension=pdo_pgsql.so\n" > $DIR_PHP_INI_FILES/pdo_pgsql.ini
-RUN phpenmod pgsql pdo_pgsql
-RUN mv php-pgsql-8.1.0-x86_64.pkg.tar.zst usr /opt/postgres/
+#RUN phpenmod pgsql pdo_pgsql
+RUN mv php-pgsql.pkg.tar.zst usr /opt/postgres/
 
 RUN cd -
 
@@ -201,11 +201,11 @@ RUN ACCEPT_EULA=Y apt-get install -y msodbcsql17
 RUN ACCEPT_EULA=Y apt-get install -y mssql-tools
 RUN apt-get install -y unixodbc-dev
 RUN pecl config-set php_ini $DIR_PHP_INI/php.ini
-RUN pecl install sqlsrv
-RUN pecl install pdo_sqlsrv
+#RUN pecl install sqlsrv
+#RUN pecl install pdo_sqlsrv
 RUN printf "; priority=20\nextension=sqlsrv.so\n" > $DIR_PHP_INI_FILES/sqlsrv.ini
 RUN printf "; priority=30\nextension=pdo_sqlsrv.so\n" > $DIR_PHP_INI_FILES/pdo_sqlsrv.ini
-RUN phpenmod sqlsrv pdo_sqlsrv
+#RUN phpenmod sqlsrv pdo_sqlsrv
 RUN echo 'export PATH="$PATH:/opt/microsoft/mssql-tools/bin"' >> ~/.bashrc
 #RUN source ~/.bashrc
 RUN mv mssql-tools microsoft/
@@ -222,7 +222,7 @@ RUN cd /opt/firebird
 RUN apt install -y firebird-dev
 RUN docker-php-ext-install pdo_firebird
 RUN docker-php-ext-configure pdo_firebird --with-pdo-firebird
-RUN phpenmod firebird pdo_firebird
+#RUN phpenmod firebird pdo_firebird
 
 COPY ./shared/conf/firebird-client.conf /etc/firebird/3.0/firebird.conf
 
@@ -240,7 +240,7 @@ RUN cp php-8.1.3-interbase-1.1.1-linux-x64.so $DIR_PHP_EXTENSIONS/interbase.so
 RUN printf ";priority=20\nextension=interbase.so\n" > $DIR_PHP_INI_FILES/interbase.ini
 RUN printf ";priority=30\nextension=pdo_interbase.so\n" > $DIR_PHP_INI_FILES/pdo_interbase.ini
 #RUN docker-php-ext-install pdo_interbase
-RUN phpenmod interbase pdo_interbase
+#RUN phpenmod interbase pdo_interbase
 RUN mv php-8.1.3-interbase-1.1.1-linux-x64.so /opt/interbase/
 
 RUN cd -
@@ -254,7 +254,7 @@ RUN cd /opt/mysql
 
 RUN docker-php-ext-install pdo_mysql
 RUN docker-php-ext-install mysqli && docker-php-ext-enable mysqli
-RUN phpenmod mysqli mysql pdo_mysql
+#RUN phpenmod mysqli mysql pdo_mysql
 
 RUN cd -
 

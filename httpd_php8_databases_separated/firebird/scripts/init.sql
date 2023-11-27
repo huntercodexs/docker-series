@@ -1,4 +1,3 @@
-
 # isql-fb
 SQL>CREATE DATABASE '/etc/firebird/3.0/databases/dbname1.fdb'
 CON>user 'SYSDBA' password 'masterkey';
