@@ -1,23 +1,18 @@
-
 # HTTPD + PHP8 + DATABASES (USING DEDICATED CONTAINER)
 Docker Series - A project to work with many docker container
 
--------------
+![banner.png](httpd_php8_databases_separated%2Ffiles%2Fmidias%2Fbanner.png)
 
 # Information
 
 Please use the branch selection to access others configurations to most need and purposes, this branch offers a complete
 environment to development using HTTP(Apache2) + PHP + Databases(see bellow).
 
--------------
 
 # About project
 
 ![img.png](./httpd_php8_databases_separated/files/midias/project-diagram.png)
 
-...
-
--------------
 
 # Dockers Containers Databases
 
@@ -36,8 +31,7 @@ environment to development using HTTP(Apache2) + PHP + Databases(see bellow).
   - MONGO ![img.png](./httpd_php8_databases_separated/files/midias/check-green.png)
   - FIREBIRD ![img.png](./httpd_php8_databases_separated/files/midias/unavailable.png)
   - INTERBASE ![img.png](./httpd_php8_databases_separated/files/midias/unavailable.png)
-  - ORACLE ![img.png](./httpd_php8_databases_separated/files/midias/check-green.png)
-    <small>** (All right reserved to oracle.com - &copy; 2022 Oracle) (oraclelinux)</small>
+  - ORACLELINUX ![img.png](./httpd_php8_databases_separated/files/midias/check-green.png)
   - SQLITE ![img.png](./httpd_php8_databases_separated/files/midias/check-green.png)
   - REDIS ![img.png](./httpd_php8_databases_separated/files/midias/check-green.png)
 
@@ -45,7 +39,6 @@ environment to development using HTTP(Apache2) + PHP + Databases(see bellow).
 
 See the file .env in the root path of this project
 
--------------
 
 # About PHP8
 
@@ -85,7 +78,6 @@ to
 extension=pdo_oci
 </pre>
 
-------------
 
 # How to use Webserver HTTPD
 
@@ -119,7 +111,6 @@ After the first step (see above) execute again the script "webserver.sh" but pas
 /home/webserver/webserver.sh restart
 </pre>
 
--------------
 
 # How to use Oracle
 
@@ -220,9 +211,8 @@ https://${WEBSERVER_ADDRESS}:5500/em
   
 </pre>
 
-* All rights reserved to ORACLE - https://www.oracle.com/
+All rights reserved to ORACLE - https://www.oracle.com/
 
--------------
 
 # How to use MongoDB
 
@@ -257,7 +247,6 @@ http://${WEBSERVER_ADDRESS}:8090/
 http://${WEBSERVER_ADDRESS}:38080/microservice-mongodb/
 </pre>
 
--------------
 
 # How to use Postgres
 
@@ -320,7 +309,6 @@ INSERT INTO users (id, name, age) VALUES ('12734983', 'Solange Smart Wow', 34);
 http://${WEBSERVER_ADDRESS}:38080/microservice-postgres/
 </pre>
 
--------------
 
 # How to use MSSQL
 
@@ -373,7 +361,6 @@ GO
 http://${WEBSERVER_ADDRESS}:38080/microservice-mssql/
 </pre>
 
--------------
 
 # How to use Firebird
 
@@ -452,7 +439,6 @@ SELECT * FROM users;
 http://${WEBSERVER_ADDRESS}:38080/microservice-firebird/
 </pre>
 
--------------
 
 # How to use MYSQL 5.7
 
@@ -478,7 +464,6 @@ SELECT * FROM users;
 http://${WEBSERVER_ADDRESS}:38080/microservice-mysql57/
 </pre>
 
--------------
 
 # How to use MYSQL 8.0
 
@@ -504,7 +489,6 @@ SELECT * FROM users;
 http://${WEBSERVER_ADDRESS}:38080/microservice-mysql80/
 </pre>
 
--------------
 
 # How to use SQLITE
 
@@ -531,7 +515,6 @@ sqlite> .quit
 http://${WEBSERVER_ADDRESS}:38080/microservice-sqlite/
 </pre>
 
--------------
 
 # How to use REDIS
 
@@ -542,5 +525,3 @@ http://${WEBSERVER_ADDRESS}:38080/microservice-sqlite/
 <pre>
 http://${WEBSERVER_ADDRESS}:38080/microservice-redis/
 </pre>
-
----------------
