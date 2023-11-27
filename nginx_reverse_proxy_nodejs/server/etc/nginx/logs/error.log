@@ -844,3 +844,53 @@
 2023/03/26 00:58:26 [notice] 1#1: signal 17 (SIGCHLD) received from 9
 2023/03/26 00:58:26 [notice] 1#1: worker process 9 exited with code 0
 2023/03/26 00:58:26 [notice] 1#1: exit
+2023/11/27 17:51:38 [notice] 1#1: using the "epoll" event method
+2023/11/27 17:51:38 [notice] 1#1: nginx/1.18.0 (Ubuntu)
+2023/11/27 17:51:38 [notice] 1#1: OS: Linux 5.15.0-89-generic
+2023/11/27 17:51:38 [notice] 1#1: getrlimit(RLIMIT_NOFILE): 1048576:1048576
+2023/11/27 17:51:38 [notice] 1#1: start worker processes
+2023/11/27 17:51:38 [notice] 1#1: start worker process 6
+2023/11/27 17:51:38 [notice] 1#1: start worker process 7
+2023/11/27 17:51:38 [notice] 1#1: start worker process 8
+2023/11/27 17:51:38 [notice] 1#1: start worker process 9
+2023/11/27 17:51:38 [notice] 1#1: start worker process 10
+2023/11/27 17:51:38 [notice] 1#1: start worker process 11
+2023/11/27 17:51:38 [notice] 1#1: start worker process 12
+2023/11/27 17:51:38 [notice] 1#1: start worker process 13
+2023/11/27 17:52:38 [error] 7#7: *1 open() "/var/www/htdocs/favicon.ico" failed (2: No such file or directory), client: 172.18.0.1, server: nginx_reverse_proxy_nodejs, request: "GET /favicon.ico HTTP/1.1", host: "localhost:33000", referrer: "http://localhost:33000/app1/"
+2023/11/27 17:57:02 [notice] 1#1: signal 15 (SIGTERM) received, exiting
+2023/11/27 17:57:02 [notice] 7#7: exiting
+2023/11/27 17:57:02 [notice] 6#6: exiting
+2023/11/27 17:57:02 [notice] 10#10: exiting
+2023/11/27 17:57:02 [notice] 11#11: exiting
+2023/11/27 17:57:02 [notice] 9#9: exiting
+2023/11/27 17:57:02 [notice] 10#10: exit
+2023/11/27 17:57:02 [notice] 13#13: exiting
+2023/11/27 17:57:02 [notice] 6#6: exit
+2023/11/27 17:57:02 [notice] 11#11: exit
+2023/11/27 17:57:02 [notice] 9#9: exit
+2023/11/27 17:57:02 [notice] 7#7: exit
+2023/11/27 17:57:02 [notice] 13#13: exit
+2023/11/27 17:57:02 [notice] 1#1: signal 17 (SIGCHLD) received from 13
+2023/11/27 17:57:02 [notice] 12#12: exiting
+2023/11/27 17:57:02 [notice] 1#1: worker process 13 exited with code 0
+2023/11/27 17:57:02 [notice] 1#1: signal 29 (SIGIO) received
+2023/11/27 17:57:02 [notice] 12#12: exit
+2023/11/27 17:57:02 [notice] 1#1: signal 17 (SIGCHLD) received from 11
+2023/11/27 17:57:02 [notice] 1#1: worker process 7 exited with code 0
+2023/11/27 17:57:02 [notice] 1#1: worker process 9 exited with code 0
+2023/11/27 17:57:02 [notice] 1#1: worker process 10 exited with code 0
+2023/11/27 17:57:02 [notice] 1#1: worker process 11 exited with code 0
+2023/11/27 17:57:02 [notice] 8#8: exiting
+2023/11/27 17:57:02 [notice] 1#1: signal 29 (SIGIO) received
+2023/11/27 17:57:02 [notice] 1#1: signal 17 (SIGCHLD) received from 10
+2023/11/27 17:57:02 [notice] 1#1: worker process 6 exited with code 0
+2023/11/27 17:57:02 [notice] 8#8: exit
+2023/11/27 17:57:02 [notice] 1#1: signal 29 (SIGIO) received
+2023/11/27 17:57:02 [notice] 1#1: signal 17 (SIGCHLD) received from 6
+2023/11/27 17:57:02 [notice] 1#1: signal 17 (SIGCHLD) received from 12
+2023/11/27 17:57:02 [notice] 1#1: worker process 12 exited with code 0
+2023/11/27 17:57:02 [notice] 1#1: signal 29 (SIGIO) received
+2023/11/27 17:57:02 [notice] 1#1: signal 17 (SIGCHLD) received from 8
+2023/11/27 17:57:02 [notice] 1#1: worker process 8 exited with code 0
+2023/11/27 17:57:02 [notice] 1#1: exit
