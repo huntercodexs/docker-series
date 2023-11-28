@@ -14,7 +14,7 @@ echo "Connecting...";
 try {
 
     $client = new \MongoDB\Client(
-        'mongodb://root:MongoDB2019!@192.168.0.174:27017'
+        'mongodb://root:MongoDB2019!@192.168.0.204:27017'
     );
 
     echo "<h1>Connected Successful</h1>";

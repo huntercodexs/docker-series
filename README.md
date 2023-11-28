@@ -6,12 +6,10 @@ Using PHP8 together NGINX connected with the most used databases
 
 # Information
 
-Please use the branch selection to access others configurations for your need and purposes, this branch offers a complete
-environment to development using HTTPD(Apache2) + PHP8 + Databases(see bellow).
+Please use the branch selection to access others configurations for your need and purposes, this branch offers 
+a complete environment to development using HTTPD(Apache2) + PHP8 + Databases(see bellow).
 
-> IMPORTANT
-
-See the file .env in the root path of this repository to see all details about the application settings
+> IMPORTANT: See the file .env in the root path of this repository to see all details about the application settings
 
 
 # About project
@@ -43,21 +41,21 @@ See the file .env in the root path of this repository to see all details about t
 
 # About PHP8
 
-> DOCKERFILE
+- DOCKERFILE
 
 Set up the php8.dockerfile in the header to refers an application or settings that should be used in all 
 process, by example DIR_PHP_INI or DIR_WEBSERVER
 
-> PHP INI FILES
+- PHP INI FILES
 
 Configuration file to PHP server shared between HOST and Container
 
 <pre>
-/usr/local/etc/php/php.ini
+httpd_php8_databases_separated/php8/shared/ini/php/php.ini
 /usr/local/etc/php/conf.d/
 </pre>
 
-> EXTENSIONS
+- EXTENSIONS FILES (Library)
 
 Extension directory shared between HOST and Container
 
@@ -65,9 +63,7 @@ Extension directory shared between HOST and Container
 /usr/local/lib/php/extensions/no-debug-non-zts-20210902/
 </pre>
 
-> IMPORTANT
-
-Edit the /usr/local/etc/php/php.ini file and restart the service or container php8, by example
+> IMPORTANT: Edit the /usr/local/etc/php/php.ini file and restart the service or container php8, by example
 
 from 
 <pre>
@@ -77,6 +73,11 @@ from
 to
 <pre>
 extension=pdo_oci
+</pre>
+
+- Access the information from PHP version installed:
+<pre>
+http://localhost:38080/info/
 </pre>
 
 
@@ -89,9 +90,7 @@ Server version: Apache/2.4.54 (Unix)
 Server built:   Jul 12 2022 04:31:28
 </pre>
 
-> IMPORTANT
-
-In the first time to run this container, execute the script "webserver.sh prepare" after docker-compose up -d
+> IMPORTANT: In the first time to run this container, execute the script "webserver.sh prepare" after docker-compose up -d
 
 <pre>
 docker exec -it webserver /bin/bash
@@ -134,7 +133,7 @@ https://github.com/huntercodexs/docker-series/tree/databases#oracle
 
 - Access the application sample to Oracle Linux Database:
 <pre>
-http://${WEBSERVER_ADDRESS}:38080/microservice-oraclelinux/
+http://localhost:38080/microservice-oraclelinux/
 </pre>
 
 
@@ -144,7 +143,7 @@ https://github.com/huntercodexs/docker-series/tree/databases#mongodb
 
 - Access the application sample to MongoDB Database:
 <pre>
-http://${WEBSERVER_ADDRESS}:38080/microservice-mongodb/
+http://localhost:38080/microservice-mongodb/
 </pre>
 
 
@@ -154,7 +153,7 @@ https://github.com/huntercodexs/docker-series/tree/databases#postgres
 
 - Access the application sample to Postgres Database:
 <pre>
-http://${WEBSERVER_ADDRESS}:38080/microservice-postgres/
+http://localhost:38080/microservice-postgres/
 </pre>
 
 
@@ -164,7 +163,7 @@ https://github.com/huntercodexs/docker-series/tree/databases#mssql
 
 - Access the application sample to MsSQL Database:
 <pre>
-http://${WEBSERVER_ADDRESS}:38080/microservice-mssql/
+http://localhost:38080/microservice-mssql/
 </pre>
 
 
@@ -176,7 +175,7 @@ https://github.com/huntercodexs/docker-series/tree/databases#firebird
 
 - Access the application sample to Firebird Database:
 <pre>
-http://${WEBSERVER_ADDRESS}:38080/microservice-firebird/
+http://localhost:38080/microservice-firebird/
 </pre>
 
 
@@ -186,7 +185,7 @@ https://github.com/huntercodexs/docker-series/tree/databases#mysql-57
 
 - Access the application sample to MySQL 5.7 Database:
 <pre>
-http://${WEBSERVER_ADDRESS}:38080/microservice-mysql57/
+http://localhost:38080/microservice-mysql57/
 </pre>
 
 
@@ -196,7 +195,7 @@ https://github.com/huntercodexs/docker-series/tree/databases#mysql-80
 
 - Access the application sample to MySQL 8.0 Database:
 <pre>
-http://${WEBSERVER_ADDRESS}:38080/microservice-mysql80/
+http://localhost:38080/microservice-mysql80/
 </pre>
 
 
@@ -206,7 +205,7 @@ https://github.com/huntercodexs/docker-series/tree/databases#sqlite3
 
 - Access the application sample to Sqlite3 Database:
 <pre>
-http://${WEBSERVER_ADDRESS}:38080/microservice-sqlite/
+http://localhost:38080/microservice-sqlite/
 </pre>
 
 
@@ -218,7 +217,7 @@ https://github.com/huntercodexs/docker-series/tree/databases#redis
 
 - Access the application sample to Redis System Cache:
 <pre>
-http://${WEBSERVER_ADDRESS}:38080/microservice-redis/
+http://localhost:38080/microservice-redis/
 </pre>
 
 

@@ -4,6 +4,7 @@ ENV DIR_WEBSERVER "/var/www/webserver"
 ENV DIR_PHP_EXTENSIONS "/usr/local/lib/php/extensions/no-debug-non-zts-20210902"
 ENV DIR_PHP_INI "/usr/local/etc/php"
 ENV DIR_PHP_INI_FILES "/usr/local/etc/php/conf.d"
+ENV DIR_PHP8_HOME "/home/php8"
 
 ENV DIR_MS_ORACLE "/var/www/webserver/microservice-oraclelinux"
 ENV DIR_MS_MONGODB "/var/www/webserver/microservice-mongodb"
@@ -201,8 +202,14 @@ RUN ACCEPT_EULA=Y apt-get install -y msodbcsql17
 RUN ACCEPT_EULA=Y apt-get install -y mssql-tools
 RUN apt-get install -y unixodbc-dev
 RUN pecl config-set php_ini $DIR_PHP_INI/php.ini
+
 #RUN pecl install sqlsrv
 #RUN pecl install pdo_sqlsrv
+
+#RUN pecl install sqlsrv-5.11.0
+#RUN pecl install pdo_sqlsrv-5.11.0
+#RUN phpenmod sqlsrv pdo_sqlsrv
+
 RUN printf "; priority=20\nextension=sqlsrv.so\n" > $DIR_PHP_INI_FILES/sqlsrv.ini
 RUN printf "; priority=30\nextension=pdo_sqlsrv.so\n" > $DIR_PHP_INI_FILES/pdo_sqlsrv.ini
 #RUN phpenmod sqlsrv pdo_sqlsrv
@@ -293,20 +300,19 @@ RUN groupadd docker_series -g 999
 RUN useradd docker_series -g docker_series -d $DIR_WEBSERVER
 RUN chown nobody:nogroup $DIR_WEBSERVER -R
 
-# Share data from container to host
-RUN mkdir -p /home/shared/php8-ini
-RUN mkdir -p /home/shared/php8-extensions
-RUN chown nobody:nogroup /home/shared -R
-RUN chmod 777 /home/shared -R
-
-RUN mkdir -p /home/php8/php8-ini
-RUN mkdir -p /home/php8/php8-extensions
-RUN cp -r $DIR_PHP_INI/ /home/php8/php8-ini/
-RUN cp -r $DIR_PHP_EXTENSIONS/ /home/php8/php8-extensions/
-RUN chown nobody:nogroup /home/php8 -R
-RUN chmod 777 /home/php8 -R
+## Share data from container to host
+#RUN mkdir -p $DIR_PHP8_HOME/shared/php8-ini
+#RUN mkdir -p $DIR_PHP8_HOME/shared/php8-extensions
+#
+#RUN cp -r $DIR_PHP_INI/ $DIR_PHP8_HOME/shared/php8-ini/
+#RUN cp -r $DIR_PHP_INI_FILES/ $DIR_PHP8_HOME/shared/php8-ini/
+#RUN cp -r $DIR_PHP_EXTENSIONS/ $DIR_PHP8_HOME/shared/php8-extensions/
+#
+#RUN chown nobody:nogroup $DIR_PHP8_HOME -R
+#RUN chmod 777 $DIR_PHP8_HOME -R
 
 COPY ./shared/ini/php/php.ini $DIR_PHP_INI/php.ini
+COPY ./shared/extensions/*.so $DIR_PHP_EXTENSIONS/
 
 EXPOSE 9000
 CMD ["php-fpm"]

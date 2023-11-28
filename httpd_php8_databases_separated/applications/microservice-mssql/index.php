@@ -9,7 +9,7 @@ echo "Connecting...";
 try {
 
     //driver:dbname[ip:port/service-name|container-name], username, password
-    $con = new PDO("sqlsrv:Server=192.168.0.174;Database=master", "SA", "123@Mudar#");
+    $con = new PDO("sqlsrv:Server=192.168.0.204;Database=master", "SA", "123@Mudar#");
 
     echo "<h1>Connected Successful !</h1>";
 

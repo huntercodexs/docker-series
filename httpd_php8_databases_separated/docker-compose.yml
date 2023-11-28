@@ -11,7 +11,7 @@ services:
             - ${WEBSERVER_PORT2}:443
         privileged: true
         volumes:
-            - ./webserver/:/home/webserver/
+            - ./webserver/:/home/webserver/shared/
             - ./applications/:/var/www/webserver/
         tty: true
         depends_on:
@@ -31,29 +31,29 @@ services:
             - ${PHP8_PORT}:9000
         volumes:
             - ./applications/:/var/www/webserver/
-            - ./php8/shared/:/home/shared/
+            - ./php8/shared/:/home/php8/shared/
         networks:
             - webserver_network
     #----------------------------------------------------------------------------------------
-    oraclelinux:
-        env_file: .env
-        container_name: oraclelinux
-        build:
-            context: ./oracle/database
-            dockerfile: oraclelinux.dockerfile
-            args:
-                DB_EDITION: ${DB_EDITION}
-                ORACLE_PASSWORD: ${ORACLE_PASSWORD}
-        volumes:
-            - ./oracle/share:/home/oracle/share
-            - ./oracle/oradata:/opt/oracle/oradata
-        ports:
-            - ${ORACLE_PORT1}:1521
-            - ${ORACLE_PORT2}:5500
-        tty: true
-        networks:
-            - default
-            - webserver_network
+#    oraclelinux:
+#        env_file: .env
+#        container_name: oraclelinux
+#        build:
+#            context: ./oracle/database
+#            dockerfile: oraclelinux.dockerfile
+#            args:
+#                DB_EDITION: ${DB_EDITION}
+#                ORACLE_PASSWORD: ${ORACLE_PASSWORD}
+#        volumes:
+#            - ./oracle/share:/home/oracle/share
+#            - ./oracle/oradata:/opt/oracle/oradata
+#        ports:
+#            - ${ORACLE_PORT1}:1521
+#            - ${ORACLE_PORT2}:5500
+#        tty: true
+#        networks:
+#            - default
+#            - webserver_network
     #----------------------------------------------------------------------------------------
     mongo:
         env_file: .env
@@ -101,27 +101,27 @@ services:
             - default
             - webserver_network
     #-----------------------------------------------------------------------------------------
-    postgres:
-        env_file: .env
-        container_name: postgres
-        image: postgres
-        ports:
-            - ${POSTGRES_PORT}:5432
-        environment:
-            POSTGRES_DB: ${POSTGRES_DB}
-            POSTGRES_USER: ${POSTGRES_USER}
-            POSTGRES_PASSWORD: ${POSTGRES_PASSWORD}
-            TZ: GMT
-        volumes:
-            - type: bind
-              source: ./postgres/PostgresSQL
-              target: /var/lib/postgresql/data/
-              read_only: false
-        tty: true
-        networks:
-            - default
-            - webserver_network
-    #----------------------------------------------------------------------------------------
+#    postgres:
+#        env_file: .env
+#        container_name: postgres
+#        image: postgres
+#        ports:
+#            - ${POSTGRES_PORT}:5432
+#        environment:
+#            POSTGRES_DB: ${POSTGRES_DB}
+#            POSTGRES_USER: ${POSTGRES_USER}
+#            POSTGRES_PASSWORD: ${POSTGRES_PASSWORD}
+#            TZ: GMT
+#        volumes:
+#            - type: bind
+#              source: ./postgres/PostgresSQL
+#              target: /var/lib/postgresql/data/
+#              read_only: false
+#        tty: true
+#        networks:
+#            - default
+#            - webserver_network
+#    #----------------------------------------------------------------------------------------
     mssql:
         env_file: .env
         container_name: mssql
@@ -158,67 +158,67 @@ services:
         networks:
             - default
             - webserver_network
-    #----------------------------------------------------------------------------------------
-    firebird:
-        env_file: .env
-        container_name: firebird
-        privileged: true
-        build:
-            context: ./firebird
-            dockerfile: firebird.dockerfile
-            args:
-                TZ: ${FIREBIRD_TIMEZONE}
-                ISC_PASSWORD: ${FIREBIRD_ISC_PASSWORD}
-                FIREBIRD_USER: ${FIREBIRD_USER}
-                FIREBIRD_DBNAME: ${FIREBIRD_DBNAME}
-        ports:
-            - ${FIREBIRD_PORT}:3050
-        volumes:
-            - ./firebird/data/:/etc/firebird/3.0/
-        environment:
-            TZ: ${FIREBIRD_TIMEZONE}
-            FIREBIRD_DATABASE: ${FIREBIRD_DBNAME}
-            FIREBIRD_USER: ${FIREBIRD_USER}
-            FIREBIRD_PASS: ${FIREBIRD_ISC_PASSWORD}
-            ISC_PASSWORD: ${FIREBIRD_ISC_PASSWORD}
-        tty: true
-        networks:
-            - default
-            - webserver_network
-    #----------------------------------------------------------------------------------------
-    mysql-80:
-        env_file: .env
-        image: mysql:8.0
-        container_name: mysql80
-        ports:
-            - ${MYSQL80_PORT}:3306
-        volumes:
-            - "./mysql-80/lib:/var/lib/mysql/"
-        environment:
-            MYSQL_DATABASE: ${MYSQL80_DATABASE}
-            MYSQL_USERNAME: ${MYSQL80_USERNAME}
-            MYSQL_PASSWORD: ${MYSQL80_PASSWORD}
-            MYSQL_ROOT_PASSWORD: ${MYSQL80_ROOT_PASSWORD}
-        networks:
-            - default
-            - webserver_network
-    #----------------------------------------------------------------------------------------
-    mysql-57:
-        env_file: .env
-        image: mysql:5.7
-        container_name: mysql57
-        ports:
-            - ${MYSQL57_PORT}:3306
-        volumes:
-            - "./mysql-57/lib:/var/lib/mysql/"
-        environment:
-            MYSQL_DATABASE: ${MYSQL57_DATABASE}
-            MYSQL_USERNAME: ${MYSQL57_USERNAME}
-            MYSQL_PASSWORD: ${MYSQL57_PASSWORD}
-            MYSQL_ROOT_PASSWORD: ${MYSQL57_ROOT_PASSWORD}
-        networks:
-            - default
-            - webserver_network
+#    #----------------------------------------------------------------------------------------
+#    firebird:
+#        env_file: .env
+#        container_name: firebird
+#        privileged: true
+#        build:
+#            context: ./firebird
+#            dockerfile: firebird.dockerfile
+#            args:
+#                TZ: ${FIREBIRD_TIMEZONE}
+#                ISC_PASSWORD: ${FIREBIRD_ISC_PASSWORD}
+#                FIREBIRD_USER: ${FIREBIRD_USER}
+#                FIREBIRD_DBNAME: ${FIREBIRD_DBNAME}
+#        ports:
+#            - ${FIREBIRD_PORT}:3050
+#        volumes:
+#            - ./firebird/data/:/etc/firebird/3.0/
+#        environment:
+#            TZ: ${FIREBIRD_TIMEZONE}
+#            FIREBIRD_DATABASE: ${FIREBIRD_DBNAME}
+#            FIREBIRD_USER: ${FIREBIRD_USER}
+#            FIREBIRD_PASS: ${FIREBIRD_ISC_PASSWORD}
+#            ISC_PASSWORD: ${FIREBIRD_ISC_PASSWORD}
+#        tty: true
+#        networks:
+#            - default
+#            - webserver_network
+#    #----------------------------------------------------------------------------------------
+#    mysql-80:
+#        env_file: .env
+#        image: mysql:8.0
+#        container_name: mysql80
+#        ports:
+#            - ${MYSQL80_PORT}:3306
+#        volumes:
+#            - "./mysql-80/lib:/var/lib/mysql/"
+#        environment:
+#            MYSQL_DATABASE: ${MYSQL80_DATABASE}
+#            MYSQL_USERNAME: ${MYSQL80_USERNAME}
+#            MYSQL_PASSWORD: ${MYSQL80_PASSWORD}
+#            MYSQL_ROOT_PASSWORD: ${MYSQL80_ROOT_PASSWORD}
+#        networks:
+#            - default
+#            - webserver_network
+#    #----------------------------------------------------------------------------------------
+#    mysql-57:
+#        env_file: .env
+#        image: mysql:5.7
+#        container_name: mysql57
+#        ports:
+#            - ${MYSQL57_PORT}:3306
+#        volumes:
+#            - "./mysql-57/lib:/var/lib/mysql/"
+#        environment:
+#            MYSQL_DATABASE: ${MYSQL57_DATABASE}
+#            MYSQL_USERNAME: ${MYSQL57_USERNAME}
+#            MYSQL_PASSWORD: ${MYSQL57_PASSWORD}
+#            MYSQL_ROOT_PASSWORD: ${MYSQL57_ROOT_PASSWORD}
+#        networks:
+#            - default
+#            - webserver_network
     #----------------------------------------------------------------------------------------
     # NOTE: The sqlite don't can used remotely, so it is used inside php8 container
     sqlite3:
