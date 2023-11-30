@@ -12,7 +12,7 @@
 *.key
 
 ## GENERAL DIR
-
+/trash/
 
 ## APPLICATIONS
 /httpd_php8_databases_separated/applications/application-mongodb/php-7.4.0/
