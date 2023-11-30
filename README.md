@@ -1,7 +1,7 @@
 # HTTPD + PHP8 + DATABASES (USING DEDICATED CONTAINER)
 Using PHP8 together NGINX connected with the most used databases
 
-![banner.png](httpd_php8_databases_separated/files/midias/banner.png)
+![banner.png](httpd_php8_databases_separated/files/media/banner.png)
 
 
 # Information
@@ -14,29 +14,91 @@ a complete environment to development using HTTPD(Apache2) + PHP8 + Databases(se
 
 # About project
 
-![img.png](./httpd_php8_databases_separated/files/midias/project-diagram.png)
+![img.png](./httpd_php8_databases_separated/files/media/project-diagram.png)
 
+> IMPORTANT: This repository have a lot of files that has been downloaded from the responsible sources, compiled and 
+> tested in the environments contained in this repository. You can see these files in the folder 
+> httpd_php8_databases_separated/php/{PHP-VERSION}/conf/extensions/php-{PHP-VERSION}-compiled-extensions.zip 
+> witch will be copied to inside PHP container, unzipped and applied in the container targeted.
+
+> Give a look in the section #References to get more details (don't mess the workdir called extensions)
 
 # Docker Containers Databases
 
-> ![img.png](./httpd_php8_databases_separated/files/midias/check-green.png) Available
-> ![img.png](./httpd_php8_databases_separated/files/midias/check-silver.png) Pending
-> ![img.png](./httpd_php8_databases_separated/files/midias/unavailable.png) Unavailable
+> ![img.png](./httpd_php8_databases_separated/files/media/check-green.png) Available
+> ![img.png](./httpd_php8_databases_separated/files/media/check-silver.png) Pending
+> ![img.png](./httpd_php8_databases_separated/files/media/unavailable.png) Unavailable
 
-- HTTPD ![img.png](./httpd_php8_databases_separated/files/midias/check-green.png)
-- PHP8-FPM ![img.png](./httpd_php8_databases_separated/files/midias/check-green.png)
+- HTTPD - APACHE2 ![img.png](./httpd_php8_databases_separated/files/media/check-green.png)
+
+
 - DATABASES
-  - MYSQL ![img.png](./httpd_php8_databases_separated/files/midias/check-green.png)
-    - 5.7 ![img.png](./httpd_php8_databases_separated/files/midias/check-green.png)
-    - 8.0 ![img.png](./httpd_php8_databases_separated/files/midias/check-green.png)
-  - MSSQL ![img.png](./httpd_php8_databases_separated/files/midias/check-green.png)
-  - PGSQL ![img.png](./httpd_php8_databases_separated/files/midias/check-green.png)
-  - MONGO ![img.png](./httpd_php8_databases_separated/files/midias/check-green.png)
-  - FIREBIRD ![img.png](./httpd_php8_databases_separated/files/midias/unavailable.png)
-  - INTERBASE ![img.png](./httpd_php8_databases_separated/files/midias/unavailable.png)
-  - ORACLELINUX ![img.png](./httpd_php8_databases_separated/files/midias/check-green.png)
-  - SQLITE ![img.png](./httpd_php8_databases_separated/files/midias/check-green.png)
-  - REDIS ![img.png](./httpd_php8_databases_separated/files/midias/check-green.png)
+  - ORACLELINUX ![img.png](./httpd_php8_databases_separated/files/media/check-green.png)
+  - MONGO ![img.png](./httpd_php8_databases_separated/files/media/check-green.png)
+  - MSSQL ![img.png](./httpd_php8_databases_separated/files/media/check-green.png)
+  - MYSQL ![img.png](./httpd_php8_databases_separated/files/media/check-green.png)
+    - 5.7 ![img.png](./httpd_php8_databases_separated/files/media/check-green.png)
+    - 8.0 ![img.png](./httpd_php8_databases_separated/files/media/check-green.png)
+  - REDIS ![img.png](./httpd_php8_databases_separated/files/media/check-green.png)
+  - SQLITE ![img.png](./httpd_php8_databases_separated/files/media/check-green.png)
+  - POSTGRES ![img.png](./httpd_php8_databases_separated/files/media/check-green.png)
+  - FIREBIRD ![img.png](./httpd_php8_databases_separated/files/media/check-green.png)
+
+
+- PHP-7.4.0-FPM ![img.png](./httpd_php8_databases_separated/files/media/check-green.png)
+  - DATABASE CONNECTIONS
+    - ORACLELINUX ![img.png](./httpd_php8_databases_separated/files/media/check-green.png)
+    - MONGO ![img.png](./httpd_php8_databases_separated/files/media/check-green.png)
+    - MYSQL ![img.png](./httpd_php8_databases_separated/files/media/check-green.png)
+    - MSSQL ![img.png](./httpd_php8_databases_separated/files/media/check-green.png)
+      - 5.7 ![img.png](./httpd_php8_databases_separated/files/media/check-green.png)
+      - 8.0 ![img.png](./httpd_php8_databases_separated/files/media/check-green.png)
+    - REDIS ![img.png](./httpd_php8_databases_separated/files/media/check-green.png)
+    - SQLITE ![img.png](./httpd_php8_databases_separated/files/media/check-green.png)
+    - POSTGRES ![img.png](./httpd_php8_databases_separated/files/media/check-green.png)
+    - FIREBIRD ![img.png](./httpd_php8_databases_separated/files/media/unavailable.png)
+
+
+- PHP-8.0.0-FPM ![img.png](./httpd_php8_databases_separated/files/media/check-green.png)
+  - DATABASE CONNECTIONS
+    - ORACLELINUX ![img.png](./httpd_php8_databases_separated/files/media/check-green.png)
+    - MONGO ![img.png](./httpd_php8_databases_separated/files/media/check-green.png)
+    - MSSQL ![img.png](./httpd_php8_databases_separated/files/media/check-green.png)
+    - MYSQL ![img.png](./httpd_php8_databases_separated/files/media/check-green.png)
+      - 5.7 ![img.png](./httpd_php8_databases_separated/files/media/check-green.png)
+      - 8.0 ![img.png](./httpd_php8_databases_separated/files/media/check-green.png)
+    - REDIS ![img.png](./httpd_php8_databases_separated/files/media/check-green.png)
+    - SQLITE ![img.png](./httpd_php8_databases_separated/files/media/check-green.png)
+    - POSTGRES ![img.png](./httpd_php8_databases_separated/files/media/unavailable.png)
+    - FIREBIRD ![img.png](./httpd_php8_databases_separated/files/media/unavailable.png)
+
+
+- PHP-8.1.0-FPM ![img.png](./httpd_php8_databases_separated/files/media/check-green.png)
+  - DATABASE CONNECTIONS
+    - ORACLELINUX ![img.png](./httpd_php8_databases_separated/files/media/check-green.png)
+    - MONGO ![img.png](./httpd_php8_databases_separated/files/media/check-green.png)
+    - MSSQL ![img.png](./httpd_php8_databases_separated/files/media/check-green.png)
+    - MYSQL ![img.png](./httpd_php8_databases_separated/files/media/check-green.png)
+      - 5.7 ![img.png](./httpd_php8_databases_separated/files/media/check-green.png)
+      - 8.0 ![img.png](./httpd_php8_databases_separated/files/media/check-green.png)
+    - REDIS ![img.png](./httpd_php8_databases_separated/files/media/check-green.png)
+    - SQLITE ![img.png](./httpd_php8_databases_separated/files/media/check-green.png)
+    - POSTGRES ![img.png](./httpd_php8_databases_separated/files/media/unavailable.png)
+    - FIREBIRD ![img.png](./httpd_php8_databases_separated/files/media/unavailable.png)
+
+
+- PHP-8.2.2-FPM ![img.png](./httpd_php8_databases_separated/files/media/check-green.png)
+  - DATABASE CONNECTIONS
+    - ORACLELINUX ![img.png](./httpd_php8_databases_separated/files/media/check-green.png)
+    - MONGO ![img.png](./httpd_php8_databases_separated/files/media/check-green.png)
+    - MSSQL ![img.png](./httpd_php8_databases_separated/files/media/check-green.png)
+    - MYSQL ![img.png](./httpd_php8_databases_separated/files/media/check-green.png)
+      - 5.7 ![img.png](./httpd_php8_databases_separated/files/media/check-green.png)
+      - 8.0 ![img.png](./httpd_php8_databases_separated/files/media/check-green.png)
+    - REDIS ![img.png](./httpd_php8_databases_separated/files/media/check-green.png)
+    - SQLITE ![img.png](./httpd_php8_databases_separated/files/media/check-green.png)
+    - POSTGRES ![img.png](./httpd_php8_databases_separated/files/media/unavailable.png)
+    - FIREBIRD ![img.png](./httpd_php8_databases_separated/files/media/unavailable.png)
 
 
 # About PHP8
@@ -51,7 +113,7 @@ process, by example DIR_PHP_INI or DIR_WEBSERVER
 Configuration file to PHP server shared between HOST and Container
 
 <pre>
-httpd_php8_databases_separated/php8/shared/ini/php/php.ini
+./httpd_php8_databases_separated/php8/shared/ini/php/php.ini
 /usr/local/etc/php/conf.d/
 </pre>
 
@@ -77,7 +139,7 @@ extension=pdo_oci
 
 - Access the information from PHP version installed:
 <pre>
-http://localhost:38080/info/
+http://localhost:{WEBSERVER-PORT}/info/
 </pre>
 
 
@@ -133,7 +195,7 @@ https://github.com/huntercodexs/docker-series/tree/databases#oracle
 
 - Access the application sample to Oracle Linux Database:
 <pre>
-http://localhost:38080/microservice-oraclelinux/
+http://localhost:{WEBSERVER-PORT}/application-oraclelinux/
 </pre>
 
 
@@ -143,17 +205,7 @@ https://github.com/huntercodexs/docker-series/tree/databases#mongodb
 
 - Access the application sample to MongoDB Database:
 <pre>
-http://localhost:38080/microservice-mongodb/
-</pre>
-
-
-# Postgres
-
-https://github.com/huntercodexs/docker-series/tree/databases#postgres
-
-- Access the application sample to Postgres Database:
-<pre>
-http://localhost:38080/microservice-postgres/
+http://localhost:{WEBSERVER-PORT}/application-mongodb/
 </pre>
 
 
@@ -163,19 +215,7 @@ https://github.com/huntercodexs/docker-series/tree/databases#mssql
 
 - Access the application sample to MsSQL Database:
 <pre>
-http://localhost:38080/microservice-mssql/
-</pre>
-
-
-# Firebird
-
-https://github.com/huntercodexs/docker-series/tree/databases#firebird
-
-> NOTE: IS NOT WORKING CORRECTLY YET !!!
-
-- Access the application sample to Firebird Database:
-<pre>
-http://localhost:38080/microservice-firebird/
+http://localhost:{WEBSERVER-PORT}/application-mssql/
 </pre>
 
 
@@ -185,7 +225,7 @@ https://github.com/huntercodexs/docker-series/tree/databases#mysql-57
 
 - Access the application sample to MySQL 5.7 Database:
 <pre>
-http://localhost:38080/microservice-mysql57/
+http://localhost:{WEBSERVER-PORT}/application-mysql57/
 </pre>
 
 
@@ -195,17 +235,7 @@ https://github.com/huntercodexs/docker-series/tree/databases#mysql-80
 
 - Access the application sample to MySQL 8.0 Database:
 <pre>
-http://localhost:38080/microservice-mysql80/
-</pre>
-
-
-# SQLITE
-
-https://github.com/huntercodexs/docker-series/tree/databases#sqlite3
-
-- Access the application sample to Sqlite3 Database:
-<pre>
-http://localhost:38080/microservice-sqlite/
+http://localhost:{WEBSERVER-PORT}/application-mysql80/
 </pre>
 
 
@@ -217,9 +247,167 @@ https://github.com/huntercodexs/docker-series/tree/databases#redis
 
 - Access the application sample to Redis System Cache:
 <pre>
-http://localhost:38080/microservice-redis/
+http://localhost:{WEBSERVER-PORT}/application-redis/
+</pre>
+
+
+# SQLITE
+
+https://github.com/huntercodexs/docker-series/tree/databases#sqlite3
+
+- Access the application sample to Sqlite3 Database:
+<pre>
+http://localhost:{WEBSERVER-PORT}/application-sqlite/
+</pre>
+
+
+# Postgres
+
+https://github.com/huntercodexs/docker-series/tree/databases#postgres
+
+- Access the application sample to Postgres Database:
+<pre>
+http://localhost:{WEBSERVER-PORT}/application-postgres/
+</pre>
+
+
+# Firebird
+
+https://github.com/huntercodexs/docker-series/tree/databases#firebird
+
+> NOTE: IS NOT WORKING CORRECTLY YET !!!
+
+- Access the application sample to Firebird Database:
+<pre>
+http://localhost:{WEBSERVER-PORT}/application-firebird/
 </pre>
 
 
 # Step by Step
 
+1- Clone the repository
+<pre>
+user@host:/home/user$ git clone https://github.com/huntercodexs/docker-series.git .
+</pre>
+
+2- Access the repository folder
+<pre>
+user@host:/home/user$ cd docker-series
+</pre>
+
+3- Change the current branch
+<pre>
+user@host:/home/user/docker-series$ git checkout httpd_php8_databases_separated
+</pre>
+
+4- Access the httpd_php8_databases_separated folder
+<pre>
+user@host:/home/user/docker-series$ cd httpd_php8_databases_separated
+</pre>
+
+5- Check and set up the .env file, .ini PHP files and all files contained in the path php/{PHP-VERSION}/conf, and also 
+check or set up the configurations for each database contained in the databases folder path 
+
+6- Build the containers
+
+> NOTE: Check the folder permissions mainly the databases/oracle/database and databases/oracle/oradata, if you 
+> don't know what must be used, use 0x777
+
+<pre>    
+user@host:/home/user/docker-series/httpd_php8_databases_separated$ docker network create webserver_network
+user@host:/home/user/docker-series/httpd_php8_databases_separated$ docker-compose up --build
+</pre>
+
+Make sure that the result look like this
+<pre>
+user@host:/home/user/docker-series/httpd_php8_databases_separated$ docker-compose ps
+     Name                    Command                  State                                             Ports                                       
+----------------------------------------------------------------------------------------------------------------------------------------------------
+firebird          firebird                         Up             0.0.0.0:33050->3050/tcp,:::33050->3050/tcp                                        
+mongo             docker-entrypoint.sh mongod      Up             0.0.0.0:27017->27017/tcp,:::27017->27017/tcp                                      
+mongo-express     /sbin/tini -- /docker-entr ...   Up             0.0.0.0:8090->8081/tcp,:::8090->8081/tcp                                          
+mssql             /opt/mssql/bin/permissions ...   Up             0.0.0.0:1433->1433/tcp,:::1433->1433/tcp                                          
+mssql-tools       /bin/sh -c /bin/bash             Up             0.0.0.0:31812->10000/tcp,:::31812->10000/tcp                                      
+mysql57           docker-entrypoint.sh mysqld      Up             0.0.0.0:3705->3306/tcp,:::3705->3306/tcp, 33060/tcp                               
+mysql80           docker-entrypoint.sh mysqld      Up             0.0.0.0:3708->3306/tcp,:::3708->3306/tcp, 33060/tcp                               
+oraclelinux       /bin/sh -c exec $ORACLE_BA ...   Up (healthy)   0.0.0.0:1521->1521/tcp,:::1521->1521/tcp, 0.0.0.0:5500->5500/tcp,:::5500->5500/tcp
+php-7.4.0         docker-php-entrypoint php-fpm    Up             0.0.0.0:9000->9000/tcp,:::9000->9000/tcp                                          
+php-8.0.0         docker-php-entrypoint php-fpm    Up             0.0.0.0:9001->9000/tcp,:::9001->9000/tcp                                          
+php-8.1.0         docker-php-entrypoint php-fpm    Up             0.0.0.0:9002->9000/tcp,:::9002->9000/tcp                                          
+php-8.2.2         docker-php-entrypoint php-fpm    Up             0.0.0.0:9003->9000/tcp,:::9003->9000/tcp                                          
+postgres          docker-entrypoint.sh postgres    Up             0.0.0.0:5432->5432/tcp,:::5432->5432/tcp                                          
+redis             redis-server --requirepass ...   Up             0.0.0.0:6379->6379/tcp,:::6379->6379/tcp                                          
+sqlite3           bash                             Up             0.0.0.0:31050->5050/tcp,:::31050->5050/tcp                                        
+webserver-7.4.0   httpd-foreground                 Up             0.0.0.0:40443->443/tcp,:::40443->443/tcp, 0.0.0.0:33074->80/tcp,:::33074->80/tcp  
+webserver-8.0.0   httpd-foreground                 Up             0.0.0.0:41443->443/tcp,:::41443->443/tcp, 0.0.0.0:33800->80/tcp,:::33800->80/tcp  
+webserver-8.1.0   httpd-foreground                 Up             0.0.0.0:42443->443/tcp,:::42443->443/tcp, 0.0.0.0:33810->80/tcp,:::33810->80/tcp  
+webserver-8.2.2   httpd-foreground                 Up             0.0.0.0:43443->443/tcp,:::43443->443/tcp, 0.0.0.0:33822->80/tcp,:::33822->80/tcp
+</pre>
+
+7- Edit the webserver file settings in the path httpd_php8_databases_separated/webserver/{PHP-VERSION}/conf
+
+> NOTE: See all the file in this folder to more details
+
+<pre>
+user@host:/home/user/docker-series/httpd_php8_databases_separated/webserver/{PHP-VERSION}/conf$ httpd.conf
+user@host:/home/user/docker-series/httpd_php8_databases_separated/webserver/{PHP-VERSION}/conf$ webserver.conf
+user@host:/home/user/docker-series/httpd_php8_databases_separated/webserver/{PHP-VERSION}/conf/htdocs$ index.html
+</pre>
+
+8- Restart the webserver targeted
+
+> NOTE: Whether you need, change this script
+
+<pre>
+user@host:/home/user/docker-series/httpd_php8_databases_separated$ docker exec -it webserver-{PHP-VERSION} /bin/bash
+root@9fdf75782c1e:/usr/local/apache2# /home/webserver/conf/webserver-apply-changes-and-restart.sh
+</pre>
+
+9- Apply the custom settings in the PHP container targeted
+
+> NOTE: Whether you need, change this script
+
+<pre>
+user@host:/home/user/docker-series/httpd_php8_databases_separated$ docker exec -it php-{PHP-VERSION} /bin/bash
+root@fdd2bcedb04f:/opt# /home/php/conf/custom.sh
+</pre>
+
+10- Test the applications to get info from each PHP version
+<pre>
+http://localhost:{WEBSERVER-PORT}/info/
+</pre>
+
+11- Test each sample application that are placed in the folder ./applications
+<pre>
+http://localhost:{WEBSERVER-PORT}/application-oraclelinux/
+http://localhost:{WEBSERVER-PORT}/application-mongodb/
+http://localhost:{WEBSERVER-PORT}/application-mssql/
+http://localhost:{WEBSERVER-PORT}/application-mysql57/
+http://localhost:{WEBSERVER-PORT}/application-mysql80/
+http://localhost:{WEBSERVER-PORT}/application-redis/
+http://localhost:{WEBSERVER-PORT}/application-sqlite/
+http://localhost:{WEBSERVER-PORT}/application-postgres/
+http://localhost:{WEBSERVER-PORT}/application-firebird/
+</pre>
+
+
+# References
+
+> Here you can find the information where was obtained some libraries (.so) as example oci8.so, sqlsrv.so
+
+Oraclelinux - OCI - Oracle 19c
+- https://download.oracle.com
+- https://oraclelinux.pkgs.org
+- https://pecl.php.net/package/oci8
+
+Mssql - SQLSRV - Microsoft Drivers
+- https://github.com/Microsoft/msphpsql/releases/
+- https://learn.microsoft.com/pt-br/sql/connect/php/download-drivers-php-sql-server?view=sql-server-ver16
+
+Postgres - PGSQL - Drivers and Libraries
+- https://packages.ubuntu.com/focal/
+- https://archlinux.org/packages/extra/x86_64/php-pgsql
+- https://linux-packages.com/ubuntu-focal-fossa/package/php80-pgsql
+
+Firebird
+- https://firebirdsql.org/en/php-driver/

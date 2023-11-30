@@ -1,0 +1,65 @@
+<?php
+
+#################################################
+# ORACLE DATABASE CONNECTION
+#################################################
+
+//CREATE SEQUENCE SEQ_CUSTOMER START WITH 1 INCREMENT BY 1 MAXVALUE 999999999 NOCYCLE NOCACHE;
+//
+//DROP TABLE DEVEL.CUSTOMERS;
+//
+//CREATE TABLE DEVEL.CUSTOMERS (
+//    ID NUMBER(*,0),
+//    PERSON_TYPE NUMBER,
+//    NAME VARCHAR2(250),
+//    IDENTIFICATION VARCHAR2(250),
+//    BORN_DATE DATE,
+//    PURCHASE_DATE DATE,
+//    CONTRACT_NUMBER VARCHAR(250)
+//);
+//
+//-- INSERT
+//
+//INSERT INTO DEVEL.CUSTOMERS
+//(ID,PERSON_TYPE,NAME,IDENTIFICATION,BORN_DATE,PURCHASE_DATE,CONTRACT_NUMBER)
+//VALUES
+//(1,1,'MARCOS DA SILVA','51845741749',TIMESTAMP '2023-06-16 03:22:12.000000',TIMESTAMP '2023-06-16 03:22:12.000000','123456');
+//
+//INSERT INTO DEVEL.CUSTOMERS
+//(ID,PERSON_TYPE,NAME,IDENTIFICATION,BORN_DATE,PURCHASE_DATE,CONTRACT_NUMBER)
+//VALUES
+//(2,1,'JONAS DA SILVA','21345741749',TIMESTAMP '2023-06-16 03:22:12.000000',TIMESTAMP '2023-06-16 03:22:12.000000','123456');
+//
+//INSERT INTO DEVEL.CUSTOMERS
+//(ID,PERSON_TYPE,NAME,IDENTIFICATION,BORN_DATE,PURCHASE_DATE,CONTRACT_NUMBER)
+//VALUES
+//(3,1,'JOEL DA SILVA','87755741749',TIMESTAMP '2023-06-16 03:22:12.000000',TIMESTAMP '2023-06-16 03:22:12.000000','123456');
+
+try {
+
+    /**
+     * Note: In this case the server database is working in another machine in a docker container
+     * that is called oraclelinux
+    */
+    //driver:dbname[ip:port/service-name|container-name], username, password
+    $con = new PDO("oci:dbname=oraclelinux:1521/ORCLPDB1", "DEVEL", "oracle1Ipw");
+    var_dump($con);
+
+    $r = $con->query("SELECT * FROM CUSTOMERS au")->fetchAll(PDO::FETCH_ASSOC);
+    var_dump('<pre>', $r, '</pre>');
+
+} catch (PDOException $e) {
+
+    $except = $e->getMessage();
+    $error = "[PDOException:500]";
+    $error .= "\nError: " . $except;
+
+    if (preg_match('/could not find driver/', $except, $m, PREG_OFFSET_CAPTURE)) {
+        $error .= "\nAvailable drivers: " . implode(", ", PDO::getAvailableDrivers());
+    }
+
+    var_dump($error);
+}
+
+phpinfo();
+exit;

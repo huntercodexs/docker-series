@@ -1,0 +1,24 @@
+version: "3.7"
+services:
+    
+    #----------------------------------------------------------------------------------------
+    jenkins-2-60-3:
+        env_file: .env
+        container_name: jenkins-2-60-3
+        build:
+            context: ./
+            dockerfile: jenkins-2-60-3.dockerfile
+        ports:
+            - ${JENKINS_HTTP_PORT}:8080
+            - ${JENKINS_AGENT_PORT}:50000
+        volumes:
+            - ./share/:/var/jenkins_home
+        tty: true
+        networks:
+            - default
+            - open_network
+    #----------------------------------------------------------------------------------------
+
+networks:
+    open_network:
+        external: true

@@ -1,0 +1,23 @@
+version: "3.7"
+services:
+    
+    #----------------------------------------------------------------------------------------
+    alpine:
+        env_file: .env
+        container_name: alpine
+        #image: alpine
+        build:
+            context: .
+            dockerfile: alpine.dockerfile
+        ports:
+            - ${ALPINE_PORT}:35900
+        privileged: true
+        tty: true
+        networks:
+            - default
+            - open_network
+    #----------------------------------------------------------------------------------------
+
+networks:
+    open_network:
+        external: true

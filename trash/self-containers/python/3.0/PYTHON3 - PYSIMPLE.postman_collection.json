@@ -1,0 +1,181 @@
+{
+	"info": {
+		"_postman_id": "ef3f1942-5cd0-4183-a924-1e05f211255e",
+		"name": "PYTHON3 - PYSIMPLE",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "Test",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://192.168.0.174:35000/api/welcome",
+					"protocol": "http",
+					"host": [
+						"192",
+						"168",
+						"0",
+						"174"
+					],
+					"port": "35000",
+					"path": [
+						"api",
+						"welcome"
+					]
+				}
+			},
+			"response": [
+				{
+					"name": "Test",
+					"originalRequest": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://192.168.0.174:35000/api/welcome",
+							"protocol": "http",
+							"host": [
+								"192",
+								"168",
+								"0",
+								"174"
+							],
+							"port": "35000",
+							"path": [
+								"api",
+								"welcome"
+							]
+						}
+					},
+					"status": "OK",
+					"code": 200,
+					"_postman_previewlanguage": "json",
+					"header": [
+						{
+							"key": "Server",
+							"value": "Werkzeug/2.2.2 Python/3.10.6"
+						},
+						{
+							"key": "Date",
+							"value": "Mon, 15 Aug 2022 14:57:22 GMT"
+						},
+						{
+							"key": "Content-Type",
+							"value": "application/json"
+						},
+						{
+							"key": "Content-Length",
+							"value": "91"
+						},
+						{
+							"key": "Access-Control-Allow-Origin",
+							"value": "*"
+						},
+						{
+							"key": "Connection",
+							"value": "close"
+						}
+					],
+					"cookie": [],
+					"body": "{\n    \"message\": \"Everything fine !\",\n    \"response\": \"Welcome to pysimple\",\n    \"status\": 200\n}"
+				}
+			]
+		},
+		{
+			"name": "Article",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"name\": \"Tester\"\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://192.168.0.174:35000/api/article",
+					"protocol": "http",
+					"host": [
+						"192",
+						"168",
+						"0",
+						"174"
+					],
+					"port": "35000",
+					"path": [
+						"api",
+						"article"
+					]
+				}
+			},
+			"response": [
+				{
+					"name": "Article",
+					"originalRequest": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"name\": \"Tester\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://192.168.0.174:35000/api/article",
+							"protocol": "http",
+							"host": [
+								"192",
+								"168",
+								"0",
+								"174"
+							],
+							"port": "35000",
+							"path": [
+								"api",
+								"article"
+							]
+						}
+					},
+					"status": "OK",
+					"code": 200,
+					"_postman_previewlanguage": "json",
+					"header": [
+						{
+							"key": "Server",
+							"value": "Werkzeug/2.2.2 Python/3.10.6"
+						},
+						{
+							"key": "Date",
+							"value": "Mon, 15 Aug 2022 14:57:17 GMT"
+						},
+						{
+							"key": "Content-Type",
+							"value": "application/json"
+						},
+						{
+							"key": "Content-Length",
+							"value": "131"
+						},
+						{
+							"key": "Access-Control-Allow-Origin",
+							"value": "*"
+						},
+						{
+							"key": "Connection",
+							"value": "close"
+						}
+					],
+					"cookie": [],
+					"body": "{\n    \"message\": \"Everything fine !\",\n    \"request\": {\n        \"name\": \"Tester\"\n    },\n    \"response\": \"Create new article\",\n    \"status\": 200\n}"
+				}
+			]
+		}
+	]
+}

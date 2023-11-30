@@ -1,0 +1,43 @@
+version: "3.7"
+services:
+    
+    #----------------------------------------------------------------------------------------
+    elasticsearch:
+        env_file: .env
+        container_name: elasticsearch
+        image: elasticsearch:${GENERAL_STACK_VERSION}
+        ports:
+            - ${ELASTICSEARCH_PORT_1}:9200
+            - ${ELASTICSEARCH_PORT_2}:9300
+        volumes:
+            - type: bind
+              source: ./config/elasticsearch.yml
+              target: /usr/share/elasticsearch/config/elasticsearch.yml
+              read_only: true
+            - type: bind
+              source: ./data
+              target: /usr/share/elasticsearch/data
+              read_only: false
+        environment:
+            ELASTIC_VERSION: ${GENERAL_STACK_VERSION}
+            ELASTIC_PASSWORD: ${ELASTIC_PASSWORD}
+            KIBANA_USERNAME: ${KIBANA_SYSTEM_USERNAME}
+            KIBANA_SYSTEM_USERNAME: ${KIBANA_SYSTEM_USERNAME}
+            LOGSTASH_INTERNAL_USERNAME: ${LOGSTASH_INTERNAL_USERNAME}
+            LOGSTASH_INTERNAL_PASSWORD: ${LOGSTASH_INTERNAL_PASSWORD}
+            ES_JAVA_OPTS: ${ELASTICSEARCH_JAVA_OPTS}
+        ulimits:
+            memlock:
+                soft: -1
+                hard: -1
+        networks:
+            - default
+            - open_network
+    #----------------------------------------------------------------------------------------
+
+networks:
+    open_network:
+        external: true
+        
+volumes:
+    elasticsearch:

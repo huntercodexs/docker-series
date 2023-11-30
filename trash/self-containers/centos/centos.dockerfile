@@ -1,0 +1,11 @@
+FROM centos
+
+# UPDATE
+
+# LIBS
+
+# ESSENTIALS
+
+# OTHERS
+
+EXPOSE 35900

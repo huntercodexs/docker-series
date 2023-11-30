@@ -1,0 +1,31 @@
+version: "3.7"
+services:
+    
+    #----------------------------------------------------------------------------------------
+    grafana-ubuntu:
+        env_file: .env
+        container_name: grafana-ubuntu
+        image: grafana/grafana-enterprise:8.4.6-ubuntu
+        ports:
+            - ${GRAFANA_UBUNTU_PORT}:3000
+        volumes:
+            - type: bind
+              source: ./conf
+              target: /home/grafana/
+              read_only: true
+        environment:
+            GF_SECURITY_ADMIN_USER: ${GRAFANA_USERNAME}
+            GF_SECURITY_ADMIN_PASSWORD: ${GRAFANA_PASSWORD}
+            #GF_AWS_PROFILES: ${GRAFANA_AWS_PROFILE}
+            #GF_AWS_default_ACCESS_KEY_ID: ${GRAFANA_AWS_ACCESS_KEY_ID}
+            #GF_AWS_default_SECRET_ACCESS_KEY: ${GRAFANA_AWS_SECRET_KEY}
+            #GF_AWS_default_REGION: ${GRAFANA_AWS_REGION}
+        tty: true
+        networks:
+            - default
+            - open_network
+    #----------------------------------------------------------------------------------------
+
+networks:
+    open_network:
+        external: true

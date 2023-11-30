@@ -1,0 +1,134 @@
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+  <modelVersion>4.0.0</modelVersion>
+  <parent>
+    <groupId>io.zipkin.brave.example</groupId>
+    <artifactId>brave-example-parent</artifactId>
+    <version>1.0-SNAPSHOT</version>
+    <relativePath>../parent-pom.xml</relativePath>
+  </parent>
+
+  <artifactId>brave-example-webmvc4-boot</artifactId>
+  <packaging>jar</packaging>
+
+  <name>brave-example-webmvc4-boot</name>
+  <description>Tracing Example: Spring WebMVC 4/Spring Boot 1.5/JRE 8</description>
+
+  <properties>
+    <jre.version>8</jre.version>
+
+    <spring-boot.version>1.5.22.RELEASE</spring-boot.version>
+  </properties>
+
+  <dependencyManagement>
+    <dependencies>
+      <dependency>
+        <groupId>org.springframework.boot</groupId>
+        <artifactId>spring-boot-dependencies</artifactId>
+        <version>${spring-boot.version}</version>
+        <type>pom</type>
+        <scope>import</scope>
+      </dependency>
+    </dependencies>
+  </dependencyManagement>
+
+  <dependencies>
+    <!-- Configures Spring Boot with SLF4J logging -->
+    <dependency>
+      <groupId>org.springframework.boot</groupId>
+      <artifactId>spring-boot-starter</artifactId>
+    </dependency>
+    <!-- Adds /health endpoint -->
+    <dependency>
+      <groupId>org.springframework.boot</groupId>
+      <artifactId>spring-boot-actuator</artifactId>
+    </dependency>
+    <!-- Configures the lower overhead Jetty container -->
+    <dependency>
+      <groupId>org.springframework.boot</groupId>
+      <artifactId>spring-boot-starter-jetty</artifactId>
+      <exclusions>
+        <exclusion>
+          <!-- This project doesn't use websocket -->
+          <groupId>org.eclipse.jetty.websocket</groupId>
+          <artifactId>*</artifactId>
+        </exclusion>
+        <exclusion>
+          <groupId>org.mortbay.jasper</groupId>
+          <artifactId>apache-el</artifactId>
+        </exclusion>
+      </exclusions>
+    </dependency>
+
+    <!-- Adds the web libraries used in the example app -->
+    <dependency>
+      <groupId>org.springframework</groupId>
+      <artifactId>spring-webmvc</artifactId>
+    </dependency>
+    <dependency>
+      <groupId>org.springframework</groupId>
+      <artifactId>spring-web</artifactId>
+    </dependency>
+    <dependency>
+      <groupId>com.squareup.okhttp3</groupId>
+      <artifactId>okhttp</artifactId>
+      <!-- Intentionally OkHttp 3 as it doesn't have a Kotlin dependency -->
+      <version>3.14.9</version>
+    </dependency>
+
+    <!-- Adds the MVC class and method names to server spans -->
+    <dependency>
+      <groupId>io.zipkin.brave</groupId>
+      <artifactId>brave-instrumentation-spring-webmvc</artifactId>
+    </dependency>
+    <!-- Instruments the underlying OkHttpClient requests that call the backend -->
+    <dependency>
+      <groupId>io.zipkin.brave</groupId>
+      <artifactId>brave-instrumentation-okhttp3</artifactId>
+    </dependency>
+
+    <!-- Integrates so you can use log patterns like %X{traceId}/%X{spanId} -->
+    <dependency>
+      <groupId>io.zipkin.brave</groupId>
+      <artifactId>brave-context-slf4j</artifactId>
+    </dependency>
+
+    <!-- The below are needed to report traces to http://127.0.0.1:9411/api/v2/spans -->
+    <dependency>
+      <groupId>io.zipkin.brave</groupId>
+      <artifactId>brave</artifactId>
+    </dependency>
+    <dependency>
+      <groupId>io.zipkin.reporter2</groupId>
+      <artifactId>zipkin-reporter-brave</artifactId>
+    </dependency>
+    <dependency>
+      <groupId>io.zipkin.reporter2</groupId>
+      <artifactId>zipkin-sender-okhttp3</artifactId>
+    </dependency>
+  </dependencies>
+
+  <build>
+    <plugins>
+      <plugin>
+        <groupId>org.springframework.boot</groupId>
+        <artifactId>spring-boot-maven-plugin</artifactId>
+        <version>${spring-boot.version}</version>
+        <executions>
+          <execution>
+            <goals>
+              <goal>repackage</goal>
+            </goals>
+          </execution>
+        </executions>
+        <configuration>
+          <!-- This can be overridden to brave.example.Frontend also -->
+          <mainClass>brave.example.Backend</mainClass>
+          <classifier>exec</classifier>
+          <executable>true</executable>
+        </configuration>
+      </plugin>
+    </plugins>
+  </build>
+</project>

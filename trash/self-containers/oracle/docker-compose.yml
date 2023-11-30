@@ -1,0 +1,29 @@
+version: "3.7"
+services:
+    
+    #----------------------------------------------------------------------------------------
+    oraclelinux:
+        env_file: .env
+        container_name: oraclelinux
+        build:
+            context: ./database
+            dockerfile: oraclelinux.dockerfile
+            args:
+                DB_EDITION: ${DB_EDITION}
+                ORACLE_PASSWORD: ${ORACLELINUX_PASSWORD}
+        volumes:
+            - ./share:/home/oracle/share
+            - ./oradata:/opt/oracle/oradata
+        ports:
+            - ${ORACLELINUX_PORT1}:1521
+            - ${ORACLELINUX_PORT2}:5500
+        tty: true
+        networks:
+            - default
+            - open_network
+    #----------------------------------------------------------------------------------------
+
+networks:
+    open_network:
+        external: true
+        

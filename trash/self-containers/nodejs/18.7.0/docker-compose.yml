@@ -1,0 +1,26 @@
+version: "3.7"
+services:
+    
+    #----------------------------------------------------------------------------------------
+    nodejs:
+        env_file: .env
+        #image: node
+        build:
+            context: ./
+            dockerfile: nodejs.dockerfile
+        container_name: nodejs
+        ports:
+            - ${NODEJS_PORT1}:3000
+            - ${NODEJS_PORT2}:8080
+        volumes:
+            - ./app:/home/nodejs/app/
+        tty: true
+        networks:
+            - default
+            - open_network
+    #----------------------------------------------------------------------------------------
+
+networks:
+    open_network:
+        external: true
+        

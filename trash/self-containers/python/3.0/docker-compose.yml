@@ -1,0 +1,32 @@
+version: "3.7"
+services:
+    
+    #----------------------------------------------------------------------------------------
+    python3:
+        env_file: .env
+        #Using Image
+        #image: python:3
+        container_name: python3
+        #Using Builder
+        build:
+            context: .
+            dockerfile: python3.dockerfile
+        ports:
+            - ${PYTHON3_PORT1}:5000
+            - ${PYTHON3_PORT2}:8080
+            - ${PYTHON3_PORT3}:31800
+        volumes:
+            - type: bind
+              source: ./pysimple
+              target: /home/python3/pysimple
+              read_only: false
+        tty: true
+        networks:
+            - default
+            - open_network
+    #----------------------------------------------------------------------------------------
+
+networks:
+    open_network:
+        external: true
+        

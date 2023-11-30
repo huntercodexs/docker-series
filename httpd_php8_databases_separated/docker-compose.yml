@@ -2,58 +2,173 @@ version: "3.7"
 services:
     
     #----------------------------------------------------------------------------------------
-    webserver:
+    webserver-7.4.0:
         env_file: .env
         image: httpd:2.4.54
-        container_name: webserver
+        container_name: webserver-7.4.0
         ports:
-            - ${WEBSERVER_PORT1}:80
-            - ${WEBSERVER_PORT2}:443
+            - ${WEBSERVER740_PORT1}:80
+            - ${WEBSERVER740_PORT2}:443
         privileged: true
         volumes:
-            - ./webserver/:/home/webserver/shared/
             - ./applications/:/var/www/webserver/
+            - ./webserver/7.4.0/conf/:/home/webserver/conf/
+            - ./webserver/7.4.0/shared/:/home/webserver/shared/
         tty: true
         depends_on:
-            - php8
+            - php-7.4.0
         links:
-            - php8
+            - php-7.4.0
         networks:
             - webserver_network
+        #command: "/home/webserver/conf/webserver.sh"
     #----------------------------------------------------------------------------------------
-    php8:
+    webserver-8.0.0:
         env_file: .env
-        container_name: php8
-        build:
-            context: ./php8
-            dockerfile: php8.dockerfile
+        image: httpd:2.4.54
+        container_name: webserver-8.0.0
         ports:
-            - ${PHP8_PORT}:9000
+            - ${WEBSERVER800_PORT1}:80
+            - ${WEBSERVER800_PORT2}:443
+        privileged: true
         volumes:
             - ./applications/:/var/www/webserver/
-            - ./php8/shared/:/home/php8/shared/
+            - ./webserver/8.0.0/conf/:/home/webserver/conf/
+            - ./webserver/8.0.0/shared/:/home/webserver/shared/
+        tty: true
+        depends_on:
+            - php-8.0.0
+        links:
+            - php-8.0.0
         networks:
             - webserver_network
+        #command: "/home/webserver/conf/webserver.sh"
     #----------------------------------------------------------------------------------------
-#    oraclelinux:
-#        env_file: .env
-#        container_name: oraclelinux
-#        build:
-#            context: ./oracle/database
-#            dockerfile: oraclelinux.dockerfile
-#            args:
-#                DB_EDITION: ${DB_EDITION}
-#                ORACLE_PASSWORD: ${ORACLE_PASSWORD}
-#        volumes:
-#            - ./oracle/share:/home/oracle/share
-#            - ./oracle/oradata:/opt/oracle/oradata
-#        ports:
-#            - ${ORACLE_PORT1}:1521
-#            - ${ORACLE_PORT2}:5500
-#        tty: true
-#        networks:
-#            - default
-#            - webserver_network
+    webserver-8.1.0:
+        env_file: .env
+        image: httpd:2.4.54
+        container_name: webserver-8.1.0
+        ports:
+            - ${WEBSERVER810_PORT1}:80
+            - ${WEBSERVER810_PORT2}:443
+        privileged: true
+        volumes:
+            - ./applications/:/var/www/webserver/
+            - ./webserver/8.1.0/conf/:/home/webserver/conf/
+            - ./webserver/8.1.0/shared/:/home/webserver/shared/
+        tty: true
+        depends_on:
+            - php-8.1.0
+        links:
+            - php-8.1.0
+        networks:
+            - webserver_network
+        #command: "/home/webserver/conf/webserver.sh"
+    #----------------------------------------------------------------------------------------
+    webserver-8.2.2:
+        env_file: .env
+        image: httpd:2.4.54
+        container_name: webserver-8.2.2
+        ports:
+            - ${WEBSERVER822_PORT1}:80
+            - ${WEBSERVER822_PORT2}:443
+        privileged: true
+        volumes:
+            - ./applications/:/var/www/webserver/
+            - ./webserver/8.2.2/conf/:/home/webserver/conf/
+            - ./webserver/8.2.2/shared/:/home/webserver/shared/
+        tty: true
+        depends_on:
+            - php-8.2.2
+        links:
+            - php-8.2.2
+        networks:
+            - webserver_network
+        #command: "/home/webserver/conf/webserver.sh"
+    #----------------------------------------------------------------------------------------
+    php-7.4.0:
+        env_file: .env
+        container_name: php-7.4.0
+        build:
+            context: ./php/7.4.0
+            dockerfile: php-7.4.0.dockerfile
+        ports:
+            - ${PHP740_PORT}:9000
+        volumes:
+            - ./applications/:/var/www/webserver/
+            - ./php/7.4.0/conf/:/home/php/conf/
+            - ./php/7.4.0/shared/:/home/php/shared/
+        networks:
+            - webserver_network
+        #command: "/home/php/conf/custom.sh"
+    #----------------------------------------------------------------------------------------
+    php-8.0.0:
+        env_file: .env
+        container_name: php-8.0.0
+        build:
+            context: ./php/8.0.0
+            dockerfile: php-8.0.0.dockerfile
+        ports:
+            - ${PHP800_PORT}:9000
+        volumes:
+            - ./applications/:/var/www/webserver/
+            - ./php/8.0.0/conf/:/home/php/conf/
+            - ./php/8.0.0/shared/:/home/php/shared/
+        networks:
+            - webserver_network
+        #command: "/home/php/conf/custom.sh"
+    #----------------------------------------------------------------------------------------
+    php-8.1.0:
+        env_file: .env
+        container_name: php-8.1.0
+        build:
+            context: ./php/8.1.0
+            dockerfile: php-8.1.0.dockerfile
+        ports:
+            - ${PHP810_PORT}:9000
+        volumes:
+            - ./applications/:/var/www/webserver/
+            - ./php/8.1.0/conf/:/home/php/conf/
+            - ./php/8.1.0/shared/:/home/php/shared/
+        networks:
+            - webserver_network
+        #command: "/home/php/conf/custom.sh"
+    #----------------------------------------------------------------------------------------
+    php-8.2.2:
+        env_file: .env
+        container_name: php-8.2.2
+        build:
+            context: ./php/8.2.2
+            dockerfile: php-8.2.2.dockerfile
+        ports:
+            - ${PHP822_PORT}:9000
+        volumes:
+            - ./applications/:/var/www/webserver/
+            - ./php/8.2.2/conf/:/home/php/conf/
+            - ./php/8.2.2/shared/:/home/php/shared/
+        networks:
+            - webserver_network
+        #command: "/home/php/conf/custom.sh"
+    #----------------------------------------------------------------------------------------
+    oraclelinux:
+        env_file: .env
+        container_name: oraclelinux
+        build:
+            context: ./databases/oracle/database
+            dockerfile: oraclelinux.dockerfile
+            args:
+                DB_EDITION: ${DB_EDITION}
+                ORACLE_PASSWORD: ${ORACLE_PASSWORD}
+        volumes:
+            - ./databases/oracle/share:/home/oracle/share
+            - ./databases/oracle/oradata:/opt/oracle/oradata
+        ports:
+            - ${ORACLE_PORT1}:1521
+            - ${ORACLE_PORT2}:5500
+        tty: true
+        networks:
+            - default
+            - webserver_network
     #----------------------------------------------------------------------------------------
     mongo:
         env_file: .env
@@ -66,11 +181,11 @@ services:
             MONGO_INITDB_ROOT_PASSWORD: ${MONGO_INITDB_ROOT_PASSWORD}
         volumes:
             - type: bind
-              source: ./mongo/MongoDB
+              source: ./databases/mongo/MongoDB
               target: /data/db/
               read_only: false
             - type: bind
-              source: ./mongo/mongodb.conf
+              source: ./databases/mongo/mongodb.conf
               target: /etc/mongodb.conf
               read_only: false
         tty: true
@@ -101,27 +216,27 @@ services:
             - default
             - webserver_network
     #-----------------------------------------------------------------------------------------
-#    postgres:
-#        env_file: .env
-#        container_name: postgres
-#        image: postgres
-#        ports:
-#            - ${POSTGRES_PORT}:5432
-#        environment:
-#            POSTGRES_DB: ${POSTGRES_DB}
-#            POSTGRES_USER: ${POSTGRES_USER}
-#            POSTGRES_PASSWORD: ${POSTGRES_PASSWORD}
-#            TZ: GMT
-#        volumes:
-#            - type: bind
-#              source: ./postgres/PostgresSQL
-#              target: /var/lib/postgresql/data/
-#              read_only: false
-#        tty: true
-#        networks:
-#            - default
-#            - webserver_network
-#    #----------------------------------------------------------------------------------------
+    postgres:
+        env_file: .env
+        container_name: postgres
+        image: postgres
+        ports:
+            - ${POSTGRES_PORT}:5432
+        environment:
+            POSTGRES_DB: ${POSTGRES_DB}
+            POSTGRES_USER: ${POSTGRES_USER}
+            POSTGRES_PASSWORD: ${POSTGRES_PASSWORD}
+            TZ: GMT
+        volumes:
+            - type: bind
+              source: ./databases/postgres/PostgresSQL
+              target: /var/lib/postgresql/data/
+              read_only: false
+        tty: true
+        networks:
+            - default
+            - webserver_network
+    #----------------------------------------------------------------------------------------
     mssql:
         env_file: .env
         container_name: mssql
@@ -130,11 +245,11 @@ services:
             - ${MSSQL_PORT}:1433
         volumes:
             - type: bind
-              source: ./mssql
+              source: ./databases/mssql
               target: /var/lib/mssql/data/
               read_only: false
             - type: bind
-              source: ./mssql/data
+              source: ./databases/mssql/data
               target: /var/opt/mssql/data/
               read_only: false
         environment:
@@ -158,84 +273,57 @@ services:
         networks:
             - default
             - webserver_network
-#    #----------------------------------------------------------------------------------------
-#    firebird:
-#        env_file: .env
-#        container_name: firebird
-#        privileged: true
-#        build:
-#            context: ./firebird
-#            dockerfile: firebird.dockerfile
-#            args:
-#                TZ: ${FIREBIRD_TIMEZONE}
-#                ISC_PASSWORD: ${FIREBIRD_ISC_PASSWORD}
-#                FIREBIRD_USER: ${FIREBIRD_USER}
-#                FIREBIRD_DBNAME: ${FIREBIRD_DBNAME}
-#        ports:
-#            - ${FIREBIRD_PORT}:3050
-#        volumes:
-#            - ./firebird/data/:/etc/firebird/3.0/
-#        environment:
-#            TZ: ${FIREBIRD_TIMEZONE}
-#            FIREBIRD_DATABASE: ${FIREBIRD_DBNAME}
-#            FIREBIRD_USER: ${FIREBIRD_USER}
-#            FIREBIRD_PASS: ${FIREBIRD_ISC_PASSWORD}
-#            ISC_PASSWORD: ${FIREBIRD_ISC_PASSWORD}
-#        tty: true
-#        networks:
-#            - default
-#            - webserver_network
-#    #----------------------------------------------------------------------------------------
-#    mysql-80:
-#        env_file: .env
-#        image: mysql:8.0
-#        container_name: mysql80
-#        ports:
-#            - ${MYSQL80_PORT}:3306
-#        volumes:
-#            - "./mysql-80/lib:/var/lib/mysql/"
-#        environment:
-#            MYSQL_DATABASE: ${MYSQL80_DATABASE}
-#            MYSQL_USERNAME: ${MYSQL80_USERNAME}
-#            MYSQL_PASSWORD: ${MYSQL80_PASSWORD}
-#            MYSQL_ROOT_PASSWORD: ${MYSQL80_ROOT_PASSWORD}
-#        networks:
-#            - default
-#            - webserver_network
-#    #----------------------------------------------------------------------------------------
-#    mysql-57:
-#        env_file: .env
-#        image: mysql:5.7
-#        container_name: mysql57
-#        ports:
-#            - ${MYSQL57_PORT}:3306
-#        volumes:
-#            - "./mysql-57/lib:/var/lib/mysql/"
-#        environment:
-#            MYSQL_DATABASE: ${MYSQL57_DATABASE}
-#            MYSQL_USERNAME: ${MYSQL57_USERNAME}
-#            MYSQL_PASSWORD: ${MYSQL57_PASSWORD}
-#            MYSQL_ROOT_PASSWORD: ${MYSQL57_ROOT_PASSWORD}
-#        networks:
-#            - default
-#            - webserver_network
+    #----------------------------------------------------------------------------------------
+    mysql-80:
+        env_file: .env
+        image: mysql:8.0
+        container_name: mysql80
+        ports:
+            - ${MYSQL80_PORT}:3306
+        volumes:
+            - ./databases/mysql-80/lib:/var/lib/mysql/
+        environment:
+            MYSQL_DATABASE: ${MYSQL80_DATABASE}
+            MYSQL_USERNAME: ${MYSQL80_USERNAME}
+            MYSQL_PASSWORD: ${MYSQL80_PASSWORD}
+            MYSQL_ROOT_PASSWORD: ${MYSQL80_ROOT_PASSWORD}
+        networks:
+            - default
+            - webserver_network
+    #----------------------------------------------------------------------------------------
+    mysql-57:
+        env_file: .env
+        image: mysql:5.7
+        container_name: mysql57
+        ports:
+            - ${MYSQL57_PORT}:3306
+        volumes:
+            - ./databases/mysql-57/lib:/var/lib/mysql/
+        environment:
+            MYSQL_DATABASE: ${MYSQL57_DATABASE}
+            MYSQL_USERNAME: ${MYSQL57_USERNAME}
+            MYSQL_PASSWORD: ${MYSQL57_PASSWORD}
+            MYSQL_ROOT_PASSWORD: ${MYSQL57_ROOT_PASSWORD}
+        networks:
+            - default
+            - webserver_network
     #----------------------------------------------------------------------------------------
     # NOTE: The sqlite don't can used remotely, so it is used inside php8 container
     sqlite3:
         env_file: .env
         container_name: sqlite3
         build:
-            context: ./sqlite3
+            context: ./databases/sqlite3
         privileged: true
         ports:
             - ${SQLITE3_PORT}:5050
         volumes:
             - type: bind
-              source: ./sqlite3/sqliteDB/sqlite-autoconf
+              source: ./databases/sqlite3/sqliteDB/sqlite-autoconf
               target: /data/sqlite3/
               read_only: false
             - type: bind
-              source: ./sqlite3/sqliteDB/databases
+              source: ./databases/sqlite3/sqliteDB/databases
               target: /root/db/
               read_only: false
         stdin_open: true
@@ -248,16 +336,16 @@ services:
         env_file: .env
         container_name: redis
         build:
-            context: ./redis
+            context: ./databases/redis
         ports:
             - ${REDIS_PORT}:6379
         volumes:
             - type: bind
-              source: ./redis/data
+              source: ./databases/redis/data
               target: /data/
               read_only: false
             - type: bind
-              source: ./redis/redis.conf
+              source: ./databases/redis/redis.conf
               target: /etc/redis/redis.conf
               read_only: false
         command: redis-server --requirepass ${REDIS_AUTH}
@@ -266,6 +354,33 @@ services:
             - default
             - webserver_network
     #-----------------------------------------------------------------------------------------
+    firebird:
+        env_file: .env
+        container_name: firebird
+        privileged: true
+        build:
+            context: ./databases/firebird
+            dockerfile: firebird.dockerfile
+            args:
+                TZ: ${FIREBIRD_TIMEZONE}
+                ISC_PASSWORD: ${FIREBIRD_ISC_PASSWORD}
+                FIREBIRD_USER: ${FIREBIRD_USER}
+                FIREBIRD_DBNAME: ${FIREBIRD_DBNAME}
+        ports:
+            - ${FIREBIRD_PORT}:3050
+        volumes:
+            - ./databases/firebird/data/:/etc/firebird/3.0/
+        environment:
+            TZ: ${FIREBIRD_TIMEZONE}
+            FIREBIRD_DATABASE: ${FIREBIRD_DBNAME}
+            FIREBIRD_USER: ${FIREBIRD_USER}
+            FIREBIRD_PASS: ${FIREBIRD_ISC_PASSWORD}
+            ISC_PASSWORD: ${FIREBIRD_ISC_PASSWORD}
+        tty: true
+        networks:
+            - default
+            - webserver_network
+    #----------------------------------------------------------------------------------------
 
 networks:
     webserver_network:

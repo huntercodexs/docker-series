@@ -1,0 +1,27 @@
+version: "3.7"
+services:
+    
+    #----------------------------------------------------------------------------------------
+    rabbitmq-3-9-8:
+        env_file: .env
+        image: rabbitmq:3.9.8
+        container_name: rabbitmq-3-9-8
+        ports:
+            - ${RABBITMQ_PORT}:5672
+            - ${RABBITMQ_HTTP_PORT}:15672
+        volumes:
+            - type: bind
+              source: ./lib
+              target: /var/lib/rabbitmq/
+              read_only: false
+        environment:
+            RABBITMQ_DEFAULT_USER: ${RABBITMQ_DEFAULT_USER}
+            RABBITMQ_DEFAULT_PASS: ${RABBITMQ_DEFAULT_PASS}
+        tty: true
+        networks:
+            - open_network
+    #----------------------------------------------------------------------------------------
+
+networks:
+    open_network:
+        external: true

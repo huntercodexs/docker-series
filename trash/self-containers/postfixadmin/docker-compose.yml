@@ -1,0 +1,50 @@
+version: "3.7"
+services:
+    
+    #----------------------------------------------------------------------------------------
+    postfixadmin_db:
+        env_file: .env
+        container_name: postfixadmin_db
+        image: mysql:5.7
+        restart: always
+        environment:
+            MYSQL_RANDOM_ROOT_PASSWORD: ${MYSQL_RANDOM_ROOT_PASSWORD}
+            MYSQL_DATABASE: ${POSTFIXADMIN_DB_NAME}
+            MYSQL_USER: ${POSTFIXADMIN_DB_USER}
+            MYSQL_PASSWORD: ${POSTFIXADMIN_DB_PASSWORD}
+        ports:
+            - ${POSTFIXADMIN_DB_PORT}
+        networks:
+            - default
+            - open_network
+    #----------------------------------------------------------------------------------------
+    postfixadmin:
+        env_file: .env
+        container_name: postfixadmin
+        image: postfixadmin
+        restart: always
+        environment:
+            POSTFIXADMIN_NAME: ${POSTFIXADMIN_NAME}
+            POSTFIXADMIN_DB_TYPE: ${POSTFIXADMIN_DB_TYPE}
+            POSTFIXADMIN_DB_HOST: ${POSTFIXADMIN_DB_HOST}
+            POSTFIXADMIN_DB_USER: ${POSTFIXADMIN_DB_USER}
+            POSTFIXADMIN_DB_PASSWORD: ${POSTFIXADMIN_DB_PASSWORD}
+            POSTFIXADMIN_DB_NAME: ${POSTFIXADMIN_DB_NAME}
+            POSTFIXADMIN_SETUP_PASSWORD: ${POSTFIXADMIN_SETUP_PASSWORD}
+        ports:
+            - ${POSTFIXADMIN_HTTP_GUEST_PORT}:${POSTFIXADMIN_HTTP_PORT}
+        volumes:
+            - ./share/:/home/postfixadmin/files/
+            - ./config/config.local.php:/var/www/html/config.local.php
+            - ./config/config.inc.php:/var/www/html/config.inc.php
+        depends_on:
+            - postfixadmin_db
+        tty: true
+        networks:
+            - default
+            - open_network
+    #----------------------------------------------------------------------------------------
+
+networks:
+    open_network:
+        external: true
