@@ -11,6 +11,9 @@
 *.ppk
 *.key
 
+## GENERAL DIR
+
+
 ## APPLICATIONS
 /httpd_php8_databases_separated/applications/application-mongodb/php-7.4.0/
 /httpd_php8_databases_separated/applications/application-mongodb/php-8.0.0/
