@@ -1,5 +1,5 @@
 # HTTPD + PHP8 + DATABASES (USING DEDICATED CONTAINER)
-Using PHP8 together NGINX connected with the most used databases
+Using PHP together Apache2 Server connected with the most used databases
 
 ![banner.png](httpd_php8_databases_separated/files/media/banner.png)
 
