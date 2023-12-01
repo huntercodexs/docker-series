@@ -13,7 +13,7 @@ Please use the branch selector to access others environment configurations
 
 - PHP8-APACHE
 - MYSQL8
-- 
+
 
 # Usage
 
