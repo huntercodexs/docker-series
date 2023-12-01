@@ -5,28 +5,26 @@ services:
         image: openjdk:8u212
         container_name: openjdk-8u212
         ports:
-            - "31890:31890"
+            - ${OPENJDK_HTTP_PORT}:31890
         volumes:
-            - type: bind
-              source: ./java/simple-api-demo
-              target: /home/openjdk/simple-api-demo
-              read_only: false
+            - ./java/simple-api-demo:/home/openjdk/simple-api-demo
         tty: true
         networks:
             - openjdk-net
-        command: "java -jar /home/openjdk/simple-api-demo/SIMPLE-API-DEMO-22.01.1-SNAPSHOT.jar"
+        depends_on:
+            - mysql-80-to-jdk
+        links:
+            - mysql-80-to-jdk
+        command: "java -jar /home/openjdk/simple-api-demo/SIMPLE-API-DEMO-22.01.1-SNAPSHOT.jar --spring.config.location=/home/openjdk/simple-api-demo/application.properties"
     #----------------------------------------------------------------------------------------
     mysql-80-to-jdk:
         env_file: .env
         image: mysql:8.0
         container_name: mysql-80-to-jdk
         ports:
-            - "3706:3306"
+            - ${MYSQL80_PORT}:3306
         volumes:
-            - type: bind
-              source: ./mysql-80
-              target: /var/lib/mysql/
-              read_only: false
+            - ./mysql-80:/var/lib/mysql/
         environment:
             MYSQL_DATABASE: ${MYSQL80_DATABASE}
             MYSQL_USERNAME: ${MYSQL80_USERNAME}
