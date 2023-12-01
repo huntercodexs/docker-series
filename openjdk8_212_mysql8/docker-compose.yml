@@ -1,16 +1,6 @@
 version: "3.7"
 services:
     #----------------------------------------------------------------------------------------
-    #
-    # NOTE: JUST WORK WITH JAR FILE !
-    # After changes in the current project and generated jar file, copy it into docker container openjdk
-    # and run the command "docker-compose up openjdk-8u212" to feature update
-    #
-    # or execute directly command as
-    #   docker exec -it openjdk-8u212 java -jar /home/openjdk/simple-api-demo/SIMPLE-API-DEMO-22.01.1-SNAPSHOT.jar
-    #
-    # request sample: http://192.168.0.174:31890/api/simple-api-demo
-    # response: OK, it is working fine !
     openjdk-8u212:
         image: openjdk:8u212
         container_name: openjdk-8u212
