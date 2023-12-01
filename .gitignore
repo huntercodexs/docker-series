@@ -12,4 +12,5 @@
 *.key
 
 ## GENERAL DIR
+.idea/
 /trash/
