@@ -1,7 +1,7 @@
 # PHP8-APACHE + MYSQL8
 A quick and single repository to build an environment for PHP8 with Apache2 and MYSQL8
 
-![banner.png](php8-apache/files/medias/banner.png)
+![banner.png](php8-apache-mysql/files/medias/banner.png)
 
 
 # Information
