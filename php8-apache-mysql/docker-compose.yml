@@ -11,16 +11,12 @@ services:
         image: php:8.0-apache
         build:
             context: ./
-            dockerfile: php8.dockerfile
+            dockerfile: php8-apache.dockerfile
         volumes:
-#            - type: bind
-#              source: ./conf
-#              target: /etc/apache2/conf/
-#              read_only: false
-            - type: bind
-              source: ./sites
-              target: /var/www/html/
-              read_only: false
+            - ./applications/:/var/www/webserver/
+            - ./conf/php/:/home/php/conf/
+            - ./conf/apache2/:/home/php/apache/
+            - ./shared/:/home/php/shared/
         ports:
             - ${PHP8_APACHE_PORT}:9000
             - ${PHP8_APACHE_PORT_HTTP}:80
@@ -39,7 +35,7 @@ services:
         ports:
             - ${MYSQL80_PORT}:3306
         volumes:
-            - "./mysql-80:/var/lib/mysql/"
+            - ./mysql-80:/var/lib/mysql/
         environment:
             MYSQL_DATABASE: ${MYSQL80_DATABASE}
             MYSQL_USERNAME: ${MYSQL80_USERNAME}
