@@ -101,6 +101,20 @@ a complete environment to development using HTTPD(Apache2) + PHP8 + Databases(se
     - FIREBIRD ![img.png](./httpd_php8_databases_separated/files/media/unavailable.png)
 
 
+- PHP-8.2.13-FPM ![img.png](./httpd_php8_databases_separated/files/media/check-green.png)
+  - DATABASE CONNECTIONS
+    - ORACLELINUX ![img.png](./httpd_php8_databases_separated/files/media/check-green.png)
+    - MONGO ![img.png](./httpd_php8_databases_separated/files/media/check-green.png)
+    - MSSQL ![img.png](./httpd_php8_databases_separated/files/media/check-green.png)
+    - MYSQL ![img.png](./httpd_php8_databases_separated/files/media/check-green.png)
+      - 5.7 ![img.png](./httpd_php8_databases_separated/files/media/check-green.png)
+      - 8.0 ![img.png](./httpd_php8_databases_separated/files/media/check-green.png)
+    - REDIS ![img.png](./httpd_php8_databases_separated/files/media/check-green.png)
+    - SQLITE ![img.png](./httpd_php8_databases_separated/files/media/check-green.png)
+    - POSTGRES ![img.png](./httpd_php8_databases_separated/files/media/unavailable.png)
+    - FIREBIRD ![img.png](./httpd_php8_databases_separated/files/media/unavailable.png)
+
+
 # About PHP8
 
 - DOCKERFILE
@@ -408,6 +422,8 @@ Postgres - PGSQL - Drivers and Libraries
 - https://packages.ubuntu.com/focal/
 - https://archlinux.org/packages/extra/x86_64/php-pgsql
 - https://linux-packages.com/ubuntu-focal-fossa/package/php80-pgsql
+- https://repo.herecura.eu/pool/php82-pgsql-8.2.13-1-x86_64.pkg.tar.zst
+- https://ftp.belnet.be/mirrors/garudalinux.org/x86_64/php80-pgsql-8.0.1-2-x86_64.pkg.tar.zst
 
 Firebird
 - https://firebirdsql.org/en/php-driver/

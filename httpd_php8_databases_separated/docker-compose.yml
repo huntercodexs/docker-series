@@ -86,6 +86,27 @@ services:
             - webserver_network
         #command: "/home/webserver/conf/webserver.sh"
     #----------------------------------------------------------------------------------------
+    webserver-8.2.13:
+        env_file: .env
+        image: httpd:2.4.54
+        container_name: webserver-8.2.13
+        ports:
+            - ${WEBSERVER8213_PORT1}:80
+            - ${WEBSERVER8213_PORT2}:443
+        privileged: true
+        volumes:
+            - ./applications/:/var/www/webserver/
+            - ./webserver/8.2.13/conf/:/home/webserver/conf/
+            - ./webserver/8.2.13/shared/:/home/webserver/shared/
+        tty: true
+        depends_on:
+            - php-8.2.13
+        links:
+            - php-8.2.13
+        networks:
+            - webserver_network
+        #command: "/home/webserver/conf/webserver.sh"
+    #----------------------------------------------------------------------------------------
     php-7.4.0:
         env_file: .env
         container_name: php-7.4.0
@@ -146,6 +167,22 @@ services:
             - ./applications/:/var/www/webserver/
             - ./php/8.2.2/conf/:/home/php/conf/
             - ./php/8.2.2/shared/:/home/php/shared/
+        networks:
+            - webserver_network
+        #command: "/home/php/conf/custom.sh"
+    #----------------------------------------------------------------------------------------
+    php-8.2.13:
+        env_file: .env
+        container_name: php-8.2.13
+        build:
+            context: ./php/8.2.13
+            dockerfile: php-8.2.13.dockerfile
+        ports:
+            - ${PHP8213_PORT}:9000
+        volumes:
+            - ./applications/:/var/www/webserver/
+            - ./php/8.2.13/conf/:/home/php/conf/
+            - ./php/8.2.13/shared/:/home/php/shared/
         networks:
             - webserver_network
         #command: "/home/php/conf/custom.sh"
