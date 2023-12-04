@@ -245,14 +245,14 @@ RUN cd /opt/postgres
 
 RUN apt install -y postgresql postgresql-contrib
 
-RUN wget https://archlinux.org/packages/extra/x86_64/php-pgsql/download -O php-pgsql.pkg.tar.zst
-RUN tar -I zstd -xvf php-pgsql.pkg.tar.zst
-RUN cp usr/lib/php/modules/pgsql.so $DIR_PHP_EXTENSIONS/
-RUN cp usr/lib/php/modules/pdo_pgsql.so $DIR_PHP_EXTENSIONS/
-RUN mv php-pgsql.pkg.tar.zst usr /opt/postgres/
+RUN wget https://ftp.belnet.be/mirrors/garudalinux.org/x86_64/php80-pgsql-8.0.1-2-x86_64.pkg.tar.zst -O php80-pgsql-8.0.1-2-x86_64.pkg.tar.zst
+RUN tar -I zstd -xvf php80-pgsql-8.0.1-2-x86_64.pkg.tar.zst
+RUN cp usr/lib/php80/modules/pgsql.so $DIR_PHP_EXTENSIONS/
+RUN cp usr/lib/php80/modules/pdo_pgsql.so $DIR_PHP_EXTENSIONS/
+RUN mv php80-pgsql-8.0.1-2-x86_64.pkg.tar.zst usr /opt/postgres/
 
-RUN printf ";priority=40\nextension=pgsql\n" > $DIR_PHP_INI_FILES/pgsql.ini
-RUN printf ";priority=50\nextension=pdo_pgsql\n" > $DIR_PHP_INI_FILES/pdo_pgsql.ini
+RUN printf ";priority=40\nextension=pgsql.so\n" > $DIR_PHP_INI_FILES/pgsql.ini
+RUN printf ";priority=50\nextension=pdo_pgsql.so\n" > $DIR_PHP_INI_FILES/pdo_pgsql.ini
 
 RUN cd -
 

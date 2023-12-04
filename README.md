@@ -69,7 +69,7 @@ a complete environment to development using HTTPD(Apache2) + PHP8 + Databases(se
       - 8.0 ![img.png](./httpd_php8_databases_separated/files/media/check-green.png)
     - REDIS ![img.png](./httpd_php8_databases_separated/files/media/check-green.png)
     - SQLITE ![img.png](./httpd_php8_databases_separated/files/media/check-green.png)
-    - POSTGRES ![img.png](./httpd_php8_databases_separated/files/media/unavailable.png)
+    - POSTGRES ![img.png](./httpd_php8_databases_separated/files/media/check-green.png)
     - FIREBIRD ![img.png](./httpd_php8_databases_separated/files/media/unavailable.png)
 
 
