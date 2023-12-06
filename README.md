@@ -1,84 +1,52 @@
-# NGINX + PHP8
-Docker Series - A project to work with many docker container
+# NGINX + PHP-8.X.X (WITH PHP-7.4.0 AS WELL)
+A quick and single repository to build an environment for PHP with NGINX
 
----
-
-# About
-
-This branch set up the complete environment to run PHP and NGINX as Webserver
+![banner.png](nginx_php8/files/medias/banner.png)
 
 
----
+# Information
 
-# How to use
+Please use the branch selector to access others environment configurations
+
+The PHP available in this branch are:
+
+- PHP-7.4.0
+- PHP-8.0.0
+- PHP-8.1.0
+- PHP-8.2.2
+- PHP-8.2.13
+
+# Usage
 
 - Access the folder path in this project to run php8 together nginx, as below:  
 
 <pre>
-$ git clone https://github.com/huntercodexs/docker-series.git .
-$ git checkout nginx_php8
-$ cd nginx_php8
-$ docker-compose up --build (in first time)
-$ docker-compose start (in others case)
+user@host:/home/user$ git clone https://github.com/huntercodexs/docker-series.git .
+user@host:/home/user$ cd docker-series
+user@host:/home/user/docker-series$ git checkout nginx_php8
+user@host:/home/user/docker-series$ cd nginx_php8
+user@host:/home/user/docker-series/nginx_php8$ docker network create nginx_php8_network
+user@host:/home/user/docker-series/nginx_php8$ docker-compose up --build (in first time)
+user@host:/home/user/docker-series/nginx_php8$ [Ctrl+C]
+user@host:/home/user/docker-series/nginx_php8$ docker-compose start (in the next times)
+user@host:/home/user/docker-series/nginx_php8$ docker-compose ps (check the containers status)
 </pre>
 
-- Before build and start project set the following files configurations:
+- Before build and start project set the following configurations files:
 
 <pre>
-- php.ini (nginx_php8/php/8.0/conf/php.ini)
-- nginx.conf (nginx_php8/nginx/nginx.conf)
-- php80.conf (nginx_php8/nginx/conf.d/php80.conf)
-- php81.conf (nginx_php8/nginx/conf.d/php81.conf)
+- php.ini (nginx_php8/php/{PHP-VERSION}/conf/)
+- nginx.conf (nginx_php8/nginx/)
+- php-{PHP-VERSION}.conf (nginx_php8/nginx/conf.d/)
 </pre>
 
 - Access the application
 
 <pre>
-http://192.168.0.174:38080/php80/index.php
-http://192.168.0.174:38080/php81/index.php
+http://192.168.0.204:38080/php-7.4.0/index.php
+http://192.168.0.204:38080/php-8.0.0/index.php
+http://192.168.0.204:38080/php-8.1.0/index.php
+http://192.168.0.204:38080/php-8.2.2/index.php
+http://192.168.0.204:38080/php-8.2.13/index.php
 </pre>
-
----
-
-# PHP-8.0
-
-> FEATURES AVAILABLE
-
-- XDEBUG
-- OPCACHE
-- MBSTRING
-- BCMATH
-- COMPOSER
-- REDIS
-- PDO
-- MSSQL
-- MYSQL
-- MONGODB
-- POSTGRES
-- SQLITE3
-- FIREBIRD
-- INTERBASE
-
----
-
-# PHP-8.1
-
-> FEATURES AVAILABLE
-
-- XDEBUG
-- OPCACHE
-- MBSTRING
-- BCMATH
-- COMPOSER
-- REDIS
-- PDO
-- MSSQL
-- MYSQL
-- MONGODB
-- POSTGRES
-- SQLITE3
-- FIREBIRD
-- INTERBASE
-- ORACLE
-
 
