@@ -1,11 +1,17 @@
-trash
+## GENERAL FILE EXTENSIONS
 *-tar
 *.jar
 *.jar.original
 *.deb
 *.exec
 *.run
-.idea
-nodes
-node_modules
+
+## SPECIFIC FILES
 /java_mssql/app/application.properties
+
+## GENERAL DIR
+nodes/
+.idea/
+trash
+node_modules/
+h2_mysql_oracle_sftp_mailhog/
