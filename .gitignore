@@ -1,15 +1,25 @@
-trash
+
+*.jar
 *-tar
 *.jar.original
 *.deb
 *.exec
 *.run
-.idea
-nodes
-node_modules
+
+## GENERAL FILE EXTENSIONS
+sources-docker-compose.yml
+
+## SPECIFIC FILES
+/java_mssql/app/application.properties
+
+## GENERAL DIR
+.idea/
+trash/
+nodes/
+node_modules/
 /docker-elk/
 /elkstack792/
 /micro-services/
-sources-docker-compose.yml
-/nginx_reverse_proxy_nodejs/applications/app1/app1env
-/nginx_reverse_proxy_nodejs/applications/app2/app2env
+h2_mysql_oraclesftp_mailhog/
+/nginx_reverse_proxy_nodejs/applications/app1/app1env/
+/nginx_reverse_proxy_nodejs/applications/app2/app2env/
