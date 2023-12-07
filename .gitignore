@@ -1,5 +1,4 @@
-trash
-.idea
+## GENERAL FILE EXTENSIONS
 *-tar
 *.jar
 *.jar.original
@@ -16,6 +15,11 @@ trash
 nodes
 node_modules
 
+## GENERAL DIR
+trash/
+.idea/
+
+## APPLICATIONS
 databases/firebird
 databases/h2-database
 databases/microsoft
