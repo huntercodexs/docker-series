@@ -1,12 +1,17 @@
+## GENERAL FILE EXTENSIONS
 *-tar
 *.jar
 *.jar.original
 *.deb
 *.exec
 *.run
-nodes
-.idea
-node_modules
-trash
+
+## SPECIFIC FILES
 /nginx_php8_mysql/mysql/5.7/lib/**
 /nginx_php8_mysql/mysql/8.0/lib/**
+
+## GENERAL DIR
+.idea/
+trash/
+nodes/
+node_modules/

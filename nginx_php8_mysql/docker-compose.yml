@@ -1,41 +1,10 @@
 version: "3.7"
 services:
-    
+
     #----------------------------------------------------------------------------------------
-    nginx-ubuntu2004-php81:
+    nginx:
         env_file: .env
-        container_name: nginx-ubuntu2004-php81
-        build:
-            context: ./nginx-ubuntu2004-php81
-            dockerfile: nginx-ubuntu2004-php81.dockerfile
-        privileged: true
-        ports:
-            - ${NGINX_UBUNTU2004_PORT}:80
-        environment:
-            PHP_IDE_CONFIG: ${PHP_IDE_CONFIG}
-        volumes:
-            - ./applications/php81:/var/www/applications/
-            #-----------------------------------------------------------------
-            ### ENABLE THE FOLLOW VOLUMES JUST AFTER BUILD
-            #-----------------------------------------------------------------
-            #- ./server-nginx/etc/nginx/nginx.conf:/etc/nginx/nginx.conf
-            #- ./server-nginx/etc/nginx/conf.d:/etc/nginx/conf.d
-            #- ./server-nginx/etc/nginx/sites-available:/etc/nginx/sites-available
-            #- ./server-nginx/etc/nginx/sites-enabled:/etc/nginx/sites-enabled
-            #- ./server-nginx/etc/nginx/snippets:/etc/nginx/snippets
-        working_dir: /etc/nginx
-        links:
-            - php81
-        depends_on:
-            - php81
-        tty: true
-        networks:
-            - default
-            - open_network
-    #----------------------------------------------------------------------------------------
-    nginx-php80:
-        env_file: .env
-        container_name: nginx-php80
+        container_name: nginx
         image: nginx:latest
         privileged: true
         ports:
@@ -43,57 +12,105 @@ services:
         environment:
             PHP_IDE_CONFIG: ${PHP_IDE_CONFIG}
         volumes:
-            - ./nginx-php80/etc/nginx/nginx.conf:/etc/nginx/nginx.conf
-            - ./nginx-php80/etc/nginx/conf.d:/etc/nginx/conf.d
-            - ./nginx-php80/etc/nginx/sites-available:/etc/nginx/sites-available
-            - ./nginx-php80/etc/nginx/sites-enabled:/etc/nginx/sites-enabled
-            - ./nginx-php80/etc/nginx/snippets:/etc/nginx/snippets
-            - ./applications/php80:/var/www/applications/
+            - ./nginx/nginx.conf:/etc/nginx/nginx.conf
+            - ./nginx/conf.d:/etc/nginx/conf.d/
+            - ./applications/:/var/www/applications/
         working_dir: /etc/nginx
         links:
-            - php80
+            - php-7.4.0
+            - php-8.0.0
+            - php-8.1.0
+            - php-8.2.2
+            - php-8.2.13
         depends_on:
-            - php80
-        tty: true
+            - php-7.4.0
+            - php-8.0.0
+            - php-8.1.0
+            - php-8.2.2
+            - php-8.2.13
         networks:
             - default
-            - open_network
+            - nginx_php8_mysql_network
     #----------------------------------------------------------------------------------------
-    php80:
+    php-7.4.0:
         env_file: .env
-        container_name: php80
+        container_name: php-7.4.0
         build:
-            context: ./php/8.0
-            dockerfile: php80.dockerfile
-        privileged: true
-        environment:
-            PHP_IDE_CONFIG: ${PHP_IDE_CONFIG}
+            context: ./php/7.4.0
+            dockerfile: php-7.4.0.dockerfile
         ports:
-            - ${PHP80_PORT}:9000
+            - ${PHP740_PORT}:9000
         volumes:
-            - ./applications/php80:/var/www/applications/
-        tty: true
+            - ./applications/:/var/www/applications/
+            - ./php/7.4.0/conf/:/home/php/conf/
+            - ./php/7.4.0/shared/:/home/php/shared/
         networks:
-            - default
-            - open_network
+            - nginx_php8_mysql_network
+        #command: "/home/php/conf/custom.sh"
     #----------------------------------------------------------------------------------------
-    php81:
+    php-8.0.0:
         env_file: .env
-        container_name: php81
+        container_name: php-8.0.0
         build:
-            context: ./php/8.1
-            dockerfile: php81.dockerfile
-        privileged: true
-        environment:
-            PHP_IDE_CONFIG: ${PHP_IDE_CONFIG}
+            context: ./php/8.0.0
+            dockerfile: php-8.0.0.dockerfile
         ports:
-            - ${PHP81_PORT}:9000
+            - ${PHP800_PORT}:9000
         volumes:
-            - ./applications/php81:/var/www/applications/
-        tty: true
+            - ./applications/:/var/www/applications/
+            - ./php/8.0.0/conf/:/home/php/conf/
+            - ./php/8.0.0/shared/:/home/php/shared/
         networks:
-            - default
-            - open_network
+            - nginx_php8_mysql_network
+        #command: "/home/php/conf/custom.sh"
+    #----------------------------------------------------------------------------------------
+    php-8.1.0:
+        env_file: .env
+        container_name: php-8.1.0
+        build:
+            context: ./php/8.1.0
+            dockerfile: php-8.1.0.dockerfile
+        ports:
+            - ${PHP810_PORT}:9000
+        volumes:
+            - ./applications/:/var/www/applications/
+            - ./php/8.1.0/conf/:/home/php/conf/
+            - ./php/8.1.0/shared/:/home/php/shared/
+        networks:
+            - nginx_php8_mysql_network
+        #command: "/home/php/conf/custom.sh"
+    #----------------------------------------------------------------------------------------
+    php-8.2.2:
+        env_file: .env
+        container_name: php-8.2.2
+        build:
+            context: ./php/8.2.2
+            dockerfile: php-8.2.2.dockerfile
+        ports:
+            - ${PHP822_PORT}:9000
+        volumes:
+            - ./applications/:/var/www/applications/
+            - ./php/8.2.2/conf/:/home/php/conf/
+            - ./php/8.2.2/shared/:/home/php/shared/
+        networks:
+            - nginx_php8_mysql_network
+        #command: "/home/php/conf/custom.sh"
+    #----------------------------------------------------------------------------------------
+    php-8.2.13:
+        env_file: .env
+        container_name: php-8.2.13
+        build:
+            context: ./php/8.2.13
+            dockerfile: php-8.2.13.dockerfile
+        ports:
+            - ${PHP8213_PORT}:9000
+        volumes:
+            - ./applications/:/var/www/applications/
+            - ./php/8.2.13/conf/:/home/php/conf/
+            - ./php/8.2.13/shared/:/home/php/shared/
+        networks:
+            - nginx_php8_mysql_network
+        #command: "/home/php/conf/custom.sh"
     #----------------------------------------------------------------------------------------
     mysql-80:
         env_file: .env
@@ -102,7 +119,7 @@ services:
         ports:
             - ${MYSQL80_PORT}:3306
         volumes:
-            - ./mysql/8.0/lib:/var/lib/mysql/
+            - ./mysql-8.0/lib:/var/lib/mysql/
         environment:
             MYSQL_DATABASE: ${MYSQL80_DATABASE}
             MYSQL_USERNAME: ${MYSQL80_USERNAME}
@@ -111,7 +128,7 @@ services:
         tty: true
         networks:
             - default
-            - open_network
+            - nginx_php8_mysql_network
     #----------------------------------------------------------------------------------------
     mysql-57:
         env_file: .env
@@ -120,7 +137,7 @@ services:
         ports:
             - ${MYSQL57_PORT}:3306
         volumes:
-            - ./mysql/5.7/lib:/var/lib/mysql/
+            - ./mysql-5.7/lib:/var/lib/mysql/
         environment:
             MYSQL_DATABASE: ${MYSQL57_DATABASE}
             MYSQL_USERNAME: ${MYSQL57_USERNAME}
@@ -129,10 +146,10 @@ services:
         tty: true
         networks:
             - default
-            - open_network
+            - nginx_php8_mysql_network
     #----------------------------------------------------------------------------------------
-    
+
 networks:
-    open_network:
+    nginx_php8_mysql_network:
         external: true
         

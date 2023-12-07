@@ -1,131 +1,70 @@
-
 # NGINX + PHP8 + MYSQL5 + MYSQL8
-Docker Series - A project to work with many docker container
+A quick and single repository to build an environment for PHP with NGINX
 
----
-
-# About
-
-This branch set up the complete environment to run PHP and NGINX as Webserver
+![banner.png](nginx_php8_mysql/files/medias/banner.png)
 
 
----
+# Information
 
-# How to use
+Please use the branch selector to access others environment configurations
 
-- Before build and start project set the following files configurations:
+The PHP available in this branch are:
 
-<pre>
-- php.ini (nginx_php8_mysql/php/8.0/conf/php.ini)
-- nginx.conf (nginx_php8_mysql/nginx/nginx.conf)
-- php80.conf (nginx_php8_mysql/nginx/conf.d/php80.conf)
-- php81.conf (nginx_php8_mysql/nginx/conf.d/php81.conf)
-</pre>
+- PHP-7.4.0
+- PHP-8.0.0
+- PHP-8.1.0
+- PHP-8.2.2
+- PHP-8.2.13
 
-- Access the folder path in this project to run php8 together nginx, as below:  
+
+# Usage
+
+- Access the folder path in this project to run php8 together nginx, as below:
 
 <pre>
-$ git clone https://github.com/huntercodexs/docker-series.git .
-$ git checkout nginx_php8_mysql
-$ cd nginx_php8_mysql
-$ docker-compose up --build (in first time)
-$ docker-compose start (in others case)
+user@host:/home/user$ git clone https://github.com/huntercodexs/docker-series.git .
+user@host:/home/user$ cd docker-series
+user@host:/home/user/docker-series$ git checkout nginx_php8_mysql
+user@host:/home/user/docker-series$ cd nginx_php8_mysql
+user@host:/home/user/docker-series/nginx_php8_mysql$ docker network create nginx_php8_mysql_mysql_network
+user@host:/home/user/docker-series/nginx_php8_mysql$ docker-compose up --build (in first time)
+user@host:/home/user/docker-series/nginx_php8_mysql$ [Ctrl+C]
+user@host:/home/user/docker-series/nginx_php8_mysql$ docker-compose start (in the next times)
+user@host:/home/user/docker-series/nginx_php8_mysql$ docker-compose ps (check the containers status)
 </pre>
 
-- Create a Database in mysql container 5.7 and 8.0
+- Before build and start project set the following configurations files:
 
 <pre>
-CREATE DATABASE database CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci;
+- php.ini (nginx_php8/php/{PHP-VERSION}/conf/)
+- nginx.conf (nginx_php8/nginx/)
+- php-{PHP-VERSION}.conf (nginx_php8/nginx/conf.d/)
 </pre>
-
-- Use the script init.sql (nginx_php8_mysql/mysql/init.sql) to populate a database
 
 - Access the application
 
 <pre>
-#PHP-8.0
-http://192.168.0.174:38080/mysql/5-7/index.php
-http://192.168.0.174:38080/mysql/8-0/index.php
-#PHP-8.1
-http://192.168.0.174:39000/mysql/5-7/index.php
-http://192.168.0.174:39000/mysql/8-0/index.php
+http://192.168.0.204:38080/php-7.4.0/index.php
+http://192.168.0.204:38080/php-7.4.0/mysq/5.7/index.php
+http://192.168.0.204:38080/php-7.4.0/mysq/8.0/index.php
+
+http://192.168.0.204:38080/php-8.0.0/index.php
+http://192.168.0.204:38080/php-8.0.0/mysq/5.7/index.php
+http://192.168.0.204:38080/php-8.0.0/mysq/8.0/index.php
+
+http://192.168.0.204:38080/php-8.1.0/index.php
+http://192.168.0.204:38080/php-8.1.0/mysq/5.7/index.php
+http://192.168.0.204:38080/php-8.1.0/mysq/8.0/index.php
+
+http://192.168.0.204:38080/php-8.2.2/index.php
+http://192.168.0.204:38080/php-8.2.2/mysq/5.7/index.php
+http://192.168.0.204:38080/php-8.2.2/mysq/8.0/index.php
+
+http://192.168.0.204:38080/php-8.2.13/index.php
+http://192.168.0.204:38080/php-8.2.13/mysq/5.7/index.php
+http://192.168.0.204:38080/php-8.2.13/mysq/8.0/index.php
+
 </pre>
 
----
-# NGINX
 
-- Content
-<pre>
-/var/www/html: The actual web content, which by default only consists of the default Nginx page you saw earlier, is served out of the /var/www/html directory. This can be changed by altering Nginx configuration files.
-</pre>
-
-- Server Configuration
-<pre>
-/etc/nginx: The Nginx configuration directory. All of the Nginx configuration files reside here.
-
-/etc/nginx/nginx.conf: The main Nginx configuration file. This can be modified to make changes to the Nginx global configuration.
-
-/etc/nginx/sites-available/: The directory where per-site server blocks can be stored. Nginx will not use the configuration files found in this directory unless they are linked to the sites-enabled directory. Typically, all server block configuration is done in this directory, and then enabled by linking to the other directory.
-
-/etc/nginx/sites-enabled/: The directory where enabled per-site server blocks are stored. Typically, these are created by linking to configuration files found in the sites-available directory.
-
-/etc/nginx/snippets: This directory contains configuration fragments that can be included elsewhere in the Nginx configuration. Potentially repeatable configuration segments are good candidates for refactoring into snippets.
-</pre>
-
-- Server Logs
-<pre>
-/var/log/nginx/access.log: Every request to your web server is recorded in this log file unless Nginx is configured to do otherwise.
-/var/log/nginx/error.log: Any Nginx errors will be recorded in this log.
-</pre>
-
----
-
-# PHP-8.0
-
-> FEATURES AVAILABLE
-
-- XDEBUG
-- OPCACHE
-- MBSTRING
-- BCMATH
-- COMPOSER
-- REDIS
-- PDO
-- MSSQL
-- MYSQL
-- MONGODB
-- POSTGRES
-- SQLITE3
-- FIREBIRD
-- INTERBASE
-
----
-
-# PHP-8.1
-
-> FEATURES AVAILABLE
-
-- XDEBUG
-- OPCACHE
-- MBSTRING
-- BCMATH
-- COMPOSER
-- REDIS
-- PDO
-- MSSQL
-- MYSQL
-- MONGODB
-- POSTGRES
-- SQLITE3
-- FIREBIRD
-- INTERBASE
-- ORACLE
-
----
-
-# MYSQL
-
-> AVAILABLE VERSIONS
-
-- 5.7
-- 8.0
+# Step by Step

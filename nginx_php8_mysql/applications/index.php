@@ -1,4 +1,3 @@
 <?php
-echo "NGINX is running...";
-phpinfo();
-exit;
+
+echo "<h1>Its Work !</h1>";
