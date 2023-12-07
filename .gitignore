@@ -1,12 +1,25 @@
-trash
+## GENERAL FILE EXTENSIONS
 *-tar
 *.jar
 *.jar.original
 *.deb
 *.exec
 *.run
-.idea
-nodes
-node_modules
-/java_mongodb/mongodb/mongo/MongoDB/
+*.exe
+*.dll
+*.so
+*.fdb
+*.log
+*.wt
+*.pem
+*.ppk
+*.key
 /java_mongodb/app/application.properties
+
+## GENERAL DIR
+.idea/
+trash/
+nodes/
+node_modules/
+/java_mongodb/mongodb/mongo/MongoDB/
+
