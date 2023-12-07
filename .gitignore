@@ -1,5 +1,4 @@
-trash
-.idea
+## GENERAL FILE EXTENSIONS
 *-tar
 *.deb
 *.exec
@@ -14,10 +13,10 @@ trash
 *.jar
 *.jar.original
 
+## SPECIFIC FILES
 /h2_mysql_oracle_sftp_mailhog/mysql-80/lib/*
 h2_mysql_oracle_sftp_mailhog/sftp/uploads/*.txt*
 h2_mysql_oracle_sftp_mailhog/sftp/downloads/*.txt*
-
 /h2_mysql_oracle_sftp_mailhog/oracle/database/relinkOracleBinary.sh
 /h2_mysql_oracle_sftp_mailhog/oracle/database/runOracle.sh
 /h2_mysql_oracle_sftp_mailhog/oracle/database/runUserScripts.sh
@@ -34,6 +33,10 @@ h2_mysql_oracle_sftp_mailhog/sftp/downloads/*.txt*
 /h2_mysql_oracle_sftp_mailhog/oracle/database/dbca.rsp.tmpl
 /h2_mysql_oracle_sftp_mailhog/oracle/database/installDBBinaries.sh
 /h2_mysql_oracle_sftp_mailhog/oracle/database/LINUX.X64_193000_db_home.zip
+/h2_mysql_oracle_sftp_mailhog/oracle/oradata/.ORCLCDB.created
+
+## GENERAL DIR
+trash/
+.idea/
 /h2_mysql_oracle_sftp_mailhog/oracle/oradata/dbconfig/
 /h2_mysql_oracle_sftp_mailhog/oracle/oradata/ORCLCDB/
-/h2_mysql_oracle_sftp_mailhog/oracle/oradata/.ORCLCDB.created
