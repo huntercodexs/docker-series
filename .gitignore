@@ -12,6 +12,7 @@
 *.key
 
 ## GENERAL DIR
+.idea/
 /trash/
 
 ## APPLICATIONS
