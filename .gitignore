@@ -1,15 +1,22 @@
-trash
-*-tar
+## GENERAL FILE EXTENSIONS
+*.exe
+*.dll
+*.so
+*.fdb
+*.log
+*.wt
+*.ppk
 *.jar
 *.jar.original
-*.deb
 *.exec
 *.run
-.idea
 *.crt
 *.csr
 *.pem
 *.key
 *.req
-nodes
-node_modules
+
+## GENERAL DIR
+node_modules/
+nodes/
+/trash/
