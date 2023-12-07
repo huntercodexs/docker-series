@@ -1,12 +1,16 @@
-trash
+## GENERAL FILE EXTENSIONS
 *-tar
 *.jar
 *.jar.original
 *.deb
 *.exec
 *.run
-.idea
-nodes
-node_modules
-/java_postgres/postgres/PostgresSQL/
 /java_postgres/app/application.properties
+
+## SPECIFIC FILES
+/java_postgres/postgres/PostgresSQL/
+
+## GENERAL DIR
+node_modules/
+.idea/
+trash
