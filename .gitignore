@@ -1,15 +1,13 @@
-trash
+## GENERAL FILE EXTENSIONS
 *-tar
 *.jar
 *.jar.original
 *.deb
 *.exec
 *.run
-.idea
-nodes
-node_modules
 LINUX.X64_193000_db_home.zip
-h2_mysql_oracle_sftp_mailhog/
+
+## SPECIFIC FILES
 /java_oracle/app/application.properties
 /java_oraclelinux/oracle/database/*.sh
 /java_oraclelinux/oracle/database/*.ee
@@ -18,3 +16,10 @@ h2_mysql_oracle_sftp_mailhog/
 /java_oraclelinux/oracle/database/*.tmpl
 /java_oraclelinux/app/application.properties
 /java_oraclelinux/oracle/oradata/**
+
+## GENERAL DIR
+node_modules/
+.idea/
+trash
+nodes/
+h2_mysql_oracle_sftp_mailhog/
