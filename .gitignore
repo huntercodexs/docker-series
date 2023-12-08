@@ -39,8 +39,7 @@
 /nginx_php8_mysql/mysql-8.0/lib/mysql.ibd
 /nginx_php8_mysql/mysql-8.0/lib/client-key.pem
 /nginx_php8_mysql/mysql-8.0/lib/b025981ab95a.err
-/nginx_php8_mysql/mysql-8.0/lib/binlog.000001
-/nginx_php8_mysql/mysql-8.0/lib/binlog.000002
+/nginx_php8_mysql/mysql-8.0/lib/binlog.**
 /nginx_php8_mysql/mysql-8.0/lib/#ib_16384_0.dblwr
 /nginx_php8_mysql/mysql-8.0/lib/auto.cnf
 /nginx_php8_mysql/mysql-8.0/lib/#ib_16384_1.dblwr
