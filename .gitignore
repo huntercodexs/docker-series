@@ -32,7 +32,6 @@
 /nginx_php8_mysql/mysql-8.0/lib/undo_001
 /nginx_php8_mysql/mysql-8.0/lib/server-cert.pem
 /nginx_php8_mysql/mysql-8.0/lib/ib_buffer_pool
-/nginx_php8_mysql/mysql-8.0/lib/binlog.000001
 /nginx_php8_mysql/mysql-8.0/lib/server-key.pem
 /nginx_php8_mysql/mysql-8.0/lib/private_key.pem
 /nginx_php8_mysql/mysql-8.0/lib/mysql.sock
@@ -40,6 +39,7 @@
 /nginx_php8_mysql/mysql-8.0/lib/mysql.ibd
 /nginx_php8_mysql/mysql-8.0/lib/client-key.pem
 /nginx_php8_mysql/mysql-8.0/lib/b025981ab95a.err
+/nginx_php8_mysql/mysql-8.0/lib/binlog.000001
 /nginx_php8_mysql/mysql-8.0/lib/binlog.000002
 /nginx_php8_mysql/mysql-8.0/lib/#ib_16384_0.dblwr
 /nginx_php8_mysql/mysql-8.0/lib/auto.cnf
