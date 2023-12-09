@@ -8,13 +8,19 @@ services:
         image: nginx:latest
         privileged: true
         ports:
-            - ${NGINX_PORT}:80
+            - ${NGINX_PHP740_PORT}:80
+            - ${NGINX_PHP800_PORT}:81
+            - ${NGINX_PHP810_PORT}:82
+            - ${NGINX_PHP822_PORT}:83
+            - ${NGINX_PHP8213_PORT}:84
         environment:
             PHP_IDE_CONFIG: ${PHP_IDE_CONFIG}
         volumes:
-            - ./nginx/nginx.conf:/etc/nginx/nginx.conf
             - ./nginx/conf.d:/etc/nginx/conf.d/
-            - ./applications/:/var/www/applications/
+            - ./nginx/nginx.conf:/etc/nginx/nginx.conf
+            - ./nginx/404.html:/usr/share/nginx/html/404.html
+            - ./nginx/500.html:/usr/share/nginx/html/500.html
+            - ./applications/:/var/www/webserver/applications/
         working_dir: /etc/nginx
         links:
             - php-7.4.0
@@ -41,9 +47,9 @@ services:
         ports:
             - ${PHP740_PORT}:9000
         volumes:
-            - ./applications/:/var/www/applications/
             - ./php/7.4.0/conf/:/home/php/conf/
             - ./php/7.4.0/shared/:/home/php/shared/
+            - ./applications/php-7.4.0/:/var/www/webserver/applications/php-7.4.0/
         networks:
             - nginx_php8_network
         #command: "/home/php/conf/custom.sh"
@@ -57,9 +63,9 @@ services:
         ports:
             - ${PHP800_PORT}:9000
         volumes:
-            - ./applications/:/var/www/applications/
             - ./php/8.0.0/conf/:/home/php/conf/
             - ./php/8.0.0/shared/:/home/php/shared/
+            - ./applications/php-8.0.0/:/var/www/webserver/applications/php-8.0.0/
         networks:
             - nginx_php8_network
         #command: "/home/php/conf/custom.sh"
@@ -73,9 +79,9 @@ services:
         ports:
             - ${PHP810_PORT}:9000
         volumes:
-            - ./applications/:/var/www/applications/
             - ./php/8.1.0/conf/:/home/php/conf/
             - ./php/8.1.0/shared/:/home/php/shared/
+            - ./applications/php-8.1.0/:/var/www/webserver/applications/php-8.1.0/
         networks:
             - nginx_php8_network
         #command: "/home/php/conf/custom.sh"
@@ -89,9 +95,9 @@ services:
         ports:
             - ${PHP822_PORT}:9000
         volumes:
-            - ./applications/:/var/www/applications/
             - ./php/8.2.2/conf/:/home/php/conf/
             - ./php/8.2.2/shared/:/home/php/shared/
+            - ./applications/php-8.2.2/:/var/www/webserver/applications/php-8.2.2/
         networks:
             - nginx_php8_network
         #command: "/home/php/conf/custom.sh"
@@ -105,9 +111,9 @@ services:
         ports:
             - ${PHP8213_PORT}:9000
         volumes:
-            - ./applications/:/var/www/applications/
             - ./php/8.2.13/conf/:/home/php/conf/
             - ./php/8.2.13/shared/:/home/php/shared/
+            - ./applications/php-8.2.13/:/var/www/webserver/applications/php-8.2.13/
         networks:
             - nginx_php8_network
         #command: "/home/php/conf/custom.sh"

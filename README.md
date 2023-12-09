@@ -43,10 +43,19 @@ user@host:/home/user/docker-series/nginx_php8$ docker-compose ps (check the cont
 - Access the application
 
 <pre>
-http://192.168.0.204:38080/php-7.4.0/index.php
-http://192.168.0.204:38080/php-8.0.0/index.php
-http://192.168.0.204:38080/php-8.1.0/index.php
-http://192.168.0.204:38080/php-8.2.2/index.php
-http://192.168.0.204:38080/php-8.2.13/index.php
+http://{WEBSERVER-ADDRESS}:38080/php-7.4.0/menu.php
+http://{WEBSERVER-ADDRESS}:38080/php-7.4.0/content/index.php
+
+http://{WEBSERVER-ADDRESS}:38081/php-8.0.0/menu.php
+http://{WEBSERVER-ADDRESS}:38081/php-8.0.0/content/index.php
+
+http://{WEBSERVER-ADDRESS}:38082/php-8.1.0/menu.php
+http://{WEBSERVER-ADDRESS}:38082/php-8.1.0/content/index.php
+
+http://{WEBSERVER-ADDRESS}:38083/php-8.2.2/menu.php
+http://{WEBSERVER-ADDRESS}:38083/php-8.2.2/content/index.php
+
+http://{WEBSERVER-ADDRESS}:38084/php-8.2.13/menu.php
+http://{WEBSERVER-ADDRESS}:38084/php-8.2.13/content/index.php
 </pre>
 
