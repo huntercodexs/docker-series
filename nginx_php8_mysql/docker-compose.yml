@@ -18,6 +18,8 @@ services:
         volumes:
             - ./nginx/conf.d:/etc/nginx/conf.d/
             - ./nginx/nginx.conf:/etc/nginx/nginx.conf
+            - ./nginx/404.html:/usr/share/nginx/html/404.html
+            - ./nginx/500.html:/usr/share/nginx/html/500.html
             - ./applications/:/var/www/webserver/applications/
         working_dir: /etc/nginx
         links:
