@@ -120,7 +120,16 @@ user@host:/home/user/docker-series$ git checkout httpd_php8_separated
 user@host:/home/user/docker-series$ cd httpd_php8_separated
 </pre>
 
-5- Check and set up the .env file, .ini PHP files and all files contained in the path php/{PHP-VERSION}/conf
+5- Check and set up the .env file, .ini PHP files and all files contained in the path php/{PHP-VERSION}/conf, also 
+check and configure the httpd.conf file with the correct ports
+<pre>
+#Listen 12.34.56.78:80
+Listen 80
+Listen 81
+Listen 82
+Listen 83
+Listen 84
+</pre>
 
 6- Build the containers
 
