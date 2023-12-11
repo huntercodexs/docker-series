@@ -1,10 +1,25 @@
 # HTTPD + PHP8 + DATABASES (USING DEDICATED CONTAINER)
-Using PHP together Apache2 Server connected with the most used databases
+Using PHP together Apache2 Server connected with the most used databases - OFFLINE DRIVERS
 
 ![banner.png](httpd_php8_databases_separated/files/media/banner.png)
 
 
 # Information
+
+> IMPORTANT NOTE: This project branch is an improving of the branch httpd_php8_databases_separated, but in this case
+> all drivers installed in the PHP containers are made directly from the own container (folder) configuration, that 
+> those are placed in the path php/{PHP-VERSION}/conf/extensions/php-{PHP-VERSION}-compiled-extensions.zip, where all 
+> of these drivers was compiled and tested in the specific PHP-VERSION in the another time. If you need to check these 
+> drivers files just do the command tar -xfv {file} and you will see all the files compiled .so type. For more details 
+> you may give a look in the files php/{PHP-VERSION}/php-{PHP-VERSION}.dockerfile specifically in the section like 
+> showed below
+
+Example
+
+<pre>
+COPY ./conf/extensions/php-7.4.0-compiled-extensions.zip $DIR_PHP_EXTENSIONS/
+RUN unzip -o $DIR_PHP_EXTENSIONS/php-7.4.0-compiled-extensions.zip -d $DIR_PHP_EXTENSIONS
+</pre>
 
 Please use the branch selection to access others configurations for your need and purposes, this branch offers 
 a complete environment to development using HTTPD(Apache2) + PHP8 + Databases(see bellow).
