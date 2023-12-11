@@ -1,8 +1,12 @@
 FROM php:8.1.0-fpm
 
 ENV DIR_WEBSERVER "/var/www/webserver"
+ENV DIR_PHP_EXTENSIONS "/usr/local/lib/php/extensions/no-debug-non-zts-20210902"
+ENV DIR_PHP_INI "/usr/local/etc/php"
+ENV DIR_PHP_INI_FILES "/usr/local/etc/php/conf.d"
+ENV DIR_PHP_HOME "/home/php"
 
-WORKDIR $DIR_WEBSERVER
+WORKDIR "/opt"
 
 #---------------------------------------------------------------------------------------------------------
 ## UPDATE
@@ -45,16 +49,16 @@ RUN apt install -y alien
 RUN apt install -y vim
 
 #---------------------------------------------------------------------------------------------------------
-#RUN apt install -y ldconfig
+# OTHERS
 #---------------------------------------------------------------------------------------------------------
 RUN apt-get install -y libaio1
 RUN apt-get install -y tzdata
+#RUN apt install -y ldconfig
 
 #---------------------------------------------------------------------------------------------------------
 ## ESSENTIAL
 #---------------------------------------------------------------------------------------------------------
 RUN apt-get install -y zstd
-RUN apt install -y php-common/stable
 RUN apt-get install -y gnupg2
 
 #---------------------------------------------------------------------------------------------------------
@@ -100,6 +104,8 @@ RUN mkdir -p $DIR_WEBSERVER
 RUN groupadd docker_series -g 999
 RUN useradd docker_series -g docker_series -d $DIR_WEBSERVER
 RUN chown nobody:nogroup $DIR_WEBSERVER -R
+
+COPY ./ini/*.ini $DIR_PHP_INI/
 
 EXPOSE 9000
 CMD ["php-fpm"]

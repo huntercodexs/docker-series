@@ -1,8 +1,7 @@
-<?php
+<h1>ERP DEMO</h1>
 
-function WritePage() {
-    echo "<h1>Supplies: This is a page write by PHP 8 in HTTPD (APACHE2)</h1>";
-}
-
-WritePage();
-phpinfo();
+<ul>
+    <li>
+        <a href="./content/supplies-page.php">SUPPLIES</a>
+    </li>
+</ul>

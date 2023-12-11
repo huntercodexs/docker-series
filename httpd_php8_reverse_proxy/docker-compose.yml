@@ -14,11 +14,12 @@ services:
             - ./proxy/:/home/proxy/
             - ./proxy/conf/httpd.conf:/usr/local/apache2/conf/httpd.conf
             - ./proxy/conf/proxy.conf:/usr/local/apache2/conf/proxy.conf
+            - ./proxy/conf/htdocs/:/usr/local/apache2/htdocs
         tty: true
         networks:
             default:
-            open_network:
-            reverse_proxy:
+            httpd_php8_reverse_proxy_open_network:
+            httpd_php8_reverse_proxy_private_network:
                 ipv4_address: 10.0.0.2
     #----------------------------------------------------------------------------------------
     webserver:
@@ -30,6 +31,7 @@ services:
             - ./webserver/:/home/webserver/
             - ./webserver/conf/httpd.conf:/usr/local/apache2/conf/httpd.conf
             - ./webserver/conf/webserver.conf:/usr/local/apache2/conf/webserver.conf
+            - ./webserver/conf/htdocs/:/usr/local/apache2/htdocs
             - ./applications/:/var/www/webserver/
         tty: true
         depends_on:
@@ -37,7 +39,7 @@ services:
         links:
             - php8
         networks:
-            reverse_proxy:
+            httpd_php8_reverse_proxy_private_network:
                 ipv4_address: 10.0.0.3
     #----------------------------------------------------------------------------------------
     php8:
@@ -45,18 +47,18 @@ services:
         container_name: php8
         build:
             context: ./php8
-            dockerfile: php8.dockerfile
+            dockerfile: php-8.1.0.dockerfile
         volumes:
             - ./applications/:/var/www/webserver/
         networks:
-            reverse_proxy:
+            httpd_php8_reverse_proxy_private_network:
                 ipv4_address: 10.0.0.4
     #----------------------------------------------------------------------------------------
 
 networks:
-    open_network:
+    httpd_php8_reverse_proxy_open_network:
         external: true
-    reverse_proxy:
+    httpd_php8_reverse_proxy_private_network:
         external: false
         internal: true
         driver: bridge

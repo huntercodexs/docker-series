@@ -1,34 +1,30 @@
-
 # HTTP + PHP8 + REVERSE-PROXY
+To create a complete web environment using reverse proxy with apache2
 
-To create a complete web environment using reverse proxy with apache2 
+![banner.png](httpd_php8_reverse_proxy/files/media/banner.png)
 
--------------
 
 # Information
 
 Please use the branch selection to access others containers and environments configurations
 
--------------
 
 # Docker Configuration Contained
 
 - HTTPD - 2.4.54 (Using Reverse Proxy)
 - PHP8 - 8.1.0 (FPM)
 
--------------
 
 # About
 
-This branch set up the environment to run HTTPD (apache2) as Webserver with reverse proxy to contact PHP applications 
-in the INTERNAL WEBSERVER folder path /var/www/webserver that are been placed in the INTERNAL LAN (RESTRICT ACCESS) trough 
-PROXY SERVER.
+This branch set up the environment to run HTTPD (apache2) as Webserver with reverse proxy to contact PHP applications
+in the INTERNAL WEBSERVER folder path /var/www/webserver that are been placed in the INTERNAL LAN (RESTRICT ACCESS) 
+trough PROXY SERVER.
 
 Below can see the diagram that explain with more details this environment:
 
-![img.png](httpd_php8_reverse_proxy/files/midias/HTTPD_PHP8_REVERSE_PROXY.png)
+![img.png](httpd_php8_reverse_proxy/files/media/HTTPD_PHP8_REVERSE_PROXY.png)
 
--------------
 
 # Httpd Configurations
 
@@ -36,11 +32,11 @@ Below can see the diagram that explain with more details this environment:
 
 - Server Details
 <pre>
-ServerRoot "/usr/local/apache2"
-Listen 80
+    ServerRoot "/usr/local/apache2"
+    Listen 80
 
-DocumentRoot "/usr/local/apache2/htdocs"
-&lt;Directory "/usr/local/apache2/htdocs"&gt;
+    DocumentRoot "/usr/local/apache2/htdocs"
+    <\Directory "/usr/local/apache2/htdocs\>
 </pre>
 
 - Proxy Modules Required
@@ -64,12 +60,10 @@ Group www-data
 Include /usr/local/apache2/conf/proxy.conf
 </pre>
 
--------------
 
-# How to use
+# Usage
 
 - Firstly check/set the all files below:
-
 <pre>
 httpd_php8_reverse_proxy/.env
 httpd_php8_reverse_proxy/docker-compose.yml
@@ -86,57 +80,53 @@ httpd_php8_reverse_proxy/webserver/webserver.sh
 
 - Run the docker-compose command to build a project:
 <pre>
-docker-compose up --build
+user@host:/home/user$ git clone https://github.com/huntercodexs/docker-series.git .
+user@host:/home/user$ cd docker-series
+user@host:/home/user/docker-series$ git checkout httpd_php8_reverse_proxy
+user@host:/home/user/docker-series$ cd httpd_php8_reverse_proxy
+user@host:/home/user/docker-series/httpd_php8_reverse_proxy$ docker network create httpd_php8_reverse_proxy_open_network
+user@host:/home/user/docker-series/httpd_php8_reverse_proxy$ docker-compose up --build (in first time)
+user@host:/home/user/docker-series/httpd_php8_reverse_proxy$ [Ctrl+C]
+user@host:/home/user/docker-series/httpd_php8_reverse_proxy$ docker-compose start (in the next times)
+user@host:/home/user/docker-series/httpd_php8_reverse_proxy$ docker-compose ps (check the containers status)
 </pre>
 
 - Access the sample application to test this environment:
 <pre>
-http://{WEBSERVER_IP}:38081/erp/default/sales/
-http://{WEBSERVER_IP}:38081/erp/input/supplies/
+http://localhost:38081/erp/default/sales/
+http://localhost:38081/erp/input/supplies/
 </pre>
 
-------------
 
-# Problem Fix
+# Fix Problem
 
-If occurs any problem during build services or up services, try to fix the problem using a 
+If occurs any problem during build services or up services, try to fix the problem using a
 script refers to proxy or webserver container, as below:
 
 > Proxy Container
 
 - Access the proxy
 <pre>
-docker exec -it proxy /bin/bash
+user@host:/home/user/docker-series/httpd_php8_reverse_proxy$ docker exec -it proxy /bin/bash
 </pre>
 
 - Access the home folder path and get configuration files from httpd apache2
-<pre>
-cd /home/proxy
-./proxy.sh --get
-</pre>
-
 - After fix the configuration files from httpd, edit it and so apply the changes
 <pre>
-./proxy.sh --apply
+root@host# /home/proxy/proxy.sh
 </pre>
 
 > Webserver Container
 
 - Access the webserver
 <pre>
-docker exec -it webserver /bin/bash
+user@host:/home/user/docker-series/httpd_php8_reverse_proxy$ docker exec -it webserver /bin/bash
 </pre>
 
 - Access the home folder path and get configuration files from httpd apache2
-<pre>
-cd /home/webserver
-./webserver.sh --get
-</pre>
-
 - After fix the configuration files from httpd, edit it and so apply the changes
 <pre>
-./webserver.sh --apply
+root@host# /home/webserver/webserver.sh
 </pre>
 
--------------
 

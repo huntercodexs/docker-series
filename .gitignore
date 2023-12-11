@@ -1,13 +1,16 @@
-trash
-*-tar
-*.jar
+## GENERAL FILE EXTENSIONS
+*.exe
 *.deb
-*.exec
-*.run
-.idea
-nodes
-/httpd_php8_separated/webserver/conf/extra
-/httpd_php8_separated/webserver/conf/original
-/httpd_php8_separated/webserver/conf/magic
-/httpd_php8_separated/webserver/conf/mime.types
-/httpd_php8_separated/webserver/htdocs
+*.jar
+*.dll
+*.so
+*.fdb
+*.log
+*.wt
+*.pem
+*.ppk
+*.key
+
+## GENERAL DIR
+.idea/
+/trash/
