@@ -243,11 +243,11 @@ RUN cd /opt/postgres
 
 RUN apt install -y postgresql postgresql-contrib
 
-RUN wget https://archlinux.org/packages/extra-staging/x86_64/php-legacy-pgsql/download -O php-pgsql-8.1.pkg.tar.zst
-RUN tar -I zstd -xvf php-pgsql-8.1.pkg.tar.zst
+RUN wget https://archlinux.org/packages/extra/x86_64/php-legacy-pgsql/download -O php-legacy-pgsql-8.1.26-1-x86_64.pkg.tar.zst
+RUN tar -I zstd -xvf php-legacy-pgsql-8.1.26-1-x86_64.pkg.tar.zst
 RUN cp usr/lib/php-legacy/modules/pgsql.so $DIR_PHP_EXTENSIONS/
 RUN cp usr/lib/php-legacy/modules/pdo_pgsql.so $DIR_PHP_EXTENSIONS/
-RUN mv php-pgsql-8.1.pkg.tar.zst usr /opt/postgres/
+RUN mv php-legacy-pgsql-8.1.26-1-x86_64.pkg.tar.zst usr /opt/postgres/
 
 RUN printf ";priority=40\nextension=pgsql\n" > $DIR_PHP_INI_FILES/pgsql.ini
 RUN printf ";priority=50\nextension=pdo_pgsql\n" > $DIR_PHP_INI_FILES/pdo_pgsql.ini

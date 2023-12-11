@@ -2,109 +2,36 @@ version: "3.7"
 services:
     
     #----------------------------------------------------------------------------------------
-    webserver-7.4.0:
+    webserver:
         env_file: .env
         image: httpd:2.4.54
-        container_name: webserver-7.4.0
+        container_name: webserver
         ports:
             - ${WEBSERVER740_PORT1}:80
-            - ${WEBSERVER740_PORT2}:443
+            - ${WEBSERVER800_PORT1}:81
+            - ${WEBSERVER810_PORT1}:82
+            - ${WEBSERVER822_PORT1}:83
+            - ${WEBSERVER8213_PORT1}:84
         privileged: true
         volumes:
             - ./applications/:/var/www/webserver/
-            - ./webserver/7.4.0/conf/:/home/webserver/conf/
-            - ./webserver/7.4.0/shared/:/home/webserver/shared/
+            - ./webserver/conf/:/home/webserver/conf/
+            - ./webserver/shared/:/home/webserver/shared/
         tty: true
         depends_on:
             - php-7.4.0
+            - php-8.0.0
+            - php-8.1.0
+            - php-8.2.2
+            - php-8.2.13
         links:
             - php-7.4.0
-        networks:
-            - webserver_network
-        #command: "/home/webserver/conf/webserver.sh"
-    #----------------------------------------------------------------------------------------
-    webserver-8.0.0:
-        env_file: .env
-        image: httpd:2.4.54
-        container_name: webserver-8.0.0
-        ports:
-            - ${WEBSERVER800_PORT1}:80
-            - ${WEBSERVER800_PORT2}:443
-        privileged: true
-        volumes:
-            - ./applications/:/var/www/webserver/
-            - ./webserver/8.0.0/conf/:/home/webserver/conf/
-            - ./webserver/8.0.0/shared/:/home/webserver/shared/
-        tty: true
-        depends_on:
             - php-8.0.0
-        links:
-            - php-8.0.0
-        networks:
-            - webserver_network
-        #command: "/home/webserver/conf/webserver.sh"
-    #----------------------------------------------------------------------------------------
-    webserver-8.1.0:
-        env_file: .env
-        image: httpd:2.4.54
-        container_name: webserver-8.1.0
-        ports:
-            - ${WEBSERVER810_PORT1}:80
-            - ${WEBSERVER810_PORT2}:443
-        privileged: true
-        volumes:
-            - ./applications/:/var/www/webserver/
-            - ./webserver/8.1.0/conf/:/home/webserver/conf/
-            - ./webserver/8.1.0/shared/:/home/webserver/shared/
-        tty: true
-        depends_on:
             - php-8.1.0
-        links:
-            - php-8.1.0
-        networks:
-            - webserver_network
-        #command: "/home/webserver/conf/webserver.sh"
-    #----------------------------------------------------------------------------------------
-    webserver-8.2.2:
-        env_file: .env
-        image: httpd:2.4.54
-        container_name: webserver-8.2.2
-        ports:
-            - ${WEBSERVER822_PORT1}:80
-            - ${WEBSERVER822_PORT2}:443
-        privileged: true
-        volumes:
-            - ./applications/:/var/www/webserver/
-            - ./webserver/8.2.2/conf/:/home/webserver/conf/
-            - ./webserver/8.2.2/shared/:/home/webserver/shared/
-        tty: true
-        depends_on:
             - php-8.2.2
-        links:
-            - php-8.2.2
-        networks:
-            - webserver_network
-        #command: "/home/webserver/conf/webserver.sh"
-    #----------------------------------------------------------------------------------------
-    webserver-8.2.13:
-        env_file: .env
-        image: httpd:2.4.54
-        container_name: webserver-8.2.13
-        ports:
-            - ${WEBSERVER8213_PORT1}:80
-            - ${WEBSERVER8213_PORT2}:443
-        privileged: true
-        volumes:
-            - ./applications/:/var/www/webserver/
-            - ./webserver/8.2.13/conf/:/home/webserver/conf/
-            - ./webserver/8.2.13/shared/:/home/webserver/shared/
-        tty: true
-        depends_on:
-            - php-8.2.13
-        links:
             - php-8.2.13
         networks:
-            - webserver_network
+            - httpd_php8_databases_separated_network
         #command: "/home/webserver/conf/webserver.sh"
     #----------------------------------------------------------------------------------------
     php-7.4.0:
@@ -120,7 +47,7 @@ services:
             - ./php/7.4.0/conf/:/home/php/conf/
             - ./php/7.4.0/shared/:/home/php/shared/
         networks:
-            - webserver_network
+            - httpd_php8_databases_separated_network
         #command: "/home/php/conf/custom.sh"
     #----------------------------------------------------------------------------------------
     php-8.0.0:
@@ -136,7 +63,7 @@ services:
             - ./php/8.0.0/conf/:/home/php/conf/
             - ./php/8.0.0/shared/:/home/php/shared/
         networks:
-            - webserver_network
+            - httpd_php8_databases_separated_network
         #command: "/home/php/conf/custom.sh"
     #----------------------------------------------------------------------------------------
     php-8.1.0:
@@ -152,7 +79,7 @@ services:
             - ./php/8.1.0/conf/:/home/php/conf/
             - ./php/8.1.0/shared/:/home/php/shared/
         networks:
-            - webserver_network
+            - httpd_php8_databases_separated_network
         #command: "/home/php/conf/custom.sh"
     #----------------------------------------------------------------------------------------
     php-8.2.2:
@@ -168,7 +95,7 @@ services:
             - ./php/8.2.2/conf/:/home/php/conf/
             - ./php/8.2.2/shared/:/home/php/shared/
         networks:
-            - webserver_network
+            - httpd_php8_databases_separated_network
         #command: "/home/php/conf/custom.sh"
     #----------------------------------------------------------------------------------------
     php-8.2.13:
@@ -184,7 +111,7 @@ services:
             - ./php/8.2.13/conf/:/home/php/conf/
             - ./php/8.2.13/shared/:/home/php/shared/
         networks:
-            - webserver_network
+            - httpd_php8_databases_separated_network
         #command: "/home/php/conf/custom.sh"
     #----------------------------------------------------------------------------------------
     oraclelinux:
@@ -205,7 +132,7 @@ services:
         tty: true
         networks:
             - default
-            - webserver_network
+            - httpd_php8_databases_separated_network
     #----------------------------------------------------------------------------------------
     mongo:
         env_file: .env
@@ -228,7 +155,7 @@ services:
         tty: true
         networks:
             - default
-            - webserver_network
+            - httpd_php8_databases_separated_network
     #----------------------------------------------------------------------------------------
     mongo-express:
         env_file: .env
@@ -251,7 +178,7 @@ services:
             - mongo
         networks:
             - default
-            - webserver_network
+            - httpd_php8_databases_separated_network
     #-----------------------------------------------------------------------------------------
     postgres:
         env_file: .env
@@ -272,7 +199,7 @@ services:
         tty: true
         networks:
             - default
-            - webserver_network
+            - httpd_php8_databases_separated_network
     #----------------------------------------------------------------------------------------
     mssql:
         env_file: .env
@@ -298,7 +225,7 @@ services:
         tty: true
         networks:
             - default
-            - webserver_network
+            - httpd_php8_databases_separated_network
     #----------------------------------------------------------------------------------------
     mssql-tools:
         env_file: .env
@@ -309,7 +236,7 @@ services:
         tty: true
         networks:
             - default
-            - webserver_network
+            - httpd_php8_databases_separated_network
     #----------------------------------------------------------------------------------------
     mysql-80:
         env_file: .env
@@ -326,7 +253,7 @@ services:
             MYSQL_ROOT_PASSWORD: ${MYSQL80_ROOT_PASSWORD}
         networks:
             - default
-            - webserver_network
+            - httpd_php8_databases_separated_network
     #----------------------------------------------------------------------------------------
     mysql-57:
         env_file: .env
@@ -343,7 +270,7 @@ services:
             MYSQL_ROOT_PASSWORD: ${MYSQL57_ROOT_PASSWORD}
         networks:
             - default
-            - webserver_network
+            - httpd_php8_databases_separated_network
     #----------------------------------------------------------------------------------------
     # NOTE: The sqlite don't can used remotely, so it is used inside php8 container
     sqlite3:
@@ -367,7 +294,7 @@ services:
         tty: true
         networks:
             - default
-            - webserver_network
+            - httpd_php8_databases_separated_network
     #----------------------------------------------------------------------------------------
     redis:
         env_file: .env
@@ -389,7 +316,7 @@ services:
         tty: true
         networks:
             - default
-            - webserver_network
+            - httpd_php8_databases_separated_network
     #-----------------------------------------------------------------------------------------
     firebird:
         env_file: .env
@@ -416,9 +343,9 @@ services:
         tty: true
         networks:
             - default
-            - webserver_network
+            - httpd_php8_databases_separated_network
     #----------------------------------------------------------------------------------------
 
 networks:
-    webserver_network:
+    httpd_php8_databases_separated_network:
         external: true

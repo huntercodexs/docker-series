@@ -195,7 +195,7 @@ user@host:/home/user$ git clone https://github.com/huntercodexs/docker-series.gi
 user@host:/home/user$ cd docker-series
 user@host:/home/user/docker-series$ git checkout httpd_php8_databases_separated
 user@host:/home/user/docker-series$ cd httpd_php8_databases_separated
-user@host:/home/user/docker-series/httpd_php8_databases_separated$ docker network create webserver_network
+user@host:/home/user/docker-series/httpd_php8_databases_separated$ docker network create httpd_php8_databases_separated_network
 user@host:/home/user/docker-series/httpd_php8_databases_separated$ docker-compose up --build (in first time)
 user@host:/home/user/docker-series/httpd_php8_databases_separated$ [Ctrl+C]
 user@host:/home/user/docker-series/httpd_php8_databases_separated$ docker-compose start (in the next times)
@@ -320,7 +320,16 @@ user@host:/home/user/docker-series$ cd httpd_php8_databases_separated
 </pre>
 
 5- Check and set up the .env file, .ini PHP files and all files contained in the path php/{PHP-VERSION}/conf, and also 
-check or set up the configurations for each database contained in the databases folder path 
+check or set up the configurations for each database contained in the databases folder path. Finally,check and configure 
+the httpd.conf file with the correct ports
+<pre>
+#Listen 12.34.56.78:80
+Listen 80
+Listen 81
+Listen 82
+Listen 83
+Listen 84
+</pre>
 
 6- Build the containers
 
@@ -328,7 +337,7 @@ check or set up the configurations for each database contained in the databases 
 > don't know what must be used, use 0x777
 
 <pre>    
-user@host:/home/user/docker-series/httpd_php8_databases_separated$ docker network create webserver_network
+user@host:/home/user/docker-series/httpd_php8_databases_separated$ docker network create httpd_php8_databases_separated_network
 user@host:/home/user/docker-series/httpd_php8_databases_separated$ docker-compose up --build
 </pre>
 
