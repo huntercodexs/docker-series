@@ -1,8 +1,11 @@
 # HTTPD + PHP8 (USING DEDICATED CONTAINER)
-Using PHP together Apache2 Server
+Using PHP together Apache2 Server - OFFLINE DRIVERS
 
-![banner.png](httpd_php8_separated/files/media/banner.png)
+![banner.png](httpd_php8_separated-offline-drivers/files/media/banner.png)
 
+
+![unavailable.png](httpd_php8_separated-offline-drivers/files/media/unavailable.png)
+***DEPRECATED***
 
 # Information
 
@@ -16,23 +19,23 @@ a complete environment to development using HTTPD(Apache2) + PHP8.
 
 > IMPORTANT: This repository have a lot of files that has been downloaded from the responsible sources, compiled and
 > tested in the environments contained in this repository. You can see these files in the folder
-> httpd_php8_separated/php/{PHP-VERSION}/conf/extensions/php-{PHP-VERSION}-compiled-extensions.zip
+> httpd_php8_separated-offline-drivers/php/{PHP-VERSION}/conf/extensions/php-{PHP-VERSION}-compiled-extensions.zip
 > witch will be copied to inside PHP container, unzipped and applied in the container targeted.
 
 > Give a look in the section #References to get more details (don't mess the workdir called extensions)
 
 # Docker Containers Databases
 
-> ![img.png](./httpd_php8_separated/files/media/check-green.png) Available
-> ![img.png](./httpd_php8_separated/files/media/check-silver.png) Pending
-> ![img.png](./httpd_php8_separated/files/media/unavailable.png) Unavailable
+> ![img.png](./httpd_php8_separated-offline-drivers/files/media/check-green.png) Available
+> ![img.png](./httpd_php8_separated-offline-drivers/files/media/check-silver.png) Pending
+> ![img.png](./httpd_php8_separated-offline-drivers/files/media/unavailable.png) Unavailable
 
-- HTTPD - APACHE2 ![img.png](./httpd_php8_separated/files/media/check-green.png)
-- PHP-7.4.0-FPM ![img.png](./httpd_php8_separated/files/media/check-green.png)
-- PHP-8.0.0-FPM ![img.png](./httpd_php8_separated/files/media/check-green.png)
-- PHP-8.1.0-FPM ![img.png](./httpd_php8_separated/files/media/check-green.png)
-- PHP-8.2.2-FPM ![img.png](./httpd_php8_separated/files/media/check-green.png)
-- PHP-8.2.13-FPM ![img.png](./httpd_php8_separated/files/media/check-green.png)
+- HTTPD - APACHE2 ![img.png](./httpd_php8_separated-offline-drivers/files/media/check-green.png)
+- PHP-7.4.0-FPM ![img.png](./httpd_php8_separated-offline-drivers/files/media/check-green.png)
+- PHP-8.0.0-FPM ![img.png](./httpd_php8_separated-offline-drivers/files/media/check-green.png)
+- PHP-8.1.0-FPM ![img.png](./httpd_php8_separated-offline-drivers/files/media/check-green.png)
+- PHP-8.2.2-FPM ![img.png](./httpd_php8_separated-offline-drivers/files/media/check-green.png)
+- PHP-8.2.13-FPM ![img.png](./httpd_php8_separated-offline-drivers/files/media/check-green.png)
 
 
 # About PHP8
@@ -47,7 +50,7 @@ process, by example DIR_PHP_INI or DIR_WEBSERVER
 Configuration file to PHP server shared between HOST and Container
 
 <pre>
-./httpd_php8_separated/php8/shared/ini/php/php.ini
+./httpd_php8_separated-offline-drivers/php8/shared/ini/php/php.ini
 /usr/local/etc/php/conf.d/
 </pre>
 
@@ -68,7 +71,7 @@ docker exec -it webserver /bin/bash
 /home/apache2/webserver.sh prepare
 </pre>
 
-Before run the previous step, please edit the files in /httpd_php8_separated/webserver/conf/ in this project
+Before run the previous step, please edit the files in /httpd_php8_separated-offline-drivers/webserver/conf/ in this project
 path [conf|htdocs], these files are responsible to configure the webserver HTTP.
 
 <pre>
@@ -88,13 +91,13 @@ After the first step (see above) execute again the script "webserver.sh" but pas
 <pre>
 user@host:/home/user$ git clone https://github.com/huntercodexs/docker-series.git .
 user@host:/home/user$ cd docker-series
-user@host:/home/user/docker-series$ git checkout httpd_php8_separated
-user@host:/home/user/docker-series$ cd httpd_php8_separated
-user@host:/home/user/docker-series/httpd_php8_separated$ docker network create httpd_php8_separated_network
-user@host:/home/user/docker-series/httpd_php8_separated$ docker-compose up --build (in first time)
-user@host:/home/user/docker-series/httpd_php8_separated$ [Ctrl+C]
-user@host:/home/user/docker-series/httpd_php8_separated$ docker-compose start (in the next times)
-user@host:/home/user/docker-series/httpd_php8_separated$ docker-compose ps (check the containers status)
+user@host:/home/user/docker-series$ git checkout httpd_php8_separated-offline-drivers
+user@host:/home/user/docker-series$ cd httpd_php8_separated-offline-drivers
+user@host:/home/user/docker-series/httpd_php8_separated-offline-drivers$ docker network create httpd_php8_separated-offline-drivers_network
+user@host:/home/user/docker-series/httpd_php8_separated-offline-drivers$ docker-compose up --build (in first time)
+user@host:/home/user/docker-series/httpd_php8_separated-offline-drivers$ [Ctrl+C]
+user@host:/home/user/docker-series/httpd_php8_separated-offline-drivers$ docker-compose start (in the next times)
+user@host:/home/user/docker-series/httpd_php8_separated-offline-drivers$ docker-compose ps (check the containers status)
 </pre>
 
 
@@ -112,12 +115,12 @@ user@host:/home/user$ cd docker-series
 
 3- Change the current branch
 <pre>
-user@host:/home/user/docker-series$ git checkout httpd_php8_separated
+user@host:/home/user/docker-series$ git checkout httpd_php8_separated-offline-drivers
 </pre>
 
-4- Access the httpd_php8_separated folder
+4- Access the httpd_php8_separated-offline-drivers folder
 <pre>
-user@host:/home/user/docker-series$ cd httpd_php8_separated
+user@host:/home/user/docker-series$ cd httpd_php8_separated-offline-drivers
 </pre>
 
 5- Check and set up the .env file, .ini PHP files and all files contained in the path php/{PHP-VERSION}/conf, also 
@@ -137,13 +140,13 @@ Listen 84
 > don't know what must be used, use 0x777
 
 <pre>    
-user@host:/home/user/docker-series/httpd_php8_separated$ docker network create httpd_php8_separated_network
-user@host:/home/user/docker-series/httpd_php8_separated$ docker-compose up --build
+user@host:/home/user/docker-series/httpd_php8_separated-offline-drivers$ docker network create httpd_php8_separated-offline-drivers_network
+user@host:/home/user/docker-series/httpd_php8_separated-offline-drivers$ docker-compose up --build
 </pre>
 
 Make sure that the result look like this
 <pre>
-user@host:/home/user/docker-series/httpd_php8_separated$ docker-compose ps
+user@host:/home/user/docker-series/httpd_php8_separated-offline-drivers$ docker-compose ps
      Name                    Command                  State                                             Ports                                       
 ----------------------------------------------------------------------------------------------------------------------------------------------------
 php-7.4.0         docker-php-entrypoint php-fpm    Up             0.0.0.0:9000->9000/tcp,:::9000->9000/tcp                                          
@@ -156,14 +159,14 @@ webserver-8.1.0   httpd-foreground                 Up             0.0.0.0:42443-
 webserver-8.2.2   httpd-foreground                 Up             0.0.0.0:43443->443/tcp,:::43443->443/tcp, 0.0.0.0:33822->80/tcp,:::33822->80/tcp
 </pre>
 
-7- Edit the webserver file settings in the path httpd_php8_separated/webserver/{PHP-VERSION}/conf
+7- Edit the webserver file settings in the path httpd_php8_separated-offline-drivers/webserver/{PHP-VERSION}/conf
 
 > NOTE: See all the file in this folder to more details
 
 <pre>
-user@host:/home/user/docker-series/httpd_php8_separated/webserver/{PHP-VERSION}/conf$ httpd.conf
-user@host:/home/user/docker-series/httpd_php8_separated/webserver/{PHP-VERSION}/conf$ webserver.conf
-user@host:/home/user/docker-series/httpd_php8_separated/webserver/{PHP-VERSION}/conf/htdocs$ index.html
+user@host:/home/user/docker-series/httpd_php8_separated-offline-drivers/webserver/{PHP-VERSION}/conf$ httpd.conf
+user@host:/home/user/docker-series/httpd_php8_separated-offline-drivers/webserver/{PHP-VERSION}/conf$ webserver.conf
+user@host:/home/user/docker-series/httpd_php8_separated-offline-drivers/webserver/{PHP-VERSION}/conf/htdocs$ index.html
 </pre>
 
 8- Restart the webserver targeted
@@ -171,7 +174,7 @@ user@host:/home/user/docker-series/httpd_php8_separated/webserver/{PHP-VERSION}/
 > NOTE: Whether you need, change this script
 
 <pre>
-user@host:/home/user/docker-series/httpd_php8_separated$ docker exec -it webserver-{PHP-VERSION} /bin/bash
+user@host:/home/user/docker-series/httpd_php8_separated-offline-drivers$ docker exec -it webserver-{PHP-VERSION} /bin/bash
 root@9fdf75782c1e:/usr/local/apache2# /home/webserver/conf/webserver-apply-changes-and-restart.sh
 </pre>
 
