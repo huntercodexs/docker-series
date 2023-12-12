@@ -15,7 +15,7 @@ services:
               target: /usr/share/elasticsearch/config/elasticsearch.yml
               read_only: true
             - type: bind
-              source: elasticsearch
+              source: ./elasticsearch/data
               target: /usr/share/elasticsearch/data
               read_only: false
         environment:
@@ -32,7 +32,7 @@ services:
                 hard: -1
         networks:
             default:
-            open_network:
+            elk_zipkin_v1_open_network:
     #----------------------------------------------------------------------------------------
     kibana:
         env_file: .env
@@ -55,7 +55,7 @@ services:
             - elasticsearch
         networks:
             default:
-            open_network:
+            elk_zipkin_v1_open_network:
     #----------------------------------------------------------------------------------------
     logstash:
         env_file: .env
@@ -84,7 +84,7 @@ services:
             - elasticsearch
         networks:
             default:
-            open_network:
+            elk_zipkin_v1_open_network:
     #----------------------------------------------------------------------------------------
     zipkin:
         env_file: .env
@@ -109,12 +109,12 @@ services:
             - elasticsearch
         networks:
             default:
-            open_network:
+            elk_zipkin_v1_open_network:
     #----------------------------------------------------------------------------------------
 
 networks:
-    open_network:
+    elk_zipkin_v1_open_network:
         external: true
 
 volumes:
-    elastcsearch:
+    elasticsearch:

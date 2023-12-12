@@ -1,14 +1,19 @@
-trash
-*-tar
-*.jar
+## GENERAL FILE EXTENSIONS
+*.exe
 *.deb
-*.exec
-*.run
-.idea
-nodes
-/docker-elk/
-/elkstack792/
-micro-services
-**/containers/mysql-57/**
-**/containers/mysql-80/**
-**/containers/ubuntu-1804/micro-services/**
+*.jar
+*.dll
+*.so
+*.fdb
+*.log
+*.wt
+*.pem
+*.ppk
+*.key
+
+## GENERAL DIR
+.idea/
+/trash/
+
+## ELASTIC SEARCH
+/elk_zipkin_v1/elasticsearch/data/nodes/**
