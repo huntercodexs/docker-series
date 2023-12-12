@@ -74,28 +74,52 @@ user@host:/home/user/docker-series/elk_zipkin_v1$ docker-compose up --build
 Make sure that the result look like this
 <pre>
 user@host:/home/user/docker-series/elk_zipkin_v1$ docker-compose ps
-     Name                    Command                  State                                             Ports                                       
-----------------------------------------------------------------------------------------------------------------------------------------------------
+    Name                   Command                   State                                                                                                             Ports                                                                                                      
+----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+elasticsearch   /tini -- /usr/local/bin/do ...   Up               0.0.0.0:9200->9200/tcp,:::9200->9200/tcp, 0.0.0.0:9300->9300/tcp,:::9300->9300/tcp                                                                                                                              
+kibana          /usr/local/bin/dumb-init - ...   Up               0.0.0.0:5601->5601/tcp,:::5601->5601/tcp                                                                                                                                                                        
+logstash        /usr/local/bin/docker-entr ...   Up               0.0.0.0:5000->5000/tcp,:::5000->5000/tcp, 0.0.0.0:5000->5000/udp,:::5000->5000/udp, 0.0.0.0:5044->5044/tcp,:::5044->5044/tcp, 0.0.0.0:8080->8080/tcp,:::8080->8080/tcp, 0.0.0.0:9600->9600/tcp,:::9600->9600/tcp
+zipkin          start-zipkin                     Up (unhealthy)   9410/tcp, 0.0.0.0:9411->9411/tcp,:::9411->9411/tcp
 </pre>
 
 7- Test the containers
 
 Elasticsearch
-<pre>http://localhost:9200/</pre>
+<pre>
+http://localhost:9200/
+ELASTIC_USERNAME
+ELASTIC_PASSWORD
+</pre>
 
 Kibana
-<pre>http://localhost:5601/app/home#/</pre>
-<pre>http://localhost:5601/app/dev_tools#/console</pre>
+<pre>
+http://localhost:5601/app/home#/
+http://localhost:5601/app/dev_tools#/console
+ELASTIC_USERNAME
+ELASTIC_PASSWORD
+</pre>
 
 Logstash
-<pre>http://localhost:8080</pre>
+<pre>
+http://localhost:8080
+</pre>
 
 Zipkin
-<pre>http://localhost:9411</pre>
+<pre>
+http://localhost:9411
+</pre>
 
 
 # Helper and References
 
 1. Access zipkin container
 
-> docker exec -it ${CONTAINER-ID} sh
+<pre>
+user@host:/home/user/docker-series/elk_zipkin_v1$ docker exec -it zipkin sh
+</pre>
+
+
+# Sample Usage (Java Project)
+
+Use the follow repository https://github.com/huntercodexs/zipkin-tracing-demo to create tests
+
