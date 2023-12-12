@@ -36,7 +36,7 @@ services:
             - php-8.2.13
         networks:
             - default
-            - nginx_php8_network
+            - nginx_php8-offline-drivers_network
     #----------------------------------------------------------------------------------------
     php-7.4.0:
         env_file: .env
@@ -51,7 +51,7 @@ services:
             - ./php/7.4.0/shared/:/home/php/shared/
             - ./applications/php-7.4.0/:/var/www/webserver/applications/php-7.4.0/
         networks:
-            - nginx_php8_network
+            - nginx_php8-offline-drivers_network
         #command: "/home/php/conf/custom.sh"
     #----------------------------------------------------------------------------------------
     php-8.0.0:
@@ -67,7 +67,7 @@ services:
             - ./php/8.0.0/shared/:/home/php/shared/
             - ./applications/php-8.0.0/:/var/www/webserver/applications/php-8.0.0/
         networks:
-            - nginx_php8_network
+            - nginx_php8-offline-drivers_network
         #command: "/home/php/conf/custom.sh"
     #----------------------------------------------------------------------------------------
     php-8.1.0:
@@ -83,7 +83,7 @@ services:
             - ./php/8.1.0/shared/:/home/php/shared/
             - ./applications/php-8.1.0/:/var/www/webserver/applications/php-8.1.0/
         networks:
-            - nginx_php8_network
+            - nginx_php8-offline-drivers_network
         #command: "/home/php/conf/custom.sh"
     #----------------------------------------------------------------------------------------
     php-8.2.2:
@@ -99,7 +99,7 @@ services:
             - ./php/8.2.2/shared/:/home/php/shared/
             - ./applications/php-8.2.2/:/var/www/webserver/applications/php-8.2.2/
         networks:
-            - nginx_php8_network
+            - nginx_php8-offline-drivers_network
         #command: "/home/php/conf/custom.sh"
     #----------------------------------------------------------------------------------------
     php-8.2.13:
@@ -115,11 +115,11 @@ services:
             - ./php/8.2.13/shared/:/home/php/shared/
             - ./applications/php-8.2.13/:/var/www/webserver/applications/php-8.2.13/
         networks:
-            - nginx_php8_network
+            - nginx_php8-offline-drivers_network
         #command: "/home/php/conf/custom.sh"
     #----------------------------------------------------------------------------------------
 
 networks:
-    nginx_php8_network:
+    nginx_php8-offline-drivers_network:
         external: true
         
