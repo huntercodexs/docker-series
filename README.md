@@ -22,7 +22,6 @@ Please use the branch selection to access others configurations for your need an
 - Zipkin
 
 
-
 # Usage
 
 <pre>
@@ -99,6 +98,21 @@ ELASTIC_USERNAME
 ELASTIC_PASSWORD
 </pre>
 
+Example
+![kibana-dashboard-dev-tools-example.png](elk_zipkin_v1/files/media/kibana-dashboard-dev-tools-example.png)
+
+Queries
+<pre>
+GET tcp-logstash-docker-elk-zipkin-v1/_search
+GET http-logstash-docker-elk-zipkin-v1/_search
+GET postman-tests-elk-zipkin-v1/_search
+</pre>
+
+Indexes
+<pre>
+elk_zipkin_v1/logstash/pipeline/pipelineio.conf
+</pre>
+
 Logstash
 <pre>
 http://localhost:8080
@@ -112,10 +126,18 @@ http://localhost:9411
 
 # Helper and References
 
-1. Access zipkin container
-
+Access zipkin container
 <pre>
 user@host:/home/user/docker-series/elk_zipkin_v1$ docker exec -it zipkin sh
+</pre>
+
+Make a query in the Kibana Dashboard
+<pre>
+GET tcp-logstash-docker-elk-zipkin-v1/_search
+
+GET http-logstash-docker-elk-zipkin-v1/_search
+
+GET postman-tests-elk-zipkin-v1/_search
 </pre>
 
 
