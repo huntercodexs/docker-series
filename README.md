@@ -1,14 +1,31 @@
 # NGINX + PHP8 + MYSQL5 + MYSQL8
-A quick and single repository to build an environment for PHP with NGINX
+A quick and single repository to build an environment for PHP with NGINX - OFFLINE DRIVERS
 
-![banner.png](nginx_php8_mysql/files/medias/banner.png)
+![banner.png](nginx_php8_mysql-offline-drivers/files/medias/banner.png)
 
 
 # Information
 
-Please use the branch selector to access others environment configurations
+> IMPORTANT NOTE: This project branch is an improving of the branch nginx_php8_mysql-offline-drivers-offline-drivers, but in this case
+> all drivers installed in the PHP containers are made directly from the own container (folder) configuration, that
+> those are placed in the path php/{PHP-VERSION}/conf/extensions/php-{PHP-VERSION}-compiled-extensions.zip, where all
+> of these drivers was compiled and tested in the specific PHP-VERSION in the another time. If you need to check these
+> drivers files just do the command tar -xfv {file} and you will see all the files compiled .so type. For more details
+> you may give a look in the files php/{PHP-VERSION}/php-{PHP-VERSION}.dockerfile specifically in the section like
+> showed below
+> showed below
 
-The PHP available in this branch are:
+Example
+
+<pre>
+COPY ./conf/extensions/php-7.4.0-compiled-extensions.zip $DIR_PHP_EXTENSIONS/
+RUN unzip -o $DIR_PHP_EXTENSIONS/php-7.4.0-compiled-extensions.zip -d $DIR_PHP_EXTENSIONS
+</pre>
+
+> Please use the branch selector to access others environment configurations
+
+
+# PHP Version Available
 
 - PHP-7.4.0
 - PHP-8.0.0
@@ -24,13 +41,13 @@ The PHP available in this branch are:
 <pre>
 user@host:/home/user$ git clone https://github.com/huntercodexs/docker-series.git .
 user@host:/home/user$ cd docker-series
-user@host:/home/user/docker-series$ git checkout nginx_php8_mysql
-user@host:/home/user/docker-series$ cd nginx_php8_mysql
-user@host:/home/user/docker-series/nginx_php8_mysql$ docker network create nginx_php8_mysql_mysql_network
-user@host:/home/user/docker-series/nginx_php8_mysql$ docker-compose up --build (in first time)
-user@host:/home/user/docker-series/nginx_php8_mysql$ [Ctrl+C]
-user@host:/home/user/docker-series/nginx_php8_mysql$ docker-compose start (in the next times)
-user@host:/home/user/docker-series/nginx_php8_mysql$ docker-compose ps (check the containers status)
+user@host:/home/user/docker-series$ git checkout nginx_php8_mysql-offline-drivers
+user@host:/home/user/docker-series$ cd nginx_php8_mysql-offline-drivers
+user@host:/home/user/docker-series/nginx_php8_mysql-offline-drivers$ docker network create nginx_php8_mysql-offline-drivers_mysql_network
+user@host:/home/user/docker-series/nginx_php8_mysql-offline-drivers$ docker-compose up --build (in first time)
+user@host:/home/user/docker-series/nginx_php8_mysql-offline-drivers$ [Ctrl+C]
+user@host:/home/user/docker-series/nginx_php8_mysql-offline-drivers$ docker-compose start (in the next times)
+user@host:/home/user/docker-series/nginx_php8_mysql-offline-drivers$ docker-compose ps (check the containers status)
 </pre>
 
 - Before build and start project set the following configurations files:
@@ -58,12 +75,12 @@ user@host:/home/user$ cd docker-series
 
 3- Change the current branch
 <pre>
-user@host:/home/user/docker-series$ git checkout nginx_php8_mysql
+user@host:/home/user/docker-series$ git checkout nginx_php8_mysql-offline-drivers
 </pre>
 
-4- Access the nginx_php8_mysql folder
+4- Access the nginx_php8_mysql-offline-drivers folder
 <pre>
-user@host:/home/user/docker-series$ cd nginx_php8_mysql
+user@host:/home/user/docker-series$ cd nginx_php8_mysql-offline-drivers
 </pre>
 
 5- Check and set up the .env file, .ini PHP files and all files contained in the path php/{PHP-VERSION}/conf
@@ -71,13 +88,13 @@ user@host:/home/user/docker-series$ cd nginx_php8_mysql
 6- Build the containers
 
 <pre>    
-user@host:/home/user/docker-series/nginx_php8_mysql$ docker network create nginx_php8_mysql_network
-user@host:/home/user/docker-series/nginx_php8_mysql$ docker-compose up --build
+user@host:/home/user/docker-series/nginx_php8_mysql-offline-drivers$ docker network create nginx_php8_mysql-offline-drivers_network
+user@host:/home/user/docker-series/nginx_php8_mysql-offline-drivers$ docker-compose up --build
 </pre>
 
 Make sure that the result look like this
 <pre>
-user@host:/home/user/docker-series/nginx_php8_mysql$ docker-compose ps
+user@host:/home/user/docker-series/nginx_php8_mysql-offline-drivers$ docker-compose ps
    Name                 Command               State                          Ports                       
 ---------------------------------------------------------------------------------------------------------
 mysql57      docker-entrypoint.sh mysqld      Up      0.0.0.0:3705->3306/tcp,:::3705->3306/tcp, 33060/tcp

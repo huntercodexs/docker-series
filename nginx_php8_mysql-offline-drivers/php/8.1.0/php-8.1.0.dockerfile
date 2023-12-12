@@ -1,7 +1,7 @@
-FROM php:8.2.13-fpm
+FROM php:8.1.0-fpm
 
 ENV DIR_WEBSERVER "/var/www/webserver"
-ENV DIR_PHP_EXTENSIONS "/usr/local/lib/php/extensions/no-debug-non-zts-20220829"
+ENV DIR_PHP_EXTENSIONS "/usr/local/lib/php/extensions/no-debug-non-zts-20210902"
 ENV DIR_PHP_INI "/usr/local/etc/php"
 ENV DIR_PHP_INI_FILES "/usr/local/etc/php/conf.d"
 ENV DIR_PHP_HOME "/home/php"
@@ -102,27 +102,10 @@ RUN docker-php-ext-install pdo
 #---------------------------------------------------------------------------------------------------------
 RUN mkdir -p /opt/mysql
 
-RUN cd /opt/mysql
-
-RUN docker-php-ext-install pdo_mysql
-RUN docker-php-ext-install mysqli && docker-php-ext-enable mysqli
-#RUN phpenmod mysqli mysql pdo_mysql
-
-RUN cd -
-
 #---------------------------------------------------------------------------------------------------------
 ## REDIS
 #---------------------------------------------------------------------------------------------------------
 RUN mkdir -p /opt/redis
-
-RUN cd /opt/redis
-
-RUN pecl install redis
-RUN echo "extension=redis" > $DIR_PHP_INI_FILES/redis.ini
-RUN echo "date.timezone=America/Sao_Paulo" > $DIR_PHP_INI_FILES/timezone_sao_paulo.ini
-RUN echo "memory_limit = 1024M" > $DIR_PHP_INI_FILES/memory_limit.ini
-
-RUN cd -
 
 #---------------------------------------------------------------------------------------------------------
 ## WEBSERVER SETTINGS FINAL
@@ -134,6 +117,9 @@ RUN chown nobody:nogroup $DIR_WEBSERVER -R
 
 COPY ./conf/ini/php/php.ini $DIR_PHP_INI/php.ini
 COPY ./conf/ini/*.ini $DIR_PHP_INI_FILES/
+
+COPY ./conf/extensions/php-8.1.0-compiled-extensions.zip $DIR_PHP_EXTENSIONS/
+RUN unzip -o $DIR_PHP_EXTENSIONS/php-8.1.0-compiled-extensions.zip -d $DIR_PHP_EXTENSIONS
 
 EXPOSE 9000
 CMD ["php-fpm"]
