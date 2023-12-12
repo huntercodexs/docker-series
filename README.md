@@ -97,7 +97,7 @@ Result
 php8-apache   docker-php-entrypoint apac ...   Up      0.0.0.0:38443->443/tcp,:::38443->443/tcp, 0.0.0.0:38080->80/tcp,:::38080->80/tcp, 0.0.0.0:9000->9000/tcp,:::9000->9000/tcp
 </pre>
 
-7- Access the applications
+7- Access the applications to make a test
 <pre>
 http://localhost:38080/app1
 http://localhost:38080/app2
