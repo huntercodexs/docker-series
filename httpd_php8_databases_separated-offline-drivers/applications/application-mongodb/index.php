@@ -4,10 +4,7 @@
 # MONGODB DATABASE CONNECTION
 #################################################
 
-//require_once __DIR__ . '/php-7.4.0/vendor/autoload.php';
-//require_once __DIR__ . '/php-8.0.0/vendor/autoload.php';
-//require_once __DIR__ . '/php-8.1.0/vendor/autoload.php';
-require_once __DIR__ . '/php-8.2.2/vendor/autoload.php';
+require_once __DIR__ . '/vendor/autoload.php';
 
 use MongoDB\Client;
 use MongoDB\Driver\Manager;

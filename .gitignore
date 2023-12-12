@@ -16,6 +16,9 @@
 /trash/
 
 ## APPLICATIONS
+/httpd_php8_databases_separated-offline-drivers/applications/application-mongodb/composer.json
+/httpd_php8_databases_separated-offline-drivers/applications/application-mongodb/composer.lock
+/httpd_php8_databases_separated-offline-drivers/applications/application-mongodb/vendor/
 /httpd_php8_databases_separated-offline-drivers/applications/application-mongodb/php-7.4.0/
 /httpd_php8_databases_separated-offline-drivers/applications/application-mongodb/php-8.0.0/
 /httpd_php8_databases_separated-offline-drivers/applications/application-mongodb/php-8.1.0/
@@ -70,6 +73,7 @@
 /httpd_php8_databases_separated-offline-drivers/databases/mysql-57/lib/public_key.pem
 /httpd_php8_databases_separated-offline-drivers/databases/mysql-57/lib/server-cert.pem
 /httpd_php8_databases_separated-offline-drivers/databases/mysql-57/lib/server-key.pem
+/httpd_php8_databases_separated-offline-drivers/databases/mysql-57/lib/ibtmp1
 
 ## MYSQL-8.0
 /httpd_php8_databases_separated-offline-drivers/databases/mysql-80/lib/sys/
@@ -102,6 +106,7 @@
 /httpd_php8_databases_separated-offline-drivers/databases/mysql-80/lib/mysql.ibd
 /httpd_php8_databases_separated-offline-drivers/databases/mysql-80/lib/server-cert.pem
 /httpd_php8_databases_separated-offline-drivers/databases/mysql-80/lib/binlog.000003
+/httpd_php8_databases_separated-offline-drivers/databases/mysql-80/lib/ibtmp1
 
 ## ORACLE
 /httpd_php8_databases_separated-offline-drivers/databases/oracle/oradata/dbconfig/

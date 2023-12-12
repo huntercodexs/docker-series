@@ -1,11 +1,11 @@
-CREATE TABLE users (
-    id serial NOT NULL,
-    name VARCHAR(250) NOT NULL,
-    age INTEGER,
-    PRIMARY KEY (id)
-);
 
-INSERT INTO users (id, name, age) VALUES ('94734987', 'Amanda Barros', 33);
-INSERT INTO users (id, name, age) VALUES ('12734983', 'Marcos Silva', 34);
+CREATE TABLE `customers` (
+    `id` bigint NOT NULL AUTO_INCREMENT,
+    `age` int DEFAULT NULL,
+    `email` varchar(255) DEFAULT NULL,
+    `name` varchar(255) DEFAULT NULL,
+    PRIMARY KEY (`id`)
+) ENGINE=MyISAM DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
-SELECT * FROM users;
+INSERT INTO customers (name, email, age) VALUES ('Amanda Barros', 'amanda@email.com', 33);
+INSERT INTO customers (name, email, age) VALUES ('Marcos Silva', 'marcos@email.com', 34);

@@ -147,8 +147,7 @@ RUN mkdir -p /opt/mongodb
 
 RUN cd /opt/mongodb
 
-RUN pecl install mongodb
-RUN composer require mongodb/mongodb
+RUN composer --ignore-platform-req=ext-mongodb require mongodb/mongodb
 
 RUN mkdir -p $DIR_APP_MONGODB
 RUN chown nobody:nogroup $DIR_APP_MONGODB -R
@@ -176,6 +175,7 @@ RUN apt-get upgrade -y
 RUN ACCEPT_EULA=Y apt-get install -y msodbcsql17
 RUN ACCEPT_EULA=Y apt-get install -y mssql-tools
 RUN apt-get install -y unixodbc-dev
+RUN mv mssql-tools microsoft/
 
 RUN cd -
 

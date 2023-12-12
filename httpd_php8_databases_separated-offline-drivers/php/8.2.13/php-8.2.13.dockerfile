@@ -138,15 +138,6 @@ RUN export LD_LIBRARY_PATH
 
 RUN ldconfig
 
-RUN pecl channel-update pecl.php.net
-
-RUN docker-php-ext-configure pdo_oci --with-pdo-oci=instantclient,/opt/oracle/instantclient,19.3 \
-&& echo 'instantclient,/opt/oracle/instantclient/' | pecl install oci8 \
-&& docker-php-ext-install \
-        pdo_oci \
-&& docker-php-ext-enable \
-        oci8
-
 RUN cd -
 
 #---------------------------------------------------------------------------------------------------------
@@ -156,10 +147,7 @@ RUN mkdir -p /opt/mongodb
 
 RUN cd /opt/mongodb
 
-RUN pecl install mongodb
-RUN printf ";priority=60\nextension=mongodb\n" > $DIR_PHP_INI_FILES/mongodb.ini
-RUN pecl config-set php_ini $DIR_PHP_INI/php.ini
-RUN composer require mongodb/mongodb
+RUN composer --ignore-platform-req=ext-mongodb require mongodb/mongodb
 
 RUN mkdir -p $DIR_APP_MONGODB
 RUN chown nobody:nogroup $DIR_APP_MONGODB -R
@@ -187,10 +175,6 @@ RUN apt-get upgrade -y
 RUN ACCEPT_EULA=Y apt-get install -y msodbcsql17
 RUN ACCEPT_EULA=Y apt-get install -y mssql-tools
 RUN apt-get install -y unixodbc-dev
-RUN pecl config-set php_ini $DIR_PHP_INI/php.ini
-RUN printf "; priority=20\nextension=sqlsrv\n" > $DIR_PHP_INI_FILES/sqlsrv.ini
-RUN printf "; priority=30\nextension=pdo_sqlsrv\n" > $DIR_PHP_INI_FILES/pdo_sqlsrv.ini
-RUN echo 'export PATH="$PATH:/opt/microsoft/mssql-tools/bin"' >> ~/.bashrc
 RUN mv mssql-tools microsoft/
 
 RUN cd -
@@ -200,40 +184,15 @@ RUN cd -
 #---------------------------------------------------------------------------------------------------------
 RUN mkdir -p /opt/mysql
 
-RUN cd /opt/mysql
-
-RUN docker-php-ext-install pdo_mysql
-RUN docker-php-ext-install mysqli && docker-php-ext-enable mysqli
-#RUN phpenmod mysqli mysql pdo_mysql
-
-RUN cd -
-
 #---------------------------------------------------------------------------------------------------------
 ## REDIS
 #---------------------------------------------------------------------------------------------------------
 RUN mkdir -p /opt/redis
 
-RUN cd /opt/redis
-
-RUN pecl install redis
-RUN echo "extension=redis" > $DIR_PHP_INI_FILES/redis.ini
-RUN echo "date.timezone=America/Sao_Paulo" > $DIR_PHP_INI_FILES/timezone_sao_paulo.ini
-RUN echo "memory_limit = 1024M" > $DIR_PHP_INI_FILES/memory_limit.ini
-
-RUN cd -
-
 #---------------------------------------------------------------------------------------------------------
 ## SQLITE (LOCALHOST)
 #---------------------------------------------------------------------------------------------------------
 RUN mkdir -p /opt/sqlite
-
-RUN cd /opt/sqlite
-
-RUN apt-get install sqlite3 -y
-RUN apt-get install libsqlite3-dev -y
-RUN docker-php-ext-install pdo_sqlite
-
-RUN cd -
 
 #---------------------------------------------------------------------------------------------------------
 ## POSTGRES [IT IS NOT AVAILABLE YET]
@@ -243,16 +202,6 @@ RUN mkdir -p /opt/postgres
 RUN cd /opt/postgres
 
 RUN apt install -y postgresql postgresql-contrib
-COPY ./conf/library/postgres/php82-pgsql-8.2.13-1-x86_64.pkg.tar.zst /opt/postgres
-RUN tar -I zstd -xvf postgres/php82-pgsql-8.2.13-1-x86_64.pkg.tar.zst
-RUN cp usr/lib/php82/modules/pgsql.so $DIR_PHP_EXTENSIONS/
-RUN cp usr/lib/php82/modules/pdo_pgsql.so $DIR_PHP_EXTENSIONS/
-RUN printf ";priority=40\nextension=pgsql\n" > $DIR_PHP_INI_FILES/pgsql.ini
-RUN printf ";priority=50\nextension=pdo_pgsql\n" > $DIR_PHP_INI_FILES/pdo_pgsql.ini
-
-RUN apt update
-RUN apt-get update && apt-get upgrade
-RUN apt-get install libc6
 
 RUN cd -
 
@@ -264,10 +213,6 @@ RUN mkdir -p /opt/firebird
 RUN cd /opt/firebird
 
 RUN apt install -y firebird-dev
-RUN docker-php-ext-install pdo_firebird
-RUN docker-php-ext-configure pdo_firebird --with-pdo-firebird
-RUN printf ";priority=20\nextension=firebird\n" > $DIR_PHP_INI_FILES/firebird.ini
-RUN printf ";priority=30\nextension=pdo_firebird\n" > $DIR_PHP_INI_FILES/pdo_firebird.ini
 
 COPY ./conf/config/firebird-client.conf /etc/firebird/3.0/firebird.conf
 
@@ -277,16 +222,6 @@ RUN cd -
 ## INTERBASE [IT IS NOT AVAILABLE YET]
 #---------------------------------------------------------------------------------------------------------
 RUN mkdir -p /opt/interbase
-
-RUN cd /opt/interbase
-
-RUN wget https://github.com/FirebirdSQL/php-firebird/releases/download/v3.0.1/php_8.2.0-interbase-3.0.1-linux-x64.so
-RUN cp  php_8.2.0-interbase-3.0.1-linux-x64.so  $DIR_PHP_EXTENSIONS/interbase.so
-RUN printf ";priority=20\nextension=interbase\n" > $DIR_PHP_INI_FILES/interbase.ini
-RUN printf ";priority=30\nextension=pdo_interbase\n" > $DIR_PHP_INI_FILES/pdo_interbase.ini
-RUN mv  php_8.2.0-interbase-3.0.1-linux-x64.so  /opt/interbase/
-
-RUN cd -
 
 #---------------------------------------------------------------------------------------------------------
 ## WEBSERVER SETTINGS FINAL

@@ -13,6 +13,7 @@ Using PHP together Apache2 Server connected with the most used databases - OFFLI
 > drivers files just do the command tar -xfv {file} and you will see all the files compiled .so type. For more details 
 > you may give a look in the files php/{PHP-VERSION}/php-{PHP-VERSION}.dockerfile specifically in the section like 
 > showed below
+> showed below
 
 Example
 
@@ -37,6 +38,7 @@ a complete environment to development using HTTPD(Apache2) + PHP8 + Databases(se
 > witch will be copied to inside PHP container, unzipped and applied in the container targeted.
 
 > Give a look in the section #References to get more details (don't mess the workdir called extensions)
+
 
 # Docker Containers Databases
 
