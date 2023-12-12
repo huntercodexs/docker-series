@@ -21,6 +21,7 @@
 /nginx_php8_mysql-offline-drivers/mysql-5.7/lib/ibdata1
 /nginx_php8_mysql-offline-drivers/mysql-5.7/lib/ib_logfile0
 /nginx_php8_mysql-offline-drivers/mysql-5.7/lib/ib_logfile1
+/nginx_php8_mysql-offline-drivers/mysql-5.7/lib/ibtmp1
 /nginx_php8_mysql-offline-drivers/mysql-5.7/lib/mysql/
 /nginx_php8_mysql-offline-drivers/mysql-5.7/lib/performance_schema/
 /nginx_php8_mysql-offline-drivers/mysql-5.7/lib/sys/
@@ -46,6 +47,8 @@
 /nginx_php8_mysql-offline-drivers/mysql-8.0/lib/ibdata1
 /nginx_php8_mysql-offline-drivers/mysql-8.0/lib/ca.pem
 /nginx_php8_mysql-offline-drivers/mysql-8.0/lib/binlog.index
+/nginx_php8_mysql-offline-drivers/mysql-8.0/lib/ibtmp1
+/nginx_php8_mysql-offline-drivers/mysql-8.0/lib/9f347259f655.err
 /nginx_php8_mysql-offline-drivers/mysql-8.0/lib/sys/
 /nginx_php8_mysql-offline-drivers/mysql-8.0/lib/mysql/
 /nginx_php8_mysql-offline-drivers/mysql-8.0/lib/performance_schema/
