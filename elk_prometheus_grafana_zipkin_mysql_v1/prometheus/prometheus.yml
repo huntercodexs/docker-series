@@ -1,25 +1,25 @@
 scrape_configs:
   
-  ############################################# Microservice identification sample - 3
+  # Microservice identification sample - 3
   
   - job_name: 'microservice-client-demo'
     scrape_interval: 2s
     metrics_path: "/actuator/prometheus"
     static_configs:
-      - targets: ['192.168.15.16:31302']
+      - targets: ['192.168.0.204:31302']
   
-  ############################################# Microservice identification sample - 1
+  # Microservice identification sample - 1
   
   - job_name: 'microservice-product-demo'
     scrape_interval: 2s
     metrics_path: "/actuator/prometheus"
     static_configs:
-      - targets: ['192.168.15.16:31304']
+      - targets: ['192.168.0.204:31304']
   
-  ############################################# Microservice identification sample - 2
+  # Microservice identification sample - 2
   
   - job_name: 'microservice-order-demo'
     scrape_interval: 2s
     metrics_path: "/actuator/prometheus"
     static_configs:
-      - targets: ['192.168.15.16:31303']
+      - targets: ['192.168.0.204:31303']
