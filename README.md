@@ -1,56 +1,146 @@
-# ELK + PROMETHEUS + GRAFANA USING DOCKER
+# ELK + PROMETHEUS + GRAFANA
+Complete trace environment
 
-Docker Series - A project to work with many docker container
+![banner.png](elk_prometheus_grafana_v1/files/media/banner.png)
 
----
+# Information
 
-# Specification
+Please use the branch selection to access others configurations for your need and purposes
+
+# Resources
+
+> NOTE: Use the same stack version to ELK (recommended)
 
 - Stack Version (ELK) : 7.9.2
-- Docker
-- Docker-Compose
+- Elasticsearch
+- Kibana
+- Logstash
+- Prometheus
+- Grafana
 
 > Please see the .env file to more details
 
----
 
-# How to use
-
-- Clone this project from GitHub
+# Usage
 
 <pre>
-user@host$ git clone https://github.com/huntercodexs/docker-series.git .
-user@host$ git checkout elk_prometheus_grafana_v1
-user@host$ cd elk_prometheus_grafana_v1/
-user@host$ docker-compose up --build (in first time)
-user@host$ docker-compose start (in others case)
+user@host:/home/user$ git clone https://github.com/huntercodexs/docker-series.git .
+user@host:/home/user$ cd docker-series
+user@host:/home/user/docker-series$ git checkout elk_prometheus_grafana_v1
+user@host:/home/user/docker-series$ cd elk_prometheus_grafana_v1
+user@host:/home/user/docker-series/elk_prometheus_grafana_v1$ docker network create elk_prometheus_grafana_v1_open_network
+user@host:/home/user/docker-series/elk_prometheus_grafana_v1$ docker-compose up --build (in first time)
+user@host:/home/user/docker-series/elk_prometheus_grafana_v1$ [Ctrl+C]
+user@host:/home/user/docker-series/elk_prometheus_grafana_v1$ docker-compose start (in the next times)
+user@host:/home/user/docker-series/elk_prometheus_grafana_v1$ docker-compose ps (check the containers status)
 </pre>
 
-- Create a Network if needed
 
+# Step by Step
+
+Follow the steps below to quick and easy environment creation
+
+1- Clone the repository
 <pre>
-docker network create open_network
+user@host:/home/user$ git clone https://github.com/huntercodexs/docker-series.git .
 </pre>
 
-- Links to access
+2- Access the repository folder
+<pre>
+user@host:/home/user$ cd docker-series.git
+</pre>
 
-1. Elasticsearch
-<pre>http://localhost:9200/</pre>
+3- Change the current branch
+<pre>
+user@host:/home/user/docker-series$ git checkout elk_prometheus_grafana_v1
+</pre>
 
-2. Kibana
-<pre>http://localhost:5601/app/home#/</pre>
-<pre>http://localhost:5601/app/dev_tools#/console</pre>
+4- Access the elk_prometheus_grafana_v1 folder
+<pre>
+user@host:/home/user/docker-series$ cd elk_prometheus_grafana_v1
+</pre>
 
-3. Logstash
-<pre>http://localhost:8080</pre>
+5- Check and set up the .env file also check and edit the files YML and pipelineio.conf
+<pre>
+elk_prometheus_grafana_v1/elasticsearch/config/elasticsearch.yml
+elk_prometheus_grafana_v1/kibana/config/kibana.yml
+elk_prometheus_grafana_v1/logstash/config/logstash.yml
+elk_prometheus_grafana_v1/logstash/pipeline/pipelineio.conf
+elk_prometheus_grafana_v1/prometheus/prometheus.yml
+</pre>
 
-4. Prometheus
+6- Build the containers
+
+<pre>    
+user@host:/home/user/docker-series/elk_prometheus_grafana_v1$ docker network create elk_prometheus_grafana_v1_open_network
+user@host:/home/user/docker-series/elk_prometheus_grafana_v1$ docker-compose up --build
+</pre>
+
+Make sure that the result look like this
+<pre>
+user@host:/home/user/docker-series/elk_prometheus_grafana_v1$ docker-compose ps
+    Name                   Command                   State                                                                                                             Ports                                                                                                      
+----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+</pre>
+
+7- Test the containers
+
+Elasticsearch
+<pre>
+http://localhost:9200/
+ELASTIC_USERNAME
+ELASTIC_PASSWORD
+</pre>
+
+Kibana
+<pre>
+http://localhost:5601/app/home#/
+http://localhost:5601/app/dev_tools#/console
+ELASTIC_USERNAME
+ELASTIC_PASSWORD
+</pre>
+
+Example
+![kibana-dashboard-dev-tools-example.png](elk_prometheus_grafana_v1/files/media/kibana-dashboard-dev-tools-example.png)
+
+Queries
+<pre>
+GET tcp-logstash-docker-elk_prometheus-grafana-v1/_search
+GET http-logstash-docker-elk_prometheus-grafana-v1/_search
+GET postman-tests-elk_prometheus-grafana-v1/_search
+</pre>
+
+Indexes
+<pre>
+elk_prometheus_grafana_v1/logstash/pipeline/pipelineio.conf
+</pre>
+
+Logstash
+<pre>
+http://localhost:8080
+</pre>
+
+Prometheus
 <pre>http://localhost:9090</pre>
 
-5. Grafana
+Grafana
 <pre>http://localhost:3001/login</pre>
-   
-6. Grafana Ubuntu
+
+Grafana Ubuntu
 <pre>http://localhost:3000/login</pre>
 
----
+
+# Helper and References
+
+Make a query in the Kibana Dashboard
+<pre>
+GET tcp-logstash-docker-elk-prometheus-grafana-v1/_search
+GET http-logstash-docker-elk-prometheus-grafana-v1/_search
+GET postman-tests-elk-prometheus-grafana-v1/_search
+</pre>
+
+
+# Sample Usage (Java Project)
+
+Use the follow repository https://github.com/huntercodexs/elk-prometheus-grafana-zipkin-demo to create tests
