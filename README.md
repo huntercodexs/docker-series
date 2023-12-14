@@ -122,13 +122,19 @@ http://localhost:8080
 </pre>
 
 Prometheus
-<pre>http://localhost:9090</pre>
+<pre>
+http://localhost:9090
+</pre>
 
 Grafana
-<pre>http://localhost:3001/login</pre>
+<pre>
+http://localhost:3001/login
+</pre>
 
 Grafana Ubuntu
-<pre>http://localhost:3000/login</pre>
+<pre>
+http://localhost:3000/login
+</pre>
 
 
 # Helper and References
