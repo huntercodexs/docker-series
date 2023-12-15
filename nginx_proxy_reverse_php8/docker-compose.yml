@@ -18,7 +18,7 @@ services:
         environment:
             PHP_IDE_CONFIG: ${PHP_IDE_CONFIG}
         volumes:
-            - ./logs:/etc/nginx/logs
+            - ./nginx/logs:/etc/nginx/logs
             - ./nginx/conf.d:/etc/nginx/conf.d/
             - ./nginx/nginx.conf:/etc/nginx/nginx.conf
             - ./nginx/proxy.conf:/etc/nginx/proxy.conf
