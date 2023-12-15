@@ -1,9 +1,7 @@
+# NGINX + REVERSE PROXY
+A quick and single repository to build an environment with NGINX
 
-# NGINX WITH REVERSE PROXY
-
-Dockerized project using Nginx server
-
------------------
+![banner.png](nginx_reverse_proxy/files/media/banner.png)
 
 # About
 
@@ -12,62 +10,76 @@ explain with more details:
 
 ![img.png](nginx_reverse_proxy/files/media/NGINX-REVERSE-PROXY-SAMPLE.png)
 
------------------
 
-# How to use
+# Usage
 
 - Before build and start project set the following files configurations:
 
 <pre>
-- nginx.conf (nginx_reverse_proxy/etc/nginx/nginx.conf)
-- nginx.conf (nginx_reverse_proxy/etc/nginx/conf/public-server.conf)
-- nginx.conf (nginx_reverse_proxy/etc/nginx/conf/private-server.conf)
+- nginx.conf (./nginx_reverse_proxy/etc/nginx/nginx.conf)
+- public-server.conf (./nginx_reverse_proxy/etc/nginx/conf/public-server.conf)
+- private-server.conf (./nginx_reverse_proxy/etc/nginx/conf/private-server.conf)
 </pre>
 
 - Access the folder path in this project to run php8 together nginx, as below:
 
 <pre>
-$ git clone https://github.com/huntercodexs/docker-series.git .
-$ git checkout nginx_reverse_proxy
-$ cd nginx_reverse_proxy
-$ docker-compose up --build (in first time)
-$ docker-compose start (in others case)
+user@host:/home/user$ git clone https://github.com/huntercodexs/docker-series.git .
+user@host:/home/user$ cd docker-series
+user@host:/home/user/docker-series$ git checkout nginx_reverse_proxy
+user@host:/home/user/docker-series$ cd nginx_reverse_proxy
+user@host:/home/user/docker-series/nginx_reverse_proxy$ docker network create nginx_reverse_proxy_open_network
+user@host:/home/user/docker-series/nginx_reverse_proxy$ docker-compose up --build (in first time)
+user@host:/home/user/docker-series/nginx_reverse_proxy$ [Ctrl+C]
+user@host:/home/user/docker-series/nginx_reverse_proxy$ docker-compose start (in the next times)
+user@host:/home/user/docker-series/nginx_reverse_proxy$ docker-compose ps (check the containers status)
 </pre>
 
-- Access and test
+# Step by Step
 
+Follow the steps below to quick and easy environment creation
+
+1- Clone the repository
 <pre>
-http://{WEBSERVER_IP_ADDRESS}:38085
-http://{WEBSERVER_IP_ADDRESS}:38085/pages/
-http://{WEBSERVER_IP_ADDRESS}:38085/page/1/
-http://{WEBSERVER_IP_ADDRESS}:38085/page/2/
-http://{WEBSERVER_IP_ADDRESS}:38085/page/3/
+user@host:/home/user$ git clone https://github.com/huntercodexs/docker-series.git .
 </pre>
 
------------------
-# About NGINX
-
-- Content
+2- Access the repository folder
 <pre>
-/var/www/html: The actual web content, which by default only consists of the default Nginx page you saw earlier, 
-is served out of the /var/www/html directory. This can be changed by altering Nginx configuration files.
+user@host:/home/user$ cd docker-series.git
 </pre>
 
-- Server Configuration
+3- Change the current branch
 <pre>
-/etc/nginx: The Nginx configuration directory. All of the Nginx configuration files reside here.
-
-/etc/nginx/nginx.conf: The main Nginx configuration file. This can be modified to make changes to the Nginx global configuration.
-
-/etc/nginx/sites-available/: The directory where per-site server blocks can be stored. Nginx will not use the configuration files found in this directory unless they are linked to the sites-enabled directory. Typically, all server block configuration is done in this directory, and then enabled by linking to the other directory.
-
-/etc/nginx/sites-enabled/: The directory where enabled per-site server blocks are stored. Typically, these are created by linking to configuration files found in the sites-available directory.
-
-/etc/nginx/snippets: This directory contains configuration fragments that can be included elsewhere in the Nginx configuration. Potentially repeatable configuration segments are good candidates for refactoring into snippets.
+user@host:/home/user/docker-series$ git checkout nginx_reverse_proxy
 </pre>
 
-- Server Logs
+4- Access the nginx_reverse_proxy folder
 <pre>
-/var/log/nginx/access.log: Every request to your web server is recorded in this log file unless Nginx is configured to do otherwise.
-/var/log/nginx/error.log: Any Nginx errors will be recorded in this log.
+user@host:/home/user/docker-series$ cd nginx_reverse_proxy
+</pre>
+
+5- Check and set up the .env file
+
+6- Build the containers
+
+<pre>    
+user@host:/home/user/docker-series/nginx_reverse_proxy$ docker network create nginx_reverse_proxy_open_network
+user@host:/home/user/docker-series/nginx_reverse_proxy$ docker-compose up --build
+</pre>
+
+Make sure that the result look like this
+<pre>
+user@host:/home/user/docker-series/nginx_reverse_proxy$ docker-compose ps
+    Name                   Command                   State                                                                                                             Ports                                                                                                      
+----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+</pre>
+
+7- Access and test the applications
+<pre>
+http://localhost:38585
+http://localhost:38585/app1/
+http://localhost:38585/app1/pages/page1/
+http://localhost:38585/app1/pages/page2/
+http://localhost:38585/app1/pages/page3/
 </pre>
