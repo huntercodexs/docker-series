@@ -78,8 +78,9 @@ user@host:/home/user/docker-series/nginx_reverse_proxy$ docker-compose ps
 7- Access and test the applications
 <pre>
 http://localhost:38585
-http://localhost:38585/app1/
-http://localhost:38585/app1/pages/page1/
-http://localhost:38585/app1/pages/page2/
-http://localhost:38585/app1/pages/page3/
+http://localhost:38585/app1
+http://localhost:38585/app1/sample/
+http://localhost:38585/app1/sample/pages/page1/
+http://localhost:38585/app1/sample/pages/page2/
+http://localhost:38585/app1/sample/pages/page3/
 </pre>
