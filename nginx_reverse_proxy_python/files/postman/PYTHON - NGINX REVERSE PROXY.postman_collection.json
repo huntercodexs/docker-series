@@ -14,7 +14,7 @@
 						"method": "GET",
 						"header": [],
 						"url": {
-							"raw": "http://192.168.0.174:38085/app1/",
+							"raw": "http://localhost:38085/app1/",
 							"protocol": "http",
 							"host": [
 								"192",
@@ -36,7 +36,7 @@
 								"method": "GET",
 								"header": [],
 								"url": {
-									"raw": "http://192.168.0.174:38085/app1/",
+									"raw": "http://localhost:38085/app1/",
 									"protocol": "http",
 									"host": [
 										"192",
@@ -96,7 +96,7 @@
 						"method": "GET",
 						"header": [],
 						"url": {
-							"raw": "http://192.168.0.174:38085/app2/",
+							"raw": "http://localhost:38085/app2/",
 							"protocol": "http",
 							"host": [
 								"192",
@@ -118,7 +118,7 @@
 								"method": "GET",
 								"header": [],
 								"url": {
-									"raw": "http://192.168.0.174:38085/app2/",
+									"raw": "http://localhost:38085/app2/",
 									"protocol": "http",
 									"host": [
 										"192",

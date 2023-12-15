@@ -1,15 +1,14 @@
-trash
+## GENERAL FILE EXTENSIONS
 *-tar
+*.jar
 *.jar.original
 *.deb
 *.exec
 *.run
-.idea
-nodes
-node_modules
-/docker-elk/
-/elkstack792/
-/micro-services/
-sources-docker-compose.yml
-/nginx_reverse_proxy_python/applications/app1/app1env
-/nginx_reverse_proxy_python/applications/app2/app2env
+*.log
+
+## GENERAL DIR
+.idea/
+trash/
+nodes/
+node_modules/

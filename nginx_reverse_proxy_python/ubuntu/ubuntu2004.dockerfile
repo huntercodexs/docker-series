@@ -45,15 +45,15 @@ RUN apt install -y curl
 #------------------------------------------------------------------------------------------------------
 RUN apt-get install -y nginx
 
-COPY ./server/etc/nginx/nginx.conf /etc/nginx/nginx.conf
-COPY ./server/etc/nginx/proxy.conf /etc/nginx/proxy.conf
-COPY ./server/etc/nginx/fastcgi.conf /etc/nginx/fastcgi.conf
-COPY ./server/etc/nginx/mime.types /etc/nginx/mime.types
-COPY ./server/etc/nginx/conf.d/ /etc/nginx/conf.d/
-COPY ./server/etc/nginx/sites-available/ /etc/nginx/sites-available/
-COPY ./server/etc/nginx/sites-enabled/ /etc/nginx/sites-enabled/
-COPY ./server/etc/nginx/logs/ /var/log/nginx/
-COPY ./server/htdocs/ /var/www/htdocs/
+COPY ./nginx/nginx.conf /etc/nginx/nginx.conf
+COPY ./nginx/proxy.conf /etc/nginx/proxy.conf
+COPY ./nginx/fastcgi.conf /etc/nginx/fastcgi.conf
+COPY ./nginx/mime.types /etc/nginx/mime.types
+COPY ./nginx/conf.d/ /etc/nginx/conf.d/
+COPY ./nginx/sites-available/ /etc/nginx/sites-available/
+COPY ./nginx/sites-enabled/ /etc/nginx/sites-enabled/
+COPY ./nginx/logs/ /var/log/nginx/
+COPY ./nginx/htdocs/ /var/www/htdocs/
 COPY ./applications/ $DIR_APPS/
 
 RUN useradd --no-create-home nginx
@@ -66,15 +66,11 @@ RUN apt install -y python3-venv
 
 # TRY START APPLICATIONS
 COPY ./applications/applications-deploy.sh /usr/bin/applications-deploy
-
-USER root
-RUN applications-deploy
+RUN /usr/bin/applications-deploy
 
 #------------------------------------------------------------------------------------------------------
 ## FINISHED SETTINGS
 #------------------------------------------------------------------------------------------------------
-
-WORKDIR $DIR_APPS
 
 EXPOSE 85
 EXPOSE 8585

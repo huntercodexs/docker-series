@@ -1,9 +1,8 @@
-
 # NGINX + REVERSE PROXY + PYTHON
-
 Dockerized project using Nginx Reverse Proxy and PYTHON
 
------------------
+![banner.png](nginx_reverse_proxy_python/files/media/banner.png)
+
 
 # Requisites
 
@@ -11,96 +10,115 @@ Dockerized project using Nginx Reverse Proxy and PYTHON
 - Python
 - Postman
 - Shell Script
-- ** Linux Knowledge
 
------------------
 
 # About
 
-This branch set up the environment to run NGINX as Webserver with reverse proxy to contact PYTHON microservices, below can 
+This branch set up the environment to run NGINX as Webserver with reverse proxy to contact PYTHON applications, below can 
 see the diagram that explain with more details:
 
 > NOTE: Using docker is not possible execute systemctl as a service manager, so give a look in th file 
 > nginx_reverse_proxy_python/applications/applications-deploy.sh and see with more details this issue.
 
------------------
 
-# How to use
-
-> CONFIGURATION
+# Usage
 
 - Before build and start project set the following files configurations:
 
 <pre>
-- nginx.conf (nginx_reverse_proxy_python/etc/nginx/nginx.conf)
-- reverse-proxy-python-server.conf (nginx_reverse_proxy_python/etc/nginx/conf/reverse-proxy-python-server.conf)
-- reverse-proxy-python.log (nginx_reverse_proxy_python/etc/nginx/logs/reverse-proxy-python.log)
+- nginx.conf (./nginx_reverse_proxy_python/etc/nginx/nginx.conf)
+- reverse-proxy-python-server.conf (./nginx_reverse_proxy_python/etc/nginx/conf/reverse-proxy-python-server.conf)
+- reverse-proxy-python.log (./nginx_reverse_proxy_python/etc/nginx/logs/reverse-proxy-python.log)
 </pre>
 
-> SERVICES
-
-- Before build and start project set the microservices in script below
+- Before build and start project set the python applications in script below
 
 <pre>
-- applications-deploy.sh (nginx_reverse_proxy_python/microservices/applications-deploy.sh)
+- applications-deploy.sh (nginx_reverse_proxy_python/applications/applications-deploy.sh)
 </pre>
 
-
-> RUN AND TEST
 
 - Access the folder path in this project to run nginx_reverse_proxy_python, as below:
 
 <pre>
-$ git clone https://github.com/huntercodexs/docker-series.git .
-$ git checkout nginx_reverse_proxy_python
-$ cd nginx_reverse_proxy_python
-$ docker-compose up --build (in first time)
-$ docker-compose start (in others case)
+user@host:/home/user$ git clone https://github.com/huntercodexs/docker-series.git .
+user@host:/home/user$ cd docker-series
+user@host:/home/user/docker-series$ git checkout nginx_reverse_proxy_python
+user@host:/home/user/docker-series$ cd nginx_reverse_proxy_python
+user@host:/home/user/docker-series/nginx_reverse_proxy_python$ docker network create nginx_reverse_proxy_python_open_network
+user@host:/home/user/docker-series/nginx_reverse_proxy_python$ docker-compose up --build (in first time)
+user@host:/home/user/docker-series/nginx_reverse_proxy_python$ [Ctrl+C]
+user@host:/home/user/docker-series/nginx_reverse_proxy_python$ docker-compose start (in the next times)
+user@host:/home/user/docker-series/nginx_reverse_proxy_python$ docker-compose ps (check the containers status)
 </pre>
 
-- Run the microservices in nginx_uwsgi_python container
+- Run the applications in nginx_uwsgi_python container
+
+> IMPORTANT NOTE: If the automatically deploy not work in the builder will be necessary run the command below 
 
 <pre>
-$ docker exec -it nginx_uwsgi_python /bin/bash
+user@host:/home/user/docker-series/nginx_reverse_proxy_python$ docker exec -it nginx_uwsgi_python /bin/bash
+root@25f8c997da0a:/home/python/applications# ./applications-deploy.sh
 </pre>
 
+# Step by Step
+
+Follow the steps below to quick and easy environment creation
+
+1- Clone the repository
 <pre>
-root@25f8c997da0a:/home/python/applications# applications-deploy
+user@host:/home/user$ git clone https://github.com/huntercodexs/docker-series.git .
 </pre>
 
-- Access and test - API
-
+2- Access the repository folder
 <pre>
-[GET] http://${WEBSERVER_IP_ADDRESS}:38085/app1/
-[GET] http://${WEBSERVER_IP_ADDRESS}:38085/app2/
+user@host:/home/user$ cd docker-series.git
+</pre>
+
+3- Change the current branch
+<pre>
+user@host:/home/user/docker-series$ git checkout nginx_reverse_proxy_python
+</pre>
+
+4- Access the nginx_reverse_proxy_python folder
+<pre>
+user@host:/home/user/docker-series$ cd nginx_reverse_proxy_python
+</pre>
+
+5- Check and set up the .env file
+
+6- Build the containers
+
+<pre>    
+user@host:/home/user/docker-series/nginx_reverse_proxy_python$ docker network create nginx_reverse_proxy_python_open_network
+user@host:/home/user/docker-series/nginx_reverse_proxy_python$ docker-compose up --build
+</pre>
+
+Make sure that the result look like this
+<pre>
+user@host:/home/user/docker-series/nginx_reverse_proxy_python$ docker-compose ps
+    Name                   Command               State                       Ports                     
+-------------------------------------------------------------------------------------------------------
+</pre>
+
+7- Access and test - APIs
+<pre>
+[GET] http://localhost:38085/app1/
+[RESPONSE]
+{
+  "message": "Everything fine !",
+  "response": "Welcome to APP1",
+  "status": 200
+}
+
+[GET] http://localhost:38085/app2/
+[RESPONSE]
+{
+    "message": "Everything fine !",
+    "response": "Welcome to APP2",
+    "status": 200
+}
 </pre>
 
 > Use the postman file to make a tests above: "PYTHON - NGINX REVERSE PROXY.postman_collection.json"
 
------------------
-# About NGINX
-
-- Content
-<pre>
-/var/www/html: The actual web content, which by default only consists of the default Nginx page you saw earlier, 
-is served out of the /var/www/html directory. This can be changed by altering Nginx configuration files.
-</pre>
-
-- Server Configuration
-<pre>
-/etc/nginx: The Nginx configuration directory. All of the Nginx configuration files reside here.
-
-/etc/nginx/nginx.conf: The main Nginx configuration file. This can be modified to make changes to the Nginx global configuration.
-
-/etc/nginx/sites-available/: The directory where per-site server blocks can be stored. Nginx will not use the configuration files found in this directory unless they are linked to the sites-enabled directory. Typically, all server block configuration is done in this directory, and then enabled by linking to the other directory.
-
-/etc/nginx/sites-enabled/: The directory where enabled per-site server blocks are stored. Typically, these are created by linking to configuration files found in the sites-available directory.
-
-/etc/nginx/snippets: This directory contains configuration fragments that can be included elsewhere in the Nginx configuration. Potentially repeatable configuration segments are good candidates for refactoring into snippets.
-</pre>
-
-- Server Logs
-<pre>
-/var/log/nginx/access.log: Every request to your web server is recorded in this log file unless Nginx is configured to do otherwise.
-/var/log/nginx/error.log: Any Nginx errors will be recorded in this log.
-</pre>
