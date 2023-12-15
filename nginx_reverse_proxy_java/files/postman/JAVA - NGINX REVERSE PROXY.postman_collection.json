@@ -11,7 +11,7 @@
 				"method": "GET",
 				"header": [],
 				"url": {
-					"raw": "http://192.168.0.174:38085/api/v1/users",
+					"raw": "http://localhost:38085/api/v1/users",
 					"protocol": "http",
 					"host": [
 						"192",
@@ -35,7 +35,7 @@
 				"method": "GET",
 				"header": [],
 				"url": {
-					"raw": "http://192.168.0.174:38085/api/v1/sales",
+					"raw": "http://localhost:38085/api/v1/sales",
 					"protocol": "http",
 					"host": [
 						"192",
@@ -58,7 +58,7 @@
 						"method": "GET",
 						"header": [],
 						"url": {
-							"raw": "http://192.168.0.174:38085/api/v1/sales",
+							"raw": "http://localhost:38085/api/v1/sales",
 							"protocol": "http",
 							"host": [
 								"192",
@@ -110,7 +110,7 @@
 				"method": "GET",
 				"header": [],
 				"url": {
-					"raw": "http://192.168.0.174:38085/api/v1/supplies",
+					"raw": "http://localhost:38085/api/v1/supplies",
 					"protocol": "http",
 					"host": [
 						"192",
@@ -133,7 +133,7 @@
 						"method": "GET",
 						"header": [],
 						"url": {
-							"raw": "http://192.168.0.174:38085/api/v1/supplies",
+							"raw": "http://localhost:38085/api/v1/supplies",
 							"protocol": "http",
 							"host": [
 								"192",

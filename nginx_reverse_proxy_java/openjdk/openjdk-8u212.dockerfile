@@ -16,4 +16,4 @@ RUN ls /home/openjdk8u212/microservices/supplies
 
 RUN java -version
 
-COPY ./microservices/microservices-start.sh /usr/bin/microservices-start
+COPY ./microservices/microservices-start.sh /home/openjdk8u212/microservices-start.sh

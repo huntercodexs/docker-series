@@ -10,38 +10,57 @@ services:
         ports:
             - ${NGINX_PORT}:85
         volumes:
-            - ./etc/nginx/nginx.conf:/etc/nginx/nginx.conf
-            - ./etc/nginx/proxy.conf:/etc/nginx/proxy.conf
-            - ./etc/nginx/fastcgi.conf:/etc/nginx/fastcgi.conf
-            - ./etc/nginx/mime.types:/etc/nginx/mime.types
-            - ./etc/nginx/conf.d/:/etc/nginx/conf.d/
-            - ./etc/nginx/logs/:/var/log/nginx/
-            - ./htdocs/:/var/www/htdocs/
+            - ./nginx/htdocs/:/var/www/htdocs/
+            - ./nginx/logs:/etc/nginx/logs
+            - ./nginx/conf.d/:/etc/nginx/conf.d/
+            - ./nginx/nginx.conf:/etc/nginx/nginx.conf
+            - ./nginx/proxy.conf:/etc/nginx/proxy.conf
+            - ./nginx/fastcgi.conf:/etc/nginx/fastcgi.conf
+            - ./nginx/mime.types:/etc/nginx/mime.types
         working_dir: /etc/nginx
         tty: true
         networks:
             default:
-            open_network:
-            reverse_proxy:
+            nginx_reverse_proxy_java_open_network:
+            nginx_reverse_proxy_java_restrict_network:
                 ipv4_address: 10.0.0.2
     #------------------------------------------------------------
     openjdk-8u212:
         env_file: .env
         container_name: openjdk-8u212
         build:
-            context: .
+            context: ./openjdk
             dockerfile: openjdk-8u212.dockerfile
         privileged: true
         tty: true
+        depends_on:
+            - mysql-57
+        links:
+            - mysql-57
         networks:
-            reverse_proxy:
+            nginx_reverse_proxy_java_restrict_network:
                 ipv4_address: 10.0.0.3
     #------------------------------------------------------------
+    mysql-57:
+        env_file: .env
+        image: mysql:5.7
+        container_name: mysql57
+        volumes:
+            - ./mysql-57/lib:/var/lib/mysql/
+        environment:
+            MYSQL_DATABASE: ${MYSQL57_DATABASE}
+            MYSQL_USERNAME: ${MYSQL57_USERNAME}
+            MYSQL_PASSWORD: ${MYSQL57_PASSWORD}
+            MYSQL_ROOT_PASSWORD: ${MYSQL57_ROOT_PASSWORD}
+        networks:
+            nginx_reverse_proxy_java_restrict_network:
+                ipv4_address: 10.0.0.4
+    #----------------------------------------------------------------------------------------
     
 networks:
-    open_network:
+    nginx_reverse_proxy_java_open_network:
         external: true
-    reverse_proxy:
+    nginx_reverse_proxy_java_restrict_network:
         external: false
         internal: true
         driver: bridge
