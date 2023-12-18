@@ -22,8 +22,8 @@ services:
         tty: true
         networks:
             default:
-            nginx_reverse_proxy_python_separated_open_network:
-            nginx_reverse_proxy_python_separated_restrict_network:
+            nginx_reverse_proxy_python_mysql_separated_open_network:
+            nginx_reverse_proxy_python_mysql_separated_restrict_network:
                 ipv4_address: 10.0.0.2
     #----------------------------------------------------------------------------------------
     python3:
@@ -48,8 +48,8 @@ services:
             - mysql-57
             - mysql-80
         networks:
-            nginx_reverse_proxy_python_separated_open_network:
-            nginx_reverse_proxy_python_separated_restrict_network:
+            nginx_reverse_proxy_python_mysql_separated_open_network:
+            nginx_reverse_proxy_python_mysql_separated_restrict_network:
                 ipv4_address: 10.0.0.3
     #----------------------------------------------------------------------------------------
     mysql-80:
@@ -67,7 +67,7 @@ services:
             MYSQL_ROOT_PASSWORD: ${MYSQL80_ROOT_PASSWORD}
         tty: true
         networks:
-            nginx_reverse_proxy_python_separated_restrict_network:
+            nginx_reverse_proxy_python_mysql_separated_restrict_network:
                 ipv4_address: 10.0.0.4
     #----------------------------------------------------------------------------------------
     mysql-57:
@@ -85,14 +85,14 @@ services:
             MYSQL_ROOT_PASSWORD: ${MYSQL57_ROOT_PASSWORD}
         tty: true
         networks:
-            nginx_reverse_proxy_python_separated_restrict_network:
+            nginx_reverse_proxy_python_mysql_separated_restrict_network:
                 ipv4_address: 10.0.0.5
     #----------------------------------------------------------------------------------------
     
 networks:
-    nginx_reverse_proxy_python_separated_open_network:
+    nginx_reverse_proxy_python_mysql_separated_open_network:
         external: true
-    nginx_reverse_proxy_python_separated_restrict_network:
+    nginx_reverse_proxy_python_mysql_separated_restrict_network:
         external: false
         internal: true
         driver: bridge

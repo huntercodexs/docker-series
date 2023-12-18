@@ -1,6 +1,6 @@
 from routes import *
 
-print(" *"*14, "Welcome to APP2 + MYSQL 8.0", " *"*14)
+print(" *"*14, "Welcome to APP1 + MYSQL 5.7", " *"*14)
 
 
 if __name__ == "__main__":

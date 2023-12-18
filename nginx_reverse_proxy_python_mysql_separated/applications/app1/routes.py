@@ -9,7 +9,7 @@ app = Flask("APP1")
 @app.route("/app1/api/welcome", methods=["GET"])
 @cross_origin()
 def welcome():
-    return response_generator(200, "Everything fine !", "response", "Welcome to APP1", "request")
+    return response_generator(200, "Everything fine !", "response", "Welcome to APP1 and MYSQL 5.7", "request")
 
 
 @app.route("/app1/api/article", methods=["POST"])
