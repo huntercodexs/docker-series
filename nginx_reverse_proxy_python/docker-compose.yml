@@ -1,35 +1,58 @@
 version: "3.7"
 services:
     
-    #------------------------------------------------------------
-    nginx_uwsgi_python:
+    #----------------------------------------------------------------------------------------
+    nginx:
         env_file: .env
-        container_name: nginx_uwsgi_python
-        build:
-            context: ./
-            dockerfile: ubuntu/ubuntu2004.dockerfile
+        container_name: nginx
+        image: nginx:latest
         privileged: true
         ports:
             - ${NGINX_PORT}:85
         volumes:
-            - ./nginx/logs/:/var/log/nginx/
             - ./nginx/htdocs/:/var/www/htdocs/
+            - ./nginx/logs/:/etc/nginx/logs/
+            - ./nginx/logs/:/var/log/nginx/
             - ./nginx/conf.d/:/etc/nginx/conf.d/
             - ./nginx/nginx.conf:/etc/nginx/nginx.conf
             - ./nginx/proxy.conf:/etc/nginx/proxy.conf
             - ./nginx/fastcgi.conf:/etc/nginx/fastcgi.conf
             - ./nginx/mime.types:/etc/nginx/mime.types
-            - ./nginx/sites-available/:/etc/nginx/sites-available/
-            - ./nginx/sites-enabled/:/etc/nginx/sites-enabled/
-            - ./applications/:/home/python3/applications/
-        working_dir: /home/python3/applications
+        working_dir: /etc/nginx
         tty: true
         networks:
             default:
-            nginx_reverse_proxy_python_open_network:
-    #------------------------------------------------------------
+            nginx_reverse_proxy_python_separated_open_network:
+            nginx_reverse_proxy_java_restrict_network:
+                ipv4_address: 10.0.0.2
+    #----------------------------------------------------------------------------------------
+    python3:
+        env_file: .env
+        container_name: python3
+        build:
+            context: .
+            dockerfile: python/python3.dockerfile
+        ports:
+            - ${PYTHON3_PORT1}:5000
+            - ${PYTHON3_PORT2}:8080
+            - ${PYTHON3_PORT3}:31800
+        volumes:
+            - ./python/shared/:/home/python3/shared/
+            - ./applications/:/home/python3/applications/
+        tty: true
+        networks:
+            nginx_reverse_proxy_python_separated_restrict_network:
+                ipv4_address: 10.0.0.3
+    #----------------------------------------------------------------------------------------
     
 networks:
-    nginx_reverse_proxy_python_open_network:
+    nginx_reverse_proxy_python_separated_open_network:
         external: true
-        
+    nginx_reverse_proxy_python_separated_restrict_network:
+        external: false
+        internal: true
+        driver: bridge
+        ipam:
+            config:
+                - subnet: 10.0.0.0/16
+
