@@ -41,10 +41,52 @@ services:
             - ./applications/:/home/python3/applications/
         tty: true
         command: "bash /home/python3/applications/applications-deploy.sh"
+        depends_on:
+            - mysql-57
+            - mysql-80
+        links:
+            - mysql-57
+            - mysql-80
         networks:
             nginx_reverse_proxy_python_separated_open_network:
             nginx_reverse_proxy_python_separated_restrict_network:
                 ipv4_address: 10.0.0.3
+    #----------------------------------------------------------------------------------------
+    mysql-80:
+        env_file: .env
+        image: mysql:8.0
+        container_name: mysql80
+        ports:
+            - ${MYSQL80_PORT}:3306
+        volumes:
+            - ./mysql-8.0/lib:/var/lib/mysql/
+        environment:
+            MYSQL_DATABASE: ${MYSQL80_DATABASE}
+            MYSQL_USERNAME: ${MYSQL80_USERNAME}
+            MYSQL_PASSWORD: ${MYSQL80_PASSWORD}
+            MYSQL_ROOT_PASSWORD: ${MYSQL80_ROOT_PASSWORD}
+        tty: true
+        networks:
+            nginx_reverse_proxy_python_separated_restrict_network:
+                ipv4_address: 10.0.0.4
+    #----------------------------------------------------------------------------------------
+    mysql-57:
+        env_file: .env
+        image: mysql:5.7
+        container_name: mysql57
+        ports:
+            - ${MYSQL57_PORT}:3306
+        volumes:
+            - ./mysql-5.7/lib:/var/lib/mysql/
+        environment:
+            MYSQL_DATABASE: ${MYSQL57_DATABASE}
+            MYSQL_USERNAME: ${MYSQL57_USERNAME}
+            MYSQL_PASSWORD: ${MYSQL57_PASSWORD}
+            MYSQL_ROOT_PASSWORD: ${MYSQL57_ROOT_PASSWORD}
+        tty: true
+        networks:
+            nginx_reverse_proxy_python_separated_restrict_network:
+                ipv4_address: 10.0.0.5
     #----------------------------------------------------------------------------------------
     
 networks:
