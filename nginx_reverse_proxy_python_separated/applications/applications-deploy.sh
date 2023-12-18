@@ -46,16 +46,10 @@ pip install -U flask-cors
 #ufw allow ${APP_PORT}
 #cp "${APP_NAME}.service" "/etc/systemd/system/${APP_NAME}.service"
 #deactivate
-python3 "${APP_NAME}.py" &
+python3 "${APP_NAME}.py"
 #systemctl start ${APP_NAME}
 #systemctl enable ${APP_NAME}
 #systemctl status ${APP_NAME}
 #ufw delete allow ${APP_PORT}
 #------------------------------------------------------------------------------------
 
-if ! ls /etc/nginx/sites-enabled/applications-server >> /dev/null
-then
-    ln -s /etc/nginx/sites-available/applications-server /etc/nginx/sites-enabled/applications-server
-fi
-
-ufw allow 'Nginx Full'

@@ -3,6 +3,8 @@ Dockerized project using Nginx Reverse Proxy and PYTHON
 
 ![banner.png](nginx_reverse_proxy_python_separated/files/media/banner.png)
 
+> WARNING: This is a development server. Do not use it in a production deployment. 
+> Use a production WSGI server instead.
 
 # Requisites
 
@@ -92,16 +94,68 @@ user@host:/home/user/docker-series$ cd nginx_reverse_proxy_python_separated
 <pre>    
 user@host:/home/user/docker-series/nginx_reverse_proxy_python_separated$ docker network create nginx_reverse_proxy_python_separated_open_network
 user@host:/home/user/docker-series/nginx_reverse_proxy_python_separated$ docker-compose up --build
+user@host:/home/user/docker-series/nginx_reverse_proxy_python_separated$ [Ctrl+C]
+user@host:/home/user/docker-series/nginx_reverse_proxy_python_separated$ docker-compose start
 </pre>
 
 Make sure that the result look like this
 <pre>
 user@host:/home/user/docker-series/nginx_reverse_proxy_python_separated$ docker-compose ps
-    Name                   Command               State                       Ports                     
--------------------------------------------------------------------------------------------------------
+ Name                Command               State                                                                       Ports                                                                     
+-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+nginx     /docker-entrypoint.sh ngin ...   Up      80/tcp, 0.0.0.0:38085->85/tcp,:::38085->85/tcp                                                                                                
+python3   bash /home/python3/applica ...   Up      1800/tcp, 0.0.0.0:31800->31800/tcp,:::31800->31800/tcp, 0.0.0.0:35000->5000/tcp,:::35000->5000/tcp, 0.0.0.0:38080->8080/tcp,:::38080->8080/tcp
 </pre>
 
-7- Access and test - APIs
+7- Up the applications
+<pre>
+user@host:/home/user/docker-series/nginx_reverse_proxy_python_separated$ docker exec -it nginx_uwsgi_python /bin/bash
+root@25f8c997da0a:/home/python/applications# ./applications-deploy.sh
+</pre>
+
+The result should be look like as below
+<pre>
+ * * * * * * * * * * * * * * Welcome to APP1  * * * * * * * * * * * * * *
+ * Serving Flask app 'APP1'
+ * Debug mode: on
+ * Running on all addresses (0.0.0.0)
+ * Running on http://127.0.0.1:55001
+ * Running on http://172.19.0.3:55001
+Press CTRL+C to quit
+ * Restarting with stat
+ * * * * * * * * * * * * * * Welcome to APP1  * * * * * * * * * * * * * *
+ * Debugger is active!
+ * Debugger PIN: 136-930-991
+
+* * * * * * * * * * * * * * Welcome to APP2  * * * * * * * * * * * * * *
+ * Serving Flask app 'APP2'
+ * Debug mode: on
+ * Running on all addresses (0.0.0.0)
+ * Running on http://127.0.0.1:55002
+ * Running on http://172.19.0.3:55002
+Press CTRL+C to quit
+ * Restarting with stat
+ * * * * * * * * * * * * * * Welcome to APP2  * * * * * * * * * * * * * *
+ * Debugger is active!
+ * Debugger PIN: 136-930-991
+</pre>
+
+8- Check the process for applications running
+<pre>
+user@host:/home/user/docker-series/nginx_reverse_proxy_python_separated$ docker exec -it python3 /bin/bash
+root@8c1ede295935:/home/python3/applications# ps -ef
+UID          PID    PPID  C STIME TTY          TIME CMD
+root           1       0  0 17:54 pts/0    00:00:00 bash /home/python3/applications/applications-deploy.sh
+root          24       1  0 17:54 pts/0    00:00:00 python3 app1.py
+root          26      24  0 17:54 pts/0    00:00:00 /usr/local/bin/python3 app1.py
+root          40       1  0 17:54 pts/0    00:00:00 python3 app2.py
+root          41      40  0 17:54 pts/0    00:00:00 /usr/local/bin/python3 app2.py
+root          46       0  0 17:56 pts/1    00:00:00 /bin/bash
+root          53      46  0 17:56 pts/1    00:00:00 ps -ef
+root@8c1ede295935:/home/python3/applications#
+</pre>
+
+8- Access and test - APIs
 <pre>
 [GET] http://localhost:38085/app1/
 [RESPONSE]
