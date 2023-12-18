@@ -12,3 +12,5 @@
 trash/
 nodes/
 node_modules/
+/nginx_reverse_proxy_python_wsgi/applications/app2/app2env/
+/nginx_reverse_proxy_python_wsgi/applications/app1/app1env/
