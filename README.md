@@ -1,15 +1,17 @@
 # NGINX + REVERSE PROXY + PYTHON (Separated Containers)
 Dockerized project using Nginx Reverse Proxy and PYTHON
 
-![banner.png](nginx_reverse_proxy_python_separated/files/media/banner.png)
+![banner.png](nginx_reverse_proxy_python_mysql_separated/files/media/banner.png)
 
 > WARNING: This is a development server. Do not use it in a production deployment. 
-> Use a production WSGI server instead.
+> Use a production UWSGI server instead.
 
 # Requisites
 
 - Nginx
 - Python
+- Mysql 5.7
+- Mysql 8.0
 - Postman
 - Shell Script
 
@@ -20,7 +22,7 @@ This branch set up the environment to run NGINX as Webserver with reverse proxy 
 see the diagram that explain with more details:
 
 > NOTE: Using docker is not possible execute systemctl as a service manager, so give a look in th file 
-> nginx_reverse_proxy_python_separated/applications/applications-deploy.sh and see with more details this issue.
+> nginx_reverse_proxy_python_mysql_separated/applications/applications-deploy.sh and see with more details this issue.
 
 
 # Usage
@@ -28,30 +30,30 @@ see the diagram that explain with more details:
 - Before build and start project set the following files configurations:
 
 <pre>
-- nginx.conf (./nginx_reverse_proxy_python_separated/etc/nginx/nginx.conf)
-- reverse-proxy-python-server.conf (./nginx_reverse_proxy_python_separated/etc/nginx/conf/reverse-proxy-python-server.conf)
-- reverse-proxy-python.log (./nginx_reverse_proxy_python_separated/etc/nginx/logs/reverse-proxy-python.log)
+- nginx.conf (./nginx_reverse_proxy_python_mysql_separated/etc/nginx/nginx.conf)
+- reverse-proxy-python-server.conf (./nginx_reverse_proxy_python_mysql_separated/etc/nginx/conf/reverse-proxy-python-server.conf)
+- reverse-proxy-python.log (./nginx_reverse_proxy_python_mysql_separated/etc/nginx/logs/reverse-proxy-python.log)
 </pre>
 
 - Before build and start project set the python applications in script below
 
 <pre>
-- applications-deploy.sh (nginx_reverse_proxy_python_separated/applications/applications-deploy.sh)
+- applications-deploy.sh (nginx_reverse_proxy_python_mysql_separated/applications/applications-deploy.sh)
 </pre>
 
 
-- Access the folder path in this project to run nginx_reverse_proxy_python_separated, as below:
+- Access the folder path in this project to run nginx_reverse_proxy_python_mysql_separated, as below:
 
 <pre>
 user@host:/home/user$ git clone https://github.com/huntercodexs/docker-series.git .
 user@host:/home/user$ cd docker-series
-user@host:/home/user/docker-series$ git checkout nginx_reverse_proxy_python_separated
-user@host:/home/user/docker-series$ cd nginx_reverse_proxy_python_separated
-user@host:/home/user/docker-series/nginx_reverse_proxy_python_separated$ docker network create nginx_reverse_proxy_python_separated_open_network
-user@host:/home/user/docker-series/nginx_reverse_proxy_python_separated$ docker-compose up --build (in first time)
-user@host:/home/user/docker-series/nginx_reverse_proxy_python_separated$ [Ctrl+C]
-user@host:/home/user/docker-series/nginx_reverse_proxy_python_separated$ docker-compose start (in the next times)
-user@host:/home/user/docker-series/nginx_reverse_proxy_python_separated$ docker-compose ps (check the containers status)
+user@host:/home/user/docker-series$ git checkout nginx_reverse_proxy_python_mysql_separated
+user@host:/home/user/docker-series$ cd nginx_reverse_proxy_python_mysql_separated
+user@host:/home/user/docker-series/nginx_reverse_proxy_python_mysql_separated$ docker network create nginx_reverse_proxy_python_mysql_separated_open_network
+user@host:/home/user/docker-series/nginx_reverse_proxy_python_mysql_separated$ docker-compose up --build (in first time)
+user@host:/home/user/docker-series/nginx_reverse_proxy_python_mysql_separated$ [Ctrl+C]
+user@host:/home/user/docker-series/nginx_reverse_proxy_python_mysql_separated$ docker-compose start (in the next times)
+user@host:/home/user/docker-series/nginx_reverse_proxy_python_mysql_separated$ docker-compose ps (check the containers status)
 </pre>
 
 - Run the applications in nginx_uwsgi_python container
@@ -59,7 +61,7 @@ user@host:/home/user/docker-series/nginx_reverse_proxy_python_separated$ docker-
 > IMPORTANT NOTE: If the automatically deploy not work in the builder will be necessary run the command below 
 
 <pre>
-user@host:/home/user/docker-series/nginx_reverse_proxy_python_separated$ docker exec -it nginx_uwsgi_python /bin/bash
+user@host:/home/user/docker-series/nginx_reverse_proxy_python_mysql_separated$ docker exec -it nginx_uwsgi_python /bin/bash
 root@25f8c997da0a:/home/python/applications# ./applications-deploy.sh
 </pre>
 
@@ -79,12 +81,12 @@ user@host:/home/user$ cd docker-series.git
 
 3- Change the current branch
 <pre>
-user@host:/home/user/docker-series$ git checkout nginx_reverse_proxy_python_separated
+user@host:/home/user/docker-series$ git checkout nginx_reverse_proxy_python_mysql_separated
 </pre>
 
-4- Access the nginx_reverse_proxy_python_separated folder
+4- Access the nginx_reverse_proxy_python_mysql_separated folder
 <pre>
-user@host:/home/user/docker-series$ cd nginx_reverse_proxy_python_separated
+user@host:/home/user/docker-series$ cd nginx_reverse_proxy_python_mysql_separated
 </pre>
 
 5- Check and set up the .env file
@@ -92,30 +94,28 @@ user@host:/home/user/docker-series$ cd nginx_reverse_proxy_python_separated
 6- Build the containers
 
 <pre>    
-user@host:/home/user/docker-series/nginx_reverse_proxy_python_separated$ docker network create nginx_reverse_proxy_python_separated_open_network
-user@host:/home/user/docker-series/nginx_reverse_proxy_python_separated$ docker-compose up --build
-user@host:/home/user/docker-series/nginx_reverse_proxy_python_separated$ [Ctrl+C]
-user@host:/home/user/docker-series/nginx_reverse_proxy_python_separated$ docker-compose start
+user@host:/home/user/docker-series/nginx_reverse_proxy_python_mysql_separated$ docker network create nginx_reverse_proxy_python_mysql_separated_open_network
+user@host:/home/user/docker-series/nginx_reverse_proxy_python_mysql_separated$ docker-compose up --build
+user@host:/home/user/docker-series/nginx_reverse_proxy_python_mysql_separated$ [Ctrl+C]
+user@host:/home/user/docker-series/nginx_reverse_proxy_python_mysql_separated$ docker-compose start
 </pre>
 
 Make sure that the result look like this
 <pre>
-user@host:/home/user/docker-series/nginx_reverse_proxy_python_separated$ docker-compose ps
+user@host:/home/user/docker-series/nginx_reverse_proxy_python_mysql_separated$ docker-compose ps
  Name                Command               State                                                                       Ports                                                                     
 -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-nginx     /docker-entrypoint.sh ngin ...   Up      80/tcp, 0.0.0.0:38085->85/tcp,:::38085->85/tcp                                                                                                
-python3   bash /home/python3/applica ...   Up      1800/tcp, 0.0.0.0:31800->31800/tcp,:::31800->31800/tcp, 0.0.0.0:35000->5000/tcp,:::35000->5000/tcp, 0.0.0.0:38080->8080/tcp,:::38080->8080/tcp
 </pre>
 
 7- Up the applications
 <pre>
-user@host:/home/user/docker-series/nginx_reverse_proxy_python_separated$ docker exec -it nginx_uwsgi_python /bin/bash
+user@host:/home/user/docker-series/nginx_reverse_proxy_python_mysql_separated$ docker exec -it nginx_uwsgi_python /bin/bash
 root@25f8c997da0a:/home/python/applications# ./applications-deploy.sh
 </pre>
 
 The result should be look like as below
 <pre>
- * * * * * * * * * * * * * * Welcome to APP1  * * * * * * * * * * * * * *
+ * * * * * * * * * * * * * * Welcome to APP1 + MYSQL 5.7  * * * * * * * * * * * * * *
  * Serving Flask app 'APP1'
  * Debug mode: on
  * Running on all addresses (0.0.0.0)
@@ -123,11 +123,11 @@ The result should be look like as below
  * Running on http://172.19.0.3:55001
 Press CTRL+C to quit
  * Restarting with stat
- * * * * * * * * * * * * * * Welcome to APP1  * * * * * * * * * * * * * *
+ * * * * * * * * * * * * * * Welcome to APP1 + MYSQL 5.7  * * * * * * * * * * * * * *
  * Debugger is active!
  * Debugger PIN: 136-930-991
 
-* * * * * * * * * * * * * * Welcome to APP2  * * * * * * * * * * * * * *
+* * * * * * * * * * * * * * Welcome to APP2 + MYSQL 8.0  * * * * * * * * * * * * * *
  * Serving Flask app 'APP2'
  * Debug mode: on
  * Running on all addresses (0.0.0.0)
@@ -135,14 +135,14 @@ Press CTRL+C to quit
  * Running on http://172.19.0.3:55002
 Press CTRL+C to quit
  * Restarting with stat
- * * * * * * * * * * * * * * Welcome to APP2  * * * * * * * * * * * * * *
+ * * * * * * * * * * * * * * Welcome to APP2 + MYSQL 8.0  * * * * * * * * * * * * * *
  * Debugger is active!
  * Debugger PIN: 136-930-991
 </pre>
 
 8- Check the process for applications running
 <pre>
-user@host:/home/user/docker-series/nginx_reverse_proxy_python_separated$ docker exec -it python3 /bin/bash
+user@host:/home/user/docker-series/nginx_reverse_proxy_python_mysql_separated$ docker exec -it python3 /bin/bash
 root@8c1ede295935:/home/python3/applications# ps -ef
 UID          PID    PPID  C STIME TTY          TIME CMD
 root           1       0  0 17:54 pts/0    00:00:00 bash /home/python3/applications/applications-deploy.sh
@@ -161,7 +161,7 @@ root@8c1ede295935:/home/python3/applications#
 [RESPONSE]
 {
   "message": "Everything fine !",
-  "response": "Welcome to APP1",
+  "response": "Welcome to APP1 + MYSQL 5.7",
   "status": 200
 }
 
@@ -169,7 +169,7 @@ root@8c1ede295935:/home/python3/applications#
 [RESPONSE]
 {
     "message": "Everything fine !",
-    "response": "Welcome to APP2",
+    "response": "Welcome to APP2 + MYSQL 8.0",
     "status": 200
 }
 </pre>

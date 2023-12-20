@@ -1,0 +1,133 @@
+{
+	"info": {
+		"_postman_id": "37f49764-615a-43d8-8775-383bd891a21c",
+		"name": "PYTHON - NGINX REVERSE PROXY MYSQL",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "17383820"
+	},
+	"item": [
+		{
+			"name": "App1",
+			"item": [
+				{
+					"name": "Welcome",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http:///localhost:38085/app1/welcome/",
+							"protocol": "http",
+							"path": [
+								"localhost:38085",
+								"app1",
+								"welcome",
+								""
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Create Table",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:38085/app1/create-table/",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "38085",
+							"path": [
+								"app1",
+								"create-table",
+								""
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Create User",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"name\": \"Marcos da Silva\",\n    \"email\": \"marcos@email.com\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:38085/app1/create-user/",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "38085",
+							"path": [
+								"app1",
+								"create-user",
+								""
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Read User",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:38085/app1/read-user/Marcos",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "38085",
+							"path": [
+								"app1",
+								"read-user",
+								"Marcos"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "App2",
+			"item": [
+				{
+					"name": "Welcome",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://192.168.0.174:38085/app2/",
+							"protocol": "http",
+							"host": [
+								"192",
+								"168",
+								"0",
+								"174"
+							],
+							"port": "38085",
+							"path": [
+								"app2",
+								""
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		}
+	]
+}

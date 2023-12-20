@@ -56,8 +56,6 @@ services:
         env_file: .env
         image: mysql:8.0
         container_name: mysql80
-        ports:
-            - ${MYSQL80_PORT}:3306
         volumes:
             - ./mysql-8.0/lib:/var/lib/mysql/
         environment:
@@ -74,8 +72,6 @@ services:
         env_file: .env
         image: mysql:5.7
         container_name: mysql57
-        ports:
-            - ${MYSQL57_PORT}:3306
         volumes:
             - ./mysql-5.7/lib:/var/lib/mysql/
         environment:
