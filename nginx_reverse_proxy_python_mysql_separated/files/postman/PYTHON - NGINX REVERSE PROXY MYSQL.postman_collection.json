@@ -110,18 +110,85 @@
 						"method": "GET",
 						"header": [],
 						"url": {
-							"raw": "http://192.168.0.174:38085/app2/",
+							"raw": "http:///localhost:38085/app2/welcome/",
+							"protocol": "http",
+							"path": [
+								"localhost:38085",
+								"app2",
+								"welcome",
+								""
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Create Table",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:38085/app2/create-table/",
 							"protocol": "http",
 							"host": [
-								"192",
-								"168",
-								"0",
-								"174"
+								"localhost"
 							],
 							"port": "38085",
 							"path": [
 								"app2",
+								"create-table",
 								""
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Create User",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"name\": \"Marcos da Silva\",\n    \"email\": \"marcos@email.com\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:38085/app2/create-user/",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "38085",
+							"path": [
+								"app2",
+								"create-user",
+								""
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Read User",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:38085/app2/read-user/Marcos",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "38085",
+							"path": [
+								"app2",
+								"read-user",
+								"Marcos"
 							]
 						}
 					},

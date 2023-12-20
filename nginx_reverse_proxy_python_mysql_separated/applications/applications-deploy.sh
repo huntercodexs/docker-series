@@ -6,7 +6,7 @@ pip install --upgrade pip
 pip install virtualenv
 
 #####################################################################################
-# SAMPLE APPLICATION 1
+# SAMPLE APPLICATION 1 - MYSQL 5.7
 #####################################################################################
 APP_NAME="app1"
 APP_ENV="app1env"
@@ -29,7 +29,7 @@ python3 "${APP_NAME}.py" &
 sleep 2
 
 #####################################################################################
-# SAMPLE APPLICATION 2
+# SAMPLE APPLICATION 2 - MYSQL 8.0
 #####################################################################################
 APP_NAME="app2"
 APP_ENV="app2env"
@@ -42,6 +42,7 @@ pip install wheel
 pip install gunicorn
 pip install flask
 pip install -U flask-cors
+pip install cryptography
 pip install mysql-connector-python
 pip install pymysql
 
