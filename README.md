@@ -1,4 +1,4 @@
-# NGINX + REVERSE PROXY + PYTHON (Separated Containers)
+# NGINX + REVERSE PROXY + PYTHON + MYSQL (Separated Containers)
 Dockerized project using Nginx Reverse Proxy and PYTHON
 
 ![banner.png](nginx_reverse_proxy_python_mysql_separated/files/media/banner.png)
@@ -6,14 +6,16 @@ Dockerized project using Nginx Reverse Proxy and PYTHON
 > WARNING: This is a development server. Do not use it in a production deployment. 
 > Use a production UWSGI server instead.
 
+> NOTE: The sample applications just serve to show how to use Mysql connection, it's not a real or serious project
+
 # Requisites
 
 - Nginx
 - Python
-- Mysql 5.7
-- Mysql 8.0
 - Postman
 - Shell Script
+- Mysql 5.7
+- Mysql 8.0
 
 
 # About
@@ -56,12 +58,12 @@ user@host:/home/user/docker-series/nginx_reverse_proxy_python_mysql_separated$ d
 user@host:/home/user/docker-series/nginx_reverse_proxy_python_mysql_separated$ docker-compose ps (check the containers status)
 </pre>
 
-- Run the applications in nginx_uwsgi_python container
+- Run the applications in python3 container
 
 > IMPORTANT NOTE: If the automatically deploy not work in the builder will be necessary run the command below 
 
 <pre>
-user@host:/home/user/docker-series/nginx_reverse_proxy_python_mysql_separated$ docker exec -it nginx_uwsgi_python /bin/bash
+user@host:/home/user/docker-series/nginx_reverse_proxy_python_mysql_separated$ docker exec -it python3 /bin/bash
 root@25f8c997da0a:/home/python/applications# ./applications-deploy.sh
 </pre>
 
@@ -105,11 +107,15 @@ Make sure that the result look like this
 user@host:/home/user/docker-series/nginx_reverse_proxy_python_mysql_separated$ docker-compose ps
  Name                Command               State                                                                       Ports                                                                     
 -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+mysql57   docker-entrypoint.sh mysqld      Up                                                                                                                                                    
+mysql80   docker-entrypoint.sh mysqld      Up                                                                                                                                                    
+nginx     /docker-entrypoint.sh ngin ...   Up      80/tcp, 0.0.0.0:38085->85/tcp,:::38085->85/tcp                                                                                                
+python3   bash /home/python3/applica ...   Up      1800/tcp, 0.0.0.0:31800->31800/tcp,:::31800->31800/tcp, 0.0.0.0:35000->5000/tcp,:::35000->5000/tcp, 0.0.0.0:38080->8080/tcp,:::38080->8080/tcp
 </pre>
 
 7- Up the applications
 <pre>
-user@host:/home/user/docker-series/nginx_reverse_proxy_python_mysql_separated$ docker exec -it nginx_uwsgi_python /bin/bash
+user@host:/home/user/docker-series/nginx_reverse_proxy_python_mysql_separated$ docker exec -it python3 /bin/bash
 root@25f8c997da0a:/home/python/applications# ./applications-deploy.sh
 </pre>
 
@@ -156,23 +162,46 @@ root@8c1ede295935:/home/python3/applications#
 </pre>
 
 8- Access and test - APIs
+
+APP1 + MYSQL 5.7
 <pre>
-[GET] http://localhost:38085/app1/
+[GET] http://localhost:38085/app1/welcome
 [RESPONSE]
 {
   "message": "Everything fine !",
   "response": "Welcome to APP1 + MYSQL 5.7",
   "status": 200
 }
+[POST] http://localhost:38085/app1/create-table
 
-[GET] http://localhost:38085/app2/
-[RESPONSE]
+[POST] http://localhost:38085/app1/create-user
 {
-    "message": "Everything fine !",
-    "response": "Welcome to APP2 + MYSQL 8.0",
-    "status": 200
+    "name": "Marcos da Silva",
+    "email": "marcos@email.com"
 }
+
+[GET] http://localhost:38085/app1/read-user/Marcos
 </pre>
 
-> Use the postman file to make a tests above: "PYTHON - NGINX REVERSE PROXY.postman_collection.json"
+APP2 + MYSQL 8.0
+<pre>
+[GET] http://localhost:38085/app2/welcome
+[RESPONSE]
+{
+  "message": "Everything fine !",
+  "response": "Welcome to APP2 + MYSQL 8.0",
+  "status": 200
+}
+[POST] http://localhost:38085/app2/create-table
+
+[POST] http://localhost:38085/app2/create-user
+{
+    "name": "Marcos da Silva",
+    "email": "marcos@email.com"
+}
+
+[GET] http://localhost:38085/app2/read-user/Marcos
+</pre>
+
+> TIP: Use the postman file to make a tests above: "PYTHON - NGINX REVERSE PROXY MYSQL.postman_collection.json"
 
