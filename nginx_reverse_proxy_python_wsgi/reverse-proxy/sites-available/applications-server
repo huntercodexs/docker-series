@@ -1,0 +1,13 @@
+server {
+    listen 85;
+    server_name nginx_reverse_proxy_python_separated nginx_reverse_proxy_python_separated.local;
+    include proxy.conf;
+
+    location /app1/ {
+        proxy_pass http://10.0.0.3:80/app1/api/welcome;
+    }
+
+    location /app2/ {
+        proxy_pass http://10.0.0.3:80/app2/api/welcome;
+    }
+}

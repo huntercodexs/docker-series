@@ -3,7 +3,7 @@ from flask_cors.decorator import cross_origin
 from source import *
 
 
-app = Flask("APP2")
+app = Flask(__name__)
 
 
 @app.route("/app2/api/welcome", methods=["GET"])

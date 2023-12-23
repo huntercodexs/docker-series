@@ -1,0 +1,13 @@
+server {
+    listen 80;
+    server_name nginx_reverse_proxy_python_separated nginx_reverse_proxy_python_separated.local;
+    include proxy.conf;
+
+    location /app1/ {
+        proxy_pass http://unix:/home/python3/applications/app1/app1.sock;
+    }
+
+    location /app2/ {
+        proxy_pass http://unix:/home/python3/applications/app2/app2.sock;
+    }
+}
