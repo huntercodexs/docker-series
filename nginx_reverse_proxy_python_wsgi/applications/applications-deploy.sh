@@ -24,20 +24,23 @@ APP_PORT="55001"
 cd "${HOME_APPS}/${APP_NAME}/"
 python3 -m venv ${APP_ENV}
 source "${APP_ENV}/bin/activate"
-pip install -r requirements.txt
+#pip install -r requirements.txt
 pip install wheel
 pip install gunicorn
 pip install flask
 pip install -U flask-cors
+sleep 2
 cp "${APP_NAME}.service" "${SYSTEMD_DIR}/${APP_NAME}.service"
 cp "${APP_NAME}.service" "${LIB_DIR}/${APP_NAME}.service"
 ln -s "${LIB_DIR}/${APP_NAME}.service" "${SERVICE_DIR}/${APP_NAME}.service"
-#systemctl daemon-reload
+sleep 2
 #service ${APP_NAME} start
 #service ${APP_NAME} status
+#systemctl daemon-reload
 #ufw allow ${APP_PORT}
 #ufw delete allow ${APP_PORT}
 python3 "${APP_NAME}.py" &
+sleep 2
 deactivate
 echo "...OK"
 #------------------------------------------------------------------------------------
@@ -53,20 +56,23 @@ APP_PORT="55002"
 cd "${HOME_APPS}/${APP_NAME}/"
 python3 -m venv ${APP_ENV}
 source "${APP_ENV}/bin/activate"
-pip install -r requirements.txt
+#pip install -r requirements.txt
 pip install wheel
 pip install gunicorn
 pip install flask
 pip install -U flask-cors
+sleep 2
 cp "${APP_NAME}.service" "${SYSTEMD_DIR}/${APP_NAME}.service"
 cp "${APP_NAME}.service" "${LIB_DIR}/${APP_NAME}.service"
 ln -s "${LIB_DIR}/${APP_NAME}.service" "${SERVICE_DIR}/${APP_NAME}.service"
-#systemctl daemon-reload
+sleep 2
 #service ${APP_NAME} start
 #service ${APP_NAME} status
+#systemctl daemon-reload
 #ufw allow ${APP_PORT}
 #ufw delete allow ${APP_PORT}
 python3 "${APP_NAME}.py" &
+sleep 2
 deactivate
 echo "...OK"
 #------------------------------------------------------------------------------------

@@ -6,7 +6,7 @@ Dockerized project using Nginx Reverse Proxy and PYTHON
 > WARNING: This is a development server. Do not use it in a production deployment. 
 > Use a production WSGI server instead.
 
-> IMPORTANT: Check the sample service in the path files/sample/app1-sample-unix-socket.zip, it can be used to get
+> IMPORTANT: Check the sample service in the path files/sample/app1-sample-unix-socket-nginx.zip, it can be used to get
 > more details about the UNIX SOCKET protocol and understand in the better way how to use this resource
 
 # Requisites
