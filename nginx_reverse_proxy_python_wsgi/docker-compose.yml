@@ -2,64 +2,32 @@ version: "3.7"
 services:
     
     #----------------------------------------------------------------------------------------
-    reverse-proxy:
+    nginx-reverse-proxy:
         env_file: .env
-        container_name: reverse-proxy
+        container_name: nginx-reverse-proxy
         image: nginx:latest
         privileged: true
         ports:
             - ${NGINX_PORT}:85
+        environment:
+            RESTRICT_SERVER_IP: 192.168.0.204
         volumes:
-            - ./reverse-proxy/htdocs/:/var/www/htdocs/
-            - ./reverse-proxy/logs/:/etc/nginx/logs/
-            - ./reverse-proxy/logs/:/var/log/nginx/
-            - ./reverse-proxy/proxy.conf:/etc/nginx/proxy.conf
-            - ./reverse-proxy/fastcgi.conf:/etc/nginx/fastcgi.conf
-            - ./reverse-proxy/mime.types:/etc/nginx/mime.types
-            - ./reverse-proxy/nginx.conf:/etc/nginx/nginx.conf
-            - ./reverse-proxy/conf.d/:/etc/nginx/conf.d/
+            - ./nginx-reverse-proxy/htdocs/:/var/www/htdocs/
+            - ./nginx-reverse-proxy/logs/:/etc/nginx/logs/
+            - ./nginx-reverse-proxy/logs/:/var/log/nginx/
+            - ./nginx-reverse-proxy/proxy.conf:/etc/nginx/proxy.conf
+            - ./nginx-reverse-proxy/fastcgi.conf:/etc/nginx/fastcgi.conf
+            - ./nginx-reverse-proxy/mime.types:/etc/nginx/mime.types
+            - ./nginx-reverse-proxy/nginx.conf:/etc/nginx/nginx.conf
+            - ./nginx-reverse-proxy/conf.d/:/etc/nginx/conf.d/
         working_dir: /etc/nginx
         tty: true
         networks:
             default:
             nginx_reverse_proxy_python_wsgi_open_network:
-            nginx_reverse_proxy_python_wsgi_restrict_network:
-                ipv4_address: 10.0.0.2
-    #----------------------------------------------------------------------------------------
-    ubuntu-nginx-python3:
-        env_file: .env
-        container_name: ubuntu-nginx-python3
-        build:
-            context: ./
-            dockerfile: ubuntu-nginx-python3/ubuntu-nginx-python3.dockerfile
-        privileged: true
-        volumes:
-            - ./ubuntu-nginx-python3/nginx/htdocs/:/var/www/htdocs/
-            - ./ubuntu-nginx-python3/nginx/logs/:/etc/nginx/logs/
-            - ./ubuntu-nginx-python3/nginx/logs/:/var/log/nginx/
-            - ./ubuntu-nginx-python3/nginx/proxy.conf:/etc/nginx/proxy.conf
-            - ./ubuntu-nginx-python3/nginx/fastcgi.conf:/etc/nginx/fastcgi.conf
-            - ./ubuntu-nginx-python3/nginx/mime.types:/etc/nginx/mime.types
-            - ./ubuntu-nginx-python3/nginx/nginx.conf:/etc/nginx/nginx.conf
-            - ./ubuntu-nginx-python3/nginx/conf.d/:/etc/nginx/conf.d/
-            - ./applications/:/home/python3/applications/
-        working_dir: /etc/nginx
-        tty: true
-        command: "bash /home/python3/applications/applications-deploy.sh"
-        networks:
-            nginx_reverse_proxy_python_wsgi_open_network:
-            nginx_reverse_proxy_python_wsgi_restrict_network:
-                ipv4_address: 10.0.0.3
     #----------------------------------------------------------------------------------------
     
 networks:
     nginx_reverse_proxy_python_wsgi_open_network:
         external: true
-    nginx_reverse_proxy_python_wsgi_restrict_network:
-        external: false
-        internal: true
-        driver: bridge
-        ipam:
-            config:
-                - subnet: 10.0.0.0/16
 

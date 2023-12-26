@@ -1,10 +1,7 @@
-# NGINX + REVERSE PROXY + PYTHON + UWSGI (SERVICE)
+# NGINX + REVERSE PROXY + PYTHON + UWSGI (SERVICE) + RESTRICT SERVER
 Dockerized project using Nginx Reverse Proxy and PYTHON
 
 ![banner.png](nginx_reverse_proxy_python_wsgi/files/media/banner.png)
-
-> WARNING: This is a development server. Do not use it in a production deployment. 
-> Use a production WSGI server instead.
 
 > IMPORTANT: Check the sample service in the path files/sample/app1-sample-unix-socket-nginx.zip, it can be used to get
 > more details about the UNIX SOCKET protocol and understand in the better way how to use this resource
