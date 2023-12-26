@@ -49,6 +49,8 @@ fi
 
 echo "===================================================================="
 echo "NGINX SERVER IS STARTING"
+sudo service nginx stop
+sleep 2
 sudo service nginx start
 sleep 2
 sudo service nginx status

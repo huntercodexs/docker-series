@@ -10,7 +10,7 @@ services:
         ports:
             - ${NGINX_PORT}:85
         environment:
-            RESTRICT_SERVER_IP: 192.168.0.204
+            RESTRICT_SERVER_IP: ${RESTRICT_SERVER_IP}
         volumes:
             - ./nginx-reverse-proxy/htdocs/:/var/www/htdocs/
             - ./nginx-reverse-proxy/logs/:/etc/nginx/logs/
