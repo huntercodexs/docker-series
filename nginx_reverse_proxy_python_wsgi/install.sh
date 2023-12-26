@@ -17,6 +17,9 @@ read INSTALL_PYTHON
 if [[ "${INSTALL_PYTHON}" == "y" ]]; then
     sudo apt install -y python3-pip python3-dev build-essential libssl-dev libffi-dev python3-setuptools
     sudo apt install -y python3-venv
+    pip install --upgrade pip
+    pip3 install flask
+    pip3 install -U flask-cors
 fi
 
 ##########
