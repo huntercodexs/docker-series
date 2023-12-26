@@ -2,6 +2,7 @@
 
 source configure.sh
 
+echo "===================================================================="
 echo "INSTALL IS STARTING..."
 sleep 2
 
@@ -9,6 +10,7 @@ sleep 2
 # PYTHON 3
 #############
 
+echo "===================================================================="
 echo -n "INSTALL PYTHON ? Press [y=yes] [Enter=no]: "
 read INSTALL_PYTHON
 
@@ -21,12 +23,14 @@ fi
 # NGINX
 ##########
 
+echo "===================================================================="
 echo -n "INSTALL NGINX ? Press [y=yes] [Enter=no]: "
 read INSTALL_NGINX
 if [[ "${INSTALL_NGINX}" == "y" ]]; then
     sudo apt-get install -y nginx
 fi
 
+echo "===================================================================="
 echo -n "CONFIGURE NGINX ? Press [y=yes] [Enter=no]: "
 read CONFIGURE_NGINX
 if [[ "${CONFIGURE_NGINX}" == "y" ]]; then
@@ -40,6 +44,7 @@ if [[ "${CONFIGURE_NGINX}" == "y" ]]; then
     sudo cp -r ./restrict-server/nginx/htdocs/ /var/www/htdocs/
 fi
 
+echo "===================================================================="
 echo "NGINX SERVER IS STARTING"
 sudo service nginx start
 sleep 2
@@ -50,6 +55,7 @@ echo "...DONE"
 # DOCKER
 ###########
 
+echo "===================================================================="
 echo -n "BUILD DOCKER ? Press [y=yes] [Enter=no]: "
 read BUILD_DOCKER
 if [[ "${BUILD_DOCKER}" == "y" ]]; then
@@ -64,11 +70,14 @@ docker-compose start
 docker-compose ps
 
 sleep 2
-echo "----------------"
 
 ########################
 # APPLICATIONS INSTALL
 ########################
+
+echo "===================================================================="
+echo "APPLICATION IS STARTING..."
+sleep 1
 
 mkdir -p $APPS_PATH
 chmod 777 $APPS_PATH
@@ -78,7 +87,8 @@ pip install virtualenv
 
 for ((i = 0; i < ${#APPS[@]}; i++)); do
 
-    echo "INSTALL ${APPS[$i]} IS STARTING"
+    echo "--------------------------------------------------------------------"
+    echo "Application ${APPS[$i]}..."
     APP_NAME="${APPS[$i]}"
     APP_ENV=".${APPS[$i]}env"
 
@@ -122,9 +132,11 @@ for ((i = 0; i < ${#APPS[@]}; i++)); do
 
 done
 
+echo "===================================================================="
 echo "Finishing all process"
 sudo systemctl daemon-reload
 sleep 2
 
+echo "===================================================================="
 echo "Everything is fine !"
 exit 0
