@@ -10,6 +10,15 @@ Dockerized project using Nginx Reverse Proxy and PYTHON
 > careful with the configuration and the target infrastructure, because one of the NGINX server should be protected by an
 > internal LAN.
 
+# About
+
+This project show how works the reverse proxy using NGINX and UNIX Socket, you can see the flow in the image below, 
+where can be seen the infrastructure with two machines and one of these are hosted and running all the services 
+that were written in python. Pay attention a care about the accessibility to the RESTRICT LAN that cannot be accessed 
+by out of this LAN, just the NGINX REVERSE PROXY SERVER knows about this restrict and protected internal NGINX.
+
+![nginx_reverse_proxy_python_wsgi.png](nginx_reverse_proxy_python_wsgi/files/diagrams/nginx_reverse_proxy_python_wsgi.png)
+
 # Requisites
 
 - Nginx
