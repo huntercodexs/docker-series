@@ -22,6 +22,7 @@ see the diagram that explain with more details:
 > NOTE: Using docker is not possible execute systemctl as a service manager, so give a look in th file 
 > nginx_reverse_proxy_python_separated/applications/applications-deploy.sh and see with more details this issue.
 
+![nginx_reverse_proxy_python_separated.png](nginx_reverse_proxy_python_separated/files/diagrams/nginx_reverse_proxy_python_separated.png)
 
 # Usage
 
