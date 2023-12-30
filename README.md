@@ -136,13 +136,15 @@ docker-compose unpause
 
 > Acesse a pasta /self-container deste reporitorio para rodar algum container, exemplo: apache2
 
-- Etapas para rodar um container
+- Etapas para rodar um container (exemplo usando apache2)
 
 <pre>
 user@host:/home/user$ git clone https://github.com/huntercodexs/docker-series.git .
-user@host:/home/user$ cd docker-series/self-containers/apache2
-user@host:/home/user/docker-series/self-containers$ docker-compose up --build (in first time)
-user@host:/home/user/docker-series/self-containers$ docker-compose start (in the next times)
+user@host:/home/user$ cd docker-series
+user@host:/home/user/docker-series$ cd self-containers/apache2
+user@host:/home/user/docker-series/self-containers/apache2$ docker-compose up --build
+user@host:/home/user/docker-series/self-containers/apache2$ [Ctrl+C]
+user@host:/home/user/docker-series/self-containers/apache2$ docker-compose start
 </pre>
 
 # Configurações Docker via Docker-Compose

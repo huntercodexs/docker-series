@@ -137,13 +137,15 @@ docker-compose unpause
 
 > Access the folder path /self-container in this repository to run any container, by example: apache2
 
-- Steps do run one container
+- Steps do run one container (using apache2)
 
 <pre>
 user@host:/home/user$ git clone https://github.com/huntercodexs/docker-series.git .
-user@host:/home/user$ cd docker-series/self-containers/apache2
-user@host:/home/user/docker-series/self-containers$ docker-compose up --build (in first time)
-user@host:/home/user/docker-series/self-containers$ docker-compose start (in the next times)
+user@host:/home/user$ cd docker-series
+user@host:/home/user/docker-series$ cd self-containers/apache2
+user@host:/home/user/docker-series/self-containers/apache2$ docker-compose up --build
+user@host:/home/user/docker-series/self-containers/apache2$ [Ctrl+C]
+user@host:/home/user/docker-series/self-containers/apache2$ docker-compose start
 </pre>
 
 # Dockers Configurations via Docker-Compose
