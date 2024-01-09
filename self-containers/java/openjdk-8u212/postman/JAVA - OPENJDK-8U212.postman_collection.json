@@ -1,0 +1,76 @@
+{
+	"info": {
+		"_postman_id": "5648bf3a-1500-4f10-8419-279067e90e93",
+		"name": "JAVA - OPENJDK-8U212",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "17383820"
+	},
+	"item": [
+		{
+			"name": "Users",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:38801/api/v1/default/users",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "38801",
+					"path": [
+						"api",
+						"v1",
+						"default",
+						"users"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Sales",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:38802/api/v1/business/sales",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "38802",
+					"path": [
+						"api",
+						"v1",
+						"business",
+						"sales"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Supplies",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:38803/api/v1/erp/supplies",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "38803",
+					"path": [
+						"api",
+						"v1",
+						"erp",
+						"supplies"
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}
