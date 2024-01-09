@@ -1,42 +1,53 @@
-
 # JAVA (openjdk-1701)
 
 - How to run openjdk-1701 from this project use
 
 <pre>
-git clone https://github.com/huntercodexs/docker-series.git .
-cd self-containers/openjdk-1701
-docker-compose up --build (in first time)
-docker-compose start (in the next times)
+user@host:/home/user$ git clone https://github.com/huntercodexs/docker-series.git .
+user@host:/home/user$ cd docker-series/self-containers/openjdk-1701
+user@host:/home/user/docker-series/self-containers/openjdk-1701$ docker-compose up --build (in first time)
+user@host:/home/user/docker-series/self-containers/openjdk-1701$ docker-compose start (in the next times)
 </pre>
 
-- Access the openjdk-1701 application 
-
-> NOTE: BEFORE RUN GENERATE THE JAR FILE FROM PROJECT simple-api-demo !
+- Before build and start project set the microservices in script below
 
 <pre>
-After changes in the current project and generated jar file, copy it into docker container openjdk
-and run the command "docker-compose up openjdk-1701" to feature update or execute directly command as
-
-docker exec -it openjdk-1701 java -jar /home/openjdk1701/simple-api-demo/SIMPLE-API-DEMO-22.01.1-SNAPSHOT.jar
-
-request sample: [GET] http://${SERVER_IP}:31890/api/simple-api-demo
-response: OK, it is working fine !
-
+- microservices-start.sh (self-containers/java/openjdk-1701/microservices/microservices-start.sh)
 </pre>
 
-- POSTMAN FILE
+- Run the microservices in openjdk-1701 container
 
-JAVA - Simple API Demo.postman_collection.json
+<pre>
+user@host:/home/user/docker-series/self-containers/java/openjdk-1701$ docker exec -it openjdk-1701 ./microservices-start.sh
+</pre>
 
-- HELP
+or
+
+<pre>
+user@host:/home/user/docker-series/self-containers/java/openjdk-17.0.1$ docker exec -it openjdk-1701 /bin/bash
+root@25f8c997da0a:/home/openjdk1701# ./microservices-start.sh
+root@25f8c997da0a:/home/openjdk1701# ps -ef
+UID          PID    PPID  C STIME TTY          TIME CMD
+root           1       0  0 12:48 pts/0    00:00:00 bash
+root           7       0  0 12:48 pts/1    00:00:00 /bin/bash
+root          15       1 63 12:49 pts/1    00:00:11 java -jar SIMPLE-API-USERS-22.01.1-SNAPSHOT.jar
+root          16       1 63 12:49 pts/1    00:00:11 java -jar SIMPLE-API-SALES-22.01.1-SNAPSHOT.jar
+root          17       1 55 12:49 pts/1    00:00:09 java -jar SIMPLE-API-SUPPLIES-22.01.1-SNAPSHOT.jar
+</pre>
+
+> Use the postman file to make a tests above: "JAVA - OPENJDK-1701.postman_collection.json"
+
+> The microservices are localized in this project on folder self-containers/java/openjdk-17.0.1/microservices
+
+
+# Support
 
 To install more than one version of the JDKs in your Linux environment develop, use this hints:
 
 - Download the file: jdk-17.0.1_linux-x64_bin.tar.gz
 <pre>
 ** Login is required **
-https://www.oracle.com/br/java/technologies/javase/javase8u211-later-archive-downloads.html
+https://www.oracle.com/br/java/technologies/javase/javase1701-later-archive-downloads.html
 </pre>
 
 - Unzip the file downloaded

@@ -4,29 +4,18 @@ services:
     #----------------------------------------------------------------------------------------
     openjdk-1701:
         env_file: .env
-        #Use image
-        #image: openjdk:17.0.1
         container_name: openjdk-1701
-        #Use Builder
         build:
             context: .
             dockerfile: openjdk-1701.dockerfile
         ports:
-            - ${OPENJDK_1701_PORT}:31890
-        volumes:
-            - type: bind
-              source: ./simple-api-demo/target/SIMPLE-API-DEMO-22.01.1-SNAPSHOT.jar
-              target: /home/openjdk1701/simple-api-demo/SIMPLE-API-DEMO-22.01.1-SNAPSHOT.jar
-              read_only: false
-            - type: bind
-              source: ./simple-api-demo/src/main/resources/application.properties
-              target: /home/openjdk1701/simple-api-demo/application.properties
-              read_only: false
+            - ${OPENJDK_1701_PORT1}:38801
+            - ${OPENJDK_1701_PORT2}:38802
+            - ${OPENJDK_1701_PORT3}:38803
         tty: true
         networks:
             - default
             - open_network
-        command: "java -jar /home/openjdk1701/simple-api-demo/SIMPLE-API-DEMO-22.01.1-SNAPSHOT.jar"
     #----------------------------------------------------------------------------------------
 
 networks:
