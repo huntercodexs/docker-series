@@ -61,3 +61,4 @@ self-containers/oracle/oracleData/enterprise/**
 /self-containers/ssl-generator/share/ssl/*.key
 /self-containers/ssl-generator/share/ssl/*.crt
 /self-containers/sftp/uploads/*.txt
+/self-containers/jenkins/latest/share/configuration/
