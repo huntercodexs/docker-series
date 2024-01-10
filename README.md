@@ -1,7 +1,7 @@
-# ELK + ZIPKIN
-Using ELK stack together Zipkin for a complete trace environment
+# ELK
+Using complete ELK stack
 
-![banner.png](elk_zipkin_v1/files/media/banner.png)
+![banner.png](elk/files/media/banner.png)
 
 > NOTE: This branch offers only a containers
 
@@ -19,7 +19,6 @@ Please use the branch selection to access others configurations for your need an
 - Elasticsearch
 - Kibana
 - Logstash
-- Zipkin
 
 
 # Usage
@@ -27,13 +26,13 @@ Please use the branch selection to access others configurations for your need an
 <pre>
 user@host:/home/user$ git clone https://github.com/huntercodexs/docker-series.git .
 user@host:/home/user$ cd docker-series
-user@host:/home/user/docker-series$ git checkout elk_zipkin_v1
-user@host:/home/user/docker-series$ cd elk_zipkin_v1
-user@host:/home/user/docker-series/elk_zipkin_v1$ docker network create elk_zipkin_v1_open_network
-user@host:/home/user/docker-series/elk_zipkin_v1$ docker-compose up --build (in first time)
-user@host:/home/user/docker-series/elk_zipkin_v1$ [Ctrl+C]
-user@host:/home/user/docker-series/elk_zipkin_v1$ docker-compose start (in the next times)
-user@host:/home/user/docker-series/elk_zipkin_v1$ docker-compose ps (check the containers status)
+user@host:/home/user/docker-series$ git checkout elk
+user@host:/home/user/docker-series$ cd elk
+user@host:/home/user/docker-series/elk$ docker network create elk_open_network
+user@host:/home/user/docker-series/elk$ docker-compose up --build (in first time)
+user@host:/home/user/docker-series/elk$ [Ctrl+C]
+user@host:/home/user/docker-series/elk$ docker-compose start (in the next times)
+user@host:/home/user/docker-series/elk$ docker-compose ps (check the containers status)
 </pre>
 
 
@@ -53,12 +52,12 @@ user@host:/home/user$ cd docker-series.git
 
 3- Change the current branch
 <pre>
-user@host:/home/user/docker-series$ git checkout elk_zipkin_v1
+user@host:/home/user/docker-series$ git checkout elk
 </pre>
 
-4- Access the elk_zipkin_v1 folder
+4- Access the elk folder
 <pre>
-user@host:/home/user/docker-series$ cd elk_zipkin_v1
+user@host:/home/user/docker-series$ cd elk
 </pre>
 
 5- Check and set up the .env file
@@ -66,19 +65,18 @@ user@host:/home/user/docker-series$ cd elk_zipkin_v1
 6- Build the containers
 
 <pre>    
-user@host:/home/user/docker-series/elk_zipkin_v1$ docker network create elk_zipkin_v1_open_network
-user@host:/home/user/docker-series/elk_zipkin_v1$ docker-compose up --build
+user@host:/home/user/docker-series/elk$ docker network create elk_open_network
+user@host:/home/user/docker-series/elk$ docker-compose up --build
 </pre>
 
 Make sure that the result look like this
 <pre>
-user@host:/home/user/docker-series/elk_zipkin_v1$ docker-compose ps
+user@host:/home/user/docker-series/elk$ docker-compose ps
     Name                   Command                   State                                                                                                             Ports                                                                                                      
 ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 elasticsearch   /tini -- /usr/local/bin/do ...   Up               0.0.0.0:9200->9200/tcp,:::9200->9200/tcp, 0.0.0.0:9300->9300/tcp,:::9300->9300/tcp                                                                                                                              
 kibana          /usr/local/bin/dumb-init - ...   Up               0.0.0.0:5601->5601/tcp,:::5601->5601/tcp                                                                                                                                                                        
 logstash        /usr/local/bin/docker-entr ...   Up               0.0.0.0:5000->5000/tcp,:::5000->5000/tcp, 0.0.0.0:5000->5000/udp,:::5000->5000/udp, 0.0.0.0:5044->5044/tcp,:::5044->5044/tcp, 0.0.0.0:8080->8080/tcp,:::8080->8080/tcp, 0.0.0.0:9600->9600/tcp,:::9600->9600/tcp
-zipkin          start-zipkin                     Up (unhealthy)   9410/tcp, 0.0.0.0:9411->9411/tcp,:::9411->9411/tcp
 </pre>
 
 7- Test the containers
@@ -99,18 +97,18 @@ ELASTIC_PASSWORD
 </pre>
 
 Example
-![kibana-dashboard-dev-tools-example.png](elk_zipkin_v1/files/media/kibana-dashboard-dev-tools-example.png)
+![kibana-dashboard-dev-tools-example.png](elk/files/media/kibana-dashboard-dev-tools-example.png)
 
 Queries
 <pre>
-GET tcp-logstash-docker-elk-zipkin-v1/_search
-GET http-logstash-docker-elk-zipkin-v1/_search
-GET postman-tests-elk-zipkin-v1/_search
+GET tcp-logstash-docker-elk/_search
+GET http-logstash-docker-elk/_search
+GET postman-tests-elk/_search
 </pre>
 
 Indexes
 <pre>
-elk_zipkin_v1/logstash/pipeline/pipelineio.conf
+elk/logstash/pipeline/pipelineio.conf
 </pre>
 
 Logstash
@@ -118,30 +116,14 @@ Logstash
 http://localhost:8080
 </pre>
 
-Zipkin
-<pre>
-http://localhost:9411
-</pre>
-
 
 # Helper and References
 
-Access zipkin container
-<pre>
-user@host:/home/user/docker-series/elk_zipkin_v1$ docker exec -it zipkin sh
-</pre>
-
 Make a query in the Kibana Dashboard
 <pre>
-GET tcp-logstash-docker-elk-zipkin-v1/_search
+GET tcp-logstash-docker-elk/_search
 
-GET http-logstash-docker-elk-zipkin-v1/_search
+GET http-logstash-docker-elk/_search
 
-GET postman-tests-elk-zipkin-v1/_search
+GET postman-tests-elk/_search
 </pre>
-
-
-# Sample Usage (Java Project)
-
-Use the follow repository https://github.com/huntercodexs/zipkin-tracing-demo to create tests
-

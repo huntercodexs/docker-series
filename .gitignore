@@ -16,4 +16,4 @@
 /trash/
 
 ## ELASTIC SEARCH
-/elk_zipkin_v1/elasticsearch/data/nodes/**
+/elk/elasticsearch/data/nodes/**

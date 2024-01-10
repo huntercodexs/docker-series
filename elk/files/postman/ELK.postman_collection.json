@@ -1,7 +1,7 @@
 {
 	"info": {
 		"_postman_id": "640e3893-402f-4e3c-903b-2b7e32479032",
-		"name": "DOCKER-ELK",
+		"name": "ELK",
 		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
 	},
 	"item": [
