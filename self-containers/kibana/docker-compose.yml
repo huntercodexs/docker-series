@@ -19,8 +19,6 @@ services:
             ELASTICSEARCH_USERNAME: ${ELASTIC_USERNAME}
             KIBANA_PASSWORD: ${KIBANA_PASSWORD}
             KIBANA_SYSTEM_PASSWORD: ${KIBANA_SYSTEM_PASSWORD}
-        depends_on:
-            - elasticsearch
         networks:
             - default
             - open_network
