@@ -269,6 +269,7 @@ user@host:/home/user/docker-series/self-containers/apache2$ docker-compose start
 - <a href="https://github.com/huntercodexs/docker-series/tree/apache2_php8">Apache2 + PHP8</a> ![img.png](./self-containers/files/midias/check-green.png)
 - <a href="https://github.com/huntercodexs/docker-series/tree/certificate_authorities">Certificate Authorities</a> ![img.png](./self-containers/files/midias/check-green.png)
 - <a href="https://github.com/huntercodexs/docker-series/tree/ec2_java_mysql_rabbitmq">EC2 Java + Mysql + Rabbit</a> ![img.png](./self-containers/files/midias/check-green.png)
+- <a href="https://github.com/huntercodexs/docker-series/tree/elk">ELK</a> ![img.png](./self-containers/files/midias/check-green.png)
 - <a href="https://github.com/huntercodexs/docker-series/tree/elk_prometheus_grafana_v1">ELK + Prometheus + Grafana</a> ![img.png](./self-containers/files/midias/check-green.png)
 - <a href="https://github.com/huntercodexs/docker-series/tree/elk_prometheus_grafana_zipkin_mysql_v1">ELK + Prometheus + Grafana + Zipkin + Mysql</a> ![img.png](./self-containers/files/midias/check-green.png)
 - <a href="https://github.com/huntercodexs/docker-series/tree/elk_prometheus_grafana_zipkin_v1">ELK + Prometheus + Grafana + Zipkin</a> ![img.png](./self-containers/files/midias/check-green.png)
