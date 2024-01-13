@@ -1,25 +1,51 @@
 ## GENERAL FILE EXTENSIONS
 *-tar
-*.jar
 *.jar.original
 *.deb
 *.exec
 *.run
 *.log
 
-## SPECIFIC FILES
-sources-docker-compose.yml
-/ec2_java_mysql_rabbitmq/jre/**
-/ec2_java_mysql_rabbitmq/mysql8/**
-/ec2_java_mysql_rabbitmq/shared/**
-/ec2_java_mysql_rabbitmq/rabbitmq/**
-/ec2_java_mysql_rabbitmq/app/**/**/application.properties
-
 ## GENERAL DIR
 .idea/
 trash/
 nodes/
 node_modules/
-/docker-elk/
-/elkstack792/
-/micro-services/
+
+## SPECIFIC FILES AND DIRS
+/ec2_java_mysql_rabbitmq/mysql8/undo_001
+/ec2_java_mysql_rabbitmq/mysql8/binlog.index
+/ec2_java_mysql_rabbitmq/mysql8/binlog.00000**
+/ec2_java_mysql_rabbitmq/mysql8/performance_schema/
+/ec2_java_mysql_rabbitmq/mysql8/sys/
+/ec2_java_mysql_rabbitmq/mysql8/mysql.sock
+/ec2_java_mysql_rabbitmq/mysql8/binlog.000004
+/ec2_java_mysql_rabbitmq/mysql8/ca-key.pem
+/ec2_java_mysql_rabbitmq/mysql8/binlog.000006
+/ec2_java_mysql_rabbitmq/mysql8/server-key.pem
+/ec2_java_mysql_rabbitmq/mysql8/ibdata1
+/ec2_java_mysql_rabbitmq/mysql8/auto.cnf
+/ec2_java_mysql_rabbitmq/mysql8/public_key.pem
+/ec2_java_mysql_rabbitmq/mysql8/mysql/
+/ec2_java_mysql_rabbitmq/mysql8/undo_002
+/ec2_java_mysql_rabbitmq/mysql8/client-cert.pem
+/ec2_java_mysql_rabbitmq/mysql8/binlog.000005
+/ec2_java_mysql_rabbitmq/mysql8/database/
+/ec2_java_mysql_rabbitmq/mysql8/private_key.pem
+/ec2_java_mysql_rabbitmq/mysql8/mysql.ibd
+/ec2_java_mysql_rabbitmq/mysql8/#innodb_temp/
+/ec2_java_mysql_rabbitmq/mysql8/binlog.000001
+/ec2_java_mysql_rabbitmq/mysql8/#innodb_redo/
+/ec2_java_mysql_rabbitmq/mysql8/ib_buffer_pool
+/ec2_java_mysql_rabbitmq/mysql8/ca.pem
+/ec2_java_mysql_rabbitmq/mysql8/#ib_16384_1.dblwr
+/ec2_java_mysql_rabbitmq/mysql8/binlog.000002
+/ec2_java_mysql_rabbitmq/mysql8/client-key.pem
+/ec2_java_mysql_rabbitmq/mysql8/#ib_16384_0.dblwr
+/ec2_java_mysql_rabbitmq/mysql8/server-cert.pem
+/ec2_java_mysql_rabbitmq/mysql8/binlog.000007
+/ec2_java_mysql_rabbitmq/mysql8/6e1aa1e2f791.err
+
+## APPLICATIONS
+/ec2_java_mysql_rabbitmq/app/application-demo/APPLICATION-DEMO.log**
+/ec2_java_mysql_rabbitmq/app/rabbitmq-reader/RABBITMQ-READER.log**
