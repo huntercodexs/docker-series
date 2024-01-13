@@ -1,0 +1,87 @@
+{
+	"info": {
+		"_postman_id": "31c4dfee-a292-4e73-82c5-fbb31f35c88c",
+		"name": "EC2_JAVA_MYSQL_RABBITMQ",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "17383820"
+	},
+	"item": [
+		{
+			"name": "CREATE PURCHASE",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://192.168.0.204:8765/producer2-demo/api/v1/purchase",
+					"protocol": "http",
+					"host": [
+						"192",
+						"168",
+						"0",
+						"204"
+					],
+					"port": "8765",
+					"path": [
+						"producer2-demo",
+						"api",
+						"v1",
+						"purchase"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "GENERATE ORDER",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://192.168.0.204:8765/producer2-demo/api/v1/order/{purchase_id}",
+					"protocol": "http",
+					"host": [
+						"192",
+						"168",
+						"0",
+						"204"
+					],
+					"port": "8765",
+					"path": [
+						"producer2-demo",
+						"api",
+						"v1",
+						"order",
+						"{purchase_id}"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "DISPATCH ORDER",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://192.168.0.204:8765/producer2-demo/api/v1/dispatch/{purchase_id}",
+					"protocol": "http",
+					"host": [
+						"192",
+						"168",
+						"0",
+						"204"
+					],
+					"port": "8765",
+					"path": [
+						"producer2-demo",
+						"api",
+						"v1",
+						"dispatch",
+						"{purchase_id}"
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}

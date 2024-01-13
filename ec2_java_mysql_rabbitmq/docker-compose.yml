@@ -2,133 +2,155 @@ version: "3.7"
 services:
     
     #----------------------------------------------------------------------------------------
-    ec2_service_discovery:
+    ec2-service-discovery:
         env_file: .env
-        container_name: ec2_service_discovery
+        container_name: ec2-service-discovery
         build:
             context: .
-            dockerfile: ec2_service_discovery.dockerfile
+            dockerfile: ec2-service-discovery.dockerfile
         ports:
             - ${SERVICE_DISCOVERY_PORT}:8761
         privileged: true
         tty: true
         volumes:
-            - ./app/service_discovery/:/home/shared/
+            - ./app/service-discovery/:/home/shared/
         networks:
             - default
-            - open_network
-        depends_on:
-            - mysql8
-            - rabbitmq
-        links:
-            - mysql8
-            - rabbitmq
+            - ec2_java_mysql_rabbitmq_open_network
         command: "/usr/bin/java -jar /home/shared/SERVICE-DISCOVERY-22.01.1-SNAPSHOT.jar --spring.config.location=/home/shared/application.properties"
     #----------------------------------------------------------------------------------------
-    ec2_api_gateway:
+    ec2-api-gateway:
         env_file: .env
-        container_name: ec2_api_gateway
+        container_name: ec2-api-gateway
         build:
             context: .
-            dockerfile: ec2_api_gateway.dockerfile
+            dockerfile: ec2-api-gateway.dockerfile
         ports:
             - ${API_GATEWAY_PORT}:8765
             - ${API_GATEWAY_HEALTH_PORT}:8081
         privileged: true
         tty: true
         volumes:
-            - ./app/api_gateway/:/home/shared/
+            - ./app/api-gateway/:/home/shared/
         networks:
             - default
-            - open_network
+            - ec2_java_mysql_rabbitmq_open_network
         depends_on:
-            - mysql8
-            - rabbitmq
-            - ec2_service_discovery
+            - ec2-service-discovery
         links:
-            - mysql8
-            - rabbitmq
-            - ec2_service_discovery
+            - ec2-service-discovery
         command: "/usr/bin/java -jar /home/shared/API-GATEWAY-22.01.1-SNAPSHOT.jar --spring.config.location=/home/shared/application.properties"
     #----------------------------------------------------------------------------------------
-    ec2_rabbitmq_reader:
+    ec2-rabbitmq-reader:
         env_file: .env
-        container_name: ec2_rabbitmq_reader
+        container_name: ec2-rabbitmq-reader
         build:
             context: .
-            dockerfile: ec2_rabbitmq_reader.dockerfile
+            dockerfile: ec2-rabbitmq-reader.dockerfile
         privileged: true
         tty: true
         volumes:
-            - ./app/rabbitmq_reader/:/home/shared/
+            - ./app/rabbitmq-reader/:/home/shared/
         networks:
             - default
-            - open_network
+            - ec2_java_mysql_rabbitmq_open_network
         depends_on:
-            - mysql8
-            - rabbitmq
-            - ec2_service_discovery
-            - ec2_api_gateway
+            - ec2-service-discovery
+            - ec2-api-gateway
         links:
-            - mysql8
-            - rabbitmq
-            - ec2_service_discovery
-            - ec2_api_gateway
+            - ec2-service-discovery
+            - ec2-api-gateway
         command: "/usr/bin/java -jar /home/shared/RABBITMQ-READER-22.01.1-SNAPSHOT.jar --spring.config.location=/home/shared/application.properties"
     #----------------------------------------------------------------------------------------
-    ec2_application_demo:
+    ec2-application-demo:
         env_file: .env
-        container_name: ec2_application_demo
+        container_name: ec2-application-demo
         build:
             context: .
-            dockerfile: ec2_application_demo.dockerfile
+            dockerfile: ec2-application-demo.dockerfile
         privileged: true
         tty: true
         volumes:
-            - ./app/application_demo/:/home/shared/
+            - ./app/application-demo/:/home/shared/
         networks:
             - default
-            - open_network
+            - ec2_java_mysql_rabbitmq_open_network
         depends_on:
-            - mysql8
-            - rabbitmq
-            - ec2_service_discovery
-            - ec2_api_gateway
+            - ec2-service-discovery
+            - ec2-api-gateway
         links:
-            - mysql8
-            - rabbitmq
-            - ec2_service_discovery
-            - ec2_api_gateway
+            - ec2-service-discovery
+            - ec2-api-gateway
         command: "/usr/bin/java -jar /home/shared/APPLICATION-DEMO-22.01.1-SNAPSHOT.jar --spring.config.location=/home/shared/application.properties"
     #----------------------------------------------------------------------------------------
-    rabbitmq:
-        env_file: .env
-        image: rabbitmq:3.6.10
-        container_name: rabbitmq
-        ports:
-            - ${RABBITMQ_PORT}:5672
-            - ${RABBITMQ_HTTP_PORT}:15672
-        volumes:
-            - type: bind
-              source: ./rabbitmq
-              target: /var/lib/rabbitmq/
-              read_only: false
-            - type: bind
-              source: ./rabbitmq/rabbitmq.conf
-              target: /etc/rabbitmq/conf.d/rabbitmq.conf
-              read_only: false
-            - type: bind
-              source: ./rabbitmq/config/rabbitmq.config
-              target: /etc/rabbitmq/rabbitmq.config
-              read_only: false
-        environment:
-            RABBITMQ_DEFAULT_USER: ${RABBITMQ_DEFAULT_USER}
-            RABBITMQ_DEFAULT_PASS: ${RABBITMQ_DEFAULT_PASS}
-            RABBITMQ_DEFAULT_VHOST: ${RABBITMQ_DEFAULT_VHOST}
-            RABBITMQ_PLUGINS_DIR: ${RABBITMQ_PLUGINS_DIR}
-        tty: true
-        networks:
-            - open_network
+#    rabbitmq-3.6.10--image:
+#        env_file: .env
+#        image: rabbitmq:3.6.10
+#        container_name: rabbitmq-3.6.10--image
+#        ports:
+#            - ${RABBITMQ_PORT_3610_IMAGE}:5672
+#            - ${RABBITMQ_HTTP_PORT_3610_IMAGE}:15672
+#        volumes:
+#            - ./rabbitmq/3.6.10--image/lib:/var/lib/rabbitmq/
+#            - ./rabbitmq/3.6.10--image/config/rabbitmq.config:/etc/rabbitmq/rabbitmq.config
+#        environment:
+#            RABBITMQ_DEFAULT_USER: ${RABBITMQ_DEFAULT_USER}
+#            RABBITMQ_DEFAULT_PASS: ${RABBITMQ_DEFAULT_PASS}
+#            RABBITMQ_DEFAULT_VHOST: ${RABBITMQ_DEFAULT_VHOST}
+#            RABBITMQ_PLUGINS_DIR: ${RABBITMQ_PLUGINS_DIR}
+#        tty: true
+#        networks:
+#            - ec2_java_mysql_rabbitmq_open_network
+    #----------------------------------------------------------------------------------------
+#    rabbitmq-3.9.8--image:
+#        env_file: .env
+#        image: rabbitmq:3.9.8
+#        container_name: rabbitmq-3.9.8--image
+#        ports:
+#            - ${RABBITMQ_PORT_398_IMAGE}:5672
+#            - ${RABBITMQ_HTTP_PORT_398_IMAGE}:15672
+#        volumes:
+#            - ./rabbitmq/3.9.8--image/logs:/var/log/rabbitmq/log
+#            - ./rabbitmq/3.9.8--image/lib:/var/lib/rabbitmq
+#            - ./rabbitmq/3.9.8--image/config/rabbitmq.conf:/etc/rabbitmq/rabbitmq.conf
+#            - ./rabbitmq/3.9.8--image/config/rabbitmq.conf:/etc/rabbitmq/conf.d/rabbitmq.conf
+#            - ./rabbitmq/3.9.8--image/config/10-defaults.conf:/etc/rabbitmq/conf.d/10-defaults.conf
+#            - ./rabbitmq/3.9.8--image/config/20-management_agent.disable_metrics_collector.conf:/etc/rabbitmq/conf.d/20-management_agent.disable_metrics_collector.conf
+#        environment:
+#            RABBITMQ_DEFAULT_USER: ${RABBITMQ_DEFAULT_USER}
+#            RABBITMQ_DEFAULT_PASS: ${RABBITMQ_DEFAULT_PASS}
+#            RABBITMQ_DEFAULT_VHOST: ${RABBITMQ_DEFAULT_VHOST}
+#            RABBITMQ_PLUGINS_DIR: ${RABBITMQ_PLUGINS_DIR}
+#        tty: true
+#        networks:
+#            - ec2_java_mysql_rabbitmq_open_network
+    #----------------------------------------------------------------------------------------
+#    rabbitmq-3.6.10--dockerfile:
+#        env_file: .env
+#        build:
+#            context: .
+#            dockerfile: ec2-rabbit-3.6.10.dockerfile
+#        container_name: rabbitmq-3.6.10--dockerfile
+#        ports:
+#            - ${RABBITMQ_PORT_3610_DOCKERFILE}:5672
+#            - ${RABBITMQ_HTTP_PORT_3610_DOCKERFILE}:15672
+#        volumes:
+#            - type: bind
+#              source: ./rabbitmq/3.6.10--dockerfile/lib/
+#              target: /var/lib/rabbitmq/
+#              read_only: false
+#            - type: bind
+#              source: ./rabbitmq/3.6.10--dockerfile/config/rabbitmq.conf
+#              target: /etc/rabbitmq/rabbitmq.conf
+#              read_only: false
+#        environment:
+#            RABBITMQ_DEFAULT_USER: ${RABBITMQ_DEFAULT_USER}
+#            RABBITMQ_DEFAULT_PASS: ${RABBITMQ_DEFAULT_PASS}
+#            RABBITMQ_DEFAULT_VHOST: ${RABBITMQ_DEFAULT_VHOST}
+#            RABBITMQ_PLUGINS_DIR: ${RABBITMQ_PLUGINS_DIR}
+#        tty: true
+#        networks:
+#            - ec2_java_mysql_rabbitmq_open_network
     #----------------------------------------------------------------------------------------
     mysql8:
         env_file: .env
@@ -148,9 +170,9 @@ services:
             MYSQL_ROOT_PASSWORD: ${MYSQL80_ROOT_PASSWORD}
         tty: true
         networks:
-            - open_network
+            - ec2_java_mysql_rabbitmq_open_network
     #----------------------------------------------------------------------------------------
 
 networks:
-    open_network:
+    ec2_java_mysql_rabbitmq_open_network:
         external: true
