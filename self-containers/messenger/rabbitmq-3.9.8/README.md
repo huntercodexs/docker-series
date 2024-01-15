@@ -1,26 +1,50 @@
 # RABBITMQ 3.9.8
 
-- How to run rabbitmq-3-9-8 rpm from this project use
+- How to run rabbitmq-3.9.8 rpm from this project use
 
 <pre>
-git clone https://github.com/huntercodexs/docker-series.git .
-cd self-containers/messenger/rabbitmq-3.9.8
-docker-compose up --build (in first time)
-docker-compose start (in the next times)
-docker exec -it rabbitmq-3-9-8 /bin/bash
+user@host:/home/user$ git clone https://github.com/huntercodexs/docker-series.git .
+user@host:/home/user$ cd docker-series/self-containers/messenger/rabbitmq-3.9.8
+user@host:/home/user/docker-series/self-containers/messenger/rabbitmq-3.9.8$ docker network create open_network
+    user@host:/home/user/docker-series/self-containers/messenger/rabbitmq-3.9.8$ docker-compose up --build
+user@host:/home/user/docker-series/self-containers/messenger/rabbitmq-3.9.8$ [Ctrl+C]
+user@host:/home/user/docker-series/self-containers/messenger/rabbitmq-3.9.8$ docker-compose start
 </pre>
 
-When inside container run the command 
+> NOTE: If occurs some error during the build of container, check if it's the folder lib in the
+> self-containers/messenger/rabbitmq-3.9.8/lib, maybe must be required delete all content in this folder
+> for example:
 
 <pre>
-rabbitmq-plugins enable rabbitmq_management
+user@host:/home/user/docker-series/self-containers/messenger/rabbitmq-3.9.8$ cd lib
+user@host:/home/user/docker-series/self-containers/messenger/rabbitmq-3.9.8$ rm -rf .*
+user@host:/home/user/docker-series/self-containers/messenger/rabbitmq-3.9.8$ rm -rf *
 </pre>
 
-Access the manager from web browser
+- Access the RabbitMQ container
 
 <pre>
-http://{IP}:{PORT}
+user@host:/home/user/docker-series/self-containers/messenger/rabbitmq-3.9.8$ docker exec -it rabbitmq-3.9.8 /bin/bash
+</pre>
 
-EXAMPLE
-http://192.168.0.174:38080/
+- Manager the RabbitMQ
+<pre>
+bash-4.2# rabbitmq-server start &
+bash-4.2# rabbitmqctl list_users &
+bash-4.2# rabbitmq-plugins enable rabbitmq_management &
+bash-4.2# rabbitmqctl authenticate_user guest guest &
+</pre>  
+
+- Add a new user and give permissions
+<pre>
+bash-4.2# rabbitmqctl add_user test test
+bash-4.2# rabbitmqctl set_user_tags test administrator
+bash-4.2# rabbitmqctl set_permissions -p / test ".*" ".*" ".*"
+</pre>
+
+- Access the manager from web browser
+<pre>
+http://{SERVER-IP}:38080/
+Username: test
+Password: test
 </pre>

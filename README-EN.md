@@ -252,6 +252,7 @@ user@host:/home/user/docker-series/self-containers/apache2$ docker-compose start
   - <a href="https://github.com/huntercodexs/docker-series/tree/master/self-containers/jenkins/2.60.3">2.60.3 (Official)</a> ![img.png](./self-containers/files/midias/unavailable.png)
   - <a href="https://github.com/huntercodexs/docker-series/tree/master/self-containers/jenkins/2.190.1">2.190.1 (Official)</a> ![img.png](./self-containers/files/midias/unavailable.png)
   - <a href="https://github.com/huntercodexs/docker-series/tree/master/self-containers/jenkins/2.346.3">2.346.3 (Official)</a> ![img.png](./self-containers/files/midias/check-green.png)
+  - <a href="https://github.com/huntercodexs/docker-series/tree/master/self-containers/jenkins/latest">Latest (Official)</a> ![img.png](./self-containers/files/midias/check-green.png)
 - <a href="https://github.com/huntercodexs/docker-series/tree/master/self-containers/rpm">RPM</a>
   - <a href="https://github.com/huntercodexs/docker-series/tree/master/self-containers/rpm/amazonlinux">Amazonlinux</a> ![img.png](./self-containers/files/midias/check-green.png)
   - <a href="https://github.com/huntercodexs/docker-series/tree/master/self-containers/rpm/centos">Centos</a> ![img.png](./self-containers/files/midias/check-green.png)
@@ -261,6 +262,7 @@ user@host:/home/user/docker-series/self-containers/apache2$ docker-compose start
 - <a href="https://github.com/huntercodexs/docker-series/tree/master/self-containers/messenger">Message Broker</a>
   - <a href="https://github.com/huntercodexs/docker-series/tree/master/self-containers/messenger/rabbitmq-3.6.10">RabbitMQ 3.6.10 (Amazonlinux)</a> ![img.png](./self-containers/files/midias/check-green.png)
   - <a href="https://github.com/huntercodexs/docker-series/tree/master/self-containers/messenger/rabbitmq-3.9.8">RabbitMQ 3.9.8 (Official)</a> ![img.png](./self-containers/files/midias/check-green.png)
+  - <a href="https://github.com/huntercodexs/docker-series/tree/master/self-containers/messenger/rabbitmq-3.12.12">RabbitMQ 3.12.12 (Official)</a> ![img.png](./self-containers/files/midias/check-green.png)
 - <a href="https://github.com/huntercodexs/docker-series/tree/master/self-containers/ssl-generator">SSL Generator</a> ![img.png](./self-containers/files/midias/check-green.png)
 - <a href="https://github.com/huntercodexs/docker-series/tree/master/self-containers/ppk-pem-ppk">PPK & PEM Converter</a> ![img.png](./self-containers/files/midias/check-green.png)
 

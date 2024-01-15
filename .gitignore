@@ -62,3 +62,6 @@ self-containers/oracle/oracleData/enterprise/**
 /self-containers/ssl-generator/share/ssl/*.crt
 /self-containers/sftp/uploads/*.txt
 /self-containers/jenkins/latest/share/configuration/
+/self-containers/messenger/rabbitmq-3.6.10/lib/mnesia/
+/self-containers/messenger/rabbitmq-3.6.10/lib/.erlang.cookie
+/self-containers/messenger/rabbitmq-3.9.8/lib/mnesia/
