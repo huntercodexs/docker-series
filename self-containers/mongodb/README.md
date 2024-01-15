@@ -1,21 +1,53 @@
 # MONGODB
 
-- BEFORE RUN
+- Set up the self-containers/mongodb/mongo/mongod.conf
 
-Edit the .env file to create correctly to Mongo Express and MongoDB access.
+- Create on folder MongoDB inside self-containers/mongodb/mongo
 
-- BUILD AND RUN
+- How to run mongodb from this project use
 
 <pre>
-git clone https://github.com/huntercodexs/docker-series.git .
-cd self-containers/mongodb
-docker-compose up --build (in first time)
-docker-compose start (in the next times)
+user@host:/home/user$ git clone https://github.com/huntercodexs/docker-series.git .
+user@host:/home/user$ cd docker-series/self-containers/mongodb
+user@host:/home/user/docker-series/self-containers/mongodb$ docker-compose up --build
+user@host:/home/user/docker-series/self-containers/mongodb$ [Ctrl+C]
+user@host:/home/user/docker-series/self-containers/mongodb$ docker-compose start
 </pre>
 
-- AFTER BUILD
+- Set up the .env file as below
 
-> Access the MongoDB Express
+<pre>
+##############################################################################
+#### MONGO SETTINGS
+##############################################################################
+
+# Set the port to MONGO
+MONGO_PORT=27017
+
+# Set mongo username and password
+MONGO_INIT_DB_ROOT_USERNAME=root
+MONGO_INIT_DB_ROOT_PASSWORD=MongoDB2019!
+
+##############################################################################
+#### MONGO EXPRESS SETTINGS
+##############################################################################
+
+# Set the port to MONGO
+MONGO_EXPRESS_PORT=38091
+
+# Define express access by web
+MONGO_EXPRESS_USERNAME=devel
+MONGO_EXPRESS_PASSWORD=MongoExpress2019!
+
+# Set a connection with Mongo Server
+MONGO_EXPRESS_SERVER_DRIVER=mongo
+MONGO_EXPRESS_SERVER_PORT=27017
+MONGO_EXPRESS_SERVER_URL=mongo://root:MongoDB2019!@mongo:27017/
+MONGO_EXPRESS_SERVER_USERNAME=root
+MONGO_EXPRESS_SERVER_PASSWORD=MongoDB2019!
+</pre>
+
+- Access the MongoDB Express
 
 <pre>
 http://${WEBSERVER_ADDRESS}:38091/
@@ -25,7 +57,7 @@ password: ${MONGO_EXPRESS_PASSWORD}
 
 - Create a database: dbname
 
-![img.png](./midias/Mongo-Express-Dashboard.png)
+![img.png](./media/Mongo-Express-Dashboard.png)
 
 - Create a collection: users
 - Create a documents(index): id, name

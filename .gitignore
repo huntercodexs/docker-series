@@ -65,3 +65,16 @@ self-containers/oracle/oracleData/enterprise/**
 /self-containers/messenger/rabbitmq-3.6.10/lib/mnesia/
 /self-containers/messenger/rabbitmq-3.6.10/lib/.erlang.cookie
 /self-containers/messenger/rabbitmq-3.9.8/lib/mnesia/
+/self-containers/microsoft/mssql/opt/Entropy.bin
+/self-containers/microsoft/mssql/opt/master.mdf
+/self-containers/microsoft/mssql/opt/mastlog.ldf
+/self-containers/microsoft/mssql/opt/model.mdf
+/self-containers/microsoft/mssql/opt/model_msdbdata.mdf
+/self-containers/microsoft/mssql/opt/model_msdblog.ldf
+/self-containers/microsoft/mssql/opt/model_replicatedmaster.ldf
+/self-containers/microsoft/mssql/opt/model_replicatedmaster.mdf
+/self-containers/microsoft/mssql/opt/modellog.ldf
+/self-containers/microsoft/mssql/opt/msdbdata.mdf
+/self-containers/microsoft/mssql/opt/msdblog.ldf
+/self-containers/microsoft/mssql/opt/tempdb.mdf
+/self-containers/microsoft/mssql/opt/templog.ldf
