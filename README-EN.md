@@ -233,8 +233,7 @@ user@host:/home/user/docker-series/self-containers/apache2$ docker-compose start
   - openjdk-17.0.2 ![img.png](./self-containers/files/midias/check-silver.png)
   - openjdk-17.0.4 ![img.png](./self-containers/files/midias/check-silver.png)
 - <a href="https://github.com/huntercodexs/docker-series/tree/master/self-containers/python">Python</a>
-  - <a href="https://github.com/huntercodexs/docker-series/tree/master/self-containers/python/2.0">2.0</a> ![img.png](./self-containers/files/midias/check-silver.png)
-  - <a href="https://github.com/huntercodexs/docker-series/tree/master/self-containers/python/3.0">3.0</a> ![img.png](./self-containers/files/midias/check-green.png)
+  - <a href="https://github.com/huntercodexs/docker-series/tree/master/self-containers/python/3.12.1">3.12.1</a> ![img.png](./self-containers/files/midias/check-green.png)
 - <a href="https://github.com/huntercodexs/docker-series/tree/master/self-containers/nodejs">Nodejs</a>
   - 10.1.9 ![img.png](./self-containers/files/midias/check-silver.png)
   - <a href="https://github.com/huntercodexs/docker-series/tree/master/self-containers/nodejs/18.7.0">18.7.0</a> ![img.png](./self-containers/files/midias/check-green.png)
