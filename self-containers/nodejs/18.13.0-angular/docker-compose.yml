@@ -1,0 +1,30 @@
+version: "3.7"
+services:
+    
+    #----------------------------------------------------------------------------------------
+    nodejs-angular:
+        env_file: .env
+        build:
+            context: ./
+            dockerfile: nodejs-angular.dockerfile
+            args:
+                ANGULAR_PROJECT_NAME: ${ANGULAR_PROJECT_NAME}
+        container_name: nodejs-angular
+        ports:
+            - ${NODEJS_PORT1}:4200
+            - ${NODEJS_PORT2}:8080
+        volumes:
+            - ./app/:/${ANGULAR_PROJECT_NAME}
+            - ./shared/:/home/nodejs-angular/shared/
+        tty: true
+        networks:
+            - default
+            - open_network
+        command: >
+            bash -c "npm install && echo -e 'N\n' | ng serve --host 0.0.0.0 --port 4200 --disable-host-check"
+    #----------------------------------------------------------------------------------------
+
+networks:
+    open_network:
+        external: true
+        

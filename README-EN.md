@@ -238,6 +238,8 @@ user@host:/home/user/docker-series/self-containers/apache2$ docker-compose start
 - <a href="https://github.com/huntercodexs/docker-series/tree/master/self-containers/nodejs">Nodejs</a>
   - 10.1.9 ![img.png](./self-containers/files/midias/check-silver.png)
   - <a href="https://github.com/huntercodexs/docker-series/tree/master/self-containers/nodejs/18.7.0">18.7.0</a> ![img.png](./self-containers/files/midias/check-green.png)
+  - <a href="https://github.com/huntercodexs/docker-series/tree/master/self-containers/nodejs/18.7.0-react">18.7.0 React</a> ![img.png](./self-containers/files/midias/check-green.png)
+  - <a href="https://github.com/huntercodexs/docker-series/tree/master/self-containers/nodejs/18.13.0-angular">18.13.0 Angular</a> ![img.png](./self-containers/files/midias/check-green.png)
 
 > Others
 

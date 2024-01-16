@@ -16,7 +16,7 @@ trash
 
 ## GENERAL FILES X DIR
 nodes
-node_modules
+node_modules/
 h2_mysql_oracle_sftp_mailhog/
 /docker-elk/
 /elkstack792/
@@ -107,3 +107,4 @@ self-containers/oracle/oracleData/enterprise/**
 /self-containers/mysql/8.0/lib/mysql.sock
 /self-containers/mysql/8.0/lib/undo_001
 /self-containers/mysql/8.0/lib/undo_002
+/self-containers/nodejs/18.13.0-angular/app/node_modules

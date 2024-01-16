@@ -22,7 +22,7 @@ COPY $APP_SOURCE $DIR_APP
 #SETUP USER TO RUN APP
 RUN chown nobody:nogroup $DIR_APP -R
 
-CMD ["nodemon", "app.js"]
-
 EXPOSE 3000
 EXPOSE 8080
+
+CMD ["nodemon", "app.js"]

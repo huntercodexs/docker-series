@@ -1,0 +1,20 @@
+FROM node:18.7.0
+
+ARG REACT_PROJECT_NAME
+
+ENV REACT_APP_NAME $REACT_PROJECT_NAME
+
+## REACT PROJECT
+RUN npx create-react-app $REACT_APP_NAME
+WORKDIR /$REACT_APP_NAME
+RUN cd /$REACT_APP_NAME
+
+## COMMOM DEPENDENCIES TO RUN APP
+RUN npm install
+RUN npm install -g nodemon
+
+EXPOSE 3000
+EXPOSE 8080
+
+CMD ["npm", "start"]
+#CMD ["nodemon", "index.js"]
