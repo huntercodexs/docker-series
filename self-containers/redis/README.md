@@ -3,24 +3,20 @@
 - How to run redis from this project use
 
 <pre>
-git clone https://github.com/huntercodexs/docker-series.git .
-cd self-containers/redis
-docker-compose up --build (in first time)
-docker-compose start (in the next times)
+user@host:/home/user$ git clone https://github.com/huntercodexs/docker-series.git .
+user@host:/home/user$ cd docker-series/self-containers/redis
+user@host:/home/user/docker-series/self-containers/redis$ docker network create open_network
+user@host:/home/user/docker-series/self-containers/redis$ docker-compose up --build
+user@host:/home/user/docker-series/self-containers/redis$ [Ctrl+C]
+user@host:/home/user/docker-series/self-containers/redis$ docker-compose start
 </pre>
 
-# How to use
+- Access, execute, and test redis
 
 <pre>
-docker exec -it redis /bin/bash
-</pre>
-
-<pre>
+user@host:/home/user/docker-series/self-containers/redis$ docker exec -it redis /bin/bash
 root@3e760fd49412:/opt# redis-cli 
-127.0.0.1:6379>
-</pre>
-
-<pre>
+127.0.0.1:6379>[Ctrl+D]
 root@3e760fd49412:/opt# redis-cli -h 127.0.0.1 -p 6379 -a '123@Mudar!'
 Warning: Using a password with '-a' or '-u' option on the command line interface may not be safe.
 127.0.0.1:6379> SET redistestkey 123456
