@@ -2,19 +2,19 @@ version: "3.7"
 services:
 
     #----------------------------------------------------------------------------------------
-    mysql-57:
+    mysql-8.0:
         env_file: .env
-        image: mysql:5.7
-        container_name: mysql-57
+        image: mysql:8.0
+        container_name: mysql-8.0
         ports:
-            - ${MYSQL57_PORT}:3306
+            - ${MYSQL80_PORT}:3306
         volumes:
             - ./lib:/var/lib/mysql/
         environment:
-            MYSQL_DATABASE: ${MYSQL57_DATABASE}
-            MYSQL_USERNAME: ${MYSQL57_USERNAME}
-            MYSQL_PASSWORD: ${MYSQL57_PASSWORD}
-            MYSQL_ROOT_PASSWORD: ${MYSQL57_ROOT_PASSWORD}
+            MYSQL_DATABASE: ${MYSQL80_DATABASE}
+            MYSQL_USERNAME: ${MYSQL80_USERNAME}
+            MYSQL_PASSWORD: ${MYSQL80_PASSWORD}
+            MYSQL_ROOT_PASSWORD: ${MYSQL80_ROOT_PASSWORD}
         tty: true
         networks:
             - default

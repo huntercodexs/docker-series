@@ -14,7 +14,7 @@ trash
 *.key
 *.csv
 
-## GENERAL DIR
+## GENERAL FILES X DIR
 nodes
 node_modules
 h2_mysql_oracle_sftp_mailhog/
@@ -78,3 +78,32 @@ self-containers/oracle/oracleData/enterprise/**
 /self-containers/microsoft/mssql/opt/msdblog.ldf
 /self-containers/microsoft/mssql/opt/tempdb.mdf
 /self-containers/microsoft/mssql/opt/templog.ldf
+/self-containers/mysql/5.7/lib/database/
+/self-containers/mysql/5.7/lib/mysql/
+/self-containers/mysql/5.7/lib/performance_schema/
+/self-containers/mysql/5.7/lib/sys/
+/self-containers/mysql/5.7/lib/auto.cnf
+/self-containers/mysql/5.7/lib/ib_buffer_pool
+/self-containers/mysql/5.7/lib/ib_logfile0
+/self-containers/mysql/5.7/lib/ib_logfile1
+/self-containers/mysql/5.7/lib/ibdata1
+/self-containers/mysql/5.7/lib/mysql.sock
+/self-containers/mysql/8.0/lib/binlog.index
+/self-containers/mysql/8.0/lib/#ib_16384_1.dblwr
+/self-containers/mysql/8.0/lib/8a9746a0fbeb.err
+/self-containers/mysql/8.0/lib/sys/
+/self-containers/mysql/8.0/lib/database/
+/self-containers/mysql/8.0/lib/#innodb_temp/
+/self-containers/mysql/8.0/lib/auto.cnf
+/self-containers/mysql/8.0/lib/performance_schema/
+/self-containers/mysql/8.0/lib/mysql/
+/self-containers/mysql/8.0/lib/binlog.000001
+/self-containers/mysql/8.0/lib/binlog.000002
+/self-containers/mysql/8.0/lib/#ib_16384_0.dblwr
+/self-containers/mysql/8.0/lib/#innodb_redo/
+/self-containers/mysql/8.0/lib/ib_buffer_pool
+/self-containers/mysql/8.0/lib/ibdata1
+/self-containers/mysql/8.0/lib/mysql.ibd
+/self-containers/mysql/8.0/lib/mysql.sock
+/self-containers/mysql/8.0/lib/undo_001
+/self-containers/mysql/8.0/lib/undo_002
