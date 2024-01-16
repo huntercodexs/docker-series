@@ -2,15 +2,15 @@ version: "3.7"
 services:
     
     #----------------------------------------------------------------------------------------
-    ubuntu1804:
+    ubuntu-20.04:
         env_file: .env
-        #image: ubuntu:18.04
-        container_name: ubuntu1804
+        #image: ubuntu:20.04
+        container_name: ubuntu-20.04
         build:
             context: ./
-            dockerfile: ubuntu1804.dockerfile
+            dockerfile: ubuntu-20.04.dockerfile
         ports:
-            - ${UBUNTU1804_PORT}:35900
+            - ${UBUNTU2004_PORT}:35900
         volumes:
             - ./share/:/home/ubuntu/
         tty: true
