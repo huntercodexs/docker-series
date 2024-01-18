@@ -8,8 +8,8 @@
 <pre>
 user@host:/home/user$ git clone https://github.com/huntercodexs/docker-series.git .
 user@host:/home/user$ cd docker-series/self-containers/h2-database
-user@host:/home/user/docker-series/self-containers/h2-database$ docker-compose up --build (in first time)
-user@host:/home/user/docker-series/self-containers/h2-database$ docker-compose start (in the next times)
+user@host:/home/user/docker-series/self-containers/h2-database$ docker-compose up --build
+user@host:/home/user/docker-series/self-containers/h2-database$ docker-compose start
 </pre>
 
 - Settings to do before run this project

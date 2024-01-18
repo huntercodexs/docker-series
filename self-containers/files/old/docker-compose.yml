@@ -305,7 +305,7 @@ services:
     # or execute directly command as
     #   docker exec -it openjdk-8u212 java -jar /home/openjdk/simple-api-demo/SIMPLE-API-DEMO-22.01.1-SNAPSHOT.jar
     #
-    # request sample: http://192.168.0.174:31890/api/simple-api-demo
+    # request sample: http://192.168.0.204:31890/api/simple-api-demo
     # response: OK, it is working fine !
     openjdk-8u212:
         env_file: .env
@@ -523,8 +523,8 @@ services:
     #   pip3 install flask
     #   pip3 install -U flask-cors
     #
-    # GET http://192.168.0.174:35000/api/welcome
-    # POST http://192.168.0.174:35000/api/article {"name": "Tester"}
+    # GET http://192.168.0.204:35000/api/welcome
+    # POST http://192.168.0.204:35000/api/article {"name": "Tester"}
     python3:
         env_file: .env
         image: python:3

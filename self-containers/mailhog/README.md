@@ -5,8 +5,8 @@
 <pre>
 user@host:/home/user$ git clone https://github.com/huntercodexs/docker-series.git .
 user@host:/home/user$ cd docker-series/self-containers/mailhog
-user@host:/home/user/docker-series/self-containers/mailhog$ docker-compose up --build (in first time)
-user@host:/home/user/docker-series/self-containers/mailhog$ docker-compose start (in the next times)
+user@host:/home/user/docker-series/self-containers/mailhog$ docker-compose up --build
+user@host:/home/user/docker-series/self-containers/mailhog$ docker-compose start
 </pre>
 
 # Details

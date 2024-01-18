@@ -3,11 +3,13 @@
 - How to run rockylinux rpm from this project use
 
 <pre>
-git clone https://github.com/huntercodexs/docker-series.git .
-cd self-containers/rpm/rockylinux
-docker-compose up --build (in first time)
-docker-compose start (in the next times)
-docker exec -u rpmuser -it rockylinux-rpm /bin/bash
+<pre>
+user@host:/home/user$ git clone https://github.com/huntercodexs/docker-series.git .
+user@host:/home/user$ cd docker-series/self-containers/rocklinux
+user@host:/home/user/docker-series/self-containers/rocklinux$ docker-compose up --build
+user@host:/home/user/docker-series/self-containers/rocklinux$ docker-compose start
+user@host:/home/user/docker-series/self-containers/rocklinux$ docker exec -u rpmuser -it rocklinux-rpm /bin/bash
+</pre>
 </pre>
 
 

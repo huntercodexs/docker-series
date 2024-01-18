@@ -21,10 +21,10 @@ PROFTPD_SHELL=/bin/bash
 - Run the proftpd from this project using
 
 <pre>
-git clone https://github.com/huntercodexs/docker-series.git .
-cd self-containers/ubuntu/proftpd
-docker-compose up --build (in first time)
-docker-compose start (in the next times)
+user@host:/home/user$ git clone https://github.com/huntercodexs/docker-series.git .
+user@host:/home/user$ cd docker-series/self-containers/proftpd
+user@host:/home/user/docker-series/self-containers/proftpd$ docker-compose up --build
+user@host:/home/user/docker-series/self-containers/proftpd$ docker-compose start
 </pre>
 
 - Output from command "docker-compose up --build"

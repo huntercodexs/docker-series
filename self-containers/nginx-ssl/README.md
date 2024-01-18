@@ -3,20 +3,17 @@
 - How to run nginx-ssl from this project use
 
 <pre>
-user@server: git clone https://github.com/huntercodexs/docker-series.git .
-user@server: cd self-containers/nginx-ssl
-user@server: docker-compose up --build (in first time)
-user@server: docker network create open_network (if network error)
-user@server: docker-compose start (in the next times)
+user@host:/home/user$ git clone https://github.com/huntercodexs/docker-series.git .
+user@host:/home/user$ cd docker-series/self-containers/nginx-ssl
+user@host:/home/user/docker-series/self-containers/nginx-ssl$ docker-compose up --build
+user@host:/home/user/docker-series/self-containers/nginx-ssl$ [Ctrl+C]
+user@host:/home/user/docker-series/self-containers/nginx-ssl$ docker-compose start
 </pre>
 
 - Create a SSL CA
 
 <pre>
-user@server: docker exec -it nginx-ssl /bin/bash
-</pre>
-
-<pre>
+user@host:/home/user/docker-series/self-containers/nginx-ssl$ docker exec -it nginx-ssl /bin/bash
 root@d8cd7de07835: cd /etc/nginx/ssl
 root@d8cd7de07835: openssl req -x509 -nodes -days 365 -newkey rsa:2048 -keyout /etc/nginx/ssl/huntercodexs.key -out /etc/nginx/ssl/huntercodexs.crt
 </pre>
@@ -45,7 +42,9 @@ Common Name (e.g. server FQDN or YOUR name) []:huntercodexs.com
 Email Address []:huntercodexs@gmail.com
 </pre>
 
-Get the certificate generated
+- Get the certificate generated
+
+> NOTE: All generated file will be placed in the path self-containers/nginx-ssl/share/ssl
 
 <pre>
 root@d8cd7de07835:/etc/nginx/ssl# ls -ltr
@@ -54,7 +53,7 @@ total 8
 -rw-r--r-- 1 root root 1566 Mar 26 23:18 huntercodexs.crt
 </pre>
 
-Configure Nginx
+- Configure Nginx
 
 <pre>
     server_name huntercodexs.com;
@@ -65,8 +64,14 @@ Configure Nginx
     ssl_certificate_key /etc/nginx/ssl/nginx.key;
 </pre>
 
-Restart Nginx
+- Restart Nginx
 
 <pre>
 service nginx restart
+</pre>
+
+- Test the NGINX using a ssl (HTTPS PORT)
+
+<pre>
+https://localhost:33443
 </pre>

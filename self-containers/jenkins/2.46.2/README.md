@@ -5,8 +5,8 @@
 <pre>
 git clone https://github.com/huntercodexs/docker-series.git .
 cd self-containers/jenkins/2.46.2
-docker-compose up --build (in first time)
-docker-compose start (in the next times)
+docker-compose up --build
+docker-compose start
 </pre>
 
 > AFTER BUILD

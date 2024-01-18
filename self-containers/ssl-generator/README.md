@@ -3,23 +3,23 @@
 - How to run ssl-generator from this project use
 
 <pre>
-user@server: git clone https://github.com/huntercodexs/docker-series.git .
-user@server: cd self-containers/ssl-generator
-user@server: docker-compose up --build (in first time)
-user@server: docker network create open_network (if network error)
-user@server: docker-compose start (in the next times)
+user@host:/home/user$ git clone https://github.com/huntercodexs/docker-series.git .
+user@host:/home/user$ cd docker-series/self-containers/ssl-generator
+user@host:/home/user/docker-series/self-containers/ssl-generator$ docker network create open_network
+user@host:/home/user/docker-series/self-containers/ssl-generator$ docker-compose up --build
+user@host:/home/user/docker-series/self-containers/ssl-generator$ docker-compose start
 </pre>
 
 - Create a SSL CA
 
 <pre>
-user@server: cd /home/ubuntu/
-user@server: mkdir ssl
-user@server: cd ssl
-user@server: openssl req -x509 -nodes -days 365 -newkey rsa:2048 -keyout /home/ubuntu/ssl/huntercodexs.key -out /home/ubuntu/ssl/huntercodexs.crt
+user@host:/home/user/docker-series/self-containers/ssl-generator$ docker exec -it ssl-generator /bin/bash
+root@d8cd7de07835:/home/ubuntu# mkdir -p ssl
+root@d8cd7de07835:/home/ubuntu# cd sll
+root@d8cd7de07835:/home/ubuntu/ssl# openssl req -x509 -nodes -days 365 -newkey rsa:2048 -keyout /home/ubuntu/ssl/huntercodexs.key -out /home/ubuntu/ssl/huntercodexs.crt
 </pre>
 
-Example
+- Example
 
 <pre>
 Generating a RSA private key
@@ -49,7 +49,9 @@ Common Name (e.g. server FQDN or YOUR name) []: www.huntercodexs.com
 Email Address []:huntercodexs@gmail.com
 </pre>
 
-Get the certificate generated
+- Get the certificate generated
+
+> NOTE: All generated file will be placed in the path self-containers/ssl-generator/share
 
 <pre>
 root@d8cd7de07835:/home/ubuntu/ssl# ls -ltr

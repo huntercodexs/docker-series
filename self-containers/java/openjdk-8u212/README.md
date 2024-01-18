@@ -5,8 +5,8 @@
 <pre>
 user@host:/home/user$ git clone https://github.com/huntercodexs/docker-series.git .
 user@host:/home/user$ cd docker-series/self-containers/openjdk-8u212
-user@host:/home/user/docker-series/self-containers/openjdk-8u212$ docker-compose up --build (in first time)
-user@host:/home/user/docker-series/self-containers/openjdk-8u212$ docker-compose start (in the next times)
+user@host:/home/user/docker-series/self-containers/openjdk-8u212$ docker-compose up --build
+user@host:/home/user/docker-series/self-containers/openjdk-8u212$ docker-compose start
 </pre>
 
 - Before build and start project set the microservices in script below

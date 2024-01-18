@@ -29,7 +29,7 @@ MYSQL80_ROOT_PASSWORD=root123
 - Access the database
 
 <pre>
-server: 192.168.0.174
+server: 192.168.0.204
 port: 3708
 user: root
 pass: root123

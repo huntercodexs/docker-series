@@ -3,18 +3,18 @@
 - How to run nexus3 from this project use
 
 <pre>
-git clone https://github.com/huntercodexs/docker-series.git .
-cd self-containers/nexus/nexus3
-docker-compose up --build (in first time)
-docker network create open_network (IF NETWORK ERROR)
-docker-compose start (in the next times)
+user@host:/home/user$ git clone https://github.com/huntercodexs/docker-series.git .
+user@host:/home/user$ cd docker-series/self-containers/nexus/nexus3
+user@host:/home/user/docker-series/self-containers/nexus/nexus3$ docker network create open_network
+user@host:/home/user/docker-series/self-containers/nexus/nexus3$ docker-compose up --build
+user@host:/home/user/docker-series/self-containers/nexus/nexus3$ docker-compose start
 </pre>
 
 - How to access Sonatype Nexus Repository Manager
 
 Access the url
 <pre>
-http://192.168.0.174:38081
+http://192.168.0.204:38081
 </pre>
 
 Inform the current user and password
