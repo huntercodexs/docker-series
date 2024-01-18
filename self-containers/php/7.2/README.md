@@ -1,12 +1,15 @@
 # PHP-7.2
 
-- How to run php72 from this project use
+![unavailable.png](../../files/midias/unavailable.png) LEGACY
+
+- How to run php 7.2 from this project use
 
 <pre>
-$ git clone https://github.com/huntercodexs/docker-series.git .
-$ cd self-containers/php/7.2
-$ docker-compose up --build
-$ docker-compose start
+user@host:/home/user$ git clone https://github.com/huntercodexs/docker-series.git .
+user@host:/home/user$ cd docker-series/self-containers/php/7.2
+user@host:/home/user/docker-series/self-containers/php/7.2$ docker-compose up --build
+user@host:/home/user/docker-series/self-containers/php/7.2$ [Ctrl+C]
+user@host:/home/user/docker-series/self-containers/php/7.2$ docker-compose start
 </pre>
 
 > FEATURES AVAILABLE
@@ -25,7 +28,7 @@ $ docker-compose start
 - Access the webserver and run the command below
 
 <pre>
-user@ubuntu:$ docker exec -it webserver-php72 /bin/bash
+user@host:/home/user/docker-series/self-containers/php/7.2$ docker exec -it webserver-php71 /bin/bash
 root@510ad756e791:/usr/local/apache2# /home/webserver/webserver.sh restart
 </pre>
 
