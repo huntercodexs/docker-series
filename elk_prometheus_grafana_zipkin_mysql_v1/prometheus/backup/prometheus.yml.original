@@ -7,13 +7,6 @@ scrape_configs:
     - files:
       - /home/prometheus/targets/client-demo.json
 
-  - job_name: 'eureka-service-discovery-demo'
-    scrape_interval: 2s
-    metrics_path: "/actuator/prometheus"
-    file_sd_configs:
-    - files:
-      - /home/prometheus/targets/eureka-service-discovery-demo.json
-
   - job_name: 'microservice-order-demo'
     scrape_interval: 2s
     metrics_path: "/actuator/prometheus"
@@ -34,4 +27,11 @@ scrape_configs:
     file_sd_configs:
     - files:
       - /home/prometheus/targets/zuul-server-api-gateway-demo.json
+
+  - job_name: 'new-microservice-demo'
+    scrape_interval: 2s
+    metrics_path: "/actuator/prometheus"
+    file_sd_configs:
+    - files:
+      - /home/prometheus/targets/new-microservice-demo.json
 

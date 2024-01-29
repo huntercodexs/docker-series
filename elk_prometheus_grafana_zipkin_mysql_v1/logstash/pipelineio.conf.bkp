@@ -1,4 +1,9 @@
 input {
+    # example: using file to input data
+    #file {
+    #    path => "/file-path/file-name.extension"
+    #}
+
     tcp {
         port => 5000
     }
@@ -8,25 +13,32 @@ input {
     }
 }
 
+#filter {
+    # example: using csv plugin
+    #csv {
+    #    columns => ["city", "state", "country"]
+    #}
+#}
+
 output {
     elasticsearch {
         hosts => "${ELASTICSEARCH_HOST}"
+        user => "${ELASTIC_USERNAME}"
+        password => "${ELASTIC_PASSWORD}"
         index => "tcp-elk_prometheus_grafana_zipkin_mysql_v1_demo"
-        user => "${ELASTIC_USERNAME}"
-        password => "${ELASTIC_PASSWORD}"
     }
 
     elasticsearch {
         hosts => "${ELASTICSEARCH_HOST}"
+        user => "${ELASTIC_USERNAME}"
+        password => "${ELASTIC_PASSWORD}"
         index => "http-elk_prometheus_grafana_zipkin_mysql_v1_demo"
-        user => "${ELASTIC_USERNAME}"
-        password => "${ELASTIC_PASSWORD}"
     }
 
     elasticsearch {
         hosts => "${ELASTICSEARCH_HOST}"
-        index => "postman-elk_prometheus_grafana_zipkin_mysql_v1_demo"
         user => "${ELASTIC_USERNAME}"
         password => "${ELASTIC_PASSWORD}"
+        index => "postman-elk_prometheus_grafana_zipkin_mysql_v1_demo"k
     }
 }
