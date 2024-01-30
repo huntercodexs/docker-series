@@ -161,7 +161,7 @@ All microservices need to be correctly configured in the log4j2.xml and applicat
 # Configurations
 <a href="#ELK-PROMETHEUS-GRAFANA-ZIPKIN-MYSQL">Home</a>
 
-> Details 
+> Details
 
 para utilizar esse ambiente completamente é preciso seguir as seguinte regras:
 
@@ -202,7 +202,7 @@ o JAR será gerado no output directory configurado no passo 1
 - Kibana
 
 
-# grafana
+# Grafana
 <a href="#ELK-PROMETHEUS-GRAFANA-ZIPKIN-MYSQL">Home</a>
 
 After creating the entire environment, we can connect grafana to prometheus according to the information below
@@ -225,26 +225,34 @@ Result
 ![grafana-spring-boot-statistics-dashboard-import.png](elk_prometheus_grafana_zipkin_mysql_v1/files/media/grafana-spring-boot-statistics-dashboard-import.png)
 
 
-# prometheus
+# Prometheus
 <a href="#ELK-PROMETHEUS-GRAFANA-ZIPKIN-MYSQL">Home</a>
 
 This script only export microservices from Eureka Service Discovery Log, it means say that
 all microservices and only these microservices registered in the Eureka will be exported from the
 current log produced by Eureka. Therefore, you need to inform the current and correct path to
-Eureka Service where all the microservices has been registered. The log record that will be seek in the
-log look like something like that:
+Eureka Service where all the microservices has been registered.
+
+- Log record that will be sought in the log look like something like that:
+
+<pre>
 Registered instance NEW-MICROSERVICE-DEMO/192.168.0.204:new-microservice-demo:31315 with status UP (replication=true)
+</pre>
 
-> How to execute:
+- How to execute:
 
+<pre>
 ./targets-export.sh /home/user/logs/EUREKA-SERVICE-DISCOVERY.log /home/prometheus/targets/ [--reload: optional]
+</pre>
 
-Reload Prometheus YML Configurations (SIGHUP)
+- Reload Prometheus YML Configurations (SIGHUP):
+
+<pre>
 pgrep prometheus -> 1
 kill -HUP 1
-You can use the script prometheus-reload.sh to make it more easily
+</pre>
 
-> Step by step:
+- You can use the script prometheus-reload.sh to make it more easily:
 
 1) Build Prometheus container: docker-compose up --build prometheus
 2) Export targets to prometheus without reload prometheus:
@@ -256,10 +264,17 @@ You can use the script prometheus-reload.sh to make it more easily
 # Logstash
 <a href="#ELK-PROMETHEUS-GRAFANA-ZIPKIN-MYSQL">Home</a>
 
-- apagar indices do kibana se necessario
-- configurar pipelineio.conf do logstash
-- rodar o comando docker-compose up --build logstash (os indices serão automaticamente no kibana)
-    - o resultado deve ser algo parecido como abaixo
+- Useful Links
+  - http://localhost:5601/app/home#/
+  - http://localhost:5601/app/management/
+  - http://localhost:5601/app/management/kibana/indexPatterns/
+  - http://localhost:5601/app/management/kibana/indexPatterns/create
+
+The following steps must be performed to achieve a satisfactory result when using ELK
+
+- check if it is necessary to delete kibana indexes
+- configure logstash pipelineio.conf
+- run the docker-compose up --build logstash command (the indexes will be created automatically in kibana)
 <pre>
 logstash          | [2024-01-29T00:03:24,299][INFO ][logstash.javapipeline    ][.monitoring-logstash] Pipeline Java execution initialization time {"seconds"=>0.55}
 logstash          | [2024-01-29T00:03:24,342][INFO ][logstash.javapipeline    ][.monitoring-logstash] Pipeline started {"pipeline.id"=>".monitoring-logstash"}
@@ -270,21 +285,19 @@ logstash          | [2024-01-29T00:03:24,528][INFO ][logstash.inputs.tcp      ][
 logstash          | [2024-01-29T00:03:24,584][INFO ][logstash.agent           ] Pipelines running {:count=>2, :running_pipelines=>[:".monitoring-logstash", :main], :non_running_pipelines=>[]}
 logstash          | [2024-01-29T00:03:24,765][INFO ][logstash.agent           ] Successfully started Logstash API endpoint {:port=>9600}
 </pre>
-- criar indice no kibana em
-  http://localhost:5601/app/home#/
-  http://localhost:5601/app/management/
-  http://localhost:5601/app/management/kibana/indexPatterns/
-  http://localhost:5601/app/management/kibana/indexPatterns/create
-  colocar o nome do indice no input text box, clicar em Next step, selecionar um valor em "Time field" e clicar em Create index pattern
-  se necessário, é possível configurar um indice como padrão
-- executar requisição no postman para a url http://localhost:31301/client-demo/orders
-    - o endpoint esta dentro de um microserviço previamente configurado para comunicação com o logstash via config
-- verificar o status do log no kibana em
-  http://localhost:5601/app/discover
-  selecionar o indice no lado esquerdo da tela e analisar o log
-- ![kibana-discover-log-sample.png](elk_prometheus_grafana_zipkin_mysql_v1/files/media/kibana-discover-log-sample.png)
-- ![kibana-discover-log-sample.png](elk_prometheus_grafana_zipkin_mysql_v1/files/media/kibana-discover-log-index.png)
-- usar o dev tools para analisar logs em http://localhost:5601/app/dev_tools#/console conforme exemplos abaixo
+- create an index in kibana at http://localhost:5601/app/management/kibana/indexPatterns/create
+- put the name of the index in the input text box
+  - click on Next step
+    - select a value in "Time field"
+      - click on Create index pattern (if necessary, it is possible to configure an index as the default)
+- execute request in postman to the url http://localhost:31301/client-demo/orders
+  - the endpoint is within a microservice previously configured to communicate with logstash via config
+- check log status in kibana at
+  - http://localhost:5601/app/discover
+- select the index on the left side of the screen and analyze the log
+![kibana-discover-log-sample.png](elk_prometheus_grafana_zipkin_mysql_v1/files/media/kibana-discover-log-sample.png)
+![kibana-discover-log-sample.png](elk_prometheus_grafana_zipkin_mysql_v1/files/media/kibana-discover-log-index.png)
+- use dev tools to analyze logs at http://localhost:5601/app/dev_tools#/console, as per the examples below
 
 <pre>
 GET _search
@@ -332,7 +345,7 @@ GET tcp-elk_prometheus_grafana_zipkin_mysql_v1_demo/_search
 </pre>
 ![kibana-dashboard-dev-tools-example.png](elk_prometheus_grafana_zipkin_mysql_v1/files/media/kibana-dashboard-dev-tools-example.png)
 
-- caso seja necessario alterar as configurações do pipelineio do logstash é preciso reiniciar o serviço da seguinte forma
+- if it is necessary to change the logstash pipeline settings, you must restart the service as follows
 <pre>
 docker exec -it logstash /bin/bash
 
@@ -345,8 +358,8 @@ logstash     308     302  0 22:10 pts/0    00:00:00 ps -ef
 bash-4.2$ kill -HUP 1 (isso reinicia o serviço logstash automaticamente)
 </pre>
 
-ou simplesmente use o script logstash-reload.sh que esta dentro do container logstash em /home/logstash o qual pode ser
-executado com o seguinte comando
+or simply use the logstash-reload.sh script that is inside the logstash container in /home/logstash which can be
+run with the following command
 
 <pre>
 docker exec -it logstash sh /home/logstash/logstash-reload.sh 
