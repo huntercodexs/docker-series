@@ -25,6 +25,8 @@ Summary
 <a href="#ELK-PROMETHEUS-GRAFANA-ZIPKIN-MYSQL">
   <img src="elk_prometheus_grafana_zipkin_mysql_v1/files/media/top.png" alt="" />
 </a>
+<br />
+<br />
 
 Please use the branch selection to access others configurations for your need and purposes
 
@@ -33,8 +35,9 @@ Please use the branch selection to access others configurations for your need an
 <a href="#ELK-PROMETHEUS-GRAFANA-ZIPKIN-MYSQL">
   <img src="elk_prometheus_grafana_zipkin_mysql_v1/files/media/top.png" alt="" />
 </a>
-
-> NOTE: Its highest recommended to use the same stack version to ELK
+<br /
+<br /
+NOTE: Its highest recommended to use the same stack version to ELK
 
 - Stack Version (ELK) : 7.9.2
 - Elasticsearch
@@ -55,6 +58,8 @@ Please see the .env file to more details
 <a href="#ELK-PROMETHEUS-GRAFANA-ZIPKIN-MYSQL">
   <img src="elk_prometheus_grafana_zipkin_mysql_v1/files/media/top.png" alt="" />
 </a>
+<br />
+<br />
 
 <pre>
 user@host:/home/user$ git clone https://github.com/huntercodexs/docker-series.git .
@@ -73,6 +78,8 @@ user@host:/home/user/docker-series/elk_prometheus_grafana_zipkin_mysql_v1$ docke
 <a href="#ELK-PROMETHEUS-GRAFANA-ZIPKIN-MYSQL">
   <img src="elk_prometheus_grafana_zipkin_mysql_v1/files/media/top.png" alt="" />
 </a>
+<br />
+<br />
 
 This project aims to offer a development environment with production concepts for managing
 microservices. In this case, an example project made in Java will be offered, but nothing prevents the environment from being
@@ -117,6 +124,8 @@ between themselves and how they communicate essential for a well-controlled and 
 <a href="#ELK-PROMETHEUS-GRAFANA-ZIPKIN-MYSQL">
   <img src="elk_prometheus_grafana_zipkin_mysql_v1/files/media/top.png" alt="" />
 </a>
+<br />
+<br />
 
 To simulate the Java microservices environment will be used one container for each service by amazonlinux 2 (EC2), the 
 EC2-AWS machine, witch will be used to run the applications/microservices previously generated from each Java project, 
@@ -150,6 +159,8 @@ The relationship of the applications mentioned above can be seen in the diagram 
 <a href="#ELK-PROMETHEUS-GRAFANA-ZIPKIN-MYSQL">
   <img src="elk_prometheus_grafana_zipkin_mysql_v1/files/media/top.png" alt="" />
 </a>
+<br />
+<br />
 
 Another important point for running and testing the environment of this project is to have an adequate set of services in
 Java to demonstrate how it all works. To facilitate and speed up the learning process about how to operate
@@ -174,8 +185,9 @@ All microservices need to be correctly configured in the log4j2.xml and applicat
 <a href="#ELK-PROMETHEUS-GRAFANA-ZIPKIN-MYSQL">
   <img src="elk_prometheus_grafana_zipkin_mysql_v1/files/media/top.png" alt="" />
 </a>
-
-> Details
+<br /
+<br /
+Details
 
 para utilizar esse ambiente completamente é preciso seguir as seguinte regras:
 
@@ -220,6 +232,8 @@ o JAR será gerado no output directory configurado no passo 1
 <a href="#ELK-PROMETHEUS-GRAFANA-ZIPKIN-MYSQL">
   <img src="elk_prometheus_grafana_zipkin_mysql_v1/files/media/top.png" alt="" />
 </a>
+<br />
+<br />
 
 After creating the entire environment, we can connect grafana to prometheus according to the information below
 
@@ -245,6 +259,8 @@ Result
 <a href="#ELK-PROMETHEUS-GRAFANA-ZIPKIN-MYSQL">
   <img src="elk_prometheus_grafana_zipkin_mysql_v1/files/media/top.png" alt="" />
 </a>
+<br />
+<br />
 
 This script only export microservices from Eureka Service Discovery Log, it means say that
 all microservices and only these microservices registered in the Eureka will be exported from the
@@ -283,6 +299,8 @@ kill -HUP 1
 <a href="#ELK-PROMETHEUS-GRAFANA-ZIPKIN-MYSQL">
 <img src="elk_prometheus_grafana_zipkin_mysql_v1/files/media/top.png" alt="" />
 </a>
+<br />
+<br />
 
 - Useful Links
   - http://localhost:5601/app/home#/
@@ -390,6 +408,8 @@ docker exec -it logstash sh /home/logstash/logstash-reload.sh
 <a href="#ELK-PROMETHEUS-GRAFANA-ZIPKIN-MYSQL">
 <img src="elk_prometheus_grafana_zipkin_mysql_v1/files/media/top.png" alt="" />
 </a>
+<br>
+<br>
 
 Follow the steps below to quick and easy environment creation
 
@@ -543,6 +563,8 @@ Grafana Ubuntu Prometheus Integration
 <a href="#ELK-PROMETHEUS-GRAFANA-ZIPKIN-MYSQL">
 <img src="elk_prometheus_grafana_zipkin_mysql_v1/files/media/top.png" alt="" />
 </a>
+<br />
+<br />
 
 Access zipkin container
 <pre>
