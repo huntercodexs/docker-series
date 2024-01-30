@@ -218,6 +218,116 @@ services:
       - default
       - elk_prometheus_grafana_zipkin_mysql_v1_open_network
   #----------------------------------------------------------------------------------------
+  ec2-service-discovery:
+    env_file: .env
+    container_name: ec2-service-discovery
+    build:
+      context: .
+      dockerfile: ./ec2/ec2-service-discovery.dockerfile
+    ports:
+      - ${SERVICE_DISCOVERY_PORT}:${SERVICE_DISCOVERY_PORT}
+    privileged: true
+    tty: true
+    volumes:
+      - ./ec2/app/service-discovery/:/home/ec2/app/
+    networks:
+      - default
+      - elk_prometheus_grafana_zipkin_mysql_v1_open_network
+    command: "/usr/bin/java -jar /home/ec2/app/SERVICE-DISCOVERY-0.0.1-SNAPSHOT.jar --spring.config.location=/home/ec2/app/application.properties"
+  #----------------------------------------------------------------------------------------
+  ec2-api-gateway:
+    env_file: .env
+    container_name: ec2-api-gateway
+    build:
+      context: .
+      dockerfile: ./ec2/ec2-api-gateway.dockerfile
+    ports:
+      - ${API_GATEWAY_PORT}:${API_GATEWAY_PORT}
+      - ${API_GATEWAY_HEALTH_PORT}:${API_GATEWAY_HEALTH_PORT}
+    privileged: true
+    tty: true
+    volumes:
+      - ./ec2/app/api-gateway/:/home/ec2/app/
+    networks:
+      - default
+      - elk_prometheus_grafana_zipkin_mysql_v1_open_network
+    depends_on:
+      - ec2-service-discovery
+    links:
+      - ec2-service-discovery
+    command: "/usr/bin/java -jar /home/ec2/app/API-GATEWAY-0.0.1-SNAPSHOT.jar --spring.config.location=/home/ec2/app/application.properties"
+  #----------------------------------------------------------------------------------------
+  ec2-client:
+    env_file: .env
+    container_name: ec2-client
+    build:
+      context: .
+      dockerfile: ./ec2/ec2-client.dockerfile
+    ports:
+      - ${CLIENT_PORT}:${CLIENT_PORT}
+    privileged: true
+    tty: true
+    volumes:
+      - ./ec2/app/client-demo/:/home/ec2/app/
+    networks:
+      - default
+      - elk_prometheus_grafana_zipkin_mysql_v1_open_network
+    depends_on:
+      - ec2-service-discovery
+    links:
+      - ec2-service-discovery
+    command: "/usr/bin/java -jar /home/ec2/app/CLIENT-DEMO-0.0.1-SNAPSHOT.jar --spring.config.location=/home/ec2/app/application.properties"
+  #----------------------------------------------------------------------------------------
+  ec2-microservice-order:
+    env_file: .env
+    container_name: ec2-microservice-order
+    build:
+      context: .
+      dockerfile: ./ec2/ec2-microservice-order.dockerfile
+    ports:
+      - ${MICROSERVICE_ORDER_PORT}:${MICROSERVICE_ORDER_PORT}
+    privileged: true
+    tty: true
+    volumes:
+      - ./ec2/app/microservice-order/:/home/ec2/app/
+    networks:
+      - default
+      - elk_prometheus_grafana_zipkin_mysql_v1_open_network
+    depends_on:
+      - ec2-service-discovery
+      - mysql-57
+      - mysql-80
+    links:
+      - ec2-service-discovery
+      - mysql-57
+      - mysql-80
+    command: "/usr/bin/java -jar /home/ec2/app/ORDER-DEMO-0.0.1-SNAPSHOT.jar --spring.config.location=/home/ec2/app/application.properties"
+  #----------------------------------------------------------------------------------------
+  ec2-microservice-product:
+    env_file: .env
+    container_name: ec2-microservice-product
+    build:
+      context: .
+      dockerfile: ./ec2/ec2-microservice-product.dockerfile
+    ports:
+      - ${MICROSERVICE_PRODUCT_PORT}:${MICROSERVICE_PRODUCT_PORT}
+    privileged: true
+    tty: true
+    volumes:
+      - ./ec2/app/microservice-product/:/home/ec2/app/
+    networks:
+      - default
+      - elk_prometheus_grafana_zipkin_mysql_v1_open_network
+    depends_on:
+      - ec2-service-discovery
+      - mysql-57
+      - mysql-80
+    links:
+      - ec2-service-discovery
+      - mysql-57
+      - mysql-80
+    command: "/usr/bin/java -jar /home/ec2/app/PRODUCT-DEMO-0.0.1-SNAPSHOT.jar --spring.config.location=/home/ec2/app/application.properties"
+  #----------------------------------------------------------------------------------------
 
 volumes:
   elasticsearch:

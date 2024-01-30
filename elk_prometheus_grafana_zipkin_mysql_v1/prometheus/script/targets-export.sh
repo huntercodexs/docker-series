@@ -1,6 +1,10 @@
 #!/bin/bash
 
 #
+# Script Location:
+# --------------------
+# /home/$USER/docker-series/elk_prometheus_grafana_zipkin_mysql_v1/prometheus/script/targets-export.sh
+#
 # Important Note:
 # --------------------
 # This script only export microservices from Eureka Service Discovery Log, it means say that
@@ -33,6 +37,7 @@ TARGET_FILE_PATH=$2
 COMMAND=$3
 ENVIRONMENT="development" #Use: production, development or sandbox
 OPERATION_DATE=$(date '+%Y%m%d%H%M%S')
+TEMPLATE="IP"
 
 TARGET_JSON_FILE='
 [\n\t{\n
@@ -64,9 +69,9 @@ function generate_target_file {
         cp -v "$1.json" "$4/$1.json"
     fi
 
-    if ls ./targets >> /dev/null 2>&1
+    if ls ../targets >> /dev/null 2>&1
     then
-        mv -v "$1.json" "./targets/$1.json"
+        mv -v "$1.json" "../targets/$1.json"
     fi
 
     echo "$1.json was created successfully"
@@ -80,35 +85,35 @@ function generate_prometheus_file {
 
     if [[ $1 == "CREATE" ]]
     then
-        if ls "prometheus.yml" >> /dev/null 2>&1
+        if ls "../prometheus.yml" >> /dev/null 2>&1
         then
             mkdir -p "backup"
-            cp "prometheus.yml" "backup/prometheus.yml-${OPERATION_DATE}"
+            cp "../prometheus.yml" "../backup/prometheus.yml-${OPERATION_DATE}"
         fi
 
-        echo -e "scrape_configs:\n" > "prometheus.yml"
+        echo -e "scrape_configs:\n" > "../prometheus.yml"
     else
         #Don't modify these lines
-        echo -ne "  - job_name: '$1'\n" >> "prometheus.yml"
-        echo -ne '    scrape_interval: 2s\n' >> "prometheus.yml"
-        echo -ne '    metrics_path: "/actuator/prometheus"\n' >> "prometheus.yml"
-        echo -ne '    file_sd_configs:\n' >> "prometheus.yml"
-        echo -ne '    - files:\n' >> "prometheus.yml"
-        echo -ne "      - $2/$1.json\n\n" >> "prometheus.yml"
+        echo -ne "  - job_name: '$1'\n" >> "../prometheus.yml"
+        echo -ne '    scrape_interval: 2s\n' >> "../prometheus.yml"
+        echo -ne '    metrics_path: "/actuator/prometheus"\n' >> "../prometheus.yml"
+        echo -ne '    file_sd_configs:\n' >> "../prometheus.yml"
+        echo -ne '    - files:\n' >> "../prometheus.yml"
+        echo -ne "      - $2/$1.json\n\n" >> "../prometheus.yml"
     fi
 }
 
 function reload_prometheus {
-    cd ../
-    if ls ./prometheus/prometheus-reload.sh >> /dev/null 2>&1
+    cd ../../
+    if ls ./prometheus/script/prometheus-reload.sh >> /dev/null 2>&1
     then
         docker exec -it prometheus sh /home/prometheus/prometheus-reload.sh
+        echo ""
+        echo "Prometheus reloaded successfully, please check the current service status on http://localhost:9090/targets"
     else
         echo "Error: Reload is not available, check the current path."
     fi
     cd -
-    echo ""
-    echo "Prometheus reloaded successfully, please check the current service status on http://localhost:9090/targets"
 }
 
 if [[ ${EUREKA_LOG_FILE_PATH} == "" ]]
@@ -124,7 +129,33 @@ then
     TARGET_FILE_PATH="./"
 fi
 
+#TEMPLATE=IP
 INSTANCES=($(egrep "Registered instance ([a-zA-Z_-]+\/[0-9]+\.[0-9]+\.[0-9]+\.[0-9]+:[a-zA-Z_-]+:[0-9]+) with status UP" ${EUREKA_LOG_FILE_PATH} | cut -d: -f4-6 | egrep "replication=(true|false)" | sed -e 's/ Registered instance //g' | sed -e 's/ with status UP (replication=.*)//g' | sort | uniq))
+
+if [[ ${#INSTANCES[@]} == "0" ]]
+then
+    #TEMPLATE=RANDOM-ID
+    INSTANCES=($(egrep "Registered instance ([a-zA-Z_-]+\/[0-9a-zA-Z]+:[a-zA-Z_-]+:[0-9]+) with status UP" ${EUREKA_LOG_FILE_PATH} | cut -d: -f4-6 | egrep "replication=(true|false)" | sed -e 's/ Registered instance //g' | sed -e 's/ with status UP (replication=.*)//g' | sort | uniq))
+
+    if [[ ${#INSTANCES[@]} == "0" ]]
+    then
+        echo "===================================="
+        echo "Info: There is no targets to export."
+        echo "===================================="
+        exit
+    fi
+
+    TEMPLATE="RANDOM-ID"
+
+    echo -e "\n\n"
+    echo "NOTICE: TEMPLATE RANDOM-ID ACTIVATED"
+    echo -e "\n\n"
+
+else
+    echo -e "\n\n"
+    echo "NOTICE: TEMPLATE IP ACTIVATED"
+    echo -e "\n\n"
+fi
 
 generate_prometheus_file "CREATE"
 
@@ -135,7 +166,13 @@ do
     CURRENT_NAME=$(echo $instance | cut -d "/" -f1)
     echo "Name: ${CURRENT_NAME}"
 
-    CURRENT_IP=$(echo $instance | cut -d ":" -f1 | cut -d "/" -f2)
+    if [[ ${TEMPLATE} == "IP" ]]
+    then
+        CURRENT_IP=$(echo $instance | cut -d ":" -f1 | cut -d "/" -f2)
+    else
+        CURRENT_IP="127.0.0.1"
+    fi
+
     echo "IP: ${CURRENT_IP}"
 
     CURRENT_ALIAS=$(echo $instance | cut -d ":" -f2)
@@ -152,6 +189,17 @@ done
 if [[ ${COMMAND} == "--reload" ]]
 then
     reload_prometheus
+fi
+
+if [[ ${TEMPLATE} == "RANDOM-ID" ]]
+then
+    echo -e "\n\n"
+    echo "+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++"
+    echo "WARNING: The current configuration from the EUREKA SERVICE DISCOVERY is RANDOM-ID."
+    echo "It means thar you need set up the configuration prometheus.yml file manually in the scope of IP for each target. "
+    echo "Also check the json files (targets) generated."
+    echo "+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++"
+    echo -e "\n\n"
 fi
 
 exit

@@ -226,8 +226,29 @@ Use the follow repository https://github.com/huntercodexs/elk-prometheus-grafana
 - Prometheus
 - Zipkin
 - Grafana
+- Amazonlinux 2 (EC2)
 
 
+# about
+
+Para simular o ambiente de microserviços em Java sera utilizado um container para cada serviço com a imagem da amazon, 
+o Amazonlinux 2, para simular uma maquina EC2-AWS, a qual servira para rodar as aplicações/microserviços em Java que 
+foram previamente gerados em cada projeto (jar file). Apenas a titulo de exemplo sera apresentado e inserido no repositorio 
+cerca de 5 containers para exemplificar o funcionamento do ambiente, esses containers Amazonlinux 2 tem a funcionalidade 
+exclusiva de servir como demonstração, nada mais do que isso. Cada projeto sera executado dentro de cada um desses containers, 
+sendo eles os listados a seguir:
+
+- EC2 Service Discovery
+- EC2 Api Gateway
+- EC2 Client
+- EC2 Microservice Order
+- EC2 Microservice Product
+
+É importante notar que cada uma dessas maquinas deverão ser adicionadas no arquivo de configuração docker-compose.yml, 
+sendo cada um deles um container docker, que por sua vez ira executar os arquivos jar previamente gerados e prontos para 
+serem executados. Para efeito de organização e separação dos repositorios, esses arquivos deverão ser obtidos no repositorio
+https://github.com/huntercodexs/elk-prometheus-grafana-zipkin-demo, compilados, buildados e disponilizados dentro de cada 
+pasta pertinente a cada microserviço.
 
 # details
 
@@ -242,6 +263,22 @@ para utilizar esse ambiente completamente é preciso seguir as seguinte regras:
 - saber o local exato onde esta sendo gerado o log do service discovery EUREKA, pois ele sera utilizado para extrair os detalhes de cada serviço registrado no service discovery
 - usar as configurações corretas para o arquivo de propriedades no projeto JAVA
 - usar as configurações corretas para o arquivo de log xml no projeto JAVA
+
+antes de rodar esse projeto, certifique-se de colocar nas pastas
+elk_prometheus_grafana_zipkin_mysql_v1/ec2/app/api-gateway
+elk_prometheus_grafana_zipkin_mysql_v1/ec2/app/client
+elk_prometheus_grafana_zipkin_mysql_v1/ec2/app/microservice-order
+elk_prometheus_grafana_zipkin_mysql_v1/ec2/app/microservice-product
+elk_prometheus_grafana_zipkin_mysql_v1/ec2/app/service-discovery
+todos os arquivos jar gerados no projeto https://github.com/huntercodexs/elk-prometheus-grafana-zipkin-demo
+
+No IntelliJ siga as seguintes instruções
+
+1) File -> Project Structure -> Project Settings -> Artifacts -> Clique no "+" -> Jar -> From modules with dependencies... > selecione qual é a classe Main > OK
+
+2) Configurado o artefato vá em Build > Build Artifact > Build
+
+o JAR será gerado no output directory configurado no passo 1
 
 
 #  samples microservices
@@ -261,6 +298,8 @@ conjunto de microserviços para simular o ambiente. Esse repositorio oferece os 
 - Mysql Connector
 - JPA
 - Hibernate
+
+Todos os microserviços precisam ser corretamente configurados nos arquivos log4j2.xml e application.properties
 
 # prometheus
 
