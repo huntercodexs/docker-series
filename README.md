@@ -6,6 +6,21 @@ Complete trace environment
 > NOTE: If you want to be more fast goto step by step in this documentation
 > <a href="#step-by-step">Step by Step</a>
 
+Summary
+
+- <a href="#information">Information</a>
+- <a href="#resources">Resources</a>
+- <a href="#quick-usage">Quick Usage</a>
+- <a href="#purpose">Purpose</a>
+- <a href="#environment">Environment</a>
+- <a href="#samples-microservices-Java-Project">Samples Microservices (Java Project)</a>
+- <a href="#configurations">Configurations</a>
+- <a href="#grafana">Grafana</a>
+- <a href="#prometheus">Prometheus</a>
+- <a href="#logstash">Logstash</a>
+- <a href="#step-by-step">Step by Step</a>
+- <a href="#helper-and-references">Helper and References</a>
+
 # Information
 
 Please use the branch selection to access others configurations for your need and purposes
@@ -85,6 +100,7 @@ between themselves and how they communicate essential for a well-controlled and 
 
 ![purpose-diagram.png](elk_prometheus_grafana_zipkin_mysql_v1/files/media/purpose-diagram.png)
 
+
 # Environment
 
 To simulate the Java microservices environment will be used one container for each service by amazonlinux 2 (EC2), the 
@@ -117,10 +133,10 @@ The relationship of the applications mentioned above can be seen in the diagram 
 
 #  Samples Microservices (Java Project)
 
-Outro requisito importante para executar e testar o ambiente desse projeto é ter um conjunto adequado de serviços em
-Java para demonstrar como tudo funciona. Para facilitar e agilizar o processo de aprendizagem sobre o funcionamento
-desse projeto temo o repositorio https://github.com/huntercodexs/elk-prometheus-grafana-zipkin-demo que contem um
-conjunto de microserviços para simular o ambiente. Esse repositorio oferece os seguintes recursos:
+Another important point for running and testing the environment of this project is to have an adequate set of services in
+Java to demonstrate how it all works. To facilitate and speed up the learning process about how to operate
+of this project I have the repository https://github.com/huntercodexs/elk-prometheus-grafana-zipkin-demo which contains a
+set of microservices to simulate the environment. This repository offers the following features:
 
 - Eureka Server
 - Eureka Client
@@ -133,10 +149,12 @@ conjunto de microserviços para simular o ambiente. Esse repositorio oferece os 
 - JPA
 - Hibernate
 
-Todos os microserviços precisam ser corretamente configurados nos arquivos log4j2.xml e application.properties
+All microservices need to be correctly configured in the log4j2.xml and application.properties files
 
 
-# Details
+# Configurations
+
+> Details
 
 para utilizar esse ambiente completamente é preciso seguir as seguinte regras:
 
@@ -144,7 +162,7 @@ para utilizar esse ambiente completamente é preciso seguir as seguinte regras:
 - ter um ambiente de microserviços
 - utilizar o serviço discovery EUREKA da Netflix
 - utilizar o API GATEWAY da Netflix Zull (Feign)
-    - existirão duas versão de API GATEWAY uma com rotas no arquivo de propriedades e outra através de um client
+  - existirão duas versão de API GATEWAY uma com rotas no arquivo de propriedades e outra através de um client
 - ter os serviços registrados no service discovery corretamente
 - saber o local exato onde esta sendo gerado o log do service discovery EUREKA, pois ele sera utilizado para extrair os detalhes de cada serviço registrado no service discovery
 - usar as configurações corretas para o arquivo de propriedades no projeto JAVA
@@ -166,9 +184,6 @@ No IntelliJ siga as seguintes instruções
 
 o JAR será gerado no output directory configurado no passo 1
 
-
-# Configurations
-
 - Java Projects
   - Application Properties
 - Prometheus
@@ -180,25 +195,24 @@ o JAR será gerado no output directory configurado no passo 1
 - Kibana
 
 
-
 # grafana
 
-Apos criar todo o ambiente podemos conectar o grafana ao prometheus conforme informações abaixo
+After creating the entire environment, we can connect grafana to prometheus according to the information below
 
 Dashboards
 
-![grafana-dashboards.png](elk_prometheus_grafana_zipkin_mysql_v1%2Ffiles%2Fmedia%2Fgrafana-dashboards.png)
+![grafana-dashboards.png](elk_prometheus_grafana_zipkin_mysql_v1/files/media/grafana-dashboards.png)
 
-- Conectar Grafana ao Prometheus
+- Connect Grafana to Prometheus
 
 ![grafana-datasources.png](elk_prometheus_grafana_zipkin_mysql_v1/files/media/grafana-datasources.png)
 
-- Conectar Grafa ao Prometheus utilizando o plugin Spring Boot Statistics
+- Connect Grafa to Prometheus using the Spring Boot Statistics plugin
 
-Obter o ID do plugin no website do Grafana no link seguinte link https://grafana.com/grafana/dashboards/6756-spring-boot-statistics/.
-Inserir o ID do dashboard dentro do Grafana em Dashboard->import
+Get the plugin ID from the Grafana website at the following link https://grafana.com/grafana/dashboards/6756-spring-boot-statistics/.
+Insert the dashboard ID into Grafana in Dashboard->import
 
-Resultado
+Result
 
 ![grafana-spring-boot-statistics-dashboard-import.png](elk_prometheus_grafana_zipkin_mysql_v1/files/media/grafana-spring-boot-statistics-dashboard-import.png)
 
@@ -210,7 +224,7 @@ Resultado
 This script only export microservices from Eureka Service Discovery Log, it means say that
 all microservices and only these microservices registered in the Eureka will be exported from the
 current log produced by Eureka. Therefore, you need to inform the current and correct path to
-Eureka Service where all of the microservices has been registered. The log record that will be seek in the
+Eureka Service where all the microservices has been registered. The log record that will be seek in the
 log look like something like that:
 Registered instance NEW-MICROSERVICE-DEMO/192.168.0.204:new-microservice-demo:31315 with status UP (replication=true)
 
