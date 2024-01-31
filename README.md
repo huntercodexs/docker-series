@@ -667,7 +667,35 @@ elk_prometheus_grafana_zipkin_mysql_v1/logstash/pipeline/pipelineio.conf
 elk_prometheus_grafana_zipkin_mysql_v1/prometheus/prometheus.yml
 </pre>
 
-6- Build the containers
+6- Also check and configure the applications.properties, log4j2.xml for each java application.
+> IMPORTANT NOTE:<br> Check this documentation information above to get more details about it.
+<pre>
+elk_prometheus_grafana_zipkin_mysql_v1/ec2/app/api-gateway/log4j2.xml
+elk_prometheus_grafana_zipkin_mysql_v1/ec2/app/api-gateway/application.properties
+
+elk_prometheus_grafana_zipkin_mysql_v1/ec2/app/client/log4j2.xml
+elk_prometheus_grafana_zipkin_mysql_v1/ec2/app/client/application.properties
+
+elk_prometheus_grafana_zipkin_mysql_v1/ec2/app/microservice-order/log4j2.xml
+elk_prometheus_grafana_zipkin_mysql_v1/ec2/app/microservice-order/application.properties
+
+elk_prometheus_grafana_zipkin_mysql_v1/ec2/app/microservice-product/log4j2.xml
+elk_prometheus_grafana_zipkin_mysql_v1/ec2/app/microservice-product/application.properties
+
+elk_prometheus_grafana_zipkin_mysql_v1/ec2/app/service-discovery/log4j2.xml
+elk_prometheus_grafana_zipkin_mysql_v1/ec2/app/service-discovery/application.properties
+</pre>
+
+7- Generate the runnable jar files and put each one in the refer folder path
+<pre>
+elk_prometheus_grafana_zipkin_mysql_v1/ec2/app/api-gateway/API-GATEWAY-0.0.1-SNAPSHOT.jar
+elk_prometheus_grafana_zipkin_mysql_v1/ec2/app/client/CLIENT-DEMO-0.0.1-SNAPSHOT.jar
+elk_prometheus_grafana_zipkin_mysql_v1/ec2/app/microservice-order/ORDER-DEMO-0.0.1-SNAPSHOT.jar
+elk_prometheus_grafana_zipkin_mysql_v1/ec2/app/microservice-product/PRODUCT-DEMO-0.0.1-SNAPSHOT.jar
+elk_prometheus_grafana_zipkin_mysql_v1/ec2/app/service-discovery/EUREKA-SERVICE-DISCOVERY-0.0.1-SNAPSHOT.jar
+</pre>
+
+8- Build the containers
 
 <pre>    
 user@host:/home/user/docker-series/elk_prometheus_grafana_zipkin_mysql_v1$ docker network create elk_prometheus_grafana_zipkin_mysql_v1_open_network
@@ -677,60 +705,101 @@ user@host:/home/user/docker-series/elk_prometheus_grafana_zipkin_mysql_v1$ docke
 Make sure that the result look like this
 <pre>
 user@host:/home/user/docker-series/elk_prometheus_grafana_zipkin_mysql_v1$ docker-compose ps
-     Name                   Command                   State                                                                                                             Ports                                                                                                      
------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-elasticsearch    /tini -- /usr/local/bin/do ...   Up               0.0.0.0:9200->9200/tcp,:::9200->9200/tcp, 0.0.0.0:9300->9300/tcp,:::9300->9300/tcp                                                                                                                              
-grafana          /run.sh                          Up               0.0.0.0:3000->3000/tcp,:::3000->3000/tcp                                                                                                                                                                        
-grafana-ubuntu   /run.sh                          Up               0.0.0.0:3001->3000/tcp,:::3001->3000/tcp                                                                                                                                                                        
-kibana           /usr/local/bin/dumb-init - ...   Up               0.0.0.0:5601->5601/tcp,:::5601->5601/tcp                                                                                                                                                                        
-logstash         /usr/local/bin/docker-entr ...   Up               0.0.0.0:5000->5000/tcp,:::5000->5000/tcp, 0.0.0.0:5000->5000/udp,:::5000->5000/udp, 0.0.0.0:5044->5044/tcp,:::5044->5044/tcp, 0.0.0.0:8080->8080/tcp,:::8080->8080/tcp, 0.0.0.0:9600->9600/tcp,:::9600->9600/tcp
-mysql57          docker-entrypoint.sh mysqld      Up               0.0.0.0:3606->3306/tcp,:::3606->3306/tcp, 33060/tcp                                                                                                                                                             
-mysql80          docker-entrypoint.sh mysqld      Up               0.0.0.0:3706->3306/tcp,:::3706->3306/tcp, 33060/tcp                                                                                                                                                             
-prometheus       /bin/prometheus --config.f ...   Up               0.0.0.0:9090->9090/tcp,:::9090->9090/tcp                                                                                                                                                                        
-zipkin           start-zipkin                     Up (unhealthy)   9410/tcp, 0.0.0.0:9411->9411/tcp,:::9411->9411/tcp                                                                                                                                                              
+          Name                        Command                       State                                                                                                           Ports                                                                                                 
+------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+ec2-api-gateway            /usr/bin/java -jar /home/e ...   Up                      0.0.0.0:40002->40002/tcp,:::40002->40002/tcp, 0.0.0.0:40003->40003/tcp,:::40003->40003/tcp, 8080/tcp, 8081/tcp, 8765/tcp                                                                              
+ec2-client                 /usr/bin/java -jar /home/e ...   Up                      0.0.0.0:31301->31301/tcp,:::31301->31301/tcp, 8080/tcp                                                                                                                                                
+ec2-microservice-order     /usr/bin/java -jar /home/e ...   Up                      0.0.0.0:31302->31302/tcp,:::31302->31302/tcp, 8080/tcp                                                                                                                                                
+ec2-microservice-product   /usr/bin/java -jar /home/e ...   Up                      0.0.0.0:31303->31303/tcp,:::31303->31303/tcp, 8080/tcp                                                                                                                                                
+ec2-service-discovery      /usr/bin/java -jar /home/e ...   Up                      0.0.0.0:40001->40001/tcp,:::40001->40001/tcp, 8080/tcp, 8761/tcp                                                                                                                                      
+elasticsearch              /tini -- /usr/local/bin/do ...   Up                      0.0.0.0:9200->9200/tcp,:::9200->9200/tcp, 0.0.0.0:9300->9300/tcp,:::9300->9300/tcp                                                                                                                    
+grafana                    /run.sh                          Up                      0.0.0.0:3000->3000/tcp,:::3000->3000/tcp                                                                                                                                                              
+grafana-ubuntu             /run.sh                          Up                      0.0.0.0:3001->3000/tcp,:::3001->3000/tcp                                                                                                                                                              
+kibana                     /usr/local/bin/dumb-init - ...   Up                      0.0.0.0:5601->5601/tcp,:::5601->5601/tcp                                                                                                                                                              
+logstash                   /usr/local/bin/docker-entr ...   Up                      0.0.0.0:5000->5000/tcp,:::5000->5000/tcp, 0.0.0.0:5000->5000/udp,:::5000->5000/udp, 0.0.0.0:5044->5044/tcp,:::5044->5044/tcp, 0.0.0.0:8080->8080/tcp,:::8080->8080/tcp,                               
+                                                                                    0.0.0.0:9600->9600/tcp,:::9600->9600/tcp                                                                                                                                                              
+mysql57                    docker-entrypoint.sh mysqld      Up                      0.0.0.0:3606->3306/tcp,:::3606->3306/tcp, 33060/tcp                                                                                                                                                   
+mysql80                    docker-entrypoint.sh mysqld      Up                      0.0.0.0:3706->3306/tcp,:::3706->3306/tcp, 33060/tcp                                                                                                                                                   
+prometheus                 /bin/prometheus --config.f ...   Up                      0.0.0.0:9090->9090/tcp,:::9090->9090/tcp                                                                                                                                                              
+zipkin                     start-zipkin                     Up (health: starting)   9410/tcp, 0.0.0.0:9411->9411/tcp,:::9411->9411/tcp                                                                                                                                                    
 </pre>
 
-7- Test the containers
+9- Export the targets from EUREKA SERVICE DISCOVERY to Prometheus
 
-Elasticsearch
+> NOTE:<br>
+> - This process is required to prometheus known about the microservices that are running
+> - The first parameter say where is the log that belong a EUREKA
+> - The second parameter refer to location inside prometheus container and is in according to docker-compose.yml configuration
+> - The third parameter should be used if you want to reload the prometheus service with the currently or new information, it is highly recommended pass it in the parameters
+
+<pre>
+./targets-export.sh /home/$USER/logs/EUREKA-SERVICE-DISCOVERY.log /home/prometheus/targets/ [--reload: optional]
+</pre>
+
+10- Check and configure logstash
+
+In this step, if you made any modification, or need to make any modification after build the container, you should be 
+executed the script logstash-reload.sh to refresh the indexes and configurations from pipelineio.
+
+<pre>
+docker exec -it logstash sh /home/logstash/logstash-reload.sh
+</pre>
+
+11- Configure Kibana to listen logstash data request
+
+> NOTE:<br>
+> See this documentation above to get more details about it
+
+To set up Kibana, just give a look in the .env file and the yml file to kibana.yml.
+
+- create an index in kibana at http://localhost:5601/app/management/kibana/indexPatterns/create
+- put the name of the index in the input text box
+  - click on Next step
+    - select a value in "Time field"
+      - click on Create index pattern (if necessary, it is possible to configure an index as the default)
+
+12- Create Integration between Grafana and Prometheus
+
+To do it, see the section <a href="#grafana">Grafana</a> in this documentation
+
+13- Test the environment
+
+13.1) Elasticsearch
 <pre>
 http://localhost:9200/
 ELASTIC_USERNAME
 ELASTIC_PASSWORD
 </pre>
 
-Logstash
+13.2) Logstash
 <pre>
 http://localhost:8080
 </pre>
 
-Indexes Logstash
+13.2.1) Indexes Logstash
 <pre>
 elk_prometheus_grafana_zipkin_mysql_v1/logstash/pipeline/pipelineio.conf
 </pre>
 
-Kibana
+13.3) Kibana
 <pre>
 http://localhost:5601/app/home#/
 http://localhost:5601/app/dev_tools#/console
 ELASTIC_USERNAME
 ELASTIC_PASSWORD
 </pre>
-![kibana-dashboard-dev-tools-example.png](elk_prometheus_grafana_zipkin_mysql_v1/files/media/kibana-dashboard-dev-tools-example.png)
 
-Create the index in Kibana (according logstash configuration - pipelineio.conf)
+13.3.1) Create the index in Kibana (according logstash configuration - pipelineio.conf)
 <pre>
 http://localhost:5601/app/management/kibana/indexPatterns/create
 </pre>
-![kibana-dashboard-dev-tools-example.png](elk_prometheus_grafana_zipkin_mysql_v1/files/media/kibana-dashboard-dev-tools-example.png)
 
-Check the log at Kibana Discover (the created index stay at left side of screen)
+13.3.2) Check the log at Kibana Discover (the created index stay at left side of screen)
 <pre>
 http://localhost:5601/app/discover
 </pre>
-![kibana-dashboard-dev-tools-example.png](elk_prometheus_grafana_zipkin_mysql_v1/files/media/kibana-dashboard-dev-tools-example.png)
 
-Sample Queries
+13.3.3) Sample Queries
 <pre>
 GET tcp-elk_prometheus_grafana_zipkin_mysql_v1_demo/_search
 GET http-elk_prometheus_grafana_zipkin_mysql_v1_demo/_search
@@ -738,23 +807,17 @@ GET postman-tests-elk_prometheus_grafana_zipkin_mysql_v1_demo/_search
 </pre>
 ![kibana-dashboard-dev-tools-example.png](elk_prometheus_grafana_zipkin_mysql_v1/files/media/kibana-dashboard-dev-tools-example.png)
 
-Zipkin
+13.4) Zipkin
 <pre>
 http://localhost:9411
 </pre>
-![kibana-dashboard-dev-tools-example.png](elk_prometheus_grafana_zipkin_mysql_v1/files/media/kibana-dashboard-dev-tools-example.png)
 
-Zipkin Details
-<pre>
-</pre>
-
-Prometheus
+13.5) Prometheus
 <pre>
 http://localhost:9090
 </pre>
-![kibana-dashboard-dev-tools-example.png](elk_prometheus_grafana_zipkin_mysql_v1/files/media/kibana-dashboard-dev-tools-example.png)
 
-Prometheus Settings (targets)
+13.5.1) Prometheus Settings (targets)
 
 > NOTE: It is recommended use a specific tool or process to create dynamically the targets and then put the result
 > in one json or yaml file, the manual process is not indicated
@@ -763,24 +826,14 @@ Prometheus Settings (targets)
 elk_prometheus_grafana_zipkin_mysql_v1/prometheus/prometheus.yml
 </pre>
 
-Grafana
+13.6) Grafana
 <pre>
 http://localhost:3001/login
 </pre>
-![kibana-dashboard-dev-tools-example.png](elk_prometheus_grafana_zipkin_mysql_v1/files/media/kibana-dashboard-dev-tools-example.png)
 
-Grafana Prometheus Integration
-<pre>
-</pre>
-
-Grafana Ubuntu
+13.7) Grafana Ubuntu
 <pre>
 http://localhost:3000/login
-</pre>
-![kibana-dashboard-dev-tools-example.png](elk_prometheus_grafana_zipkin_mysql_v1/files/media/kibana-dashboard-dev-tools-example.png)
-
-Grafana Ubuntu Prometheus Integration
-<pre>
 </pre>
 
 
