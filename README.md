@@ -100,16 +100,16 @@ Therefore, we are aware that the environment must offer resources or tools that 
 which actually refers more to DevOps than development itself. In situations like this we can then
 work with the tools presented here, namely: Zipkin, Prometheus, ELK and Grafana, being able to divide the topics into:
 
-- Monitoring via log
+- Log Monitoring
     - Elasticsearch
     - Logstash
     - Kibana
 
-- Monitoring of hardware resources
+- Hardware Monitoring
     - Prometheus
     - Grafana
 
-- Monitoring the health of applications
+- Health Monitoring
     - Zipkin
     - Prometheus
     - Eureka Service Discovery
@@ -117,7 +117,7 @@ work with the tools presented here, namely: Zipkin, Prometheus, ELK and Grafana,
 A flow diagram is presented below to illustrate this entire environment, notice how the tools are connected
 between themselves and how they communicate essential for a well-controlled and stable environment.
 
-![purpose-diagram.png](elk_prometheus_grafana_zipkin_mysql_v1/files/media/purpose-diagram.png)
+![environment-diagram.png](elk_prometheus_grafana_zipkin_mysql_v1/files/media/environment-diagram.png)
 
 
 # Environment
@@ -143,16 +143,16 @@ Each Java project will be executed inside each container, witch are listed bello
 - ec2-microservice-order: EC2 Microservice Order
 - ec2-microservice-product: EC2 Microservice Product
 
+All the microservices will be registered in the Eureka as showed in the image below
+
+![eureka-service-discovery.png](elk_prometheus_grafana_zipkin_mysql_v1/files/media/eureka-service-discovery.png)
+
 > IMPORTANT NOTE:<br>
 > Each one of theses EC2 machines (Amazonlinux 2) were added in the docker-compose yml file, being each one a docker
 > container, which in turn will run the jar files, that was previously generated and are already to run. Just for get 
 > more organized and separate the repositories/projects, these java projects should be got in the GitHub repository
 > https://github.com/huntercodexs/elk-prometheus-grafana-zipkin-demo, after that, compiled, built-in and deployed inside 
 > each folder refer to each microservice. These folder can be viewed  in the path ec2/app/{java-project-name}
-
-The relationship of the applications mentioned above can be seen in the diagram below
-
-![environment-diagram.png](elk_prometheus_grafana_zipkin_mysql_v1/files/media/environment-diagram.png)
 
 
 #  Samples Microservices (Java Project)
