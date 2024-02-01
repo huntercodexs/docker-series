@@ -11,7 +11,7 @@ Summary
 - <a href="#information">Information</a>
 - <a href="#resources">Resources</a>
 - <a href="#quick-usage">Quick Usage</a>
-- <a href="#purpose">Purpose</a>
+- <a href="#project-purpose">Project Purpose</a>
 - <a href="#environment">Environment</a>
 - <a href="#samples-microservices-Java-Project">Samples Microservices (Java Project)</a>
 - <a href="#configurations">Configurations</a>
@@ -21,6 +21,7 @@ Summary
 - <a href="#step-by-step">Step by Step</a>
 - <a href="#helper-and-references">Helper and References</a>
 
+
 # Information
 <a href="#ELK-PROMETHEUS-GRAFANA-ZIPKIN-MYSQL">
   <img src="elk_prometheus_grafana_zipkin_mysql_v1/files/media/top.png" alt="" />
@@ -28,16 +29,16 @@ Summary
 <br>
 <br>
 
-Please use the branch selection to access others configurations for your need and purposes
+Please use the branch selector to access others configurations for your needed and purposes
 
 
 # Resources
 <a href="#ELK-PROMETHEUS-GRAFANA-ZIPKIN-MYSQL">
   <img src="elk_prometheus_grafana_zipkin_mysql_v1/files/media/top.png" alt="" />
 </a>
+
 <br>
 <br>
-NOTE: Its highest recommended to use the same stack version to ELK
 
 - Stack Version (ELK) : 7.9.2
 - Elasticsearch
@@ -51,7 +52,9 @@ NOTE: Its highest recommended to use the same stack version to ELK
 - Java 8 or later
 - Amazonlinux 2 (EC2)
 
-Please see the .env file to more details
+> NOTE:<br>
+> - Its highly recommended to use the same stack version to ELK<br> 
+> - Please see the .env file to more details
 
 
 # Quick Usage
@@ -74,31 +77,31 @@ user@host:/home/user/docker-series/elk_prometheus_grafana_zipkin_mysql_v1$ docke
 </pre>
 
 
-# Purpose
+# Project Purpose
 <a href="#ELK-PROMETHEUS-GRAFANA-ZIPKIN-MYSQL">
   <img src="elk_prometheus_grafana_zipkin_mysql_v1/files/media/top.png" alt="" />
 </a>
 <br>
 <br>
 
-This project aims to offer a development environment with production concepts for managing
-microservices. In this case, an example project made in Java will be offered, but nothing prevents the environment from being
-used for other languages such as Python, PHP, among others.
+This project aims to offer a development environment with production concepts for managing microservices. In this case, 
+an example project made in Java will be offered, but nothing prevents the environment from being used for other languages 
+such as Python, PHP, among others.
 
-Like any microservices architecture, since its size is scalable and dependent on demand and therefore
-Since this can be very large, we need to have effective monitoring and management tools. At this point we have
-to separate these needs by scope and functionality.
+Like any microservices architecture, your size is scalable and depend on demand and, therefore, since this can be
+very large, we need to have effective monitoring and management tools. At this point we have to separate these needs by
+scope and functionality.
 
 Starting from the point where we need to manage our architecture and its resources, we need to separate the needs into
-specific subjects and that at least address the following questions:
+specific subjects and at least to ask the following questions:
 
-- Monitoring via log
-- Monitoring of hardware resources
-- Monitoring the health of applications
+- How we go make the monitoring via log
+- How we go make the monitoring of hardware resources
+- How we go make the monitoring the health of applications
 
-Therefore, we are aware that the environment must offer resources or tools that facilitate this work
-which actually refers more to DevOps than development itself. In situations like this we can then
-work with the tools presented here, namely: Zipkin, Prometheus, ELK and Grafana, being able to divide the topics into:
+Therefore, we are aware that the environment must offer resources or tools that facilitate this work which actually 
+refers more to DevOps than development itself. In situations like this we can then work with the tools presented here, 
+namely: Zipkin, Prometheus, ELK and Grafana, being separated in the following topics:
 
 - Log Monitoring
     - Elasticsearch
@@ -115,12 +118,12 @@ work with the tools presented here, namely: Zipkin, Prometheus, ELK and Grafana,
     - Eureka Service Discovery
 
 A flow diagram is presented below to illustrate this entire environment, notice how the tools are connected
-between themselves and how they communicate essential for a well-controlled and stable environment.
+between themselves and how they communicate for a well-controlled and stable environment.
 
 ![environment-diagram.png](elk_prometheus_grafana_zipkin_mysql_v1/files/media/environment-diagram.png)
 
 
-# Environment
+#  Environment
 <a href="#ELK-PROMETHEUS-GRAFANA-ZIPKIN-MYSQL">
   <img src="elk_prometheus_grafana_zipkin_mysql_v1/files/media/top.png" alt="" />
 </a>
@@ -129,13 +132,13 @@ between themselves and how they communicate essential for a well-controlled and 
 
 To simulate the Java microservices environment will be used one container for each service by amazonlinux 2 (EC2), the 
 EC2-AWS machine, witch will be used to run the applications/microservices previously generated from each Java project, 
-to be more clear and direct the jar files. 
+to be more clear and direct we are talking about the jar files. 
 
 Only as an example will be presented and inserted in this project/repository 5 containers to exemplify how to work 
 the environment "ELK + PROMETHEUS + GRAFANA + ZIPKIN + MYSQL" in the practice. These containers are Amazonlinux 2, and 
 have a single and exclusive functionality to demonstrate a possible situation to use it.
 
-Each Java project will be executed inside each container, witch are listed bellow:
+Each Java project will be executed inside each container, which are listed below:
 
 - ec2-service-discovery: EC2 Service Discovery
 - ec2-api-gateway: EC2 Api Gateway
@@ -148,11 +151,11 @@ All the microservices will be registered in the Eureka as showed in the image be
 ![eureka-service-discovery.png](elk_prometheus_grafana_zipkin_mysql_v1/files/media/eureka-service-discovery.png)
 
 > IMPORTANT NOTE:<br>
-> Each one of theses EC2 machines (Amazonlinux 2) were added in the docker-compose yml file, being each one a docker
+> Each one of these EC2 machines (Amazonlinux 2) were added in the docker-compose.yml file, being each one a docker
 > container, which in turn will run the jar files, that was previously generated and are already to run. Just for get 
 > more organized and separate the repositories/projects, these java projects should be got in the GitHub repository
 > https://github.com/huntercodexs/elk-prometheus-grafana-zipkin-demo, after that, compiled, built-in and deployed inside 
-> each folder refer to each microservice. These folder can be viewed  in the path ec2/app/{java-project-name}
+> each folder refer to each microservice. These folder can be viewed in the path ec2/app/{java-project-name}
 
 
 #  Samples Microservices (Java Project)
@@ -164,7 +167,7 @@ All the microservices will be registered in the Eureka as showed in the image be
 
 Another important point for running and testing the environment of this project is to have an adequate set of services in
 Java to demonstrate how it all works. To facilitate and speed up the learning process about how to operate
-of this project I have the repository https://github.com/huntercodexs/elk-prometheus-grafana-zipkin-demo which contains a
+of this project I afford the repository https://github.com/huntercodexs/elk-prometheus-grafana-zipkin-demo which contains a
 set of microservices to simulate the environment. This repository offers the following features:
 
 - Eureka Server
@@ -178,7 +181,8 @@ set of microservices to simulate the environment. This repository offers the fol
 - JPA
 - Hibernate
 
-All microservices need to be correctly configured in the log4j2.xml and application.properties files
+> NOTE:<br>
+> All microservices need to be correctly configured in the log4j2.xml and application.properties files
 
 
 # Configurations
@@ -188,12 +192,12 @@ All microservices need to be correctly configured in the log4j2.xml and applicat
 <br>
 <br>
 
-To use this environment correctly, you must follow the following rules:
+To use this environment correctly, you must follow the rules below:
 
 - Have a microservices environment in Java
 - Use Netflix's EUREKA SERVICE DISCOVERY
-- Use the Netflix ZUUL API GATEWAY (Feign), there are two versions of the GATEWAY API, one with routes in the 
-properties file and the other through a client
+- Use Netflix ZUUL API GATEWAY (Open Feign), there are two versions of the GATEWAY API, one with routes in the 
+properties file and another through a client
 - Have services registered in service discovery correctly
 - Know the exact location where the EUREKA service discovery log is being generated, as it will be used 
 to extract the details of each service registered in service discovery
@@ -201,7 +205,7 @@ to extract the details of each service registered in service discovery
 - Use the correct settings for the xml log file in the JAVA project
 
 > IMPORTANT NOTE:
-> Before running this project, make sure to place it in the folders<br>
+> Before running this project, make sure to place each one in the folders<br>
 > 
 > - elk_prometheus_grafana_zipkin_mysql_v1/ec2/app/api-gateway<br>
 > - elk_prometheus_grafana_zipkin_mysql_v1/ec2/app/client<br>
@@ -209,27 +213,27 @@ to extract the details of each service registered in service discovery
 > - elk_prometheus_grafana_zipkin_mysql_v1/ec2/app/microservice-product<br>
 > - elk_prometheus_grafana_zipkin_mysql_v1/ec2/app/service-discovery<br>
 > 
-> All jar files generated in the project https://github.com/huntercodexs/elk-prometheus-grafana-zipkin-demo
+> For each jar files generated from the project https://github.com/huntercodexs/elk-prometheus-grafana-zipkin-demo
 
 ![sample-java-applications-folder.png](elk_prometheus_grafana_zipkin_mysql_v1/files/media/sample-java-applications-folder.png)
 
-- To generate the jar files in the IntelliJ IDE, follow the instructions below
+- To generate the jar files using IntelliJ IDE, follow the instructions below
 
 1) File -> Project Structure -> Project Settings -> Artifacts -> Click in the "+" -> Jar -> From modules with dependencies... > select the main class > click Apply button
 2) Once the artifact is configured, go to Build > Build Artifact > Build
 
-- To generate the jar file in the IntelliJ IDE when using Maven, following the image below
+- To generate the jar file in the IntelliJ IDE using Maven, following the image below
 
 ![intellij-ide-maven-jar-files.png](elk_prometheus_grafana_zipkin_mysql_v1/files/media/intellij-ide-maven-jar-files.png)
 
-Below are the main configurations that should be make in this project to correctly usage
+Below are the main configurations that should be made in this project to correctly usage
 
 - Java Projects - application.properties
 
 Each application has your own configuration, so you need pay attention in this point with more careful, however, follow 
 below a simple example for one application called microservice-order that can be used as a parameter to others case.
 
-All the configuration are very important, but the EUREKA SERVICE DISCOVERY has one highest configuration that should be 
+All the configuration are very important, but the EUREKA SERVICE DISCOVERY has one delicate configuration that should be 
 made with pretty attention. We are telling about the line "eureka.instance.instance-id", this line is very important 
 because it says to EUREKA that the services will be registered using IP:APPLICATION-NAME:PORT, and this data will be 
 used by Prometheus in another time to export and check the services health and performance, hence have an extremely 
@@ -344,7 +348,7 @@ Give a look in the section <a href="#prometheus"># Prometheus</a> to see how to 
 
 This configuration is a complement for prometheus.yml that is accessible to it in the files field. When we use the 
 script targets-export.sh to generate automatically the prometheus.yml file, the targets.json file will be generated as 
-well, and each target.json will be the name according the application registered in the EUREKA SERVICE DISCOVERY log.
+well, and each target.json will have the name according the application registered in the EUREKA SERVICE DISCOVERY log.
 
 <pre>
 [
@@ -377,7 +381,7 @@ The target.json will be named as microservice-demo.json, and the content inside 
 ]
 </pre>
 
-and prometheus.yml will be configured in the following way
+and prometheus.yml will be configured in the follow way
 
 <pre>
 scrape_configs:
@@ -441,7 +445,7 @@ output {
 }
 </pre>
 
-- Kibana - index
+- Kibana - Index Management
 
 To set up Kibana, just give a look in the .env file and the yml file to kibana.yml.
 
@@ -451,7 +455,7 @@ In the Kibana execute the following steps
 - put the name of the index in the input text box
   - click on Next step
     - select a value in "Time field"
-      - click on Create index pattern (if necessary, it is possible to configure an index as the default)
+      - click on Create index pattern (if necessary, it is possible to configure the index as the default)
 
 # Grafana
 <a href="#ELK-PROMETHEUS-GRAFANA-ZIPKIN-MYSQL">
@@ -470,7 +474,7 @@ Dashboards
 
 ![grafana-datasources.png](elk_prometheus_grafana_zipkin_mysql_v1/files/media/grafana-datasources.png)
 
-- Connect Grafa to Prometheus using the Spring Boot Statistics plugin
+- Connect Grafana to Prometheus using the Spring Boot Statistics plugin
 
 Get the plugin ID from the Grafana website at the following link https://grafana.com/grafana/dashboards/6756-spring-boot-statistics/.
 Insert the dashboard ID into Grafana in Dashboard->import
@@ -487,25 +491,22 @@ Result
 <br>
 <br>
 
-This script only export microservices from Eureka Service Discovery Log, it means say that
-all microservices and only these microservices registered in the Eureka will be exported from the
-current log produced by Eureka. Therefore, you need to inform the current and correct path to
-Eureka Service where all the microservices has been registered.
+There is one script named targets-export.sh to data export from EUREKA SERVICE DISCOVERY. This script only export 
+microservices from Eureka Service Discovery Log, it means say that all microservices and only these microservices 
+registered in the Eureka will be exported from the current log produced by Eureka. Therefore, you need to inform the 
+current and correct path to Eureka Service where all microservices have been registered.
 
 - Log record that will be sought in the log look like something like that:
-
 <pre>
 Registered instance NEW-MICROSERVICE-DEMO/192.168.0.204:new-microservice-demo:31315 with status UP (replication=true)
 </pre>
 
 - How to execute:
-
 <pre>
 ./targets-export.sh /home/user/logs/EUREKA-SERVICE-DISCOVERY.log /home/prometheus/targets/ [--reload: optional]
 </pre>
 
 - Reload Prometheus YML Configurations (SIGHUP):
-
 <pre>
 pgrep prometheus -> 1
 kill -HUP 1
@@ -513,11 +514,11 @@ kill -HUP 1
 
 - You can use the script prometheus-reload.sh to make it more easily:
 
-1) Build Prometheus container: docker-compose up --build prometheus
-2) Export targets to prometheus without reload prometheus:
-   2.1) ./targets-export.sh /home/user/logs/EUREKA-SERVICE-DISCOVERY.log /home/prometheus/targets/
-3) Export targets to prometheus with reload prometheus:
-   3.1) ./targets-export.sh /home/user/logs/EUREKA-SERVICE-DISCOVERY.log /home/prometheus/targets/ --reload
+1) Export targets to prometheus without reload prometheus:<br>
+./targets-export.sh /home/user/logs/EUREKA-SERVICE-DISCOVERY.log /home/prometheus/targets/
+
+2) Export targets to prometheus with reload prometheus (recommended):<br>
+./targets-export.sh /home/user/logs/EUREKA-SERVICE-DISCOVERY.log /home/prometheus/targets/ --reload
 
 
 # Logstash
@@ -537,7 +538,7 @@ The following steps must be performed to achieve a satisfactory result when usin
 
 - check if it is necessary to delete kibana indexes
 - configure logstash pipelineio.conf
-- run the docker-compose up --build logstash command (the indexes will be created automatically in kibana)
+- run the docker-compose up --build logstash command (the indexes will be pushed automatically in kibana)
 <pre>
 logstash          | [2024-01-29T00:03:24,299][INFO ][logstash.javapipeline    ][.monitoring-logstash] Pipeline Java execution initialization time {"seconds"=>0.55}
 logstash          | [2024-01-29T00:03:24,342][INFO ][logstash.javapipeline    ][.monitoring-logstash] Pipeline started {"pipeline.id"=>".monitoring-logstash"}
