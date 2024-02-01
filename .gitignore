@@ -71,3 +71,4 @@
 /elk_prometheus_grafana_zipkin_mysql_v1/prometheus/targets/**.json
 /elk_prometheus_grafana_zipkin_mysql_v1/prometheus/**.json
 /elk_prometheus_grafana_zipkin_mysql_v1/mysql-57/elk@002dprometheus@002dgrafana@002dzipkin@002ddemo/
+/elk_prometheus_grafana_zipkin_mysql_v1/mysql-80/elk@002dprometheus@002dgrafana@002dzipkin@002ddemo/

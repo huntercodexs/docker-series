@@ -479,7 +479,7 @@ Dashboards
 Get the plugin ID from the Grafana website at the following link https://grafana.com/grafana/dashboards/6756-spring-boot-statistics/.
 Insert the dashboard ID into Grafana in Dashboard->import
 
-Result
+Result (ID: 6756)
 
 ![grafana-spring-boot-statistics-dashboard-import.png](elk_prometheus_grafana_zipkin_mysql_v1/files/media/grafana-spring-boot-statistics-dashboard-import.png)
 
@@ -503,7 +503,7 @@ Registered instance NEW-MICROSERVICE-DEMO/192.168.0.204:new-microservice-demo:31
 
 - How to execute:
 <pre>
-./targets-export.sh /home/user/logs/EUREKA-SERVICE-DISCOVERY.log /home/prometheus/targets/ [--reload: optional]
+user@host:/home/user/docker-series/elk_prometheus_grafana_zipkin_mysql_v1$ ./targets-export.sh /home/user/logs/EUREKA-SERVICE-DISCOVERY.log /home/prometheus/targets/ [--reload: optional]
 </pre>
 
 - Reload Prometheus YML Configurations (SIGHUP):
@@ -514,11 +514,15 @@ kill -HUP 1
 
 - You can use the script prometheus-reload.sh to make it more easily:
 
-1) Export targets to prometheus without reload prometheus:<br>
-./targets-export.sh /home/user/logs/EUREKA-SERVICE-DISCOVERY.log /home/prometheus/targets/
+1- Export targets to prometheus without reload prometheus:<br>
+<pre>
+user@host:/home/user/docker-series/elk_prometheus_grafana_zipkin_mysql_v1$ ./targets-export.sh /home/user/logs/EUREKA-SERVICE-DISCOVERY.log /home/prometheus/targets/
+</pre>
 
-2) Export targets to prometheus with reload prometheus (recommended):<br>
-./targets-export.sh /home/user/logs/EUREKA-SERVICE-DISCOVERY.log /home/prometheus/targets/ --reload
+2- Export targets to prometheus with reload prometheus (recommended):<br>
+<pre>
+user@host:/home/user/docker-series/elk_prometheus_grafana_zipkin_mysql_v1$ ./targets-export.sh /home/user/logs/EUREKA-SERVICE-DISCOVERY.log /home/prometheus/targets/ --reload
+</pre>
 
 
 # Logstash
@@ -611,7 +615,7 @@ GET tcp-elk_prometheus_grafana_zipkin_mysql_v1_demo/_search
 
 - if it is necessary to change the logstash pipeline settings, you must restart the service as follows
 <pre>
-docker exec -it logstash /bin/bash
+user@host:/home/user/docker-series/elk_prometheus_grafana_zipkin_mysql_v1$ docker exec -it logstash /bin/bash
 
 bash-4.2$ ps -ef
 UID          PID    PPID  C STIME TTY          TIME CMD
@@ -626,7 +630,7 @@ or simply use the logstash-reload.sh script that is inside the logstash containe
 run with the following command
 
 <pre>
-docker exec -it logstash sh /home/logstash/logstash-reload.sh 
+user@host:/home/user/docker-series/elk_prometheus_grafana_zipkin_mysql_v1$ docker exec -it logstash sh /home/logstash/logstash-reload.sh 
 </pre>
 
 
@@ -659,7 +663,7 @@ user@host:/home/user/docker-series$ git checkout elk_prometheus_grafana_zipkin_m
 user@host:/home/user/docker-series$ cd elk_prometheus_grafana_zipkin_mysql_v1
 </pre>
 
-5- Check and set up the .env file also check and edit the files YML and pipelineio.conf
+5- Check and set up the .env file, also check and edit the files YML and pipelineio.conf
 <pre>
 elk_prometheus_grafana_zipkin_mysql_v1/elasticsearch/config/elasticsearch.yml
 elk_prometheus_grafana_zipkin_mysql_v1/kibana/config/kibana.yml
@@ -669,7 +673,10 @@ elk_prometheus_grafana_zipkin_mysql_v1/prometheus/prometheus.yml
 </pre>
 
 6- Also check and configure the applications.properties, log4j2.xml for each java application.
-> IMPORTANT NOTE:<br> Check this documentation information above to get more details about it.
+
+> IMPORTANT NOTE:<br> 
+> Check this documentation information above to get more details about it.
+
 <pre>
 elk_prometheus_grafana_zipkin_mysql_v1/ec2/app/api-gateway/log4j2.xml
 elk_prometheus_grafana_zipkin_mysql_v1/ec2/app/api-gateway/application.properties
@@ -688,6 +695,10 @@ elk_prometheus_grafana_zipkin_mysql_v1/ec2/app/service-discovery/application.pro
 </pre>
 
 7- Generate the runnable jar files and put each one in the refer folder path
+
+> TIP:<br>
+> If you don't know how to make it, please check the section <a href="#configurations">Configurations</a>
+
 <pre>
 elk_prometheus_grafana_zipkin_mysql_v1/ec2/app/api-gateway/API-GATEWAY-0.0.1-SNAPSHOT.jar
 elk_prometheus_grafana_zipkin_mysql_v1/ec2/app/client/CLIENT-DEMO-0.0.1-SNAPSHOT.jar
@@ -701,9 +712,37 @@ elk_prometheus_grafana_zipkin_mysql_v1/ec2/app/service-discovery/EUREKA-SERVICE-
 <pre>    
 user@host:/home/user/docker-series/elk_prometheus_grafana_zipkin_mysql_v1$ docker network create elk_prometheus_grafana_zipkin_mysql_v1_open_network
 user@host:/home/user/docker-series/elk_prometheus_grafana_zipkin_mysql_v1$ docker-compose up --build
+user@host:/home/user/docker-series/elk_prometheus_grafana_zipkin_mysql_v1$ [Ctrl+C]
+user@host:/home/user/docker-series/elk_prometheus_grafana_zipkin_mysql_v1$ docker-compose start
 </pre>
 
-Make sure that the result look like this
+> NOTE:<br>
+> Hold on the complete docker-compose up --build is finished and make sure that the result look like this
+
+<pre>
+ec2-service-discovery       | 2024-02-01 12:20:30.411 [/] INFO  [Eureka-EvictionTimer] c.n.e.r.AbstractInstanceRegistry$EvictionTask - Running the evict task with compensationTime 0ms
+ec2-service-discovery       |  1 --- [a-EvictionTimer] c.n.e.registry.AbstractInstanceRegistry  : Running the evict task with compensationTime 0ms
+ec2-service-discovery       | 2024-02-01 12:21:30.411 [/] INFO  [Eureka-EvictionTimer] c.n.e.r.AbstractInstanceRegistry$EvictionTask - Running the evict task with compensationTime 0ms
+ec2-service-discovery       |  1 --- [a-EvictionTimer] c.n.e.registry.AbstractInstanceRegistry  : Running the evict task with compensationTime 0ms
+ec2-service-discovery       | 2024-02-01 12:22:30.411 [/] INFO  [Eureka-EvictionTimer] c.n.e.r.AbstractInstanceRegistry$EvictionTask - Running the evict task with compensationTime 0ms
+ec2-service-discovery       |  1 --- [a-EvictionTimer] c.n.e.registry.AbstractInstanceRegistry  : Running the evict task with compensationTime 0ms
+ec2-service-discovery       | 2024-02-01 12:23:30.411 [/] INFO  [Eureka-EvictionTimer] c.n.e.r.AbstractInstanceRegistry$EvictionTask - Running the evict task with compensationTime 0ms
+ec2-service-discovery       |  1 --- [a-EvictionTimer] c.n.e.registry.AbstractInstanceRegistry  : Running the evict task with compensationTime 0ms
+grafana                     | INFO [02-01|12:24:15] Database locked, sleeping then retrying  logger=sqlstore.transactions error="database is locked" retry=0 code="database is locked"
+ec2-service-discovery       | 2024-02-01 12:24:30.411 [/] INFO  [Eureka-EvictionTimer] c.n.e.r.AbstractInstanceRegistry$EvictionTask - Running the evict task with compensationTime 0ms
+ec2-service-discovery       |  1 --- [a-EvictionTimer] c.n.e.registry.AbstractInstanceRegistry  : Running the evict task with compensationTime 0ms
+ec2-service-discovery       | 2024-02-01 12:24:55.812 [/] INFO  [AsyncResolver-bootstrap-executor-0] c.n.d.s.r.a.ConfigClusterResolver - Resolving eureka endpoints via configuration
+ec2-service-discovery       |  1 --- [trap-executor-0] c.n.d.s.r.aws.ConfigClusterResolver      : Resolving eureka endpoints via configuration
+ec2-service-discovery       | 2024-02-01 12:24:58.380 [/] INFO  [ReplicaAwareInstanceRegistry - RenewalThresholdUpdater] c.n.e.r.PeerAwareInstanceRegistryImpl - Current renewal threshold is : 5
+ec2-service-discovery       |  1 --- [hresholdUpdater] c.n.e.r.PeerAwareInstanceRegistryImpl    : Current renewal threshold is : 5
+ec2-client                  | 2024-02-01 12:24:59.098 [/] INFO  [AsyncResolver-bootstrap-executor-0] c.n.d.s.r.a.ConfigClusterResolver - Resolving eureka endpoints via configuration
+ec2-client                  |  1 --- [trap-executor-0] c.n.d.s.r.aws.ConfigClusterResolver      : Resolving eureka endpoints via configuration
+ec2-api-gateway             | 2024-02-01 12:25:00.956 [/] INFO  [AsyncResolver-bootstrap-executor-0] c.n.d.s.r.a.ConfigClusterResolver - Resolving eureka endpoints via configuration
+ec2-api-gateway             |  1 --- [trap-executor-0] c.n.d.s.r.aws.ConfigClusterResolver      : Resolving eureka endpoints via configuration
+</pre>
+
+Check the status from containers
+
 <pre>
 user@host:/home/user/docker-series/elk_prometheus_grafana_zipkin_mysql_v1$ docker-compose ps
           Name                        Command                       State                                                                                                           Ports                                                                                                 
@@ -725,16 +764,20 @@ prometheus                 /bin/prometheus --config.f ...   Up                  
 zipkin                     start-zipkin                     Up (health: starting)   9410/tcp, 0.0.0.0:9411->9411/tcp,:::9411->9411/tcp                                                                                                                                                    
 </pre>
 
-9- Export the targets from EUREKA SERVICE DISCOVERY to Prometheus
+9- Export the microservices targets from EUREKA SERVICE DISCOVERY to Prometheus
 
 > NOTE:<br>
 > - This process is required to prometheus known about the microservices that are running
-> - The first parameter say where is the log that belong a EUREKA
+> - The first parameter say where is the log that belong to EUREKA
 > - The second parameter refer to location inside prometheus container and is in according to docker-compose.yml configuration
 > - The third parameter should be used if you want to reload the prometheus service with the currently or new information, it is highly recommended pass it in the parameters
 
 <pre>
-./targets-export.sh /home/$USER/logs/EUREKA-SERVICE-DISCOVERY.log /home/prometheus/targets/ [--reload: optional]
+user@host:/home/user/docker-series/elk_prometheus_grafana_zipkin_mysql_v1$ cd prometheus/script/
+user@host:/home/user/docker-series/elk_prometheus_grafana_zipkin_mysql_v1$ ./targets-export.sh /home/$USER/logs/EUREKA-SERVICE-DISCOVERY.log /home/prometheus/targets/ [--reload: optional]
+
+#Real Example:
+user@host:/home/user/docker-series/elk_prometheus_grafana_zipkin_mysql_v1$ ./targets-export.sh ~/Documentos/Devel/Docker/docker-series/elk_prometheus_grafana_zipkin_mysql_v1/ec2/app/service-discovery/EUREKA-SERVICE-DISCOVERY.log /home/prometheus/targets/ --reload
 </pre>
 
 10- Check and configure logstash
@@ -753,11 +796,14 @@ docker exec -it logstash sh /home/logstash/logstash-reload.sh
 
 To set up Kibana, just give a look in the .env file and the yml file to kibana.yml.
 
+![kibana-create-indexes.png](elk_prometheus_grafana_zipkin_mysql_v1/files/media/kibana-create-indexes.png)
+
 - create an index in kibana at http://localhost:5601/app/management/kibana/indexPatterns/create
 - put the name of the index in the input text box
   - click on Next step
     - select a value in "Time field"
       - click on Create index pattern (if necessary, it is possible to configure an index as the default)
+      - Follow the logs in the Kibana Discovery
 
 12- Create Integration between Grafana and Prometheus
 
@@ -836,6 +882,22 @@ http://localhost:3001/login
 <pre>
 http://localhost:3000/login
 </pre>
+
+13.8) Make one sample request using POSTMAN
+
+![postman-sample-request.png](elk_prometheus_grafana_zipkin_mysql_v1/files/media/postman-sample-request.png)
+
+<pre>
+POST http://localhost:31301/client-demo/orders
+{
+    "id": 1,
+    "productId": 4001,
+    "date": "2000-01-01",
+    "quantity": 1
+}
+</pre>
+
+See the logs in the Kibana to get details about that transaction/request
 
 
 # Helper and References

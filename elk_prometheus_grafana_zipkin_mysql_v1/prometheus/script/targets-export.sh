@@ -87,7 +87,7 @@ function generate_prometheus_file {
     then
         if ls "../prometheus.yml" >> /dev/null 2>&1
         then
-            mkdir -p "backup"
+            mkdir -p "../backup"
             cp "../prometheus.yml" "../backup/prometheus.yml-${OPERATION_DATE}"
         fi
 

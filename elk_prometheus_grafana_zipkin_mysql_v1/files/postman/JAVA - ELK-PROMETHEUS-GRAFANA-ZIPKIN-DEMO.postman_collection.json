@@ -1,0 +1,173 @@
+{
+	"info": {
+		"_postman_id": "ac9fe24a-c4ea-4e8b-851a-f64da33aa638",
+		"name": "JAVA - ELK-PROMETHEUS-GRAFANA-ZIPKIN-DEMO",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "17383820"
+	},
+	"item": [
+		{
+			"name": "Orders Add",
+			"request": {
+				"auth": {
+					"type": "basic",
+					"basic": [
+						{
+							"key": "password",
+							"value": "123mudar",
+							"type": "string"
+						},
+						{
+							"key": "username",
+							"value": "elastic",
+							"type": "string"
+						}
+					]
+				},
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"id\": 10,\r\n    \"productId\": 4010,\r\n    \"date\": \"2000-01-01\",\r\n    \"quantity\": 4\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:31301/client-demo/orders",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "31301",
+					"path": [
+						"client-demo",
+						"orders"
+					]
+				}
+			},
+			"response": [
+				{
+					"name": "Orders Add",
+					"originalRequest": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"id\": 9,\r\n    \"productId\": 4009,\r\n    \"date\": \"2000-01-01\",\r\n    \"quantity\": 4\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:31301/client-demo/orders",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "31301",
+							"path": [
+								"client-demo",
+								"orders"
+							]
+						}
+					},
+					"status": "OK",
+					"code": 200,
+					"_postman_previewlanguage": "json",
+					"header": [
+						{
+							"key": "Content-Type",
+							"value": "application/json;charset=UTF-8"
+						},
+						{
+							"key": "Transfer-Encoding",
+							"value": "chunked"
+						},
+						{
+							"key": "Date",
+							"value": "Sun, 28 Jan 2024 21:25:21 GMT"
+						}
+					],
+					"cookie": [],
+					"body": "{\n    \"id\": 9,\n    \"productId\": 4009,\n    \"date\": \"2000-01-01T00:00:00.000+0000\",\n    \"quantity\": 4\n}"
+				}
+			]
+		},
+		{
+			"name": "Elasticsearch Check",
+			"request": {
+				"auth": {
+					"type": "basic",
+					"basic": [
+						{
+							"key": "password",
+							"value": "123mudar",
+							"type": "string"
+						},
+						{
+							"key": "username",
+							"value": "elastic",
+							"type": "string"
+						}
+					]
+				},
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:9200",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "9200"
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Logstash Send",
+			"request": {
+				"auth": {
+					"type": "basic",
+					"basic": [
+						{
+							"key": "password",
+							"value": "123mudar",
+							"type": "string"
+						},
+						{
+							"key": "username",
+							"value": "elastic",
+							"type": "string"
+						}
+					]
+				},
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"text\": \"hi i'm a new test from postman 002\",\r\n    \"code\": 4001\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:8080",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080"
+				}
+			},
+			"response": []
+		}
+	]
+}
