@@ -13,7 +13,7 @@ services:
       - type: bind
         source: ./elasticsearch/config/elasticsearch.yml
         target: /usr/share/elasticsearch/config/elasticsearch.yml
-        read_only: true
+        read_only: false
       - type: bind
         source: ./elasticsearch/data
         target: /usr/share/elasticsearch/data
@@ -34,29 +34,6 @@ services:
       - default
       - elk_prometheus_grafana_zipkin_v1_open_network
   #----------------------------------------------------------------------------------------
-  kibana:
-    env_file: .env
-    container_name: kibana
-    image: kibana:${GENERAL_STACK_VERSION}
-    ports:
-      - ${KIBANA_PORT}:5601
-    volumes:
-      - type: bind
-        source: ./kibana/config/kibana.yml
-        target: /usr/share/kibana/config/kibana.yml
-        read_only: true
-    environment:
-      ELASTIC_VERSION: ${GENERAL_STACK_VERSION}
-      ELASTICSEARCH_HOSTS: ${ELASTICSEARCH_HTTP_HOSTS}
-      ELASTICSEARCH_USERNAME: ${ELASTIC_USERNAME}
-      KIBANA_PASSWORD: ${KIBANA_PASSWORD}
-      KIBANA_SYSTEM_PASSWORD: ${KIBANA_SYSTEM_PASSWORD}
-    depends_on:
-      - elasticsearch
-    networks:
-      - default
-      - elk_prometheus_grafana_zipkin_v1_open_network
-  #----------------------------------------------------------------------------------------
   logstash:
     env_file: .env
     container_name: logstash
@@ -71,17 +48,69 @@ services:
       - type: bind
         source: ./logstash/pipeline
         target: /usr/share/logstash/pipeline
-        read_only: true
+        read_only: false
       - type: bind
         source: ./logstash/config/logstash.yml
         target: /usr/share/logstash/config/logstash.yml
-        read_only: true
+        read_only: false
+      - type: bind
+        source: ./logstash/script/logstash-reload.sh
+        target: /home/logstash/logstash-reload.sh
+        read_only: false
     environment:
       ELASTIC_VERSION: ${GENERAL_STACK_VERSION}
       LOGSTASH_INTERNAL_PASSWORD: ${LOGSTASH_INTERNAL_PASSWORD}
       LS_JAVA_OPTS: ${LOGSTASH_JAVA_OPTS}
     depends_on:
       - elasticsearch
+    networks:
+      - default
+      - elk_prometheus_grafana_zipkin_v1_open_network
+  #----------------------------------------------------------------------------------------
+  kibana:
+    env_file: .env
+    container_name: kibana
+    image: kibana:${GENERAL_STACK_VERSION}
+    ports:
+      - ${KIBANA_PORT}:5601
+    volumes:
+      - type: bind
+        source: ./kibana/config/kibana.yml
+        target: /usr/share/kibana/config/kibana.yml
+        read_only: false
+    environment:
+      ELASTIC_VERSION: ${GENERAL_STACK_VERSION}
+      ELASTICSEARCH_HOSTS: ${ELASTICSEARCH_HTTP_HOSTS}
+      ELASTICSEARCH_USERNAME: ${ELASTIC_USERNAME}
+      KIBANA_PASSWORD: ${KIBANA_PASSWORD}
+      KIBANA_SYSTEM_PASSWORD: ${KIBANA_SYSTEM_PASSWORD}
+    depends_on:
+      - elasticsearch
+    networks:
+      - default
+      - elk_prometheus_grafana_zipkin_v1_open_network
+  #----------------------------------------------------------------------------------------
+  prometheus:
+    env_file: .env
+    container_name: prometheus
+    image: prom/prometheus
+    ports:
+      - ${PROMETHEUS_PORT}:9090
+    working_dir: /home/prometheus
+    volumes:
+      - type: bind
+        source: ./prometheus/prometheus.yml
+        target: /etc/prometheus/prometheus.yml
+        read_only: false
+      - type: bind
+        source: ./prometheus/targets/
+        target: /home/prometheus/targets
+        read_only: false
+      - type: bind
+        source: ./prometheus/script/prometheus-reload.sh
+        target: /home/prometheus/prometheus-reload.sh
+        read_only: false
+    tty: true
     networks:
       - default
       - elk_prometheus_grafana_zipkin_v1_open_network
@@ -121,7 +150,7 @@ services:
       - type: bind
         source: ./grafana
         target: /home/grafana/
-        read_only: true
+        read_only: false
     environment:
       GF_SECURITY_ADMIN_USER: ${GRAFANA_USERNAME}
       GF_SECURITY_ADMIN_PASSWORD: ${GRAFANA_PASSWORD}
@@ -144,7 +173,7 @@ services:
       - type: bind
         source: ./grafana-ubuntu
         target: /home/grafana/
-        read_only: true
+        read_only: false
     environment:
       GF_SECURITY_ADMIN_USER: ${GRAFANA_USERNAME}
       GF_SECURITY_ADMIN_PASSWORD: ${GRAFANA_PASSWORD}
@@ -152,22 +181,6 @@ services:
       #GF_AWS_default_ACCESS_KEY_ID: ${GRAFANA_AWS_ACCESS_KEY_ID}
       #GF_AWS_default_SECRET_ACCESS_KEY: ${GRAFANA_AWS_SECRET_KEY}
       #GF_AWS_default_REGION: ${GRAFANA_AWS_REGION}
-    tty: true
-    networks:
-      - default
-      - elk_prometheus_grafana_zipkin_v1_open_network
-  #----------------------------------------------------------------------------------------
-  prometheus:
-    env_file: .env
-    container_name: prometheus
-    image: prom/prometheus
-    ports:
-      - ${PROMETHEUS_PORT}:9090
-    volumes:
-      - type: bind
-        source: ./prometheus/prometheus.yml
-        target: /etc/prometheus/prometheus.yml
-        read_only: true
     tty: true
     networks:
       - default
