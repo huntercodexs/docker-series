@@ -34,29 +34,6 @@ services:
             - default
             - elk_prometheus_grafana_v1_open_network
     #----------------------------------------------------------------------------------------
-    kibana:
-        env_file: .env
-        container_name: kibana
-        image: kibana:${STACK_VERSION}
-        ports:
-            - ${KB_PORT}:5601
-        volumes:
-            - type: bind
-              source: ./kibana/config/kibana.yml
-              target: /usr/share/kibana/config/kibana.yml
-              read_only: true
-        environment:
-            ELASTIC_VERSION: ${STACK_VERSION}
-            ELASTICSEARCH_HOSTS: ${ELASTICSEARCH_HOSTS}
-            ELASTICSEARCH_USERNAME: ${ELASTIC_USERNAME}
-            KIBANA_PASSWORD: ${KIBANA_PASSWORD}
-            KIBANA_SYSTEM_PASSWORD: ${KIBANA_SYSTEM_PASSWORD}
-        depends_on:
-            - elasticsearch
-        networks:
-            - default
-            - elk_prometheus_grafana_v1_open_network
-    #----------------------------------------------------------------------------------------
     logstash:
         env_file: .env
         container_name: logstash
@@ -80,6 +57,29 @@ services:
             ELASTIC_VERSION: ${STACK_VERSION}
             LOGSTASH_INTERNAL_PASSWORD: ${LOGSTASH_INTERNAL_PASSWORD}
             LS_JAVA_OPTS: ${LS_JAVA_OPTS}
+        depends_on:
+            - elasticsearch
+        networks:
+            - default
+            - elk_prometheus_grafana_v1_open_network
+    #----------------------------------------------------------------------------------------
+    kibana:
+        env_file: .env
+        container_name: kibana
+        image: kibana:${STACK_VERSION}
+        ports:
+            - ${KB_PORT}:5601
+        volumes:
+            - type: bind
+              source: ./kibana/config/kibana.yml
+              target: /usr/share/kibana/config/kibana.yml
+              read_only: true
+        environment:
+            ELASTIC_VERSION: ${STACK_VERSION}
+            ELASTICSEARCH_HOSTS: ${ELASTICSEARCH_HOSTS}
+            ELASTICSEARCH_USERNAME: ${ELASTIC_USERNAME}
+            KIBANA_PASSWORD: ${KIBANA_PASSWORD}
+            KIBANA_SYSTEM_PASSWORD: ${KIBANA_SYSTEM_PASSWORD}
         depends_on:
             - elasticsearch
         networks:

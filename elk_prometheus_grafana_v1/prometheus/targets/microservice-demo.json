@@ -1,0 +1,10 @@
+[
+	{
+ 		"targets": ["192.168.0.204:31301"],
+ 		"labels": {
+ 			"env": "development",
+ 			"job": "job-microservice-demo"
+ 		}
+ 	}
+]
+
