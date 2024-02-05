@@ -1,5 +1,12 @@
 # JAVA (openjdk-11.0.21) by Amazonlinux 2
 
+> IMPORTANT NOTE:<br>
+> Please check and download the file jdk-11.0.21_linux-x64_bin.rpm from
+> https://www.oracle.com/br/java/technologies/javase/jdk11-archive-downloads.html
+> <br>
+> After that, put the downloaded file in the jre folder
+
+
 - How to run openjdk-11.0.21 from this project use
 
 <pre>
