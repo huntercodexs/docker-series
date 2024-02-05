@@ -154,3 +154,5 @@ self-containers/oracle/oracleData/enterprise/**
 /self-containers/java/openjdk-17.0.7/jre/jdk-17.0.7_linux-x64_bin.rpm
 /self-containers/java/openjdk-17.0.9/jre/jdk-17.0.9_linux-x64_bin.rpm
 /self-containers/java/openjdk-17.0.10/jre/jdk-17.0.10_linux-x64_bin.rpm
+/self-containers/java/openjdk-21.0.1/jre/jdk-21.0.1_linux-x64_bin.rpm
+/self-containers/java/openjdk-21.0.2/jre/jdk-21.0.2_linux-x64_bin.rpm
