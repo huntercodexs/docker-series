@@ -148,3 +148,9 @@ self-containers/oracle/oracleData/enterprise/**
 /self-containers/oraclelinux/oradata/ORCLCDB/
 /self-containers/oraclelinux/oradata/dbconfig/
 /self-containers/java/openjdk-**/microservices/users/SIMPLE-API-USERS.log
+/self-containers/java/openjdk-11.0.21/jre/jdk-11.0.21_linux-x64_bin.rpm
+/self-containers/java/openjdk-17.0.3/jre/jdk-17.0.3_linux-x64_bin.rpm
+/self-containers/java/openjdk-17.0.4/jre/jdk-17.0.4_linux-x64_bin.rpm
+/self-containers/java/openjdk-17.0.7/jre/jdk-17.0.7_linux-x64_bin.rpm
+/self-containers/java/openjdk-17.0.9/jre/jdk-17.0.9_linux-x64_bin.rpm
+/self-containers/java/openjdk-17.0.10/jre/jdk-17.0.10_linux-x64_bin.rpm

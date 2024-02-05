@@ -6,7 +6,6 @@
 > <br>
 > After that, put the downloaded file in the jre folder
 
-
 - How to run openjdk-11.0.21 from this project use
 
 <pre>
