@@ -4,9 +4,9 @@
 
 <pre>
 user@host:/home/user$ git clone https://github.com/huntercodexs/docker-series.git .
-user@host:/home/user$ cd docker-series/self-containers/openjdk-17.0.2
-user@host:/home/user/docker-series/self-containers/openjdk-17.0.2$ docker-compose up --build
-user@host:/home/user/docker-series/self-containers/openjdk-17.0.2$ docker-compose start
+user@host:/home/user$ cd docker-series/self-containers/java/openjdk-17.0.2
+user@host:/home/user/docker-series/self-containers/java/openjdk-17.0.2$ docker-compose up --build
+user@host:/home/user/docker-series/self-containers/java/openjdk-17.0.2$ docker-compose start
 </pre>
 
 - Before build and start project set the microservices in script below
