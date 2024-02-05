@@ -248,9 +248,9 @@ user@host:/home/user/docker-series/self-containers/apache2$ docker-compose start
   - <a href="https://github.com/huntercodexs/docker-series/tree/master/self-containers/java/openjdk-17.0.7">openjdk-17.0.7</a> ![img.png](./self-containers/files/midias/check-green.png)
   - <a href="https://github.com/huntercodexs/docker-series/tree/master/self-containers/java/openjdk-17.0.9">openjdk-17.0.9</a> ![img.png](./self-containers/files/midias/check-green.png)
   - <a href="https://github.com/huntercodexs/docker-series/tree/master/self-containers/java/openjdk-17.0.10">openjdk-17.0.10</a> ![img.png](./self-containers/files/midias/check-green.png)
-  - <a href="https://github.com/huntercodexs/docker-series/tree/master/self-containers/java/openjdk-21">openjdk-21</a> ![img.png](./self-containers/files/midias/check-silver.png)
-  - <a href="https://github.com/huntercodexs/docker-series/tree/master/self-containers/java/openjdk-21.0.1">openjdk-21.0.1</a> ![img.png](./self-containers/files/midias/check-silver.png)
-  - <a href="https://github.com/huntercodexs/docker-series/tree/master/self-containers/java/openjdk-21.0.2">openjdk-21.0.2</a> ![img.png](./self-containers/files/midias/check-silver.png)
+  - <a href="https://github.com/huntercodexs/docker-series/tree/master/self-containers/java/openjdk-21">openjdk-21</a> ![img.png](./self-containers/files/midias/check-green.png)
+  - <a href="https://github.com/huntercodexs/docker-series/tree/master/self-containers/java/openjdk-21.0.1">openjdk-21.0.1</a> ![img.png](./self-containers/files/midias/check-green.png)
+  - <a href="https://github.com/huntercodexs/docker-series/tree/master/self-containers/java/openjdk-21.0.2">openjdk-21.0.2</a> ![img.png](./self-containers/files/midias/check-green.png)
 - <a href="https://github.com/huntercodexs/docker-series/tree/master/self-containers/python">Python</a>
   - <a href="https://github.com/huntercodexs/docker-series/tree/master/self-containers/python/3.12.1">3.12.1</a> ![img.png](./self-containers/files/midias/check-green.png)
 - <a href="https://github.com/huntercodexs/docker-series/tree/master/self-containers/nodejs">Nodejs</a>
