@@ -1,0 +1,24 @@
+version: "3.7"
+services:
+    
+    #----------------------------------------------------------------------------------------
+    openjdk-11.0.9:
+        env_file: .env
+        container_name: openjdk-11.0.9
+        build:
+            context: .
+            dockerfile: openjdk-11.0.9.dockerfile
+        volumes:
+            - ./microservices/users/:/home/openjdk-11.0.9/microservices/users/
+        ports:
+            - ${OPENJDK_1109_PORT1}:38801
+        tty: true
+        networks:
+            - default
+            - open_network
+        command: "java -jar /home/openjdk-11.0.9/microservices/users/SIMPLE-API-USERS-0.0.1-SNAPSHOT.jar --spring.config.location=/home/openjdk-11.0.9/microservices/users/application.properties"
+    #----------------------------------------------------------------------------------------
+
+networks:
+    open_network:
+        external: true

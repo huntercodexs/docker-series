@@ -27,50 +27,6 @@
 				}
 			},
 			"response": []
-		},
-		{
-			"name": "Sales",
-			"request": {
-				"method": "GET",
-				"header": [],
-				"url": {
-					"raw": "http://localhost:38802/api/v1/business/sales",
-					"protocol": "http",
-					"host": [
-						"localhost"
-					],
-					"port": "38802",
-					"path": [
-						"api",
-						"v1",
-						"business",
-						"sales"
-					]
-				}
-			},
-			"response": []
-		},
-		{
-			"name": "Supplies",
-			"request": {
-				"method": "GET",
-				"header": [],
-				"url": {
-					"raw": "http://localhost:38803/api/v1/erp/supplies",
-					"protocol": "http",
-					"host": [
-						"localhost"
-					],
-					"port": "38803",
-					"path": [
-						"api",
-						"v1",
-						"erp",
-						"supplies"
-					]
-				}
-			},
-			"response": []
 		}
 	]
 }

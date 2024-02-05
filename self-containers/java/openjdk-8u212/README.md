@@ -30,9 +30,7 @@ root@25f8c997da0a:/home/openjdk8u212# ps -ef
 UID          PID    PPID  C STIME TTY          TIME CMD
 root           1       0  0 12:48 pts/0    00:00:00 bash
 root           7       0  0 12:48 pts/1    00:00:00 /bin/bash
-root          15       1 63 12:49 pts/1    00:00:11 java -jar SIMPLE-API-USERS-22.01.1-SNAPSHOT.jar
-root          16       1 63 12:49 pts/1    00:00:11 java -jar SIMPLE-API-SALES-22.01.1-SNAPSHOT.jar
-root          17       1 55 12:49 pts/1    00:00:09 java -jar SIMPLE-API-SUPPLIES-22.01.1-SNAPSHOT.jar
+root          15       1 63 12:49 pts/1    00:00:11 java -jar SIMPLE-API-USERS-0.0.1-SNAPSHOT.jar
 </pre>
 
 > Use the postman file to make a tests above: "JAVA - OPENJDK-8U212.postman_collection.json"

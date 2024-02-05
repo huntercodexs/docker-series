@@ -147,3 +147,4 @@ self-containers/oracle/oracleData/enterprise/**
 /self-containers/oraclelinux/oradata/.ORCLCDB.created
 /self-containers/oraclelinux/oradata/ORCLCDB/
 /self-containers/oraclelinux/oradata/dbconfig/
+/self-containers/java/openjdk-**/microservices/users/SIMPLE-API-USERS.log
