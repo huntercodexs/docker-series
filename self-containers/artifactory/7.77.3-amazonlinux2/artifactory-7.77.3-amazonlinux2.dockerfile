@@ -1,7 +1,7 @@
-FROM amazonlinux:2023
+FROM amazonlinux:2
 
 # SHOW EXTRAS PACKAGES FROM AMAZON LIST
-#RUN amazon-linux-extras
+RUN amazon-linux-extras
 
 WORKDIR /home/artifactory
 
@@ -16,7 +16,7 @@ RUN yum install -y zip
 RUN yum install -y unzip
 RUN yum install -y wget
 RUN yum install -y vim
-RUN yum install --skip-broken -y curl
+RUN yum install -y curl
 
 # JRE JAVA
 # see https://www.oracle.com/sa/java/technologies/javase/javase8u211-later-archive-downloads.html

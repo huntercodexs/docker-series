@@ -169,6 +169,10 @@ user@host:/home/user/docker-series/self-containers/apache2$ docker-compose start
   - <a href="https://github.com/huntercodexs/docker-series/tree/master/self-containers/nexus/nexus3">Nexus 3</a> ![img.png](./self-containers/files/midias/check-green.png)
   - <a href="https://github.com/huntercodexs/docker-series/tree/master/self-containers/nexus/nexus-traefik">Nexus Traefik</a> ![img.png](./self-containers/files/midias/check-silver.png)
 - <a href="https://github.com/huntercodexs/docker-series/tree/master/self-containers/artifactory">Artifactory</a> ![img.png](./self-containers/files/midias/check-silver.png)
+  - <a href="https://github.com/huntercodexs/docker-series/tree/master/self-containers/artifactory/6.23.23">6.23.23</a> ![img.png](./self-containers/files/midias/check-green.png)
+  - <a href="https://github.com/huntercodexs/docker-series/tree/master/self-containers/artifactory/7.77.3">7.77.3</a> ![img.png](./self-containers/files/midias/check-green.png)
+  - <a href="https://github.com/huntercodexs/docker-series/tree/master/self-containers/artifactory/7.77.3-amazonlinux2">7.77.3 Amazonlinux 2</a> ![img.png](./self-containers/files/midias/unavailable.png)
+  - <a href="https://github.com/huntercodexs/docker-series/tree/master/self-containers/artifactory/7.77.3-redhat">7.77.3 RedHat</a> ![img.png](./self-containers/files/midias/unavailable.png)
 
 > Mail Servers
 
