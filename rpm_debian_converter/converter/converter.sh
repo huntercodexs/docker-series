@@ -14,9 +14,10 @@ then
         exit
     else
         echo "Processing..."
+        rm -f *.deb
         alien --scripts "/home/ubuntu/rpm_debian_converter/source/${FILENAME}.rpm"
         NAME=$(basename *.deb)
-        cp ${NAME} "/home/ubuntu/rpm_debian_converter/debian/"
+        mv -v ${NAME} "/home/ubuntu/rpm_debian_converter/debian/"
         echo "Your DEBIAN file result is placed in the folder: /debian/"
         echo "You can install the ${NAME} using the command: dpkg -i ${NAME}"
     fi
@@ -30,9 +31,10 @@ then
         exit
     else
         echo "Processing..."
+        rm -f *.rpm
         alien -r --scripts "/home/ubuntu/rpm_debian_converter/source/${FILENAME}.deb"
         NAME=$(basename *.rpm)
-        cp ${NAME} "/home/ubuntu/rpm_debian_converter/rpm/"
+        mv -v ${NAME} "/home/ubuntu/rpm_debian_converter/rpm/"
         echo "Your RPM file result is placed in the folder: /rpm/"
         echo "You can install the ${NAME} using the command: rpm -ivh ${NAME}"
     fi
