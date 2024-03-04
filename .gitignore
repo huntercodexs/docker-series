@@ -5,14 +5,8 @@
 *.exec
 *.run
 *.jar.original
+*.rpm
 
 ## GENERAL DIR
 .idea/
 trash/
-nodes/
-node_modules/
-/docker-elk/
-/elkstack792/
-/micro-services/
-/self-containers/nodejs/app/node_modules/
-/self-containers/oracle/oracleData/docker-images/

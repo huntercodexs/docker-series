@@ -1,18 +1,10 @@
+# RPM DEBIAN CONVERTER
+Create a rpm and debian packages quickly
 
-# APACHE2 + PHP8
-A quick repository to build an environment for PHP8
-
-![apache_php8.png](apache2_php8/midias/apache_php8.png)
 
 # Information
 
 Please use the branch selector to access others environment configurations
-
-
-# Docker Configurations Contained
-
-- Ubuntu/Apache2
-- PHP-8.0
 
 
 # How to use
@@ -22,38 +14,29 @@ Please use the branch selector to access others environment configurations
 <pre>
 user@host:/home/user$ git clone https://github.com/huntercodexs/docker-series.git .
 user@host:/home/user$ cd docker-series
-user@host:/home/user/docker-series$ git checkout apache2_php8
-user@host:/home/user/docker-series$ cd apache2_php8/
-user@host:/home/user/docker-series/apache2_php8$ docker-compose up --build (in first time)
-user@host:/home/user/docker-series/apache2_php8$ docker-compose start (in others case)
+user@host:/home/user/docker-series$ git checkout rpm_debian_converter
+user@host:/home/user/docker-series$ cd rpm_debian_converter/
+user@host:/home/user/docker-series/rpm_debian_converter$ docker network create open_network
+user@host:/home/user/docker-series/rpm_debian_converter$ docker-compose up --build
+user@host:/home/user/docker-series/rpm_debian_converter$ [Ctrl+C]
+user@host:/home/user/docker-series/rpm_debian_converter$ docker-compose start
+user@host:/home/user/docker-series/rpm_debian_converter$ docker-compose ps
 </pre>
 
-- Create a Network if needed
+- Result should be
 
 <pre>
-user@host:/home/user/docker-series/apache2_php8$ docker network create open_network
+        Name            Command    State                                                                Ports                                                              
+---------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+rpm_debian_converter   /bin/bash   Up      0.0.0.0:38989->38989/tcp,:::38989->38989/tcp, 0.0.0.0:38000->80/tcp,:::38000->80/tcp, 0.0.0.0:38080->8080/tcp,:::38080->8080/tcp
 </pre>
 
-- Set up the app configurations (see more details in docker-compose.yml)
-
+- Get DEBIAN package from RPM
 <pre>
-user@host:/home/user/docker-series/apache2_php8/apache2/conf$ app.local.conf
+user@host:/home/user/docker-series/rpm_debian_converter$ docker exec -it rpm_debian_converter bash converter.sh deb ${FILENAME}
 </pre>
 
-- Set up default configurations (see more details in docker-compose.yml)
-
+- Get RPM package from DEBIAN
 <pre>
-user@host:/home/user/docker-series/apache2_php8/apache2/conf$ 000-default.local.conf
-</pre>
-
-- Set up the applications
-
-<pre>
-user@host:/home/user/docker-series/apache2_php8/app$ ls app1 app2
-</pre>
-
-- Access the webserver application
-
-<pre>
-http://${WEBSERVER_ADDRESS}:38000
+user@host:/home/user/docker-series/rpm_debian_converter$ docker exec -it rpm_debian_converter bash converter.sh deb ${FILENAME}
 </pre>

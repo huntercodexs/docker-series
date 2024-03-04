@@ -10,18 +10,15 @@ services:
             dockerfile: ubuntu-20.04.dockerfile
         privileged: true
         volumes:
-            - type: bind
-              source: ./rpm/
-              target: /home/ubuntu/rpm_debian_converter/rpm
-              read_only: false
-            - type: bind
-              source: ./debian/
-              target: /home/ubuntu/rpm_debian_converter/debian
-              read_only: false
+            - ./source/:/home/ubuntu/rpm_debian_converter/source
+            - ./rpm/:/home/ubuntu/rpm_debian_converter/rpm
+            - ./debian/:/home/ubuntu/rpm_debian_converter/debian
+            - ./converter/converter.sh:/home/ubuntu/rpm_debian_converter/converter.sh
         ports:
             - ${RPM_DEBIAN_CONVERTER_PORT1}:80
             - ${RPM_DEBIAN_CONVERTER_PORT2}:8080
             - ${RPM_DEBIAN_CONVERTER_PORT3}:38989
+        tty: true
         networks:
             - open_network
     #----------------------------------------------------------------------------------------
