@@ -1,0 +1,31 @@
+version: "3.7"
+services:
+    
+    #----------------------------------------------------------------------------------------
+    rpm_debian_converter:
+        env_file: .env
+        container_name: rpm_debian_converter
+        build:
+            context: ./
+            dockerfile: ubuntu-20.04.dockerfile
+        privileged: true
+        volumes:
+            - type: bind
+              source: ./rpm/
+              target: /home/ubuntu/rpm_debian_converter/rpm
+              read_only: false
+            - type: bind
+              source: ./debian/
+              target: /home/ubuntu/rpm_debian_converter/debian
+              read_only: false
+        ports:
+            - ${RPM_DEBIAN_CONVERTER_PORT1}:80
+            - ${RPM_DEBIAN_CONVERTER_PORT2}:8080
+            - ${RPM_DEBIAN_CONVERTER_PORT3}:38989
+        networks:
+            - open_network
+    #----------------------------------------------------------------------------------------
+
+networks:
+    open_network:
+        external: true
