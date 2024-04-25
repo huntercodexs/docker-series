@@ -10,3 +10,4 @@
 ## GENERAL DIR
 .idea/
 trash/
+/rpm_debian_converter/script.sh
