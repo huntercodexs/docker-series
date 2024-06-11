@@ -1,0 +1,15 @@
+[Unit]
+Description=counter.service
+After=network-online.target
+
+[Service]
+Type=simple
+WorkingDirectory=/var/opt/services/counter
+ExecStart=/bin/bash /opt/services/counter/counter.sh
+Restart=on-abort
+User=jereelton
+Group=jereelton
+
+[Install]
+WantedBy=multi-user.target
+
