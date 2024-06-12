@@ -88,6 +88,12 @@ then
     sudo systemctl stop ${application}.service
 
     rm -rf ${service_dir}/${application}.service
+    if ls /etc/systemd/system/multi-user.target.wants/${application}.service >> /dev/null 2>&1
+    then
+        sudo unlink /etc/systemd/system/multi-user.target.wants/${application}.service
+    fi
+    echo "Please wait..."
+    sleep 3
     sudo systemctl daemon-reload
 fi
 
