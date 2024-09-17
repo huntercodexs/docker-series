@@ -1,0 +1,44 @@
+version: "3.7"
+services:
+    
+    #----------------------------------------------------------------------------------------
+    zookeeper-3.9:
+        image: docker.io/bitnami/zookeeper:3.9
+        container_name: ${ZOOKEEPER_VERSION}
+        ports:
+            - ${ZOOKEEPER_PORT1}:2181
+        volumes:
+            - ./data_zookeeper:/bitnami"
+        environment:
+            - ALLOW_ANONYMOUS_LOGIN=yes
+        networks:
+            - default
+            - open_network
+    #----------------------------------------------------------------------------------------
+    kafka-3.4:
+        env_file: .env
+        image: docker.io/bitnami/kafka:3.4
+        container_name: ${KAFKA_VERSION}
+        ports:
+            - ${KAFKA_PORT1}:9092
+            - ${KAFKA_PORT2}:9094
+        environment:
+            - KAFKA_CFG_ZOOKEEPER_CONNECT=${ZOOKEEPER_VERSION}:2181
+            - KAFKA_CFG_ADVERTISED_LISTENERS=PLAINTEXT://localhost:9092
+            - KAFKA_INTER_BROKER_USER=${KAFKA_DEFAULT_USER}
+            - KAFKA_INTER_BROKER_PASSWORD=${KAFKA_DEFAULT_PASS}
+        privileged: true
+        tty: true
+        volumes:
+            - ./shared/:/home/shared/
+            - ./data_kafka:/bitnami
+        networks:
+            - default
+            - open_network
+        depends_on:
+            - ${ZOOKEEPER_VERSION}
+    #----------------------------------------------------------------------------------------
+
+networks:
+    open_network:
+        external: true
