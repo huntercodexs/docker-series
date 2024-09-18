@@ -26,3 +26,21 @@ user@host:/home/user/docker-series/self-containers/messenger/kafka-3.4$ rm -rf *
 <pre>
 user@host:/home/user/docker-series/self-containers/messenger/kafka-3.4$ docker exec -it kafka-3.4 /bin/bash
 </pre>
+
+# TODO
+
+Check and fix the error below
+
+<pre>
+kafka-3.4        | [2024-09-18 18:15:18,818] ERROR Had an exception in BecomeZkControllerEvent (org.apache.kafka.metadata.migration.KRaftMigrationDriver)
+kafka-3.4        | java.lang.IllegalStateException: Cannot register KRaft controller 1010 as the active controller since there is no ZK controller epoch present.
+kafka-3.4        | 	at kafka.zk.KafkaZkClient.tryRegisterKRaftControllerAsActiveController(KafkaZkClient.scala:201)
+kafka-3.4        | 	at kafka.zk.ZkMigrationClient.claimControllerLeadership(ZkMigrationClient.scala:60)
+kafka-3.4        | 	at org.apache.kafka.metadata.migration.KRaftMigrationDriver.apply(KRaftMigrationDriver.java:143)
+kafka-3.4        | 	at org.apache.kafka.metadata.migration.KRaftMigrationDriver.access$800(KRaftMigrationDriver.java:57)
+kafka-3.4        | 	at org.apache.kafka.metadata.migration.KRaftMigrationDriver$BecomeZkControllerEvent.run(KRaftMigrationDriver.java:357)
+kafka-3.4        | 	at org.apache.kafka.queue.KafkaEventQueue$EventContext.run(KafkaEventQueue.java:121)
+kafka-3.4        | 	at org.apache.kafka.queue.KafkaEventQueue$EventHandler.handleEvents(KafkaEventQueue.java:201)
+kafka-3.4        | 	at org.apache.kafka.queue.KafkaEventQueue$EventHandler.run(KafkaEventQueue.java:175)
+kafka-3.4        | 	at java.base/java.lang.Thread.run(Thread.java:840)
+</pre>
