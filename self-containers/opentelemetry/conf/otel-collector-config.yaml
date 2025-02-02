@@ -1,0 +1,20 @@
+receivers:
+    otlp:
+        protocols:
+            grpc:
+            http:
+
+processors:
+    batch:
+
+exporters:
+    debug: {}
+    otlp:
+        endpoint: http://localhost:9000
+
+service:
+    pipelines:
+        traces:
+            receivers: [otlp]
+            processors: [batch]
+            exporters: [debug, otlp]

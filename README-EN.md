@@ -210,6 +210,7 @@ user@host:/home/user/docker-series/self-containers/apache2$ docker-compose start
 - <a href="https://github.com/huntercodexs/docker-series/tree/master/self-containers/zipkin">Zipkin</a> ![img.png](./self-containers/files/midias/check-green.png)
 - <a href="https://github.com/huntercodexs/docker-series/tree/master/self-containers/prometheus">Prometheus</a> ![img.png](./self-containers/files/midias/check-green.png)
 - <a href="https://github.com/huntercodexs/docker-series/tree/master/self-containers/sonar">Sonar</a> ![img.png](./self-containers/files/midias/check-green.png)
+- <a href="https://github.com/huntercodexs/docker-series/tree/master/self-containers/opentelemetry">Open Telemetry</a> ![img.png](./self-containers/files/midias/check-green.png)
 
 > Dashboards
 
