@@ -1,0 +1,47 @@
+version: '3.8'
+services:
+
+    #----------------------------------------------------------------------------------------
+    otel-collector:
+        env_file: .env
+        image: otel/opentelemetry-collector-contrib:latest
+        container_name: otel-collector
+        privileged: true
+        tty: true
+        volumes:
+            - ./conf/otel-collector-config.yaml:/etc/otel-collector-config.yaml
+        command: ["--config=/etc/otel-collector-config.yaml"]
+        ports:
+            - ${OPEN_TELEMETRY_PPROF_PORT}:1888
+            - ${OPEN_TELEMETRY_PROMETHEUS_METRICS_PORT}:8888
+            - ${OPEN_TELEMETRY_PROMETHEUS_EXPORTER_PORT}:8889
+            - ${OPEN_TELEMETRY_HEALTH_CHECK_PORT}:13133
+            - ${OPEN_TELEMETRY_OTLP_GRPC_PORT}:4317
+            - ${OPEN_TELEMETRY_OTLP_HTTP_PORT}:4318
+            - ${OPEN_TELEMETRY_ZPAGES_PORT}:55679
+        networks:
+            - open_network
+#        depends_on:
+#            - jaeger
+    #----------------------------------------------------------------------------------------
+    jaeger:
+        env_file: .env
+        image: jaegertracing/all-in-one
+        container_name: jaeger
+        privileged: true
+        tty: true
+        environment:
+            COLLECTOR_OTLP_ENABLED: "true"
+        ports:
+            - ${JAEGER_PORT_GRPC}:14250
+            - ${JAEGER_PORT_HTTP}:16686
+            - ${JAEGER_PORT_OTLP}:16685
+        networks:
+            - open_network
+        depends_on:
+            - otel-collector
+    #----------------------------------------------------------------------------------------
+
+networks:
+    open_network:
+        external: true

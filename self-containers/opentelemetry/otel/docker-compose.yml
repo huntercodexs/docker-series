@@ -2,7 +2,7 @@ version: "3.7"
 services:
     
     #----------------------------------------------------------------------------------------
-    otel-collector:
+    opentelemetry:
         env_file: .env
         image: otel/opentelemetry-collector-contrib
         volumes:

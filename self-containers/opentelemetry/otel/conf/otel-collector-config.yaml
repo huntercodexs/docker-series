@@ -10,7 +10,7 @@ processors:
 exporters:
     debug: {}
     otlp:
-        endpoint: http://localhost:9000
+        endpoint: http://opentelemetry:4317
 
 service:
     pipelines:
