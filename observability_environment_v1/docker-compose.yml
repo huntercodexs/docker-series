@@ -1,0 +1,228 @@
+version: '3.8'
+services:
+
+  #----------------------------------------------------------------------------------------
+  otel:
+    container_name: otel
+    image: otel/opentelemetry-collector-contrib:latest
+    command: [--config=/etc/otel-config.yml]
+    volumes:
+      - ./otel-config.yml:/etc/otel-config.yml
+    ports:
+      - "4318:4318"
+      - "4317:4317"
+      - "55679:55679"
+  #----------------------------------------------------------------------------------------
+  prometheus:
+    container_name: prometheus
+    image: prom/prometheus
+    command: [--config.file=/etc/prometheus/prometheus.yml]
+    volumes:
+      - ./prometheus.yml:/etc/prometheus/prometheus.yml
+    ports:
+      - "9091:9090"
+  #----------------------------------------------------------------------------------------
+  grafana:
+    container_name: grafana
+    environment:
+      - GF_AUTH_ANONYMOUS_ENABLED=true
+      - GF_AUTH_ANONYMOUS_ORG_ROLE=Admin
+    image: grafana/grafana
+    volumes:
+      - ./grafana.yml:/etc/grafana/provisioning/datasources/default.yml
+    ports:
+      - "3000:3000"
+  #----------------------------------------------------------------------------------------
+  loki:
+    container_name: loki
+    image: grafana/loki:3.2.0
+    command: -config.file=/etc/loki/local-config.yaml
+    volumes:
+      - ./loki.yaml:/etc/loki/local-config.yaml
+    ports:
+      - "3100"
+  #----------------------------------------------------------------------------------------
+  tempo:
+    container_name: tempo
+    image: grafana/tempo:latest
+    command: [ "-config.file=/etc/tempo.yaml" ]
+    volumes:
+      - ./tempo.yaml:/etc/tempo.yaml
+    ports:
+      - "4317"  # otlp grpc
+      - "4318"
+    #----------------------------------------------------------------------------------------
+    jaeger:
+      env_file: .env
+      image: jaegertracing/all-in-one
+      container_name: jaeger
+      privileged: true
+      tty: true
+      ports:
+        - ${JAEGER_PORT_GRPC}:14250
+        - ${JAEGER_PORT_HTTP}:16686
+      networks:
+        - open_network
+    #----------------------------------------------------------------------------------------
+    opensearch-node-2-15:
+      env_file: .env
+      image: opensearchproject/opensearch:2.15.0
+      container_name: opensearch-node-2-15
+      environment:
+        - cluster.name=opensearch-cluster
+        - node.name=opensearch-node-2-15
+        - discovery.seed_hosts=opensearch-node-2-15
+        - cluster.initial_cluster_manager_nodes=opensearch-node-2-15
+        - bootstrap.memory_lock=true
+        - "OPENSEARCH_JAVA_OPTS=-Xms512m -Xmx512m"
+        - OPENSEARCH_INITIAL_ADMIN_PASSWORD=${OPENSEARCH_INITIAL_ADMIN_PASSWORD}
+      ulimits:
+        memlock:
+          soft: -1
+          hard: -1
+        nofile:
+          soft: 65536
+          hard: 65536
+      volumes:
+        - opensearch-data:/usr/share/opensearch/data
+        - ./conf:/usr/share/opensearch/config/opensearch-performance-analyzer
+      ports:
+        - ${OPENSEARCH_PORT_REST_API}:9200
+        - ${OPENSEARCH_PORT_REST_ANALYZER}:9600
+      networks:
+        - opensearch-net
+    #----------------------------------------------------------------------------------------
+    opensearch-dashboards-2-15:
+      image: opensearchproject/opensearch-dashboards:2.15.0
+      container_name: opensearch-dashboards-2-15
+      ports:
+        - ${OPENSEARCH_PORT_WEB}:5601
+      expose:
+        - ${OPENSEARCH_PORT_WEB}
+      environment:
+        OPENSEARCH_HOSTS: '["https://opensearch-node-2-15:9200"]'
+      networks:
+        - opensearch-net
+      depends_on:
+        - opensearch-node-2-15
+    #----------------------------------------------------------------------------------------
+    elasticsearch:
+      env_file: .env
+      container_name: elasticsearch
+      image: elasticsearch:${GENERAL_STACK_VERSION}
+      ports:
+        - ${ELASTICSEARCH_PORT_1}:9200
+        - ${ELASTICSEARCH_PORT_2}:9300
+      volumes:
+        -   type: bind
+            source: ./elasticsearch/config/elasticsearch.yml
+            target: /usr/share/elasticsearch/config/elasticsearch.yml
+            read_only: false
+        -   type: bind
+            source: ./elasticsearch/data
+            target: /usr/share/elasticsearch/data
+            read_only: false
+      environment:
+        ELASTIC_VERSION: ${GENERAL_STACK_VERSION}
+        ELASTIC_PASSWORD: ${ELASTIC_PASSWORD}
+        KIBANA_USERNAME: ${KIBANA_SYSTEM_USERNAME}
+        KIBANA_SYSTEM_USERNAME: ${KIBANA_SYSTEM_USERNAME}
+        LOGSTASH_INTERNAL_USERNAME: ${LOGSTASH_INTERNAL_USERNAME}
+        LOGSTASH_INTERNAL_PASSWORD: ${LOGSTASH_INTERNAL_PASSWORD}
+        ES_JAVA_OPTS: ${ELASTICSEARCH_JAVA_OPTS}
+      ulimits:
+        memlock:
+          soft: -1
+          hard: -1
+      networks:
+        - default
+        - elk_prometheus_grafana_zipkin_mysql_v1_open_network
+    #----------------------------------------------------------------------------------------
+    logstash:
+      env_file: .env
+      container_name: logstash
+      image: logstash:${GENERAL_STACK_VERSION}
+      ports:
+        - ${LOGSTASH_PORT_HTTP}:8080
+        - ${LOGSTASH_PORT_1}:5044
+        - ${LOGSTASH_PORT_2}:9600
+        - ${LOGSTASH_TCP_PORT}:5000/tcp
+        - ${LOGSTASH_UDP_PORT}:5000/udp
+      volumes:
+        -   type: bind
+            source: ./logstash/pipeline
+            target: /usr/share/logstash/pipeline
+            read_only: false
+        -   type: bind
+            source: ./logstash/config/logstash.yml
+            target: /usr/share/logstash/config/logstash.yml
+            read_only: false
+        -   type: bind
+            source: ./logstash/script/logstash-reload.sh
+            target: /home/logstash/logstash-reload.sh
+            read_only: false
+      environment:
+        ELASTIC_VERSION: ${GENERAL_STACK_VERSION}
+        LOGSTASH_INTERNAL_PASSWORD: ${LOGSTASH_INTERNAL_PASSWORD}
+        LS_JAVA_OPTS: ${LOGSTASH_JAVA_OPTS}
+      depends_on:
+        - elasticsearch
+      networks:
+        - default
+        - elk_prometheus_grafana_zipkin_mysql_v1_open_network
+    #----------------------------------------------------------------------------------------
+    kibana:
+      env_file: .env
+      container_name: kibana
+      image: kibana:${GENERAL_STACK_VERSION}
+      ports:
+        - ${KIBANA_PORT}:5601
+      volumes:
+        -   type: bind
+            source: ./kibana/config/kibana.yml
+            target: /usr/share/kibana/config/kibana.yml
+            read_only: false
+      environment:
+        ELASTIC_VERSION: ${GENERAL_STACK_VERSION}
+        ELASTICSEARCH_HOSTS: ${ELASTICSEARCH_HTTP_HOSTS}
+        ELASTICSEARCH_USERNAME: ${ELASTIC_USERNAME}
+        KIBANA_PASSWORD: ${KIBANA_PASSWORD}
+        KIBANA_SYSTEM_PASSWORD: ${KIBANA_SYSTEM_PASSWORD}
+      depends_on:
+        - elasticsearch
+      networks:
+        - default
+        - elk_prometheus_grafana_zipkin_mysql_v1_open_network
+    #----------------------------------------------------------------------------------------
+  zipkin:
+    env_file: .env
+    container_name: zipkin
+    image: openzipkin/zipkin
+    ports:
+      - ${ZIPKIN_PORT}:9411
+    volumes:
+      - type: bind
+        source: ./zipkin/
+        target: /home/zipkin
+        read_only: false
+    environment:
+      STORAGE_TYPE: ${ZIPKIN_STORAGE_TYPE}
+      SEARCH_ENABLED: ${ZIPKIN_SEARCH_ENABLED}
+      #ES_HTTP_LOGGING: ${ZIPKIN_HTTP_LOGGING}
+      ES_USERNAME: ${ELASTIC_USERNAME}
+      ES_PASSWORD: ${ELASTIC_PASSWORD}
+      ES_HOSTS: ${ELASTICSEARCH_HTTP_HOSTS}
+      ES_SSL_NO_VERIFY: ${SECURITY_ZIPKIN_NO_SSL_CHECK}
+    depends_on:
+      - elasticsearch
+    networks:
+      - default
+      - elk_prometheus_grafana_zipkin_mysql_v1_open_network
+  #----------------------------------------------------------------------------------------
+
+volumes:
+  opensearch-data:
+  elasticsearch:
+
+networks:
+  opensearch-net:
