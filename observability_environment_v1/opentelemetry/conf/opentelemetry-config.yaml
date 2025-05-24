@@ -20,6 +20,8 @@ exporters:
     endpoint: "0.0.0.0:8889"
   otlphttp:
     endpoint: http://loki:3100/otlp
+  http:
+    endpoint: http://loki:3100/loki/api/v1/push
   otlp:
     endpoint: tempo:4317
     tls:
@@ -47,7 +49,7 @@ service:
     logs:
       receivers: [otlp]
       processors: [attributes, batch]
-      exporters: [debug, otlphttp]
+      exporters: [debug, otlphttp, http]
 
 extensions:
   zpages:
