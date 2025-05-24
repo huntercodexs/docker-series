@@ -1,0 +1,215 @@
+{
+	"info": {
+		"_postman_id": "1414eafd-2ccf-4d3f-b689-2b252deaa5d5",
+		"name": "Opensearch",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "33184804",
+		"_collection_link": "https://jereeltondevelteam.postman.co/workspace/Team-Workspace~b2284a6a-02af-4805-802d-8ae6bea36fc1/collection/33184804-1414eafd-2ccf-4d3f-b689-2b252deaa5d5?action=share&source=collection_link&creator=33184804"
+	},
+	"item": [
+		{
+			"name": "Create Item",
+			"request": {
+				"auth": {
+					"type": "basic",
+					"basic": [
+						{
+							"key": "password",
+							"value": "WWF3XAzAEZH8pH",
+							"type": "string"
+						},
+						{
+							"key": "username",
+							"value": "admin",
+							"type": "string"
+						}
+					]
+				},
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"id\": \"d1f91b2b-c974-4737-b696-582815190745\",\n    \"createdAt\": \"2025-05-23T20:15:43.705088Z\",\n    \"anyObjectInformation\": {\n        \"name\": \"ENROLLMENT_EXAMPLE\",\n        \"code\": \"10000\",\n        \"type\": \"anyType\",\n        \"subtype\": \"anySubTYpe\"\n    },\n    \"transactionalId\": null,\n    \"sessionId\": null,\n    \"traceId\": \"1a8419e6efcb4dd5a10204f999999999\",\n    \"serviceOrigin\": \"postman\",\n    \"spanId\": null,\n    \"anyExtraDetails\": {\n        \"resource\": \"AWS-RESOURCE\",\n        \"details\": \"any description or details\"\n    },\n    \"version\": \"v1.0.0\"\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "https://localhost:39200/digital-events-sandbox-2025-05-22/_doc",
+					"protocol": "https",
+					"host": [
+						"localhost"
+					],
+					"port": "39200",
+					"path": [
+						"digital-events-sandbox-2025-05-22",
+						"_doc"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Read Item",
+			"request": {
+				"auth": {
+					"type": "basic",
+					"basic": [
+						{
+							"key": "password",
+							"value": "WWF3XAzAEZH8pH",
+							"type": "string"
+						},
+						{
+							"key": "username",
+							"value": "admin",
+							"type": "string"
+						}
+					]
+				},
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "https://localhost:39200/digital-events-sandbox-2025-05-22/_doc/lZbK_5YBseFS7tCwy6Lc",
+					"protocol": "https",
+					"host": [
+						"localhost"
+					],
+					"port": "39200",
+					"path": [
+						"digital-events-sandbox-2025-05-22",
+						"_doc",
+						"lZbK_5YBseFS7tCwy6Lc"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Read Items",
+			"request": {
+				"auth": {
+					"type": "basic",
+					"basic": [
+						{
+							"key": "password",
+							"value": "WWF3XAzAEZH8pH",
+							"type": "string"
+						},
+						{
+							"key": "username",
+							"value": "admin",
+							"type": "string"
+						}
+					]
+				},
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "https://localhost:39200/digital-events-sandbox-2025-05-22/_search",
+					"protocol": "https",
+					"host": [
+						"localhost"
+					],
+					"port": "39200",
+					"path": [
+						"digital-events-sandbox-2025-05-22",
+						"_search"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Delete Item",
+			"request": {
+				"auth": {
+					"type": "basic",
+					"basic": [
+						{
+							"key": "password",
+							"value": "WWF3XAzAEZH8pH",
+							"type": "string"
+						},
+						{
+							"key": "username",
+							"value": "admin",
+							"type": "string"
+						}
+					]
+				},
+				"method": "DELETE",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"id\": \"d1f91b2b-c974-4737-b696-582815190745\",\n    \"createdAt\": \"2025-05-23T20:15:43.705088Z\",\n    \"anyObjectInformation\": {\n        \"name\": \"ENROLLMENT_EXAMPLE\",\n        \"code\": \"10000\",\n        \"type\": \"anyType\",\n        \"subtype\": \"anySubTYpe\"\n    },\n    \"transactionalId\": null,\n    \"sessionId\": null,\n    \"traceId\": \"1a8419e6efcb4dd5a10204f999999999\",\n    \"serviceOrigin\": \"postman\",\n    \"spanId\": null,\n    \"anyExtraDetails\": {\n        \"resource\": \"AWS-RESOURCE\",\n        \"details\": \"any description or details\"\n    },\n    \"version\": \"v1.0.0\"\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "https://localhost:39200/digital-events-sandbox-2025-05-22/_doc",
+					"protocol": "https",
+					"host": [
+						"localhost"
+					],
+					"port": "39200",
+					"path": [
+						"digital-events-sandbox-2025-05-22",
+						"_doc"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Update Item",
+			"request": {
+				"auth": {
+					"type": "basic",
+					"basic": [
+						{
+							"key": "password",
+							"value": "WWF3XAzAEZH8pH",
+							"type": "string"
+						},
+						{
+							"key": "username",
+							"value": "admin",
+							"type": "string"
+						}
+					]
+				},
+				"method": "PUT",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"doc\": {\n        \"id\": \"d1f91b2b-c974-4737-b696-582815190745\",\n        \"createdAt\": \"2025-05-23T20:15:43.705088Z\",\n        \"anyObjectInformation\": {\n            \"name\": \"ENROLLMENT_EXAMPLE_UPDATED_PUT\",\n            \"code\": \"10000\",\n            \"type\": \"anyType\",\n            \"subtype\": \"anySubTYpe\"\n        },\n        \"transactionalId\": null,\n        \"sessionId\": null,\n        \"traceId\": \"1a8419e6efcb4dd5a10204f999999999\",\n        \"serviceOrigin\": \"postman\",\n        \"spanId\": null,\n        \"anyExtraDetails\": {\n            \"resource\": \"AWS-RESOURCE\",\n            \"details\": \"any description or details\"\n        },\n        \"version\": \"v2.0.0\"\n    }\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "https://localhost:39200/digital-events-sandbox-2025-05-22/_doc/lZbK_5YBseFS7tCwy6Lc",
+					"protocol": "https",
+					"host": [
+						"localhost"
+					],
+					"port": "39200",
+					"path": [
+						"digital-events-sandbox-2025-05-22",
+						"_doc",
+						"lZbK_5YBseFS7tCwy6Lc"
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}
