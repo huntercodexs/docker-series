@@ -2,37 +2,89 @@ version: '3.8'
 services:
 
     #----------------------------------------------------------------------------------------
-    ## OPENTELEMETRY
+    ## OPENTELEMETRY-FORWARD
     #----------------------------------------------------------------------------------------
-    opentelemetry-collector:
+    opentelemetry-collector-forward:
         env_file: .env
         image: otel/opentelemetry-collector-contrib:latest
-        container_name: opentelemetry-collector
+        container_name: opentelemetry-collector-forward
         privileged: true
         tty: true
         volumes:
-            - ./opentelemetry/conf/opentelemetry-config.yaml:/etc/opentelemetry-config.yaml
-            - ./opentelemetry/shared/:/home/opentelemetry/shared/
+            - ./opentelemetry/forward/conf/opentelemetry-config.yaml:/etc/opentelemetry-config.yaml
+            - ./opentelemetry/forward/shared/:/home/opentelemetry/shared/
         command: ["--config=/etc/opentelemetry-config.yaml"]
         ports:
-            - ${OPEN_TELEMETRY_PPROF_PORT}:1888
-            - ${OPEN_TELEMETRY_PROMETHEUS_METRICS_PORT}:8888
-            - ${OPEN_TELEMETRY_PROMETHEUS_EXPORTER_PORT}:8889
-            - ${OPEN_TELEMETRY_HEALTH_CHECK_PORT}:13133
-            - ${OPEN_TELEMETRY_OTLP_GRPC_PORT}:4317
-            - ${OPEN_TELEMETRY_OTLP_HTTP_PORT}:4318
-            - ${OPEN_TELEMETRY_ZPAGES_PORT}:55679
+            - ${OTEL_FORWARD_PPROF_PORT}:1888
+            - ${OTEL_FORWARD_PROMETHEUS_METRICS_PORT}:8888
+            - ${OTEL_FORWARD_PROMETHEUS_EXPORTER_PORT}:8889
+            - ${OTEL_FORWARD_HEALTH_CHECK_PORT}:13133
+            - ${OTEL_FORWARD_OTLP_GRPC_PORT}:4317
+            - ${OTEL_FORWARD_OTLP_HTTP_PORT}:4318
+            - ${OTEL_FORWARD_ZPAGES_PORT}:55679
+        depends_on:
+            - opentelemetry-collector-elasticsearch
+            - opentelemetry-collector-opensearch
+        networks:
+            - default
+            - observability_network_v1
+    #----------------------------------------------------------------------------------------
+    ## OPENTELEMETRY-COLLECTOR-ELASTICSEARCH
+    #----------------------------------------------------------------------------------------
+    opentelemetry-collector-elasticsearch:
+        env_file: .env
+        image: otel/opentelemetry-collector-contrib:latest
+        container_name: opentelemetry-collector-elasticsearch
+        privileged: true
+        tty: true
+        volumes:
+            - ./opentelemetry/elasticsearch/conf/opentelemetry-config.yaml:/etc/opentelemetry-config.yaml
+            - ./opentelemetry/elasticsearch/shared/:/home/opentelemetry/shared/
+        command: [ "--config=/etc/opentelemetry-config.yaml" ]
+        ports:
+            - ${OTEL_ELASTICSEARCH_PPROF_PORT}:1888
+            - ${OTEL_ELASTICSEARCH_PROMETHEUS_METRICS_PORT}:8888
+            - ${OTEL_ELASTICSEARCH_PROMETHEUS_EXPORTER_PORT}:8889
+            - ${OTEL_ELASTICSEARCH_HEALTH_CHECK_PORT}:13133
+            - ${OTEL_ELASTICSEARCH_OTLP_GRPC_PORT}:4317
+            - ${OTEL_ELASTICSEARCH_OTLP_HTTP_PORT}:4318
+            - ${OTEL_ELASTICSEARCH_ZPAGES_PORT}:55679
+        depends_on:
+            - elasticsearch
+            - logstash
+            - kibana
+        networks:
+            - default
+            - observability_network_v1
+    #----------------------------------------------------------------------------------------
+    ## OPENTELEMETRY-COLLECTOR-OPENSEARCH
+    #----------------------------------------------------------------------------------------
+    opentelemetry-collector-opensearch:
+        env_file: .env
+        image: otel/opentelemetry-collector-contrib:latest
+        container_name: opentelemetry-collector-opensearch
+        privileged: true
+        tty: true
+        volumes:
+            - ./opentelemetry/opensearch/conf/opentelemetry-config.yaml:/etc/opentelemetry-config.yaml
+            - ./opentelemetry/opensearch/shared/:/home/opentelemetry/shared/
+        command: [ "--config=/etc/opentelemetry-config.yaml" ]
+        ports:
+            - ${OTEL_OPENSEARCH_PPROF_PORT}:1888
+            - ${OTEL_OPENSEARCH_PROMETHEUS_METRICS_PORT}:8888
+            - ${OTEL_OPENSEARCH_PROMETHEUS_EXPORTER_PORT}:8889
+            - ${OTEL_OPENSEARCH_HEALTH_CHECK_PORT}:13133
+            - ${OTEL_OPENSEARCH_OTLP_GRPC_PORT}:4317
+            - ${OTEL_OPENSEARCH_OTLP_HTTP_PORT}:4318
+            - ${OTEL_OPENSEARCH_ZPAGES_PORT}:55679
         depends_on:
             - tempo
             - loki
             - jaeger
             - prometheus
             - grafana
-            - opensearch-node-2-15
-            - elasticsearch
-            - logstash
-            - kibana
             - zipkin
+            - opensearch-node-2-15
         networks:
             - default
             - observability_network_v1

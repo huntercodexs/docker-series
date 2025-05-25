@@ -16,20 +16,11 @@ processors:
 
 exporters:
     debug:
-    prometheus:
-        endpoint: "0.0.0.0:8889"
-    loki:
-        endpoint: http://loki:3100/loki/api/v1/push
-    otlp:
-        endpoint: tempo:4317
-        tls:
-            insecure: true
-    otlphttp:
-        endpoint: http://jaeger:4318
-        tls:
-            insecure: true
-    zipkin:
-        endpoint: http://zipkin:9411
+    elasticsearch:
+        endpoints: [ "http://elasticsearch:9200" ]
+        #index: "otel-logs"
+        user: "${ELASTIC_USERNAME}"
+        password: "${ELASTIC_PASSWORD}"
         tls:
             insecure: true
 
@@ -39,15 +30,15 @@ service:
         traces:
             receivers: [otlp]
             processors: [batch]
-            exporters: [debug, otlp, otlphttp, zipkin]
+            exporters: [debug, elasticsearch]
         metrics:
             receivers: [otlp]
             processors: [attributes, batch]
-            exporters: [debug, prometheus]
+            exporters: [debug, elasticsearch]
         logs:
             receivers: [otlp]
             processors: [attributes, batch]
-            exporters: [debug, otlphttp, loki]
+            exporters: [debug, elasticsearch]
 
 extensions:
     zpages:
