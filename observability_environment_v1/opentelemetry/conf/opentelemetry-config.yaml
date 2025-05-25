@@ -1,56 +1,54 @@
 receivers:
-  otlp:
-    protocols:
-      grpc:
-        endpoint: 0.0.0.0:4317
-      http:
-        endpoint: 0.0.0.0:4318
+    otlp:
+        protocols:
+            grpc:
+                endpoint: 0.0.0.0:4317
+            http:
+                endpoint: 0.0.0.0:4318
 
 processors:
-  batch:
-  attributes:
-    actions:
-      - key: team
-        action: insert
-        value: huntercodexs
+    batch:
+    attributes:
+        actions:
+            - key: team
+              action: insert
+              value: huntercodexs
 
 exporters:
-  debug:
-  prometheus:
-    endpoint: "0.0.0.0:8889"
-  otlphttp:
-    endpoint: http://loki:3100/otlp
-  http:
-    endpoint: http://loki:3100/loki/api/v1/push
-  otlp:
-    endpoint: tempo:4317
-    tls:
-      insecure: true
-  jaeger:
-    endpoint: http://jaeger:4318
-    tls:
-      insecure: true
-  zipkin:
-    endpoint: http://zipkin:9411
-    tls:
-      insecure: true
+    debug:
+    prometheus:
+        endpoint: "0.0.0.0:8889"
+    loki:
+        endpoint: http://loki:3100/loki/api/v1/push
+    otlp:
+        endpoint: tempo:4317
+        tls:
+            insecure: true
+    otlphttp:
+        endpoint: http://jaeger:4318
+        tls:
+            insecure: true
+    zipkin:
+        endpoint: http://zipkin:9411
+        tls:
+            insecure: true
 
 service:
-  extensions: [zpages]
-  pipelines:
-    traces:
-      receivers: [otlp]
-      processors: [batch]
-      exporters: [debug, otlp, jaeger, zipkin]
-    metrics:
-      receivers: [otlp]
-      processors: [attributes, batch]
-      exporters: [debug, prometheus]
-    logs:
-      receivers: [otlp]
-      processors: [attributes, batch]
-      exporters: [debug, otlphttp, http]
+    extensions: [zpages]
+    pipelines:
+        traces:
+            receivers: [otlp]
+            processors: [batch]
+            exporters: [debug, otlp, otlphttp, zipkin]
+        metrics:
+            receivers: [otlp]
+            processors: [attributes, batch]
+            exporters: [debug, prometheus]
+        logs:
+            receivers: [otlp]
+            processors: [attributes, batch]
+            exporters: [debug, otlphttp, loki]
 
 extensions:
-  zpages:
-    endpoint: "0.0.0.0:55679"
+    zpages:
+        endpoint: "0.0.0.0:55679"

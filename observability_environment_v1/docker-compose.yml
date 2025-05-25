@@ -4,10 +4,10 @@ services:
     #----------------------------------------------------------------------------------------
     ## OPENTELEMETRY
     #----------------------------------------------------------------------------------------
-    opentelemetry:
+    opentelemetry-collector:
         env_file: .env
         image: otel/opentelemetry-collector-contrib:latest
-        container_name: opentelemetry
+        container_name: opentelemetry-collector
         privileged: true
         tty: true
         volumes:
@@ -22,6 +22,17 @@ services:
             - ${OPEN_TELEMETRY_OTLP_GRPC_PORT}:4317
             - ${OPEN_TELEMETRY_OTLP_HTTP_PORT}:4318
             - ${OPEN_TELEMETRY_ZPAGES_PORT}:55679
+        depends_on:
+            - tempo
+            - loki
+            - jaeger
+            - prometheus
+            - grafana
+            - opensearch-node-2-15
+            - elasticsearch
+            - logstash
+            - kibana
+            - zipkin
         networks:
             - default
             - observability_network_v1
@@ -120,6 +131,7 @@ services:
             - ${TEMPO_HTTP_PORT}
             - ${TEMPO_OTLP_PORT_HOST}:${TEMPO_OTLP_PORT}
             - ${TEMPO_HTTP_PORT_HOST}:${TEMPO_HTTP_PORT}
+            - ${TEMPO_HTTP_LISTEN_PORT_HOST}:${TEMPO_HTTP_LISTEN_PORT}
         networks:
             - default
             - observability_network_v1
@@ -133,7 +145,7 @@ services:
         privileged: true
         tty: true
         volumes:
-            - ./opensearch/opensearch-data:/usr/share/opensearch/data
+            - opensearch-data:/usr/share/opensearch/data #see in volumes below
             - ./opensearch/conf:/usr/share/opensearch/config/opensearch-performance-analyzer
             - ./opensearch/shared/:/home/opensearch/shared/
         environment:
@@ -258,7 +270,7 @@ services:
             KIBANA_PASSWORD: ${KIBANA_PASSWORD}
             KIBANA_SYSTEM_PASSWORD: ${KIBANA_SYSTEM_PASSWORD}
         ports:
-            - ${KIBANA_PORT}:5601
+            - ${KIBANA_PORT_HOST}:5601
         depends_on:
             - elasticsearch
         networks:
@@ -274,7 +286,7 @@ services:
         privileged: true
         tty: true
         volumes:
-            - ./zipkin/conf/basic-auth.properties:/home/zipkin/properties
+            - ./zipkin/conf/basic-auth.properties:/home/zipkin/properties/basic-auth.properties
             - ./zipkin/shared/:/home/zipkin/shared/
         environment:
             STORAGE_TYPE: ${ZIPKIN_STORAGE_TYPE}
@@ -284,6 +296,11 @@ services:
             ES_PASSWORD: ${ELASTIC_PASSWORD}
             ES_HOSTS: ${ELASTICSEARCH_HTTP_HOSTS}
             ES_SSL_NO_VERIFY: ${SECURITY_ZIPKIN_NO_SSL_CHECK}
+        healthcheck:
+            test: [ "CMD", "curl", "-f", "http://localhost:9411/health" ]
+            interval: 30s
+            timeout: 10s
+            retries: 3
         ports:
             - ${ZIPKIN_PORT}:9411
         depends_on:
@@ -299,4 +316,3 @@ volumes:
 
 networks:
     observability_network_v1:
-        external: true

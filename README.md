@@ -22,6 +22,56 @@ Summary
 - <a href="#helper-and-references">Helper and References</a>
 
 
+exporters for opentelemetry:
+  azuremonitor
+  dataset
+  otelarrow
+  splunk_hec
+  tencentcloud_logservice
+  awss3
+  awsemf
+  coralogix
+  doris
+  influxdb
+  logicmonitor
+  mezmo
+  prometheusremotewrite
+  otlphttp
+  sapm
+  file
+  googlecloudpubsub
+  logzio
+  prometheus
+  syslog
+  elasticsearch
+  alibabacloud_logservice
+  awsxray
+  cassandra
+  opencensus
+  opensearch
+  signalfx
+  nop
+  otlp
+  loki
+  pulsar
+  debug
+  honeycombmarker
+  kafka
+  azuredataexplorer
+  googlecloud
+  googlemanagedprometheus
+  sentry
+  zipkin
+  awscloudwatchlogs
+  carbon
+  clickhouse
+  datadog
+  loadbalancing
+  rabbitmq
+  sumologic
+  awskinesis
+
+
 # Information
 <a href="#ELK-PROMETHEUS-GRAFANA-ZIPKIN-MYSQL">
   <img src="elk_prometheus_grafana_zipkin_mysql_v1/files/media/top.png" alt="" />
