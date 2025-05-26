@@ -15,12 +15,15 @@ exporters:
         endpoint: opentelemetry-collector-opensearch:4317
         tls:
             insecure: true
+    syslog/logstash:
+        endpoint: logstash:5000
+        protocol: rfc5424
 
 service:
     pipelines:
         logs:
             receivers: [otlp]
-            exporters: [otlp/elasticsearch, otlp/opensearch]
+            exporters: [otlp/elasticsearch, otlp/opensearch, syslog/logstash]
         traces:
             receivers: [otlp]
             exporters: [otlp/elasticsearch, otlp/opensearch]

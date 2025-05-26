@@ -32,7 +32,7 @@ exporters:
         endpoint: http://zipkin:9411
         tls:
             insecure: true
-    elasticsearch: #Opensearch
+    elasticsearch: # Opensearch
         endpoints: [ "http://opensearch-node-2-15:9200" ]
         user: "admin"
         password: "${OPENSEARCH_INITIAL_ADMIN_PASSWORD}"
@@ -53,7 +53,7 @@ service:
         logs:
             receivers: [otlp]
             processors: [attributes, batch]
-            exporters: [debug, otlphttp, loki, elasticsearch]
+            exporters: [debug, loki, elasticsearch]
 
 extensions:
     zpages:
