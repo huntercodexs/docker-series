@@ -54,6 +54,10 @@ service:
             receivers: [otlp]
             processors: [attributes, batch]
             exporters: [debug, loki, elasticsearch]
+    telemetry:
+        metrics:
+            address: "0.0.0.0:8888"
+            level: "detailed"
 
 extensions:
     zpages:

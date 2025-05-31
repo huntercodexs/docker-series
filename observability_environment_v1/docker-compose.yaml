@@ -6,7 +6,7 @@ services:
     #----------------------------------------------------------------------------------------
     opentelemetry-collector-forward:
         env_file: .env
-        image: otel/opentelemetry-collector-contrib:latest
+        image: otel/opentelemetry-collector-contrib:${OTEL_FORWARD_VERSION}
         container_name: opentelemetry-collector-forward
         privileged: true
         tty: true
@@ -33,7 +33,7 @@ services:
     #----------------------------------------------------------------------------------------
     opentelemetry-collector-elasticsearch:
         env_file: .env
-        image: otel/opentelemetry-collector-contrib:latest
+        image: otel/opentelemetry-collector-contrib:${OTEL_ELASTICSEARCH_VERSION}
         container_name: opentelemetry-collector-elasticsearch
         privileged: true
         tty: true
@@ -61,7 +61,7 @@ services:
     #----------------------------------------------------------------------------------------
     opentelemetry-collector-opensearch:
         env_file: .env
-        image: otel/opentelemetry-collector-contrib:latest
+        image: otel/opentelemetry-collector-contrib:${OTEL_OPENSEARCH_VERSION}
         container_name: opentelemetry-collector-opensearch
         privileged: true
         tty: true
@@ -84,7 +84,7 @@ services:
             - prometheus
             - grafana
             - zipkin
-            - opensearch-node-2-15
+            - opensearch-node
         networks:
             - default
             - observability_network_v1
@@ -93,7 +93,7 @@ services:
     #----------------------------------------------------------------------------------------
     jaeger:
         env_file: .env
-        image: jaegertracing/all-in-one
+        image: jaegertracing/all-in-one:${JAEGER_VERSION}
         container_name: jaeger
         privileged: true
         tty: true
@@ -113,13 +113,13 @@ services:
     #----------------------------------------------------------------------------------------
     prometheus:
         env_file: .env
-        image: prom/prometheus
+        image: prom/prometheus:${PROMETHEUS_VERSION}
         container_name: prometheus
         privileged: true
         tty: true
-        command: [--config.file=/etc/prometheus/prometheus.yml]
+        command: [--config.file=/etc/prometheus/prometheus.yaml]
         volumes:
-            - ./prometheus/conf/prometheus.yml:/etc/prometheus/prometheus.yml
+            - ./prometheus/conf/prometheus.yaml:/etc/prometheus/prometheus.yaml
             - ./prometheus/shared/:/home/prometheus/shared/
         ports:
             - ${PROMETHEUS_PORT}:9090
@@ -131,12 +131,12 @@ services:
     #----------------------------------------------------------------------------------------
     grafana:
         env_file: .env
-        image: grafana/grafana
+        image: grafana/grafana:${GRAFANA_VERSION}
         container_name: grafana
         privileged: true
         tty: true
         volumes:
-            - ./grafana/conf/grafana.yml:/etc/grafana/provisioning/datasources/default.yml
+            - ./grafana/conf/grafana.yaml:/etc/grafana/provisioning/datasources/default.yaml
             - ./grafana/shared/:/home/grafana/shared/
         environment:
             - GF_AUTH_ANONYMOUS_ENABLED=true
@@ -151,7 +151,7 @@ services:
     #----------------------------------------------------------------------------------------
     loki:
         env_file: .env
-        image: grafana/loki:3.2.0
+        image: grafana/loki:${LOKI_VERSION}
         container_name: loki
         privileged: true
         tty: true
@@ -170,7 +170,7 @@ services:
     #----------------------------------------------------------------------------------------
     tempo:
         env_file: .env
-        image: grafana/tempo:latest
+        image: grafana/tempo:${TEMPO_VERSION}
         container_name: tempo
         privileged: true
         tty: true
@@ -190,10 +190,10 @@ services:
     #----------------------------------------------------------------------------------------
     ## OPENSEARCH
     #----------------------------------------------------------------------------------------
-    opensearch-node-2-15:
+    opensearch-node:
         env_file: .env
         image: opensearchproject/opensearch:${OPENSEARCH_VERSION}
-        container_name: opensearch-node-2-15
+        container_name: opensearch-node
         privileged: true
         tty: true
         volumes:
@@ -202,9 +202,9 @@ services:
             - ./opensearch/shared/:/home/opensearch/shared/
         environment:
             - cluster.name=opensearch-cluster
-            - node.name=opensearch-node-2-15
-            - discovery.seed_hosts=opensearch-node-2-15
-            - cluster.initial_cluster_manager_nodes=opensearch-node-2-15
+            - node.name=opensearch-node
+            - discovery.seed_hosts=opensearch-node
+            - cluster.initial_cluster_manager_nodes=opensearch-node
             - bootstrap.memory_lock=true
             - "OPENSEARCH_JAVA_OPTS=-Xms512m -Xmx512m"
             - OPENSEARCH_INITIAL_ADMIN_PASSWORD=${OPENSEARCH_INITIAL_ADMIN_PASSWORD}
@@ -224,22 +224,22 @@ services:
     #----------------------------------------------------------------------------------------
     ## OPENSEARCH-DASHBOARDS
     #----------------------------------------------------------------------------------------
-    opensearch-dashboards-2-15:
+    opensearch-dashboards:
         env_file: .env
         image: opensearchproject/opensearch-dashboards:${OPENSEARCH_VERSION}
-        container_name: opensearch-dashboards-2-15
+        container_name: opensearch-dashboards
         privileged: true
         tty: true
         volumes:
             - ./opensearch/shared/:/home/opensearch/shared/
         environment:
-            OPENSEARCH_HOSTS: '["https://opensearch-node-2-15:9200"]'
+            OPENSEARCH_HOSTS: '["https://opensearch-node:9200"]'
         ports:
             - ${OPENSEARCH_PORT_WEB}:5601
         expose:
             - ${OPENSEARCH_PORT_WEB}
         depends_on:
-            - opensearch-node-2-15
+            - opensearch-node
         networks:
             - default
             - observability_network_v1
@@ -294,8 +294,8 @@ services:
             LS_JAVA_OPTS: ${LOGSTASH_JAVA_OPTS}
         ports:
             - ${LOGSTASH_PORT_HTTP}:8080
-            - ${LOGSTASH_PORT_1}:5044
-            - ${LOGSTASH_PORT_2}:9600
+            - ${LOGSTASH_PORT_BEAT}:5044
+            - ${LOGSTASH_PORT_API}:9600
             - ${LOGSTASH_TCP_PORT}:5000/tcp
             - ${LOGSTASH_UDP_PORT}:5000/udp
         depends_on:
@@ -333,7 +333,7 @@ services:
     #----------------------------------------------------------------------------------------
     zipkin:
         env_file: .env
-        image: openzipkin/zipkin
+        image: openzipkin/zipkin:${ZIPKIN_VERSION}
         container_name: zipkin
         privileged: true
         tty: true
@@ -361,10 +361,28 @@ services:
             - default
             - observability_network_v1
     #----------------------------------------------------------------------------------------
+    ## WEB BROWSER - JUST FOR TESTS AND POCs
+    #----------------------------------------------------------------------------------------
+    browser:
+        image: jlesage/firefox:${BROWSER_VERSION}
+        container_name: firefox-browser
+        environment:
+            - DISPLAY_WIDTH=1920
+            - DISPLAY_HEIGHT=1080
+            - KEEP_APP_RUNNING=1
+        ports:
+            - ${BROWSER_PORT}:5800
+        networks:
+            - default
+            - observability_network_v1
+        volumes:
+            - browser_data:/config
+    #----------------------------------------------------------------------------------------
 
 volumes:
     opensearch-data:
     elasticsearch:
+    browser_data:
 
 networks:
     observability_network_v1:

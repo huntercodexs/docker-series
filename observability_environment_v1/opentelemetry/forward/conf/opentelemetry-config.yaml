@@ -7,6 +7,9 @@ receivers:
                 endpoint: 0.0.0.0:4318
 
 exporters:
+    debug:
+    prometheus:
+        endpoint: "0.0.0.0:8889"
     otlp/elasticsearch:
         endpoint: opentelemetry-collector-elasticsearch:4317
         tls:
@@ -16,17 +19,21 @@ exporters:
         tls:
             insecure: true
     syslog/logstash:
-        endpoint: logstash:5000
+        endpoint: tcp://logstash:5000
         protocol: rfc5424
 
 service:
     pipelines:
-        logs:
-            receivers: [otlp]
-            exporters: [otlp/elasticsearch, otlp/opensearch, syslog/logstash]
         traces:
             receivers: [otlp]
             exporters: [otlp/elasticsearch, otlp/opensearch]
         metrics:
             receivers: [otlp]
-            exporters: [otlp/elasticsearch, otlp/opensearch]
+            exporters: [debug, prometheus, otlp/elasticsearch, otlp/opensearch]
+        logs:
+            receivers: [otlp]
+            exporters: [otlp/elasticsearch, otlp/opensearch, syslog/logstash]
+    telemetry:
+        metrics:
+            address: "0.0.0.0:8888"
+            level: "detailed"

@@ -11,11 +11,13 @@ processors:
     attributes:
         actions:
             - key: team
-              action: insert
               value: huntercodexs
+              action: insert
 
 exporters:
     debug:
+    prometheus:
+        endpoint: "0.0.0.0:8889"
     elasticsearch:
         endpoints: [ "http://elasticsearch:9200" ]
         #index: "otel-logs"
@@ -34,11 +36,15 @@ service:
         metrics:
             receivers: [otlp]
             processors: [attributes, batch]
-            exporters: [debug, elasticsearch]
+            exporters: [debug, prometheus, elasticsearch]
         logs:
             receivers: [otlp]
             processors: [attributes, batch]
             exporters: [debug, elasticsearch]
+    telemetry:
+        metrics:
+            address: "0.0.0.0:8888"
+            level: "detailed"
 
 extensions:
     zpages:

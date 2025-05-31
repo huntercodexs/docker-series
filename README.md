@@ -6,6 +6,26 @@ Complete trace environment
 > NOTE: If you want to be more fast goto step by step in this documentation
 > <a href="#step-by-step">Step by Step</a>
 
+
+## 🔖 Component Versions
+
+| Component        | Version   |
+|------------------|-----------|
+| OpenTelemetry    | 0.118.0   |
+| Prometheus       | v3.3.1    |
+| Grafana          | 12.0.0    |
+| Loki             | 3.2.0     |
+| Tempo            | 2.7.2     |
+| OpenSearch       | 2.15.0    |
+| Jaeger           | 1.69.0    |
+| Zipkin           | 3.5.1     |
+| Elasticsearch    | 7.9.2     |
+| Logstash         | 7.9.2     |
+| Kibana           | 7.9.2     |
+| Browser          | v25.04.1  |
+
+
+
 Summary
 
 - <a href="#information">Information</a>

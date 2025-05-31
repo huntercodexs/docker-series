@@ -1,0 +1,25 @@
+scrape_configs:
+
+  - job_name: "opentelemetry-collector-forward"
+    scrape_interval: 5s
+    static_configs:
+      - targets: ["opentelemetry-collector-forward:8889", "opentelemetry-collector-forward:8888"]
+        labels:
+          group: "forward"
+          environment: "dev"
+
+  - job_name: "opentelemetry-collector-elasticsearch"
+    scrape_interval: 5s
+    static_configs:
+      - targets: ["opentelemetry-collector-elasticsearch:8889", "opentelemetry-collector-elasticsearch:8888"]
+        labels:
+          group: "elasticsearch"
+          environment: "dev"
+
+  - job_name: "opentelemetry-collector-opensearch"
+    scrape_interval: 5s
+    static_configs:
+      - targets: ["opentelemetry-collector-opensearch:8889", "opentelemetry-collector-opensearch:8888"]
+        labels:
+          group: "opensearch"
+          environment: "dev"
