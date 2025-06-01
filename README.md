@@ -24,6 +24,40 @@ Complete trace environment
 | Kibana           | 7.9.2     |
 | Browser          | v25.04.1  |
 
+✅ Organização do Ambiente — Observabilidade x Ferramenta
+
+1. Traces — Distribuição de fluxo, rastreamento de requisições
+
+| Ferramenta | Status                                                                    |
+| ---------- | ------------------------------------------------------------------------- |
+| **Zipkin** | ✅ Confirmado funcionando                                                  |
+| **Jaeger** | ✅ Confirmado funcionando                                                  |
+| **Tempo**  | ✅ Confirmado funcionando                                                  |
+| **Outros** | → (Pode incluir Honeycomb, New Relic etc. se quiser expandir futuramente) |
+
+2. Métricas — Telemetria, indicadores de saúde
+
+| Ferramenta     | Status                                                 |
+| -------------- |--------------------------------------------------------|
+| **Prometheus** | ✅ Confirmado: métricas coletadas e exibidas            |
+| **Grafana**    | ✅ Confirmado: Painel para visualizar Prometheus e Loki |
+
+
+3. Logs — Registro de eventos, diagnósticos
+
+| Ferramenta        | Status                                                             |
+| ----------------- |--------------------------------------------------------------------|
+| **OpenSearch**    | ✅ Recebendo logs via OpenTelemetry Exporter                        |
+| **Elasticsearch** | ✅ Recebendo logs via OpenTelemetry Exporter                        |
+| **Loki**          | ✅ Configurado para receber logs                                    |
+
+✅ Observabilidade Completa:
+
+    Traces → Fluxos entre serviços.
+
+    Logs → Eventos detalhados.
+
+    Métricas → Estado e performance.
 
 
 Summary

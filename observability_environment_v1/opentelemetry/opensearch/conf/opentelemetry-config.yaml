@@ -33,7 +33,7 @@ exporters:
         tls:
             insecure: true
     elasticsearch: # Opensearch
-        endpoints: [ "http://opensearch-node-2-15:9200" ]
+        endpoints: [ "https://opensearch-node:9200" ]
         user: "admin"
         password: "${OPENSEARCH_INITIAL_ADMIN_PASSWORD}"
         tls:
@@ -58,6 +58,8 @@ service:
         metrics:
             address: "0.0.0.0:8888"
             level: "detailed"
+        logs:
+            level: "debug"
 
 extensions:
     zpages:
