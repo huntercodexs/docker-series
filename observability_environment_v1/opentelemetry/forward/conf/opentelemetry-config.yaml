@@ -6,6 +6,14 @@ receivers:
             http:
                 endpoint: 0.0.0.0:4318
 
+#processors:
+#    batch: {}
+#    transform/syslog:
+#        log_statements:
+#            - context: log
+#              statements:
+#                  - set(body, body)
+
 exporters:
     debug:
     prometheus:
@@ -19,20 +27,33 @@ exporters:
         tls:
             insecure: true
     syslog/logstash:
-        endpoint: tcp://logstash:5000
+        network: udp
         protocol: rfc5424
+        endpoint: logstash
+        port: 5000
 
 service:
     pipelines:
-        traces:
+#        traces:
+#            receivers: [otlp]
+#            processors: [batch]
+#            exporters: [otlp/elasticsearch, otlp/opensearch]
+
+#        metrics:
+#            receivers: [otlp]
+#            processors: [batch]
+#            exporters: [debug, prometheus, otlp/elasticsearch, otlp/opensearch]
+
+#        logs/standard:
+#            receivers: [otlp]
+#            processors: [batch]
+#            exporters: [otlp/elasticsearch, otlp/opensearch]
+
+        logs/syslog:
             receivers: [otlp]
-            exporters: [otlp/elasticsearch, otlp/opensearch]
-        metrics:
-            receivers: [otlp]
-            exporters: [debug, prometheus, otlp/elasticsearch, otlp/opensearch]
-        logs:
-            receivers: [otlp]
-            exporters: [otlp/elasticsearch, otlp/opensearch, syslog/logstash]
+#            processors: [batch, transform/syslog]
+            exporters: [syslog/logstash]
+
     telemetry:
         metrics:
             address: "0.0.0.0:8888"

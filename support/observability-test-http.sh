@@ -64,9 +64,9 @@ do
               {"key": "service.name", "value": {"stringValue": "log-service"}}
             ]
           },
-          "instrumentationLibraryLogs": [
+          "scopeLogs": [
             {
-              "logs": [
+              "logRecords": [
                 {
                   "timeUnixNano": "1672531200000000000",
                   "severityNumber": 9,

@@ -28,10 +28,6 @@ exporters:
         endpoint: http://jaeger:4318
         tls:
             insecure: true
-    zipkin:
-        endpoint: http://zipkin:9411/api/v2/spans
-        tls:
-            insecure: true
     elasticsearch: # Opensearch
         endpoints: [ "https://opensearch-node:9200" ]
         user: "admin"
@@ -45,7 +41,7 @@ service:
         traces:
             receivers: [otlp]
             processors: [batch]
-            exporters: [debug, otlp, otlphttp, zipkin]
+            exporters: [debug, otlp, otlphttp]
         metrics:
             receivers: [otlp]
             processors: [attributes, batch]

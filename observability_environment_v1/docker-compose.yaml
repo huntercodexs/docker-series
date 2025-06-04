@@ -197,7 +197,7 @@ services:
         privileged: true
         tty: true
         volumes:
-            - opensearch-data:/usr/share/opensearch/data #see in volumes below
+            - opensearch-vol1:/usr/share/opensearch/data #see in volumes below
             - ./opensearch/conf:/usr/share/opensearch/config/opensearch-performance-analyzer
             - ./opensearch/shared/:/home/opensearch/shared/
         environment:
@@ -253,9 +253,9 @@ services:
         privileged: true
         tty: true
         volumes:
-            - ./elasticsearch/conf/elasticsearch.yml:/usr/share/elasticsearch/config/elasticsearch.yml
-            - ./elasticsearch/data:/usr/share/elasticsearch/data
+            - elasticsearch-vol1:/usr/share/elasticsearch/data #see in volumes below
             - ./elasticsearch/shared/:/home/elasticsearch/shared/
+            - ./elasticsearch/conf/elasticsearch.yml:/usr/share/elasticsearch/config/elasticsearch.yml
         environment:
             ELASTIC_VERSION: ${GENERAL_STACK_VERSION}
             ELASTIC_PASSWORD: ${ELASTIC_PASSWORD}
@@ -284,10 +284,10 @@ services:
         privileged: true
         tty: true
         volumes:
+            - ./logstash/shared/:/home/logstash/shared/
             - ./logstash/pipeline:/usr/share/logstash/pipeline
             - ./logstash/conf/logstash.yml:/usr/share/logstash/config/logstash.yml
             - ./logstash/script/logstash-reload.sh:/home/logstash/logstash-reload.sh
-            - ./logstash/shared/:/home/logstash/shared/
         environment:
             ELASTIC_VERSION: ${GENERAL_STACK_VERSION}
             LOGSTASH_INTERNAL_PASSWORD: ${LOGSTASH_INTERNAL_PASSWORD}
@@ -313,8 +313,8 @@ services:
         privileged: true
         tty: true
         volumes:
-            - ./kibana/conf/kibana.yml:/usr/share/kibana/config/kibana.yml
             - ./kibana/shared/:/home/kibana/shared/
+            - ./kibana/conf/kibana.yml:/usr/share/kibana/config/kibana.yml
         environment:
             ELASTIC_VERSION: ${GENERAL_STACK_VERSION}
             ELASTICSEARCH_HOSTS: ${ELASTICSEARCH_HTTP_HOSTS}
@@ -338,8 +338,8 @@ services:
         privileged: true
         tty: true
         volumes:
-            - ./zipkin/conf/basic-auth.properties:/home/zipkin/properties/basic-auth.properties
             - ./zipkin/shared/:/home/zipkin/shared/
+            - ./zipkin/conf/basic-auth.properties:/home/zipkin/properties/basic-auth.properties
         environment:
             STORAGE_TYPE: ${ZIPKIN_STORAGE_TYPE}
             SEARCH_ENABLED: ${ZIPKIN_SEARCH_ENABLED}
@@ -366,23 +366,25 @@ services:
     browser:
         image: jlesage/firefox:${BROWSER_VERSION}
         container_name: firefox-browser
+        privileged: true
+        tty: true
         environment:
             - DISPLAY_WIDTH=1920
             - DISPLAY_HEIGHT=1080
             - KEEP_APP_RUNNING=1
         ports:
             - ${BROWSER_PORT}:5800
+        volumes:
+            - browser_data-vol1:/config
         networks:
             - default
             - observability_network_v1
-        volumes:
-            - browser_data:/config
     #----------------------------------------------------------------------------------------
 
 volumes:
-    opensearch-data:
-    elasticsearch:
-    browser_data:
+    opensearch-vol1:
+    elasticsearch-vol1:
+    browser_data-vol1:
 
 networks:
     observability_network_v1:
