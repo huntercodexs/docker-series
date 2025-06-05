@@ -52,7 +52,7 @@ do
 
   sleep 1
 
-  # Logs
+  # Logs - GPT AI
   echo "[$COUNTER] Sending log..."
   curl -X POST http://localhost:4318/v1/logs \
     -H "Content-Type: application/json" \
@@ -72,7 +72,7 @@ do
                   "severityNumber": 9,
                   "severityText": "INFO",
                   "name": "example-log",
-                  "body": {"stringValue": "User logged in successfully"},
+                  "body": {"stringValue": "User logged in successfully - GPT AI"},
                   "attributes": [
                     {"key": "user.id", "value": {"stringValue": "1234"}},
                     {"key": "session.id", "value": {"stringValue": "abcd-1234"}}
@@ -84,6 +84,39 @@ do
         }
       ]
     }'
+
+    #Logs - Gemini AI
+    curl -X POST \
+      http://localhost:4318/v1/logs \
+      -H 'Content-Type: application/json' \
+      -d '{
+        "resource_logs": [
+          {
+            "resource": {
+              "attributes": [
+                { "key": "service.name", "value": { "string_value": "manual-test-service" } },
+                { "key": "environment", "value": { "string_value": "testing" } }
+              ]
+            },
+            "scope_logs": [
+              {
+                "scope": {},
+                "log_records": [
+                  {
+                    "time_unix_nano": "'$(($(date +%s%N)))'",
+                    "severity_text": "INFO",
+                    "body": { "string_value": "This is a log message from curl test - GEMINI AI." },
+                    "attributes": [
+                      { "key": "component", "value": { "string_value": "curl-test" } },
+                      { "key": "http.method", "value": { "string_value": "POST" } }
+                    ]
+                  }
+                ]
+              }
+            ]
+          }
+        ]
+      }'
 
   sleep 1
 

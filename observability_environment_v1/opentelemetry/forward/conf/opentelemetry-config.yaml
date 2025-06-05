@@ -6,13 +6,20 @@ receivers:
             http:
                 endpoint: 0.0.0.0:4318
 
-#processors:
-#    batch: {}
-#    transform/syslog:
-#        log_statements:
-#            - context: log
-#              statements:
-#                  - set(body, body)
+processors:
+    batch:
+        send_batch_size: 100
+        timeout: 10s
+    transform/syslog:
+        log_statements:
+            - context: log
+              statements:
+                  - set(attributes["message"], body)
+    transform/http:
+        log_statements:
+            - context: log
+              statements:
+                - set(attributes["message"], body)
 
 exporters:
     debug:
@@ -21,38 +28,56 @@ exporters:
     otlp/elasticsearch:
         endpoint: opentelemetry-collector-elasticsearch:4317
         tls:
-            insecure: true
+            insecure: true #true|false
+            #ca_file:
+            #cert_file:
+            #key_file:
     otlp/opensearch:
         endpoint: opentelemetry-collector-opensearch:4317
         tls:
-            insecure: true
+            insecure: true #true|false
+            #ca_file:
+            #cert_file:
+            #key_file:
     syslog/logstash:
         network: udp
         protocol: rfc5424
         endpoint: logstash
         port: 5000
+    otlphttp/logstash:
+        endpoint: "http://logstash:8080"
+        tls:
+            insecure: true #true|false
+            #ca_file:
+            #cert_file:
+            #key_file:
 
 service:
     pipelines:
-#        traces:
-#            receivers: [otlp]
-#            processors: [batch]
-#            exporters: [otlp/elasticsearch, otlp/opensearch]
+        traces:
+            receivers: [otlp]
+            processors: [batch]
+            exporters: [otlp/elasticsearch, otlp/opensearch]
 
-#        metrics:
-#            receivers: [otlp]
-#            processors: [batch]
-#            exporters: [debug, prometheus, otlp/elasticsearch, otlp/opensearch]
+        metrics:
+            receivers: [otlp]
+            processors: [batch]
+            exporters: [debug, prometheus, otlp/elasticsearch, otlp/opensearch]
 
-#        logs/standard:
-#            receivers: [otlp]
-#            processors: [batch]
-#            exporters: [otlp/elasticsearch, otlp/opensearch]
+        logs/standard:
+            receivers: [otlp]
+            processors: [batch]
+            exporters: [otlp/elasticsearch, otlp/opensearch]
 
         logs/syslog:
             receivers: [otlp]
-#            processors: [batch, transform/syslog]
+            processors: [batch, transform/syslog]
             exporters: [syslog/logstash]
+
+        logs/http:
+            receivers: [otlp]
+            processors: [batch, transform/http]
+            exporters: [debug, otlphttp/logstash]
 
     telemetry:
         metrics:
