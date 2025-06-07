@@ -60,6 +60,97 @@ Complete trace environment
     Métricas → Estado e performance.
 
 
+## Samples to Logstash
+
+#Logs - GPT AI
+echo "[$COUNTER] Sending log..."
+curl -X POST http://localhost:4318/v1/logs \
+-H "Content-Type: application/json" \
+-d '{
+"resourceLogs": [
+{
+"resource": {
+"attributes": [
+{"key": "service.name", "value": {"stringValue": "log-service"}}
+]
+},
+"scopeLogs": [
+{
+"logRecords": [
+{
+"timeUnixNano": "1672531200000000000",
+"severityNumber": 9,
+"severityText": "INFO",
+"name": "example-log",
+"body": {"stringValue": "User logged in successfully - GPT AI"},
+"attributes": [
+{"key": "user.id", "value": {"stringValue": "1234"}},
+{"key": "session.id", "value": {"stringValue": "abcd-1234"}}
+]
+}
+]
+}
+]
+}
+]
+}'
+
+#Logs - Gemini AI
+curl -X POST \
+  http://localhost:4318/v1/logs \
+  -H 'Content-Type: application/json' \
+  -d '{
+    "resource_logs": [
+      {
+        "resource": {
+          "attributes": [
+            { "key": "service.name", "value": { "string_value": "manual-test-service" } },
+            { "key": "environment", "value": { "string_value": "testing" } }
+          ]
+        },
+        "scope_logs": [
+          {
+            "scope": {},
+            "log_records": [
+              {
+                "time_unix_nano": "'$(($(date +%s%N)))'",
+                "severity_text": "INFO",
+                "body": { "string_value": "This is a log message from curl test - GEMINI AI." },
+                "attributes": [
+                  { "key": "component", "value": { "string_value": "curl-test" } },
+                  { "key": "http.method", "value": { "string_value": "POST" } }
+                ]
+              }
+            ]
+          }
+        ]
+      }
+    ]
+  }'
+
+### LOGSTASH (POSTMAN REQUEST)
+#  POST http://localhost:48080
+#  {
+#      "id": "d1f91b2b-c974-4737-b696-582815190745",
+#      "createdAt": "2025-05-23T20:15:43.705088Z",
+#      "anyObjectInformation": {
+#          "name": "ENROLLMENT_EXAMPLE",
+#          "code": "10000",
+#          "type": "anyType",
+#          "subtype": "anySubTYpe"
+#      },
+#      "transactionalId": null,
+#      "sessionId": null,
+#      "traceId": "1a8419e6efcb4dd5a10204f999999999",
+#      "serviceOrigin": "postman",
+#      "spanId": null,
+#      "anyExtraDetails": {
+#          "resource": "AWS-RESOURCE",
+#          "details": "any description or details"
+#      },
+#      "version": "v1.0.0"
+#  }
+
 Summary
 
 - <a href="#information">Information</a>

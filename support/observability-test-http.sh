@@ -118,6 +118,29 @@ do
         ]
       }'
 
+  ### LOGSTASH (POSTMAN REQUEST)
+#  POST http://localhost:48080
+#  {
+#      "id": "d1f91b2b-c974-4737-b696-582815190745",
+#      "createdAt": "2025-05-23T20:15:43.705088Z",
+#      "anyObjectInformation": {
+#          "name": "ENROLLMENT_EXAMPLE",
+#          "code": "10000",
+#          "type": "anyType",
+#          "subtype": "anySubTYpe"
+#      },
+#      "transactionalId": null,
+#      "sessionId": null,
+#      "traceId": "1a8419e6efcb4dd5a10204f999999999",
+#      "serviceOrigin": "postman",
+#      "spanId": null,
+#      "anyExtraDetails": {
+#          "resource": "AWS-RESOURCE",
+#          "details": "any description or details"
+#      },
+#      "version": "v1.0.0"
+#  }
+
   sleep 1
 
   # Metrics
