@@ -20,9 +20,9 @@ exporters:
         endpoint: "0.0.0.0:8889"
     elasticsearch:
         endpoints: [ "http://elasticsearch:9200" ]
-        #index: "otel-logs"
         user: "${ELASTIC_USERNAME}"
         password: "${ELASTIC_PASSWORD}"
+        logs_index: "otel-elasticsearch-v1-2025.06.08"
         tls:
             insecure: true
     zipkin:
@@ -39,11 +39,11 @@ service:
             exporters: [debug, elasticsearch, zipkin]
         metrics:
             receivers: [otlp]
-            processors: [attributes, batch]
+            processors: [batch, attributes]
             exporters: [debug, prometheus, elasticsearch]
         logs:
             receivers: [otlp]
-            processors: [attributes, batch]
+            processors: [batch, attributes]
             exporters: [debug, elasticsearch]
     telemetry:
         metrics:

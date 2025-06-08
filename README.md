@@ -151,6 +151,37 @@ curl -X POST \
 #      "version": "v1.0.0"
 #  }
 
+### Sample to Elasticsearch
+
+curl -X POST       http://localhost:4318/v1/logs       -H 'Content-Type: application/json'       -d '{
+"resource_logs": [
+{
+"resource": {
+"attributes": [
+{ "key": "service.name", "value": { "string_value": "manual-test-service" } },
+{ "key": "environment", "value": { "string_value": "testing" } }
+]
+},
+"scope_logs": [
+{
+"scope": {},
+"log_records": [
+{
+"time_unix_nano": "'$(($(date +%s%N)))'",
+"severity_text": "INFO",
+"body": { "string_value": "{\"string_value\": \"This is a log message from curl test - GEMINI AI 123456.\" }" },
+"attributes": [
+{ "key": "component", "value": { "string_value": "curl-test" } },
+{ "key": "http.method", "value": { "string_value": "POST" } }
+]
+}
+]
+}
+]
+}
+]
+}'
+
 Summary
 
 - <a href="#information">Information</a>
