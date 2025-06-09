@@ -169,7 +169,7 @@ curl -X POST       http://localhost:4318/v1/logs       -H 'Content-Type: applica
 {
 "time_unix_nano": "'$(($(date +%s%N)))'",
 "severity_text": "INFO",
-"body": { "string_value": "{\"string_value\": \"This is a log message from curl test - GEMINI AI 123456.\" }" },
+"body": { "string_value": "{\"string_value\": \"This is a log message from curl test.\" }" },
 "attributes": [
 { "key": "component", "value": { "string_value": "curl-test" } },
 { "key": "http.method", "value": { "string_value": "POST" } }

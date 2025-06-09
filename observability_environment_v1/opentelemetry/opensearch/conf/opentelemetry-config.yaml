@@ -29,11 +29,12 @@ exporters:
         tls:
             insecure: true
     elasticsearch: # Opensearch
-        endpoints: [ "https://opensearch-node:9200" ]
+        endpoints: [ "https://node-0.example.com:9200" ]
         user: "admin"
         password: "${OPENSEARCH_INITIAL_ADMIN_PASSWORD}"
+        logs_index: "otel-collector-opensearch-v1-2025.06.09"
         tls:
-            insecure: true
+            insecure_skip_verify: true
 
 service:
     extensions: [zpages]

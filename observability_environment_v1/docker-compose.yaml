@@ -84,7 +84,7 @@ services:
             - prometheus
             - grafana
             - zipkin
-            - opensearch-node
+            - node-0.example.com
         networks:
             - default
             - observability_network_v1
@@ -190,21 +190,22 @@ services:
     #----------------------------------------------------------------------------------------
     ## OPENSEARCH
     #----------------------------------------------------------------------------------------
-    opensearch-node:
+    node-0.example.com:
         env_file: .env
         image: opensearchproject/opensearch:${OPENSEARCH_VERSION}
-        container_name: opensearch-node
+        container_name: node-0.example.com
         privileged: true
         tty: true
         volumes:
             - opensearch-vol1:/usr/share/opensearch/data #see in volumes below
             - ./opensearch/conf:/usr/share/opensearch/config/opensearch-performance-analyzer
             - ./opensearch/shared/:/home/opensearch/shared/
+            #- ./opensearch/conf/opensearch.yml:/usr/share/opensearch/config/opensearch.yml
         environment:
             - cluster.name=opensearch-cluster
-            - node.name=opensearch-node
-            - discovery.seed_hosts=opensearch-node
-            - cluster.initial_cluster_manager_nodes=opensearch-node
+            - node.name=node-0.example.com
+            - discovery.seed_hosts=node-0.example.com
+            - cluster.initial_cluster_manager_nodes=node-0.example.com
             - bootstrap.memory_lock=true
             - "OPENSEARCH_JAVA_OPTS=-Xms512m -Xmx512m"
             - OPENSEARCH_INITIAL_ADMIN_PASSWORD=${OPENSEARCH_INITIAL_ADMIN_PASSWORD}
@@ -233,13 +234,13 @@ services:
         volumes:
             - ./opensearch/shared/:/home/opensearch/shared/
         environment:
-            OPENSEARCH_HOSTS: '["https://opensearch-node:9200"]'
+            OPENSEARCH_HOSTS: '["https://node-0.example.com:9200"]'
         ports:
             - ${OPENSEARCH_PORT_WEB}:5601
         expose:
             - ${OPENSEARCH_PORT_WEB}
         depends_on:
-            - opensearch-node
+            - node-0.example.com
         networks:
             - default
             - observability_network_v1
@@ -288,6 +289,7 @@ services:
             - ./logstash/pipeline:/usr/share/logstash/pipeline
             - ./logstash/conf/logstash.yml:/usr/share/logstash/config/logstash.yml
             - ./logstash/script/logstash-reload.sh:/home/logstash/logstash-reload.sh
+            - ./opensearch/certs/:/usr/share/logstash/config/certs/
         environment:
             ELASTIC_VERSION: ${GENERAL_STACK_VERSION}
             LOGSTASH_INTERNAL_PASSWORD: ${LOGSTASH_INTERNAL_PASSWORD}

@@ -22,7 +22,7 @@ exporters:
         endpoints: [ "http://elasticsearch:9200" ]
         user: "${ELASTIC_USERNAME}"
         password: "${ELASTIC_PASSWORD}"
-        logs_index: "otel-elasticsearch-v1-2025.06.08"
+        logs_index: "otel-collector-elasticsearch-v1-2025.06.08"
         tls:
             insecure: true
     zipkin:
