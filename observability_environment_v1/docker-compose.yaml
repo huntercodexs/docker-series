@@ -68,6 +68,7 @@ services:
         volumes:
             - ./opentelemetry/opensearch/conf/opentelemetry-config.yaml:/etc/opentelemetry-config.yaml
             - ./opentelemetry/opensearch/shared/:/home/opentelemetry/shared/
+            - ./opensearch/certs/:/etc/ssl/certs/
         command: [ "--config=/etc/opentelemetry-config.yaml" ]
         ports:
             - ${OTEL_OPENSEARCH_PPROF_PORT}:1888
@@ -239,6 +240,28 @@ services:
             - ${OPENSEARCH_PORT_WEB}:5601
         expose:
             - ${OPENSEARCH_PORT_WEB}
+        depends_on:
+            - node-0.example.com
+        networks:
+            - default
+            - observability_network_v1
+    #----------------------------------------------------------------------------------------
+    ## OPENSEARCH-DATA-PREPPER
+    #----------------------------------------------------------------------------------------
+    data-prepper:
+        env_file: .env
+        image: opensearchproject/data-prepper:${DATA_PREPPER_VERSION}
+        container_name: data-prepper
+        privileged: true
+        tty: true
+        volumes:
+            - ./data-prepper/data-prepper-pipelines.yaml:/etc/data-prepper/pipelines.yaml
+            - ./data-prepper/data-prepper-log4j2.properties:/usr/share/data-prepper/config/log4j2.properties
+        environment:
+            OPENSEARCH_HOSTS: '["https://node-0.example.com:9200"]'
+        ports:
+            - "21890:21890"
+            - "21891:21891"
         depends_on:
             - node-0.example.com
         networks:

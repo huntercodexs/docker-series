@@ -16,25 +16,41 @@ processors:
 
 exporters:
     debug:
-    prometheus:
-        endpoint: "0.0.0.0:8889"
+
+    ### 6. OTEL-FORWARD > OTEL-OPENSEARCH > LOKI
     loki:
         endpoint: http://loki:3100/loki/api/v1/push
+
+    ### 7. OTEL-FORWARD > OTEL-OPENSEARCH > TEMPO
     otlp:
         endpoint: tempo:4317
         tls:
             insecure: true
+
+    ### 8. OTEL-FORWARD > OTEL-OPENSEARCH > JAEGER
     otlphttp:
         endpoint: http://jaeger:4318
         tls:
             insecure: true
-    elasticsearch: # Opensearch
-        endpoints: [ "https://node-0.example.com:9200" ]
-        user: "admin"
-        password: "${OPENSEARCH_INITIAL_ADMIN_PASSWORD}"
+
+    ### 9. OTEL-FORWARD > OTEL-OPENSEARCH > OPENSEARCH
+    opensearch:
+        endpoint: "https://node-0.example.com:9200"
         logs_index: "otel-collector-opensearch-v1-2025.06.09"
         tls:
-            insecure_skip_verify: true
+            insecure: false
+            ca_file: "/etc/ssl/certs/opensearch.crt"
+        headers:
+            Authorization: "Basic ${OPENSEARCH_AUTHORIZATION}"
+
+    ### 10. OTEL-FORWARD > OTEL-OPENSEARCH > DATA-PREPPER
+    otlp/data_prepper:
+        endpoint: data-prepper:21890
+        tls:
+            insecure: true #true|false
+            #ca_file:
+            #cert_file:
+            #key_file:
 
 service:
     extensions: [zpages]
@@ -42,15 +58,15 @@ service:
         traces:
             receivers: [otlp]
             processors: [batch]
-            exporters: [debug, otlp, otlphttp]
+            exporters: [debug, otlp, otlphttp, otlp/data_prepper]
         metrics:
             receivers: [otlp]
             processors: [attributes, batch]
-            exporters: [debug, prometheus]
+            exporters: [debug, otlp/data_prepper]
         logs:
             receivers: [otlp]
             processors: [attributes, batch]
-            exporters: [debug, loki, elasticsearch]
+            exporters: [debug, loki, opensearch, otlp/data_prepper]
     telemetry:
         metrics:
             address: "0.0.0.0:8888"

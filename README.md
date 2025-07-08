@@ -7,22 +7,41 @@ Complete trace environment
 > <a href="#step-by-step">Step by Step</a>
 
 
-## 🔖 Component Versions
+## 🔖 Containers Versions
 
-| Component        | Version   |
-|------------------|-----------|
-| OpenTelemetry    | 0.118.0   |
-| Prometheus       | v3.3.1    |
-| Grafana          | 12.0.0    |
-| Loki             | 3.2.0     |
-| Tempo            | 2.7.2     |
-| OpenSearch       | 2.15.0    |
-| Jaeger           | 1.69.0    |
-| Zipkin           | 3.5.1     |
-| Elasticsearch    | 7.9.2     |
-| Logstash         | 7.9.2     |
-| Kibana           | 7.9.2     |
-| Browser          | v25.04.1  |
+| Component     | Version  | Status |
+|---------------|----------|--------|
+| OpenTelemetry | 0.118.0  | OK     |
+| Prometheus    | v3.3.1   | OK     |
+| Grafana       | 12.0.0   | OK     |
+| Loki          | 3.2.0    | OK     |
+| Tempo         | 2.7.2    | OK     |
+| OpenSearch    | 2.15.0   | OK     |
+| DataPrepper   | 2.7.0    | OK     |
+| Jaeger        | 1.69.0   | OK     |
+| Zipkin        | 3.5.1    | OK     |
+| Elasticsearch | 7.9.2    | OK     |
+| Logstash      | 7.9.2    | OK     |
+| Kibana        | 7.9.2    | OK     |
+| Browser       | v25.04.1 | OK     |
+
+
+## 🔖 Scenarios
+
+| #  | Scenario                                                           | Method | Status |
+|----|--------------------------------------------------------------------|--------|--------|
+| 1  | OpenTelemetry[Forward] > OpenTelemetry[Elasticsearch] > Kibana     | HTTP   | OK     |
+| 2  | OpenTelemetry[Forward] > OpenTelemetry[Elasticsearch] > Zipkin     | HTTP   | OK     |
+| 3  | OpenTelemetry[Forward] > OpenTelemetry[Elasticsearch] > Prometheus | OTLP   | OK     |
+| 4  | OpenTelemetry[Forward] > Logstash > Elasticsearch > Kibana         | SYSLOG | OK     |
+| 5  | OpenTelemetry[Forward] > Logstash > Elasticsearch > Kibana         | HTTP   | OK     |
+| 6  | OpenTelemetry[Forward] > OpenTelemetry[Opensearch] > Loki          |        |        |
+| 7  | OpenTelemetry[Forward] > OpenTelemetry[Opensearch] > Tempo         |        |        |
+| 8  | OpenTelemetry[Forward] > OpenTelemetry[Opensearch] > Jaeger        |        |        |
+| 9  | OpenTelemetry[Forward] > OpenTelemetry[Opensearch] > Opensearch    |        |        |
+| 10 | OpenTelemetry[Forward] > OpenTelemetry[Opensearch] > DataPrepper   |        |        |
+| 11 | OpenTelemetry[Forward] > Logstash > Opensearch                     | HTTP   |        |
+| 11 | OpenTelemetry[Forward] > OpenTelemetry[Opensearch]                 |        |        |
 
 ✅ Organização do Ambiente — Observabilidade x Ferramenta
 

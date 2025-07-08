@@ -16,8 +16,8 @@ processors:
 
 exporters:
     debug:
-    prometheus:
-        endpoint: "0.0.0.0:8889"
+
+    ### 1. OTEL-FORWARD > OTEL-ELASTICSEARCH > KIBANA
     elasticsearch:
         endpoints: [ "http://elasticsearch:9200" ]
         user: "${ELASTIC_USERNAME}"
@@ -25,10 +25,16 @@ exporters:
         logs_index: "otel-collector-elasticsearch-v1-2025.06.08"
         tls:
             insecure: true
+
+    ### 2. OTEL-FORWARD > OTEL-ELASTICSEARCH > ZIPKIN
     zipkin:
         endpoint: http://zipkin:9411/api/v2/spans
         tls:
             insecure: true
+
+    ### 3. OTEL-FORWARD > OTEL-ELASTICSEARCH > PROMETHEUS
+    prometheus:
+        endpoint: "0.0.0.0:8889"
 
 service:
     extensions: [zpages]

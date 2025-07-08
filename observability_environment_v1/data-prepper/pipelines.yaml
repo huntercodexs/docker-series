@@ -1,0 +1,56 @@
+version: "0.8"
+pipelines:
+    # Pipeline para Traces
+    otel-traces-pipeline:
+        workers: 2
+        delay: 100
+        source:
+            otel_trace_source: # Fonte OTLP para traces
+                ssl: false # Desabilite SSL para teste local. Em produção, configure SSL!
+        sink:
+            - opensearch:
+                  hosts: ["node-0.example.com:9200"]
+                  ssl: false
+                  # username: "admin" # Se security habilitado
+                  # password: "admin" # Se security habilitado
+                  trace_analytics_raw: true # Habilita o Trace Analytics
+                  index_type: trace-analytics # Tipo de índice para traces
+
+    # Pipeline para Métricas
+    otel-metrics-pipeline:
+        workers: 2
+        delay: 100
+        source:
+            otel_metrics_source: # Fonte OTLP para métricas
+                ssl: false
+        sink:
+            - opensearch:
+                  hosts: ["node-0.example.com:9200"]
+                  ssl: false
+                  # username: "admin" # Se security habilitado
+                  # password: "admin" # Se security habilitado
+                  index_type: custom # Usar tipo customizado para ter mais controle
+                  index: "otel-metrics-%{yyyy.MM.dd}" # Exemplo: otel-metrics-2025.07.06
+                  # Você pode adicionar um template de índice se quiser gerenciar o mapeamento
+                  # index_template:
+                  #   path: "/path/to/metric_template.json" # Opcional: criar um template de índice customizado
+                  document_id_field: "resource.service.name" # Exemplo: usar o nome do serviço como parte do ID do documento
+
+    # Pipeline para Logs
+    otel-logs-pipeline:
+        workers: 2
+        delay: 100
+        source:
+            otel_logs_source: # Fonte OTLP para logs
+                ssl: false
+        sink:
+            - opensearch:
+                  hosts: ["node-0.example.com:9200"]
+                  ssl: false
+                  # username: "admin" # Se security habilitado
+                  # password: "admin" # Se security habilitado
+                  index_type: custom
+                  index: "otel-logs-%{yyyy.MM.dd}" # Exemplo: otel-logs-2025.07.06
+                  # Você pode adicionar um template de índice se quiser gerenciar o mapeamento
+                  # index_template:
+                  #   path: "/path/to/log_template.json" # Opcional: criar um template de índice customizado

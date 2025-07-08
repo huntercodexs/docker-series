@@ -10,11 +10,13 @@ processors:
     batch:
         send_batch_size: 100
         timeout: 10s
+
     transform/syslog:
         log_statements:
             - context: log
               statements:
                   - set(attributes["message"], body)
+
     transform/http:
         log_statements:
             - context: log
@@ -23,8 +25,10 @@ processors:
 
 exporters:
     debug:
-    prometheus:
-        endpoint: "0.0.0.0:8889"
+
+    ### 1. OTEL-FORWARD > OTEL-ELASTICSEARCH > KIBANA
+    ### 2. OTEL-FORWARD > OTEL-ELASTICSEARCH > ZIPKIN
+    ### 3. OTEL-FORWARD > OTEL-ELASTICSEARCH > PROMETHEUS
     otlp/elasticsearch:
         endpoint: opentelemetry-collector-elasticsearch:4317
         tls:
@@ -32,20 +36,30 @@ exporters:
             #ca_file:
             #cert_file:
             #key_file:
-    otlp/opensearch:
-        endpoint: opentelemetry-collector-opensearch:4317
-        tls:
-            insecure: true #true|false
-            #ca_file:
-            #cert_file:
-            #key_file:
+
+    ### 4. OTEL-FORWARD > LOGSTASH/SYSLOG > ELASTICSEARCH > KIBANA
     syslog/logstash:
         network: udp
         protocol: rfc5424
         endpoint: logstash
         port: 5000
+
+    ### 5. OTEL-FORWARD > LOGSTASH/HTTP > ELASTICSEARCH > KIBANA
     otlphttp/logstash:
         endpoint: "http://logstash:8080"
+        tls:
+            insecure: true #true|false
+            #ca_file:
+            #cert_file:
+            #key_file:
+
+    ### 6. OTEL-FORWARD > OTEL-OPENSEARCH > LOKI
+    ### 7. OTEL-FORWARD > OTEL-OPENSEARCH > TEMPO
+    ### 8. OTEL-FORWARD > OTEL-OPENSEARCH > JAEGER
+    ### 9. OTEL-FORWARD > OTEL-OPENSEARCH > OPENSEARCH
+    ### 10. OTEL-FORWARD > OTEL-OPENSEARCH > DATA-PREPPER
+    otlp/opensearch:
+        endpoint: opentelemetry-collector-opensearch:4317
         tls:
             insecure: true #true|false
             #ca_file:
@@ -62,7 +76,7 @@ service:
         metrics:
             receivers: [otlp]
             processors: [batch]
-            exporters: [debug, prometheus, otlp/elasticsearch, otlp/opensearch]
+            exporters: [debug, otlp/elasticsearch, otlp/opensearch]
 
         logs/standard:
             receivers: [otlp]
