@@ -41,8 +41,8 @@ do
                  "spanId": "1ab2c3d4e5f67890",
                  "name": "test-span",
                  "kind": 1,
-                 "startTimeUnixNano": "1717158425000000000",
-                 "endTimeUnixNano": "1717158426000000000",
+                 "startTimeUnixNano": "'"$(date +%s%N)"'",
+                 "endTimeUnixNano": "'"$(date +%s%N)"'",
                  "attributes": [
                    {"key": "custom.attribute", "value": {"stringValue": "value"}},
                    {"key": "spanNum", "value": {"intValue": 1}}

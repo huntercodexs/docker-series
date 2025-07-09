@@ -7,7 +7,7 @@ TEAM="huntercodexs"
 ENV="manual"
 TEST_TYPE="trace"
 
-TOTAL=20
+TOTAL=$1
 
 echo "Sending $TOTAL spans to $TRACES_ENDPOINT..."
 

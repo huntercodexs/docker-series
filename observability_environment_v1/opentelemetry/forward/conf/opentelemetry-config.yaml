@@ -45,6 +45,7 @@ exporters:
         port: 5000
 
     ### 5. OTEL-FORWARD > LOGSTASH/HTTP > ELASTICSEARCH > KIBANA
+    ### 6. OTEL-FORWARD > LOGSTASH/HTTP > OPENSEARCH
     otlphttp/logstash:
         endpoint: "http://logstash:8080"
         tls:
@@ -53,11 +54,11 @@ exporters:
             #cert_file:
             #key_file:
 
-    ### 6. OTEL-FORWARD > OTEL-OPENSEARCH > LOKI
-    ### 7. OTEL-FORWARD > OTEL-OPENSEARCH > TEMPO
-    ### 8. OTEL-FORWARD > OTEL-OPENSEARCH > JAEGER
-    ### 9. OTEL-FORWARD > OTEL-OPENSEARCH > OPENSEARCH
-    ### 10. OTEL-FORWARD > OTEL-OPENSEARCH > DATA-PREPPER
+    ### 7. OTEL-FORWARD > OTEL-OPENSEARCH > LOKI
+    ### 8. OTEL-FORWARD > OTEL-OPENSEARCH > TEMPO
+    ### 9. OTEL-FORWARD > OTEL-OPENSEARCH > JAEGER
+    ### 10. OTEL-FORWARD > OTEL-OPENSEARCH > OPENSEARCH (NOK)
+    ### 11. OTEL-FORWARD > OTEL-OPENSEARCH > DATA-PREPPER > OPENSEARCH
     otlp/opensearch:
         endpoint: opentelemetry-collector-opensearch:4317
         tls:

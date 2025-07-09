@@ -255,8 +255,9 @@ services:
         privileged: true
         tty: true
         volumes:
-            - ./data-prepper/data-prepper-pipelines.yaml:/etc/data-prepper/pipelines.yaml
-            - ./data-prepper/data-prepper-log4j2.properties:/usr/share/data-prepper/config/log4j2.properties
+            - ./data-prepper/pipelines.yaml:/usr/share/data-prepper/pipelines/pipelines.yaml:ro
+            - ./data-prepper/data-prepper-log4j2.properties:/usr/share/data-prepper/config/log4j2.properties:ro
+            - ./opensearch/certs/:/usr/share/certs/opensearch/
         environment:
             OPENSEARCH_HOSTS: '["https://node-0.example.com:9200"]'
         ports:

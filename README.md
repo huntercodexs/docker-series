@@ -1,47 +1,47 @@
-# ELK PROMETHEUS GRAFANA ZIPKIN MYSQL
-Complete trace environment
+# OBSERVABILITY ENVIRONMENT
+Complete tracing environment (v1)
+
+
+# Overview
 
 ![banner.png](elk_prometheus_grafana_zipkin_mysql_v1/files/media/banner.png)
-
-> NOTE: If you want to be more fast goto step by step in this documentation
-> <a href="#step-by-step">Step by Step</a>
 
 
 ## 🔖 Containers Versions
 
-| Component     | Version  | Status |
-|---------------|----------|--------|
-| OpenTelemetry | 0.118.0  | OK     |
-| Prometheus    | v3.3.1   | OK     |
-| Grafana       | 12.0.0   | OK     |
-| Loki          | 3.2.0    | OK     |
-| Tempo         | 2.7.2    | OK     |
-| OpenSearch    | 2.15.0   | OK     |
-| DataPrepper   | 2.7.0    | OK     |
-| Jaeger        | 1.69.0   | OK     |
-| Zipkin        | 3.5.1    | OK     |
-| Elasticsearch | 7.9.2    | OK     |
-| Logstash      | 7.9.2    | OK     |
-| Kibana        | 7.9.2    | OK     |
-| Browser       | v25.04.1 | OK     |
+| Component       | Version  | Status |
+|-----------------|----------|--------|
+| Firefox Browser | v25.04.1 | OK     |
+| OpenTelemetry   | 0.118.0  | OK     |
+| Elasticsearch   | 7.9.2    | OK     |
+| Logstash        | 7.9.2    | OK     |
+| Kibana          | 7.9.2    | OK     |
+| Grafana         | 12.0.0   | OK     |
+| Loki            | 3.2.0    | OK     |
+| Tempo           | 2.7.2    | OK     |
+| Jaeger          | 1.69.0   | OK     |
+| Zipkin          | 3.5.1    | OK     |
+| Prometheus      | v3.3.1   | OK     |
+| OpenSearch      | 2.15.0   | OK     |
+| DataPrepper     | 2.12.0   | OK     |
 
 
 ## 🔖 Scenarios
 
-| #  | Scenario                                                           | Method | Status |
-|----|--------------------------------------------------------------------|--------|--------|
-| 1  | OpenTelemetry[Forward] > OpenTelemetry[Elasticsearch] > Kibana     | HTTP   | OK     |
-| 2  | OpenTelemetry[Forward] > OpenTelemetry[Elasticsearch] > Zipkin     | HTTP   | OK     |
-| 3  | OpenTelemetry[Forward] > OpenTelemetry[Elasticsearch] > Prometheus | OTLP   | OK     |
-| 4  | OpenTelemetry[Forward] > Logstash > Elasticsearch > Kibana         | SYSLOG | OK     |
-| 5  | OpenTelemetry[Forward] > Logstash > Elasticsearch > Kibana         | HTTP   | OK     |
-| 6  | OpenTelemetry[Forward] > OpenTelemetry[Opensearch] > Loki          |        |        |
-| 7  | OpenTelemetry[Forward] > OpenTelemetry[Opensearch] > Tempo         |        |        |
-| 8  | OpenTelemetry[Forward] > OpenTelemetry[Opensearch] > Jaeger        |        |        |
-| 9  | OpenTelemetry[Forward] > OpenTelemetry[Opensearch] > Opensearch    |        |        |
-| 10 | OpenTelemetry[Forward] > OpenTelemetry[Opensearch] > DataPrepper   |        |        |
-| 11 | OpenTelemetry[Forward] > Logstash > Opensearch                     | HTTP   |        |
-| 11 | OpenTelemetry[Forward] > OpenTelemetry[Opensearch]                 |        |        |
+| #  | Scenario                                                    | Protocol  | Status | Generator           |
+|----|-------------------------------------------------------------|-----------|--------|---------------------|
+| 1  | OTEL[Forward] > OTEL[Elasticsearch] > Kibana                | HTTP      | ✅ OK   |                     |
+| 2  | OTEL[Forward] > OTEL[Elasticsearch] > Zipkin                | ZIPKIN    | ✅ OK   | span-generate.sh    |
+| 3  | OTEL[Forward] > OTEL[Elasticsearch] > Prometheus            | OTLP      | ✅ OK   | metrics-generate.sh |
+| 4  | OTEL[Forward] > Logstash(syslog) > Elasticsearch > Kibana   | UDP       | ✅ OK   |                     |
+| 5  | OTEL[Forward] > Logstash(http) > Elasticsearch > Kibana     | HTTP      | ✅ OK   |                     |
+| 6  | OTEL[Forward] > Logstash(http) > Opensearch                 | HTTP      | ✅ OK   | logs-generate.sh    |
+| 7  | OTEL[Forward] > OTEL[Opensearch] > Loki                     | HTTP      | ✅ OK   | logs-generate.sh    | 
+| 8  | OTEL[Forward] > OTEL[Opensearch] > Tempo                    | OTLP      | ✅ OK   | span-generate.sh    |
+| 9  | OTEL[Forward] > OTEL[Opensearch] > Jaeger                   | OTLPHTTP  | ✅ OK   | span-generate.sh    | 
+| 10 | OTEL[Forward] > OTEL[Opensearch] > Opensearch               |           | ⚠️ NOK |                     |
+| 11 | OTEL[Forward] > OTEL[Opensearch] > DataPrepper > Opensearch | OTLPHTTP  | ✅ OK   | logs-generate.sh    |
+
 
 ✅ Organização do Ambiente — Observabilidade x Ferramenta
 
