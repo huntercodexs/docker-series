@@ -259,7 +259,7 @@ services:
             - ./data-prepper/data-prepper-log4j2.properties:/usr/share/data-prepper/config/log4j2.properties:ro
             - ./opensearch/certs/:/usr/share/certs/opensearch/
         environment:
-            OPENSEARCH_HOSTS: '["https://node-0.example.com:9200"]'
+            OPENSEARCH_HOSTS: '["8"]'
         ports:
             - "21890:21890"
             - "21891:21891"

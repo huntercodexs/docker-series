@@ -1,0 +1,65 @@
+@startuml
+!theme blueprint
+
+actor Applications as App
+
+component "OpenTelemetry Collector Forward" as OtelForward
+component "OpenTelemetry Collector Opensearch" as OtelOpensearch
+component "Logstash" as Logstash
+component "OpenTelemetry Collector Elasticsearch" as OtelElasticsearch
+component "S3" as S3
+component "Kafka" as Kafka
+component "OpenSearch2" as OpenSearch2
+
+database "Jaeger" as Jaeger
+database "Loki" as Loki
+database "Tempo" as Tempo
+
+component "DataPrepper" as DataPrepper
+database "OpenSearch" as OpenSearch
+
+database "Elasticsearch" as Elasticsearch
+database "Prometheus" as Prometheus
+database "Zipkin" as Zipkin
+
+
+component "Jaeger Panel" as JaegerPanel
+component "Grafana" as Grafana
+component "OpenSearch Dashboads" as OpenSearchDashboads
+component "Kibana" as Kibana
+component "Prometheus Panel" as PrometheusPanel
+component "Zipkin Panel" as ZipkinPanel
+
+App --> OtelForward : Send OTLP (logs, metrics, traces)
+
+OtelForward --> OtelOpensearch : Export OTLP
+OtelOpensearch --> Jaeger : Export traces
+OtelOpensearch --> Loki : Export logs
+OtelOpensearch --> Tempo : Export traces
+OtelOpensearch --> OpenSearch : Export logs/metrics/traces
+OtelOpensearch --> DataPrepper : Export logs
+DataPrepper --> OpenSearch : Export logs
+OpenSearch --> OpenSearchDashboads : logs
+
+Jaeger --> JaegerPanel : Export traces
+Loki --> Grafana : logs
+Tempo --> Grafana : traces
+
+OtelForward --> Logstash : Export logs via Syslog RFC5424
+Logstash --> Elasticsearch : Send logs (Syslog)
+Logstash --> Elasticsearch : Send logs (HTTP)
+Logstash --> OpenSearch : Send logs (HTTP)
+Logstash ..> S3 : [Samples]
+Logstash ..> Kafka : [Samples]
+Logstash ..> OpenSearch2 : [Samples]
+
+OtelForward --> OtelElasticsearch : Export OTLP
+OtelElasticsearch --> Elasticsearch : Export logs/metrics/traces
+OtelElasticsearch --> Prometheus : Export metrics
+OtelElasticsearch --> Zipkin : Export traces
+
+Elasticsearch --> Kibana : logs/metrics/traces
+Prometheus --> PrometheusPanel : metrics
+Zipkin --> ZipkinPanel : traces
+
+@enduml
