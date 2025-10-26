@@ -1,5 +1,11 @@
 # SONARQUBE
 
+> IMPORTANT: This work was tested using the following versions
+ 
+| Item    | Version | Build  | Description        | Operational System |
+|---------|---------|--------|--------------------|--------------------|
+| 1       | 9.9.8   | 100196 | Community Edition  | Linux              |
+
 - How to run sonarqube from this project use
 
 <pre>
@@ -33,7 +39,7 @@ Password: admin
 ## Usage
 
 After you make login in the Sonar UI Form, you can follow these steps below to achieve a good and satisfactory usage 
-of this amazing and powered tools for code quality, just read with attention and enjoy.
+of this amazing and powerful tools for code quality, just read with attention and enjoy.
 
 ### ✅ Step 1: Create a Global Token
 
@@ -46,7 +52,7 @@ Under “Generate Tokens”:
     Click “Generate”
     Copy and save the token immediately (you won’t see it again)
     
-Example: sqa_912c6e493d5c9527a6c855e714de03ac41c82509
+Example: sqa_753b0f09b0b8ca51d78251912cdfa48e0ccf0377
 </pre>
 
 ![token-generate.png](token-generate.png)
@@ -177,7 +183,7 @@ mvn clean verify sonar:sonar -Dsonar.projectKey=simple-api-demo -Dsonar.host.url
 <pre>
 mvn -V org.jacoco:jacoco-maven-plugin:prepare-agent test org.jacoco:jacoco-maven-plugin:report compile install org.sonarsource.scanner.maven:sonar-maven-plugin:3.5.0.1254:sonar -Dsonar.profile={Java-Profile-Sample} -Dsonar.log.level=INFO -Dbranch={PROJECT-BRANCH-GIT} -Dsonar.projectKey={PROJECT-KEY-NAME-IN-SONAR-DASHBOARD} -Dsonar.projectName={PROJECT-NAME-IN-SONAR-DASHBOARD} -Dsonar.host.url=http://localhost:39000 -Dsonar.login={LOGIN-TOKEN}
 
-# Example
+# Example1
 mvn -V org.jacoco:jacoco-maven-plugin:prepare-agent test org.jacoco:jacoco-maven-plugin:report compile install org.sonarsource.scanner.maven:sonar-maven-plugin:3.5.0.1254:sonar 
 -Dsonar.profile=HuntercodexsJava 
 -Dsonar.log.level=INFO 
@@ -186,9 +192,21 @@ mvn -V org.jacoco:jacoco-maven-plugin:prepare-agent test org.jacoco:jacoco-maven
 -Dsonar.projectName=simple-api-demo 
 -Dsonar.host.url=http://localhost:39000 
 -Dsonar.login=sqa_912c6e493d5c9527a6c855e714de03ac41c82509
+
+# Example2
+mvn -V org.jacoco:jacoco-maven-plugin:prepare-agent test org.jacoco:jacoco-maven-plugin:report compile install org.sonarsource.scanner.maven:sonar-maven-plugin:3.7.0.1746:sonar  
+-Dsonar.profile=HuntercodexsJava  
+-Dsonar.log.level=INFO  
+-Dbranch=pipeline-release  
+-Dsonar.projectKey=simple-api-demo  
+-Dsonar.projectName=simple-api-demo  
+-Dsonar.host.url=http://localhost:39000  
+-Dsonar.login=sqa_5654448d73d6552f6f36568e8f9ecd9dfb8868a2
 </pre>
 
 ## Java Project Example
+
+> Reference Project: https://github.com/huntercodexs/simple-api-demo
 
 To use sonarqube ain java projects you can follow the steps bellow:
 
@@ -240,7 +258,14 @@ To use sonarqube ain java projects you can follow the steps bellow:
 > TIP: In this case you do not need to include the plugins mentioned above (sonar-maven-plugin and jacoco-maven-plugin)
 
 ```shell
-mvn -V org.jacoco:jacoco-maven-plugin:prepare-agent test org.jacoco:jacoco-maven-plugin:report compile install org.sonarsource.scanner.maven:sonar-maven-plugin:3.7.0.1746:sonar  -Dsonar.profile=HuntercodexsJava  -Dsonar.log.level=INFO  -Dbranch=pipeline-release  -Dsonar.projectKey=simple-api-demo  -Dsonar.projectName=simple-api-demo  -Dsonar.host.url=http://localhost:39000  -Dsonar.login=sqa_912c6e493d5c9527a6c855e714de03ac41c82509
+mvn -V org.jacoco:jacoco-maven-plugin:prepare-agent test org.jacoco:jacoco-maven-plugin:report compile install org.sonarsource.scanner.maven:sonar-maven-plugin:3.7.0.1746:sonar  
+-Dsonar.profile=HuntercodexsJava  
+-Dsonar.log.level=INFO  
+-Dbranch=pipeline-release  
+-Dsonar.projectKey=simple-api-demo  
+-Dsonar.projectName=simple-api-demo  
+-Dsonar.host.url=http://localhost:39000  
+-Dsonar.login=sqa_912c6e493d5c9527a6c855e714de03ac41c82509
 ```
 
 or 
@@ -250,6 +275,8 @@ mvn clean verify sonar:sonar -Dsonar.projectKey=simple-api-demo -Dsonar.host.url
 ```
 
 ## Troubleshooting
+
+> For Linux
 
 If any problem occurs, for example the error below
 
