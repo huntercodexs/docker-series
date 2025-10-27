@@ -2,9 +2,13 @@
 
 > IMPORTANT: This work was tested using the following versions
  
-| Item    | Version | Build  | Description        | Operational System |
-|---------|---------|--------|--------------------|--------------------|
-| 1       | 9.9.8   | 100196 | Community Edition  | Linux              |
+| Item | Version       | Build  | Description        | Operational System | URL                    |
+|------|---------------|--------|--------------------|--------------------|------------------------|
+| 1    | lts-community |        | Community Edition  | Linux / Windows    | http://localhost:39000 |
+| 2    | 6.7           |        | Community Edition  | Linux / Windows    | http://localhost:39001 |
+| 3    | 9.7           |        | Community Edition  | Linux / Windows    | http://localhost:39002 |
+| 4    | 9.9.8         | 100196 | Community Edition  | Linux / Windows    | http://localhost:39003 |
+| 5    | 24.12.0       | 100206 | Community Edition  | Linux / Windows    | http://localhost:39004 |
 
 - How to run sonarqube from this project use
 
@@ -14,6 +18,24 @@ user@host:/home/user$ cd docker-series/self-containers/sonar
 user@host:/home/user/docker-series/self-containers/sonar$ docker-compose up --build
 user@host:/home/user/docker-series/self-containers/sonar$ docker-compose start
 </pre>
+
+The expected result for this sonar docker configuration repository is something like below
+
+```text
+     Name                    Command               State                     Ports                   
+-----------------------------------------------------------------------------------------------------
+sonar_db24120_1   docker-entrypoint.sh postgres    Up      5432/tcp                                  
+sonar_db67_1      docker-entrypoint.sh postgres    Up      5432/tcp                                  
+sonar_db97_1      docker-entrypoint.sh postgres    Up      5432/tcp                                  
+sonar_db998_1     docker-entrypoint.sh postgres    Up      5432/tcp                                  
+sonar_db_1        docker-entrypoint.sh postgres    Up      5432/tcp                                  
+sonarqube         /opt/sonarqube/docker/entr ...   Up      0.0.0.0:39000->9000/tcp,:::39000->9000/tcp
+sonarqube24120    /opt/sonarqube/docker/entr ...   Up      0.0.0.0:39004->9000/tcp,:::39004->9000/tcp
+sonarqube67       ./bin/run.sh                     Up      0.0.0.0:39001->9000/tcp,:::39001->9000/tcp
+sonarqube97       /opt/sonarqube/bin/run.sh  ...   Up      0.0.0.0:39002->9000/tcp,:::39002->9000/tcp
+sonarqube998      /opt/sonarqube/docker/entr ...   Up      0.0.0.0:39003->9000/tcp,:::39003->9000/tcp
+
+```
 
 ## Plugins
 
@@ -26,7 +48,7 @@ https://github.com/dependency-check/dependency-check-sonar-plugin/releases/downl
 
 ## Access
 
-http://localhost:39000
+Use the table above to access each docker using the respective version
 <pre>
 Login: admin
 Password: admin
@@ -165,7 +187,7 @@ If you want a specific project to use this profile:
 You can pass the token directly via the command line:
 
 <pre>
-mvn clean verify sonar:sonar -Dsonar.projectKey=simple-api-demo -Dsonar.host.url=http://localhost:39000 -Dsonar.login=sqa_912c6e493d5c9527a6c855e714de03ac41c82509
+mvn clean verify sonar:sonar -Dsonar.projectKey=simple-api-demo -Dsonar.host.url=http://localhost:3900[0-4] -Dsonar.login=sqa_912c6e493d5c9527a6c855e714de03ac41c82509
 </pre>
 
 Replace YOUR_TOKEN_HERE with your generated token.
@@ -175,13 +197,13 @@ Replace YOUR_TOKEN_HERE with your generated token.
 - Example 1
 
 <pre>
-mvn clean verify sonar:sonar -Dsonar.projectKey=simple-api-demo -Dsonar.host.url=http://localhost:39000 -Dsonar.login=sqa_912c6e493d5c9527a6c855e714de03ac41c82509
+mvn clean verify sonar:sonar -Dsonar.projectKey=simple-api-demo -Dsonar.host.url=http://localhost:3900[0-4] -Dsonar.login=sqa_912c6e493d5c9527a6c855e714de03ac41c82509
 </pre>
 
 - Example 2
 
 <pre>
-mvn -V org.jacoco:jacoco-maven-plugin:prepare-agent test org.jacoco:jacoco-maven-plugin:report compile install org.sonarsource.scanner.maven:sonar-maven-plugin:3.5.0.1254:sonar -Dsonar.profile={Java-Profile-Sample} -Dsonar.log.level=INFO -Dbranch={PROJECT-BRANCH-GIT} -Dsonar.projectKey={PROJECT-KEY-NAME-IN-SONAR-DASHBOARD} -Dsonar.projectName={PROJECT-NAME-IN-SONAR-DASHBOARD} -Dsonar.host.url=http://localhost:39000 -Dsonar.login={LOGIN-TOKEN}
+mvn -V org.jacoco:jacoco-maven-plugin:prepare-agent test org.jacoco:jacoco-maven-plugin:report compile install org.sonarsource.scanner.maven:sonar-maven-plugin:3.5.0.1254:sonar -Dsonar.profile={Java-Profile-Sample} -Dsonar.log.level=INFO -Dbranch={PROJECT-BRANCH-GIT} -Dsonar.projectKey={PROJECT-KEY-NAME-IN-SONAR-DASHBOARD} -Dsonar.projectName={PROJECT-NAME-IN-SONAR-DASHBOARD} -Dsonar.host.url=http://localhost:3900[0-4] -Dsonar.login={LOGIN-TOKEN}
 
 # Example1
 mvn -V org.jacoco:jacoco-maven-plugin:prepare-agent test org.jacoco:jacoco-maven-plugin:report compile install org.sonarsource.scanner.maven:sonar-maven-plugin:3.5.0.1254:sonar 
@@ -190,7 +212,7 @@ mvn -V org.jacoco:jacoco-maven-plugin:prepare-agent test org.jacoco:jacoco-maven
 -Dbranch=pipeline-release 
 -Dsonar.projectKey=simple-api-demo 
 -Dsonar.projectName=simple-api-demo 
--Dsonar.host.url=http://localhost:39000 
+-Dsonar.host.url=http://localhost:3900[0-4] 
 -Dsonar.login=sqa_912c6e493d5c9527a6c855e714de03ac41c82509
 
 # Example2
@@ -200,7 +222,7 @@ mvn -V org.jacoco:jacoco-maven-plugin:prepare-agent test org.jacoco:jacoco-maven
 -Dbranch=pipeline-release  
 -Dsonar.projectKey=simple-api-demo  
 -Dsonar.projectName=simple-api-demo  
--Dsonar.host.url=http://localhost:39000  
+-Dsonar.host.url=http://localhost:3900[0-4]  
 -Dsonar.login=sqa_5654448d73d6552f6f36568e8f9ecd9dfb8868a2
 </pre>
 
@@ -264,14 +286,14 @@ mvn -V org.jacoco:jacoco-maven-plugin:prepare-agent test org.jacoco:jacoco-maven
 -Dbranch=pipeline-release  
 -Dsonar.projectKey=simple-api-demo  
 -Dsonar.projectName=simple-api-demo  
--Dsonar.host.url=http://localhost:39000  
+-Dsonar.host.url=http://localhost:3900[0-4]  
 -Dsonar.login=sqa_912c6e493d5c9527a6c855e714de03ac41c82509
 ```
 
 or 
 
 ```shell
-mvn clean verify sonar:sonar -Dsonar.projectKey=simple-api-demo -Dsonar.host.url=http://localhost:39000 -Dsonar.login=sqa_912c6e493d5c9527a6c855e714de03ac41c82509
+mvn clean verify sonar:sonar -Dsonar.projectKey=simple-api-demo -Dsonar.host.url=http://localhost:3900[0-4] -Dsonar.login=sqa_912c6e493d5c9527a6c855e714de03ac41c82509
 ```
 
 ## Troubleshooting
