@@ -1,75 +1,79 @@
 version: "3.7"
 services:
-    
+
     #----------------------------------------------------------------------------------------
-    zookeeper-3.9:
-        image: docker.io/bitnami/zookeeper:3.9
-        container_name: ${ZOOKEEPER_VERSION}
-        ports:
-            - ${ZOOKEEPER_PORT}:2181
-        volumes:
-            - ./shared/:/home/shared/
-            - ./data_zookeeper:/bitnami
-        environment:
-            - ALLOW_ANONYMOUS_LOGIN=yes
-        networks:
-            - default
-            - open_network
-    #----------------------------------------------------------------------------------------
-    kafka-3.4:
+    zookeeper-7.6.0:
         env_file: .env
-        image: docker.io/bitnami/kafka:3.4
-        container_name: ${KAFKA_VERSION}
+        image: confluentinc/cp-zookeeper:7.6.0
+        container_name: zookeeper-7.6.0
         ports:
-            - ${KAFKA_PORT}:9092
-            - ${KAFKA_EXTERNAL_PORT}:9094
+            - ${CUSTOM_ZOOKEEPER_PORT}:2181
         environment:
-            - KAFKA_CFG_NODE_ID=${BROKER_ID}
-            - KAFKA_KRAFT_CLUSTER_ID=
-            - KAFKA_CFG_PROCESS_ROLES=controller,broker
-            - KAFKA_INTER_BROKER_USER=${KAFKA_DEFAULT_USER}
-            - KAFKA_CFG_CONTROLLER_LISTENER_NAMES=CONTROLLER
-            - KAFKA_INTER_BROKER_PASSWORD=${KAFKA_DEFAULT_PASS}
-            - KAFKA_CFG_ZOOKEEPER_METADATA_MIGRATION_ENABLE=true
-            - KAFKA_CFG_ZOOKEEPER_CONNECT=${ZOOKEEPER_VERSION}:2181
-            - KAFKA_CFG_CONTROLLER_QUORUM_VOTERS=${BROKER_ID}@${KAFKA_VERSION}:9093
-            - KAFKA_CFG_LISTENERS=PLAINTEXT://:9092,CONTROLLER://:9093,EXTERNAL://:9094
-            - KAFKA_CFG_ADVERTISED_LISTENERS=PLAINTEXT://localhost:9092,EXTERNAL://${KAFKA_VERSION}:9094
-            - KAFKA_CFG_LISTENER_SECURITY_PROTOCOL_MAP=CONTROLLER:PLAINTEXT,EXTERNAL:PLAINTEXT,PLAINTEXT:PLAINTEXT
-        privileged: true
-        tty: true
+            ALLOW_ANONYMOUS_LOGIN: "yes"
+            ZOOKEEPER_CLIENT_PORT: 2181
+            ZOOKEEPER_TICK_TIME: 2000
         volumes:
+            - zookeeper_vol:/bitnami
             - ./shared/:/home/shared/
-            - ./data_kafka:/bitnami
         networks:
             - default
             - open_network
-        depends_on:
-            - ${ZOOKEEPER_VERSION}
     #----------------------------------------------------------------------------------------
-    kafka-ui:
-        image: provectuslabs/kafka-ui:master
-        container_name: kafka-ui
+    kafka-7.6.0:
+        env_file: .env
+        image: confluentinc/cp-kafka:7.6.0
+        container_name: kafka-7.6.0
+        ports:
+            - ${CUSTOM_KAFKA_PORT}:9092
+            - ${CUSTOM_KAFKA_EXTERNAL_PORT}:9094
+        environment:
+            KAFKA_BROKER_ID: 1
+            KAFKA_ZOOKEEPER_CONNECT: zookeeper-7.6.0:2181
+            KAFKA_ADVERTISED_LISTENERS: PLAINTEXT://kafka-7.6.0:9092,EXTERNAL://localhost:9094
+            KAFKA_LISTENER_SECURITY_PROTOCOL_MAP: PLAINTEXT:PLAINTEXT,EXTERNAL:PLAINTEXT
+            KAFKA_LISTENERS: PLAINTEXT://0.0.0.0:9092,EXTERNAL://0.0.0.0:9094
+            KAFKA_INTER_BROKER_LISTENER_NAME: PLAINTEXT
         privileged: true
         tty: true
-        ports:
-            - ${KAFKA_UI_PORT}:8080
-        environment:
-            - KAFKA_CLUSTERS_0_NAME=local
-            - KAFKA_CLUSTERS_0_ZOOKEEPER=${ZOOKEEPER_VERSION}:2181
-            - KAFKA_CLUSTERS_0_BOOTSTRAP_SERVERS=${KAFKA_VERSION}:9094
         volumes:
+            - kafka_vol:/bitnami
             - ./shared/:/home/shared/
-            - ./data_kafka_ui:/kafka-ui/
+        depends_on:
+            - zookeeper-7.6.0
         networks:
             - default
             - open_network
+    #----------------------------------------------------------------------------------------
+    kafka-ui-0.7.2:
+        env_file: .env
+        image: provectuslabs/kafka-ui:v0.7.2
+        container_name: kafka-ui-0.7.2
+        ports:
+            - ${CUSTOM_KAFKA_UI_PORT}:8080
+        environment:
+            KAFKA_CLUSTERS_0_NAME: local
+            KAFKA_CLUSTERS_0_BOOTSTRAPSERVERS: kafka-7.6.0:9092
+            KAFKA_CLUSTERS_0_ZOOKEEPER: zookeeper-7.6.0:2181
+            KAFKA_CLUSTERS_0_BOOTSTRAP_SERVERS: kafka-7.6.0:9094
+        privileged: true
+        tty: true
+        volumes:
+            - kafka_ui_vol:/kafka-ui/
+            - ./shared/:/home/shared/
         depends_on:
-            - ${KAFKA_VERSION}
-            - ${ZOOKEEPER_VERSION}
+            - kafka-7.6.0
+            - zookeeper-7.6.0
+        networks:
+            - default
+            - open_network
     #----------------------------------------------------------------------------------------
 
 networks:
     open_network:
         external: true
+
+volumes:
+    kafka_vol:
+    kafka_ui_vol:
+    zookeeper_vol:
 
