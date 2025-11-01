@@ -16,6 +16,7 @@ The helpful repository for all databases
 - SQLite3
 - Redis
 - H2
+- DB2
 
 # Usage
 
@@ -42,6 +43,7 @@ oraclelinux     /bin/sh -c exec $ORACLE_BA ...   Up (healthy)   0.0.0.0:1521->15
 postgres        docker-entrypoint.sh postgres    Up             0.0.0.0:5432->5432/tcp,:::5432->5432/tcp                                                                                            
 redis           docker-entrypoint.sh redis ...   Up             0.0.0.0:6379->6379/tcp,:::6379->6379/tcp                                                                                            
 sqlite3         bash                             Up             0.0.0.0:31050->5050/tcp,:::31050->5050/tcp 
+db2             /var/db2_setup/lib/setup_d ...   Up (healthy    22/tcp, 0.0.0.0:50000->50000/tcp,:::50000->50000/tcp, 55000/tcp, 60006/tcp, 60007/tcp
 </pre>
 
 # Documentation and Support
@@ -578,4 +580,38 @@ sqlite> SELECT * FROM users;
 1|John Smith Wiz
 sqlite> .quit
 </pre>
+
+<h3>DB2</h3>
+
+Information
+
+```properties
+jdbc:db2://localhost:50000/testdb
+Driver Maven: com.ibm.db2:jcc
+Classe driver: com.ibm.db2.jcc.DB2Driver
+```
+
+Connection example
+
+```properties
+spring.datasource.url=jdbc:db2://localhost:50000/testdb
+spring.datasource.username=db2inst1
+spring.datasource.password=db2inst1
+spring.datasource.driver-class-name=com.ibm.db2.jcc.DB2Driver
+spring.jpa.hibernate.ddl-auto=update
+```
+
+Database commands
+
+```
+create table employees (id int, name varchar(100), department varchar(50));
+
+insert into DB2INST1.employees values (1, 'Laura', 'Engineering'), (2, 'Isaac', 'Finance');
+
+select * from DB2INST1.employees;
+```
+
+![db2-sample-connection-and-commands.png](databases/midias/db2-sample-connection-and-commands.png)
+
+
 
