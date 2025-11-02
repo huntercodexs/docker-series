@@ -286,7 +286,8 @@ user@host:/home/user/docker-series/self-containers/apache2$ docker-compose start
   - <a href="https://github.com/huntercodexs/docker-series/tree/master/self-containers/rpm/redhat">Redhat</a> ![img.png](./self-containers/files/midias/check-green.png)
   - <a href="https://github.com/huntercodexs/docker-series/tree/master/self-containers/rpm/rockylinux">Rockylinux</a> ![img.png](./self-containers/files/midias/check-green.png)
 - <a href="https://github.com/huntercodexs/docker-series/tree/master/self-containers/messenger">Message Broker</a>
-  - <a href="https://github.com/huntercodexs/docker-series/tree/master/self-containers/messenger/kafka-3.4">Kafka 3.4 (Bitnami)</a> ![img.png](./self-containers/files/midias/check-green.png)
+  - <a href="https://github.com/huntercodexs/docker-series/tree/master/self-containers/messenger/kafka-7.6.0">Kafka 7.6.0 (Kafka)</a> ![img.png](./self-containers/files/midias/check-green.png)
+  - <a href="https://github.com/huntercodexs/docker-series/tree/master/self-containers/messenger/kafka-7.6.0-security">Kafka 7.6.0 Security (Kafka)</a> ![img.png](./self-containers/files/midias/check-green.png)
   - <a href="https://github.com/huntercodexs/docker-series/tree/master/self-containers/messenger/rabbitmq-3.6.10">RabbitMQ 3.6.10 (Amazonlinux)</a> ![img.png](./self-containers/files/midias/check-green.png)
   - <a href="https://github.com/huntercodexs/docker-series/tree/master/self-containers/messenger/rabbitmq-3.9.8">RabbitMQ 3.9.8 (Official)</a> ![img.png](./self-containers/files/midias/check-green.png)
   - <a href="https://github.com/huntercodexs/docker-series/tree/master/self-containers/messenger/rabbitmq-3.12.12">RabbitMQ 3.12.12 (Official)</a> ![img.png](./self-containers/files/midias/check-green.png)
