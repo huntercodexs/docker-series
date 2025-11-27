@@ -4,19 +4,28 @@ The helpful repository for all databases
 
 ![banner.png](databases/midias/banner.png)
 
+
+> NOTE: You can find samples java spring boot projects for all databases in the github repository: 
+> https://github.com/huntercodexs/java-persistence-project-jpa-sample
+
+
 # Summary
 
-- Firebird
-- Oracle
-- Mssql
-- Mysql 5.7
-- Mysql 8.0
-- Postgres
-- MongoDB
-- SQLite3
-- Redis
-- H2
-- DB2
+
+| Database Name | Version   | Status | Details                        |
+|---------------|-----------|--------|--------------------------------|
+| Firebird      | 3.0       | ✅ OK   |                                |
+| Oracle        | 193000    | ✅ OK   | Linux.x64_193000_db_home       |
+| Mssql         |           | ✅ OK   | 2019-latest                    |
+| Mysql         | 5.7       | ✅ OK   |                                |
+| Mysql         | 8.0       | ✅ OK   |                                |
+| Postgres      |           | ✅ OK   | latest                         |
+| MongoDB       |           | ✅ OK   | latest                         |
+| SQLite3       | 3         | ✅ OK   |                                |
+| Redis         |           | ✅ OK   | latest                         |
+| H2            |           | ✅ OK   | version-2.1.214 (Linux Ubuntu) |
+| DB2           | 11.5.8.0  | ✅ OK   |                                |
+
 
 # Usage
 
