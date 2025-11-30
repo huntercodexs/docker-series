@@ -83,7 +83,9 @@ services:
             ### => SASL credentials
             KAFKA_CLUSTERS_0_PROPERTIES_SECURITY_PROTOCOL: SASL_PLAINTEXT
             KAFKA_CLUSTERS_0_PROPERTIES_SASL_MECHANISM: PLAIN
-            KAFKA_CLUSTERS_0_PROPERTIES_SASL_JAAS_CONFIG: org.apache.kafka.common.security.plain.PlainLoginModule required username="${CUSTOM_KAFKA_DEFAULT_USER}" password="${CUSTOM_KAFKA_DEFAULT_PASS}";
+            KAFKA_CLUSTERS_0_PROPERTIES_SASL_JAAS_CONFIG: >
+                org.apache.kafka.common.security.plain.PlainLoginModule required 
+                username="${CUSTOM_KAFKA_DEFAULT_USER}" password="${CUSTOM_KAFKA_DEFAULT_PASS}";
 
             ### => Form Login Authentication
             AUTH_TYPE: LOGIN_FORM
