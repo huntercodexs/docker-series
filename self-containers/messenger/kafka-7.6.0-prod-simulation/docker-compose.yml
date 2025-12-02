@@ -3,53 +3,70 @@ services:
 
     #----------------------------------------------------------------------------------------
     zookeeper-7.6.0-prod-simulation:
+        env_file: .env
         image: confluentinc/cp-zookeeper:7.6.0
         container_name: zookeeper-7.6.0-prod-simulation
+        hostname: zookeeper-7.6.0-prod-simulation
         ports:
-            - "2181:2181"
+            - ${CUSTOM_ZOOKEEPER_PORT}:2181
         environment:
             #ALLOW_ANONYMOUS_LOGIN: "yes"
             ZOOKEEPER_CLIENT_PORT: 2181
             ZOOKEEPER_TICK_TIME: 2000
 
             ### => Security
+            #ZOOKEEPER_REQUIRE_CLIENT_AUTH_SCHEME: SASL
             ZOOKEEPER_AUTH_PROVIDER_SASL: org.apache.zookeeper.server.auth.SASLAuthenticationProvider
             ZOOKEEPER_REQUIRE_CLIENT_AUTH_SCHEME: SASL
             JVMFLAGS: "-Djava.security.auth.login.config=/etc/zookeeper/secrets/zookeeper_jaas.conf"
             JAVA_TOOL_OPTIONS: "-Djava.security.auth.login.config=/etc/zookeeper/secrets/zookeeper_jaas.conf"
+        privileged: true
+        tty: true
         volumes:
+            - zookeeper-7.6.0-prod-simulation_vol:/zookeeper/
             - ./security/secrets:/etc/zookeeper/secrets:ro
+            - ./shared/zookeeper/:/home/shared/
         networks:
-            - default
-            - open_network
+            default:
+            open_network:
+            internal_network:
+                ipv4_address: ${ZOOKEEPER_IP}
     #----------------------------------------------------------------------------------------
     kafka-7.6.0-prod-simulation:
+        env_file: .env
         image: confluentinc/cp-kafka:7.6.0
         container_name: kafka-7.6.0-prod-simulation
+        hostname: kafka-7.6.0-prod-simulation
         ports:
-            - "29092:29092"
-            - "9092:9092"
+            - ${CUSTOM_KAFKA_PORT}:29092
+            - ${CUSTOM_KAFKA_EXTERNAL_PORT}:9092
+            - ${CUSTOM_KAFKA_JMX_PORT}:9101
         environment:
+            ### => SSL Settings
+            KAFKA_SSL_ENDPOINT_IDENTIFICATION_ALGORITHM: ""
+            KAFKA_SSL_KEYSTORE_FILENAME: broker.keystore.jks
+            KAFKA_SSL_TRUSTSTORE_FILENAME: broker.truststore.jks
+            KAFKA_SSL_KEYSTORE_LOCATION: /etc/kafka/secrets/broker.keystore.jks
+            KAFKA_SSL_KEYSTORE_PASSWORD: changeit
+            KAFKA_SSL_TRUSTSTORE_LOCATION: /etc/kafka/secrets/broker.truststore.jks
+            KAFKA_SSL_TRUSTSTORE_PASSWORD: changeit
+            KAFKA_SSL_KEY_PASSWORD: changeit
+            KAFKA_SSL_KEYSTORE_TYPE: JKS
+            KAFKA_SSL_TRUSTSTORE_TYPE: JKS
+            KAFKA_SSL_KEY_CREDENTIALS: key_password
+            KAFKA_SSL_KEYSTORE_CREDENTIALS: keystore_password
+            KAFKA_SSL_TRUSTSTORE_CREDENTIALS: truststore_password
+
             ### => Broker settings
             KAFKA_BROKER_ID: 1
             KAFKA_ZOOKEEPER_SET_ACL: "true"
-            KAFKA_ZOOKEEPER_CONNECT: zookeeper-7.6.0-prod-simulation:2181
+            KAFKA_ZOOKEEPER_CONNECT: 'zookeeper-7.6.0-prod-simulation:2181'
 
             ### => Authentication Implements => SASL/PLAIN
-            KAFKA_LISTENERS: INTERNAL://0.0.0.0:9092,EXTERNAL://0.0.0.0:29092
-            KAFKA_ADVERTISED_LISTENERS: INTERNAL://kafka-7.6.0-prod-simulation:9092,EXTERNAL://0.0.0.0:29092
-            KAFKA_LISTENER_SECURITY_PROTOCOL_MAP: INTERNAL:SASL_SSL,EXTERNAL:SASL_SSL
-            KAFKA_INTER_BROKER_LISTENER_NAME: INTERNAL
-
-            ### => SSL Settings
-            KAFKA_SSL_ENDPOINT_IDENTIFICATION_ALGORITHM: ""
-            KAFKA_SSL_KEYSTORE_LOCATION: /etc/kafka/secrets/broker.keystore.jks
-            KAFKA_SSL_KEYSTORE_PASSWORD: changeit
-            KAFKA_SSL_KEY_PASSWORD: changeit
-            KAFKA_SSL_TRUSTSTORE_LOCATION: /etc/kafka/secrets/broker.truststore.jks
-            KAFKA_SSL_TRUSTSTORE_PASSWORD: changeit
-            KAFKA_SSL_KEYSTORE_TYPE: JKS
-            KAFKA_SSL_TRUSTSTORE_TYPE: JKS
+            KAFKA_LISTENERS: SASL_SSL://0.0.0.0:29092,EXTERNAL://0.0.0.0:9092
+            KAFKA_ADVERTISED_LISTENERS: SASL_SSL://kafka-7.6.0-prod-simulation:29092,EXTERNAL://${CUSTOM_KAFKA_ADVERTISED_HOST:-localhost}:${CUSTOM_KAFKA_EXTERNAL_PORT}
+            KAFKA_LISTENER_SECURITY_PROTOCOL_MAP: SASL_SSL:SASL_SSL,EXTERNAL:SASL_SSL
+            KAFKA_INTER_BROKER_LISTENER_NAME: SASL_SSL
 
             ### => Define the mechanism of authentication SASL
             KAFKA_SASL_ENABLED_MECHANISMS: PLAIN
@@ -60,35 +77,105 @@ services:
             JAVA_TOOL_OPTIONS: "-Djava.security.auth.login.config=/etc/kafka/secrets/server_jaas.conf"
 
             ### => Credentials
-            CUSTOM_KAFKA_DEFAULT_USER: kafka
-            CUSTOM_KAFKA_DEFAULT_PASS: admin_secret
-            CUSTOM_KAFKA_DEFAULT_APP_USER: appuser_secret
+            CUSTOM_KAFKA_DEFAULT_USER: ${CUSTOM_KAFKA_DEFAULT_USER}
+            CUSTOM_KAFKA_DEFAULT_PASS: ${CUSTOM_KAFKA_DEFAULT_PASS}
+            CUSTOM_KAFKA_DEFAULT_APP_USER: ${CUSTOM_KAFKA_DEFAULT_APP_USER}
+
+            ### => Zookeeper SASL settings
+            KAFKA_ZOOKEEPER_SASL_ENABLED: "true"
+            KAFKA_ZOOKEEPER_SASL_CLIENT: "true"
+            KAFKA_ZOOKEEPER_SASL_CLIENT_USERNAME: ${CUSTOM_KAFKA_DEFAULT_USER}
+            KAFKA_ZOOKEEPER_SASL_CLIENT_PASSWORD: ${CUSTOM_KAFKA_DEFAULT_PASS}
+            KAFKA_ZOOKEEPER_SASL_CLIENT_LOGIN_CONTEXT: "Client"
+
+            # Other settings
+            KAFKA_OFFSETS_TOPIC_REPLICATION_FACTOR: 1
+            KAFKA_TRANSACTION_STATE_LOG_MIN_ISR: 1
+            KAFKA_TRANSACTION_STATE_LOG_REPLICATION_FACTOR: 1
+            KAFKA_GROUP_INITIAL_REBALANCE_DELAY_MS: 0
+            KAFKA_JMX_PORT: 9101
         privileged: true
         tty: true
         volumes:
+            - kafka-7.6.0-prod-simulation_vol:/kafka/
             - ./security/secrets:/etc/kafka/secrets:ro
+            - ./shared/kafka/:/home/shared/
         depends_on:
             - zookeeper-7.6.0-prod-simulation
         networks:
-            - default
-            - open_network
+            default:
+            open_network:
+            internal_network:
+                ipv4_address: ${KAFKA_IP}
+    #----------------------------------------------------------------------------------------
+    schema-registry-7.6.0-prod-simulation:
+        env_file: .env
+        image: confluentinc/cp-schema-registry:7.6.0
+        hostname: schema-registry-7.6.0-prod-simulation
+        container_name: schema-registry-7.6.0-prod-simulation
+        ports:
+            - ${CUSTOM_KAFKA_SCHEMA_REGISTRY_PORT}:8081
+        environment:
+            ### => SSL Settings
+            SCHEMA_REGISTRY_KAFKASTORE_SSL_TRUSTSTORE_LOCATION: /etc/kafka/secrets/broker.truststore.jks
+            SCHEMA_REGISTRY_KAFKASTORE_SSL_TRUSTSTORE_PASSWORD: changeit
+            SCHEMA_REGISTRY_KAFKASTORE_SSL_KEYSTORE_LOCATION: /etc/kafka/secrets/broker.keystore.jks
+            SCHEMA_REGISTRY_KAFKASTORE_SSL_KEYSTORE_PASSWORD: changeit
+
+            KAFKA_CLUSTERS_0_NAME: local-sasl-ssl
+
+            SCHEMA_REGISTRY_HOST_NAME: schema-registry-7.6.0-prod-simulation
+            SCHEMA_REGISTRY_KAFKASTORE_BOOTSTRAP_SERVERS: SASL_SSL://kafka-7.6.0-prod-simulation:9092
+            KAFKA_CLUSTERS_0_ZOOKEEPER: zookeeper-7.6.0-prod-simulation:2181
+
+            SCHEMA_REGISTRY_KAFKASTORE_SECURITY_PROTOCOL: SASL_SSL
+            SCHEMA_REGISTRY_KAFKASTORE_SASL_MECHANISM: PLAIN
+            SCHEMA_REGISTRY_KAFKASTORE_SASL_JAAS_CONFIG: >
+                org.apache.kafka.common.security.plain.PlainLoginModule required
+                username="${CUSTOM_KAFKA_DEFAULT_USER}" password="${CUSTOM_KAFKA_DEFAULT_PASS}";
+
+            KAFKA_OPTS: "-Djava.security.auth.login.config=/etc/kafka/secrets/client_jaas.conf"
+            JAVA_TOOL_OPTIONS: "-Djava.security.auth.login.config=/etc/secrets/kafka/client_jaas.conf"
+        privileged: true
+        tty: true
+        volumes:
+            - schema-registry-7.6.0-prod-simulation_vol:/kafka/
+            - ./security/secrets:/etc/kafka/secrets:ro
+            - ./shared/schema/:/home/shared/
+        depends_on:
+            - zookeeper-7.6.0-prod-simulation
+            - kafka-7.6.0-prod-simulation
+        networks:
+            default:
+            open_network:
+            internal_network:
+                ipv4_address: ${SCHEMA_REGISTRY_IP}
     #----------------------------------------------------------------------------------------
     kafka-ui-0.7.2-prod-simulation:
+        env_file: .env
         image: provectuslabs/kafka-ui:v0.7.2
         container_name: kafka-ui-0.7.2-prod-simulation
+        hostname: kafka-ui-0.7.2-prod-simulation
         ports:
-            - "38282:8080"
+            - ${CUSTOM_KAFKA_UI_PORT}:8080
         environment:
+            ### => SSL Settings
+            KAFKA_CLUSTERS_0_PROPERTIES_SSL_TRUSTSTORE_LOCATION: /etc/kafka/secrets/broker.truststore.jks
+            KAFKA_CLUSTERS_0_PROPERTIES_SSL_TRUSTSTORE_PASSWORD: changeit
+            KAFKA_CLUSTERS_0_PROPERTIES_SSL_KEYSTORE_LOCATION: /etc/kafka/secrets/broker.truststore.jks
+            KAFKA_CLUSTERS_0_PROPERTIES_SSL_KEYSTORE_PASSWORD: changeit
+
+            ### => Cluster Settings
             KAFKA_CLUSTERS_0_NAME: local-sasl-ssl
-            KAFKA_CLUSTERS_0_BOOTSTRAP_SERVERS: kafka-7.6.0-prod-simulation:9092
+            KAFKA_CLUSTERS_0_BOOTSTRAP_SERVERS: SASL_SSL://kafka-7.6.0-prod-simulation:9092
             KAFKA_CLUSTERS_0_ZOOKEEPER: zookeeper-7.6.0-prod-simulation:2181
 
             ### => SASL credentials
             KAFKA_CLUSTERS_0_PROPERTIES_SECURITY_PROTOCOL: SASL_SSL
             KAFKA_CLUSTERS_0_PROPERTIES_SASL_MECHANISM: PLAIN
-            KAFKA_CLUSTERS_0_PROPERTIES_SASL_JAAS_CONFIG: org.apache.kafka.common.security.plain.PlainLoginModule required username="kafka" password="admin_secret";
-            KAFKA_CLUSTERS_0_PROPERTIES_SSL_TRUSTSTORE_LOCATION: /etc/kafka/secrets/broker.truststore.jks
-            KAFKA_CLUSTERS_0_PROPERTIES_SSL_TRUSTSTORE_PASSWORD: changeit
+            KAFKA_CLUSTERS_0_PROPERTIES_SASL_JAAS_CONFIG: > 
+                org.apache.kafka.common.security.plain.PlainLoginModule required 
+                username="${CUSTOM_KAFKA_DEFAULT_USER}" password="${CUSTOM_KAFKA_DEFAULT_PASS}";
 
             ### => Form Login Authentication
             AUTH_TYPE: LOGIN_FORM
@@ -97,17 +184,34 @@ services:
         privileged: true
         tty: true
         volumes:
+            - kafka-ui-0.7.2-prod-simulation_vol:/kafka-ui/
             - ./security/secrets:/etc/kafka/secrets:ro
+            - ./shared/ui/:/home/shared/
         depends_on:
             - kafka-7.6.0-prod-simulation
             - zookeeper-7.6.0-prod-simulation
         networks:
-            - default
-            - open_network
+            default:
+            open_network:
+            internal_network:
+                ipv4_address: ${KAFKA_UI_IP}
     #----------------------------------------------------------------------------------------
 
 networks:
     open_network:
         external: true
+    internal_network:
+        external: false
+        internal: true
+        driver: bridge
+        ipam:
+            config:
+                - subnet: 10.0.0.0/16
+
+volumes:
+    zookeeper-7.6.0-prod-simulation_vol:
+    kafka-7.6.0-prod-simulation_vol:
+    schema-registry-7.6.0-prod-simulation_vol:
+    kafka-ui-0.7.2-prod-simulation_vol:
 
 
