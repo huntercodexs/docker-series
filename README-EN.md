@@ -287,7 +287,7 @@ user@host:/home/user/docker-series/self-containers/apache2$ docker-compose start
   - <a href="https://github.com/huntercodexs/docker-series/tree/master/self-containers/rpm/redhat">Redhat</a> ![img.png](./self-containers/files/midias/check-green.png)
   - <a href="https://github.com/huntercodexs/docker-series/tree/master/self-containers/rpm/rockylinux">Rockylinux</a> ![img.png](./self-containers/files/midias/check-green.png)
 - <a href="https://github.com/huntercodexs/docker-series/tree/master/self-containers/messenger">Message Broker</a>
-  - <a href="https://github.com/huntercodexs/docker-series/tree/master/self-containers/messenger/kafka-5.5.1">Kafka 5.5.1</a> ![img.png](./self-containers/files/midias/check-green.png)
+  - <a href="https://github.com/huntercodexs/docker-series/tree/master/self-containers/messenger/kafka-5.5.1-PLAINTEXT">Kafka 5.5.1 PLAINTEXT</a> ![img.png](./self-containers/files/midias/check-green.png)
   - <a href="https://github.com/huntercodexs/docker-series/tree/master/self-containers/messenger/kafka-7.6.0">Kafka 7.6.0</a> ![img.png](./self-containers/files/midias/check-silver.png)
   - <a href="https://github.com/huntercodexs/docker-series/tree/master/self-containers/messenger/kafka-7.6.0-v2">Kafka 7.6.0 v2</a> ![img.png](./self-containers/files/midias/check-green.png)
   - <a href="https://github.com/huntercodexs/docker-series/tree/master/self-containers/messenger/kafka-7.6.0-security">Kafka 7.6.0 Security</a> ![img.png](./self-containers/files/midias/check-silver.png)

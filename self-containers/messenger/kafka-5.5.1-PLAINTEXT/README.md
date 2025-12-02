@@ -30,3 +30,8 @@ https://github.com/huntercodexs/java-spring-boot-kafka-producer
 
 https://github.com/huntercodexs/java-spring-boot-kafka-consumer
 
+Also try this repo with both Producer and Consumer
+
+https://github.com/huntercodexs/java-spring-boot-integration-sample/tree/kafka-5.5.1-PLAINTEXT ***Private***
+
+
