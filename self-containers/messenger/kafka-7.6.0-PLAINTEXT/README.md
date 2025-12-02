@@ -1,5 +1,7 @@
 # APACHE KAFKA 7.0.6
 
+> TODO: Check the error: {kafka-topic-default=LEADER_NOT_AVAILABLE}
+
 - How to run kafka-7.0.6 rpm from this project use
 
 <pre>
@@ -16,3 +18,13 @@ user@host:/home/user/docker-series/self-containers/messenger/kafka-7.0.6$ docker
 <pre>
 user@host:/home/user/docker-series/self-containers/messenger/kafka-7.0.6$ docker exec -it kafka-7.0.6 /bin/bash
 </pre>
+
+- Sample Java Producer/Consumer Code
+
+https://github.com/huntercodexs/java-spring-boot-kafka-producer
+
+https://github.com/huntercodexs/java-spring-boot-kafka-consumer
+
+Also try this repo with both Producer and Consumer
+
+https://github.com/huntercodexs/java-spring-boot-integration-sample/tree/kafka-7.6.0-PLAINTEXT ***Private***
