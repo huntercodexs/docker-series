@@ -3,6 +3,7 @@ This directory contains integration code for various third-party services and pl
 Each subdirectory corresponds to a specific integration and includes the necessary code, configuration files, 
 and documentation to set up and use the integration effectively.
 
+![banner-integration.png](integration/files/banner/banner-integration.png)
 
 # CONTAINERS AVAILABLE
 
