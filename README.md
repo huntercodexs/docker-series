@@ -14,27 +14,24 @@ This project provides Docker container configurations for the following services
 - Mongodb latest
 - Redis latest
 
+# HOW TO RUN
 
-# APACHE KAFKA 7.6.0-SASL_SSL
-
-- How to run kafka-7.6.0-SASL_SSL rpm from this project use
+First, make sure you have Docker and Docker Compose installed on your machine.
+Then, follow the instructions below for each service you want to run.
 
 <pre>
 user@host:/home/user$ git clone https://github.com/huntercodexs/docker-series.git .
-user@host:/home/user$ cd docker-series/self-containers/messenger/kafka-7.6.0-SASL_SSL
-user@host:/home/user/docker-series/self-containers/messenger/kafka-7.6.0-SASL_SSL$ ./cleanup.sh
-user@host:/home/user/docker-series/self-containers/messenger/kafka-7.6.0-SASL_SSL$ ./generate-certs.sh
-user@host:/home/user/docker-series/self-containers/messenger/kafka-7.6.0-SASL_SSL$ docker network create open_network
-user@host:/home/user/docker-series/self-containers/messenger/kafka-7.6.0-SASL_SSL$ docker-compose up --build
-user@host:/home/user/docker-series/self-containers/messenger/kafka-7.6.0-SASL_SSL$ [Ctrl+C]
-user@host:/home/user/docker-series/self-containers/messenger/kafka-7.6.0-SASL_SSL$ docker-compose start
+user@host:/home/user$ cd docker-series/integration
+user@host:/home/user/docker-series/integration$ ./cleanup.sh
+user@host:/home/user/docker-series/integration$ ./generate-certs.sh
+user@host:/home/user/docker-series/integration$ docker network create open_network
+user@host:/home/user/docker-series/integration$ docker-compose up --build
+user@host:/home/user/docker-series/integration$ [Ctrl+C]
+user@host:/home/user/docker-series/integration$ docker-compose start
 </pre>
 
-- Access the Kafka container
 
-<pre>
-user@host:/home/user/docker-series/self-containers/messenger/kafka-7.6.0-SASL_SSL$ docker exec -it kafka-7.6.0-SASL_SSL /bin/bash
-</pre>
+# APACHE KAFKA 7.6.0-SASL_SSL
 
 - Sample Java Producer/Consumer Code
 
@@ -49,31 +46,20 @@ https://github.com/huntercodexs/java-spring-boot-integration-sample/tree/kafka-7
 
 # RABBITMQ 3.9.8
 
-- How to run rabbitmq-3.9.8 rpm from this project use
-
-<pre>
-user@host:/home/user$ git clone https://github.com/huntercodexs/docker-series.git .
-user@host:/home/user$ cd docker-series/self-containers/messenger/rabbitmq-3.9.8
-user@host:/home/user/docker-series/self-containers/messenger/rabbitmq-3.9.8$ docker network create open_network
-    user@host:/home/user/docker-series/self-containers/messenger/rabbitmq-3.9.8$ docker-compose up --build
-user@host:/home/user/docker-series/self-containers/messenger/rabbitmq-3.9.8$ [Ctrl+C]
-user@host:/home/user/docker-series/self-containers/messenger/rabbitmq-3.9.8$ docker-compose start
-</pre>
-
 > NOTE: If occurs some error during the build of container, check if it's the folder lib in the
-> self-containers/messenger/rabbitmq-3.9.8/lib, maybe must be required delete all content in this folder
+> integration/messenger/rabbitmq-3.9.8/lib, maybe must be required delete all content in this folder
 > for example:
 
 <pre>
-user@host:/home/user/docker-series/self-containers/messenger/rabbitmq-3.9.8$ cd lib
-user@host:/home/user/docker-series/self-containers/messenger/rabbitmq-3.9.8$ rm -rf .*
-user@host:/home/user/docker-series/self-containers/messenger/rabbitmq-3.9.8$ rm -rf *
+user@host:/home/user/docker-series/integration/messenger/rabbitmq-3.9.8$ cd lib
+user@host:/home/user/docker-series/integration/messenger/rabbitmq-3.9.8$ rm -rf .*
+user@host:/home/user/docker-series/integration/messenger/rabbitmq-3.9.8$ rm -rf *
 </pre>
 
 - Access the RabbitMQ container
 
 <pre>
-user@host:/home/user/docker-series/self-containers/messenger/rabbitmq-3.9.8$ docker exec -it rabbitmq-3.9.8 /bin/bash
+user@host:/home/user/docker-series/integration/messenger/rabbitmq-3.9.8$ docker exec -it rabbitmq-3.9.8 /bin/bash
 </pre>
 
 - Manager the RabbitMQ
@@ -101,30 +87,11 @@ Password: test
 
 # SONARQUBE
 
-> IMPORTANT: This work was tested using the following versions
+## Available Versions
 
 | Item | Version       | Build  | Description        | Operational System | URL                    |
 |------|---------------|--------|--------------------|--------------------|------------------------|
 | 4    | 9.9.8         | 100196 | Community Edition  | Linux / Windows    | http://localhost:39003 |
-
-- How to run sonarqube from this project use
-
-<pre>
-user@host:/home/user$ git clone https://github.com/huntercodexs/docker-series.git .
-user@host:/home/user$ cd docker-series/self-containers/sonar
-user@host:/home/user/docker-series/self-containers/sonar$ docker-compose up --build
-user@host:/home/user/docker-series/self-containers/sonar$ docker-compose start
-</pre>
-
-The expected result for this sonar docker configuration repository is something like below
-
-```text
-     Name                    Command               State                     Ports                   
------------------------------------------------------------------------------------------------------
-sonar_db998_1     docker-entrypoint.sh postgres    Up      5432/tcp                                  
-sonarqube998      /opt/sonarqube/docker/entr ...   Up      0.0.0.0:39003->9000/tcp,:::39003->9000/tcp
-
-```
 
 ## Plugins
 
@@ -417,23 +384,9 @@ ulimit -u 8192
 
 That's it !
 
-
 # MONGODB
 
-- Set up the self-containers/mongodb/mongo/mongod.conf
-
-- Create on folder MongoDB inside self-containers/mongodb/mongo
-
-- How to run mongodb from this project use
-
-<pre>
-user@host:/home/user$ git clone https://github.com/huntercodexs/docker-series.git .
-user@host:/home/user$ cd docker-series/self-containers/mongodb
-user@host:/home/user/docker-series/self-containers/mongodb$ docker-compose up --build
-user@host:/home/user/docker-series/self-containers/mongodb$ [Ctrl+C]
-user@host:/home/user/docker-series/self-containers/mongodb$ docker-compose start
-</pre>
-
+- Set up the integration/mongodb/mongo/mongod.conf
 - Set up the .env file as below
 
 <pre>
@@ -449,24 +402,12 @@ MONGO_INIT_DB_ROOT_USERNAME=root
 MONGO_INIT_DB_ROOT_PASSWORD=MongoDB2019!
 </pre>
 
-
 # REDIS
-
-- How to run redis from this project use
-
-<pre>
-user@host:/home/user$ git clone https://github.com/huntercodexs/docker-series.git .
-user@host:/home/user$ cd docker-series/self-containers/redis
-user@host:/home/user/docker-series/self-containers/redis$ docker network create open_network
-user@host:/home/user/docker-series/self-containers/redis$ docker-compose up --build
-user@host:/home/user/docker-series/self-containers/redis$ [Ctrl+C]
-user@host:/home/user/docker-series/self-containers/redis$ docker-compose start
-</pre>
 
 - Access, execute, and test redis
 
 <pre>
-user@host:/home/user/docker-series/self-containers/redis$ docker exec -it redis /bin/bash
+user@host:/home/user/docker-series/integration/redis$ docker exec -it redis /bin/bash
 root@3e760fd49412:/opt# redis-cli 
 127.0.0.1:6379>[Ctrl+D]
 root@3e760fd49412:/opt# redis-cli -h 127.0.0.1 -p 6379 -a '123@Mudar!'
