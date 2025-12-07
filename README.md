@@ -22,7 +22,7 @@ Sonarqube, Mongodb, and Redis. Each service has its own setup instructions and u
 started quickly. Whether you're looking to implement messaging queues, code quality analysis, or database solutions,
 this directory has you covered with ready-to-use Docker setups.
 
-> PT-BR
+> PT-BR (Português - Brasil): This section was translated to Portuguese using an AI tool.
 
 1) Cleanup Script
 ```text
@@ -144,10 +144,9 @@ user@host:~/Documentos/Devel/Docker/docker-series/integration$ ./sonar-fix-linux
 ```
 
 4) Docker Compose Up
+> IMPORTANT: Add the CN in the /etc/hosts file in your machine, for example: 127.0.0.1 kafka-7.6.0-sasl-ssl
 ```text
 user@host:~/Documentos/Devel/Docker/docker-series/integration$ docker-compose up --build
-
-> IMPORTANT: Add the CN in the /etc/hosts file in your machine, for example: 127.0.0.1 kafka-7.6.0-sasl-ssl
 ```
 
 # HOW TO RUN
