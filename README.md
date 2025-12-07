@@ -9,11 +9,11 @@ and documentation to set up and use the integration effectively.
 
 This project provides Docker container configurations for the following services:
 
-- Apache Kafka 7.6.0-SASL_SSL
-- RabbitMQ 3.9.8
-- Sonarqube 9.9.8
-- Mongodb latest
-- Redis latest
+- Apache Kafka
+- RabbitMQ
+- Sonarqube
+- Mongodb
+- Redis
 
 # HOW TO RUN
 
