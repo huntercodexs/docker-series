@@ -23,7 +23,7 @@ BROKER_TRUSTSTORE="${SECRETS_DIR}/broker.truststore.jks"
 CLIENT_TRUSTSTORE="${SECRETS_DIR}/client.truststore.jks"
 
 PASSWORD="changeit"
-BROKER_CN="kafka-7.6.0-sasl_ssl"
+BROKER_CN="kafka-7.6.0-sasl-ssl"
 
 echo "🧨 1) Gerando CA..."
 openssl genrsa -out "${CA_KEY}" 2048

@@ -2,11 +2,11 @@ version: "3.7"
 services:
     
     #----------------------------------------------------------------------------------------
-    zookeeper-7.6.0-sasl_ssl:
+    zookeeper-7.6.0-sasl-ssl:
         env_file: .env
         image: confluentinc/cp-zookeeper:7.6.0
-        container_name: zookeeper-7.6.0-sasl_ssl
-        hostname: zookeeper-7.6.0-sasl_ssl
+        container_name: zookeeper-7.6.0-sasl-ssl
+        hostname: zookeeper-7.6.0-sasl-ssl
         ports:
             - ${CUSTOM_ZOOKEEPER_PORT}:2181
         environment:
@@ -23,7 +23,7 @@ services:
         privileged: true
         tty: true
         volumes:
-            - zookeeper-7.6.0-sasl_ssl_vol:/zookeeper/
+            - zookeeper-7.6.0-sasl-ssl_vol:/zookeeper/
             - ./messenger/kafka-7.6.0-SASL_SSL/security/secrets:/etc/zookeeper/secrets:ro
             - ./messenger/kafka-7.6.0-SASL_SSL/shared/zookeeper/:/home/shared/
         networks:
@@ -32,11 +32,11 @@ services:
             internal_network:
                 ipv4_address: ${ZOOKEEPER_IP}
     #----------------------------------------------------------------------------------------
-    kafka-7.6.0-sasl_ssl:
+    kafka-7.6.0-sasl-ssl:
         env_file: .env
         image: confluentinc/cp-kafka:7.6.0
-        container_name: kafka-7.6.0-sasl_ssl
-        hostname: kafka-7.6.0-sasl_ssl
+        container_name: kafka-7.6.0-sasl-ssl
+        hostname: kafka-7.6.0-sasl-ssl
         ports:
             - ${CUSTOM_KAFKA_PORT}:29092
             - ${CUSTOM_KAFKA_EXTERNAL_PORT}:9092
@@ -60,11 +60,11 @@ services:
             ### => Broker settings
             KAFKA_BROKER_ID: 1
             KAFKA_ZOOKEEPER_SET_ACL: "true"
-            KAFKA_ZOOKEEPER_CONNECT: 'zookeeper-7.6.0-sasl_ssl:2181'
+            KAFKA_ZOOKEEPER_CONNECT: 'zookeeper-7.6.0-sasl-ssl:2181'
 
             ### => Authentication Implements => SASL/PLAIN
             KAFKA_LISTENERS: SASL_SSL://0.0.0.0:29092,EXTERNAL://0.0.0.0:9092
-            KAFKA_ADVERTISED_LISTENERS: SASL_SSL://kafka-7.6.0-sasl_ssl:29092,EXTERNAL://${CUSTOM_KAFKA_ADVERTISED_HOST:-localhost}:${CUSTOM_KAFKA_EXTERNAL_PORT}
+            KAFKA_ADVERTISED_LISTENERS: SASL_SSL://kafka-7.6.0-sasl-ssl:29092,EXTERNAL://${CUSTOM_KAFKA_ADVERTISED_HOST:-localhost}:${CUSTOM_KAFKA_EXTERNAL_PORT}
             KAFKA_LISTENER_SECURITY_PROTOCOL_MAP: SASL_SSL:SASL_SSL,EXTERNAL:SASL_SSL
             KAFKA_INTER_BROKER_LISTENER_NAME: SASL_SSL
 
@@ -97,22 +97,22 @@ services:
         privileged: true
         tty: true
         volumes:
-            - kafka-7.6.0-sasl_ssl_vol:/kafka/
+            - kafka-7.6.0-sasl-ssl_vol:/kafka/
             - ./messenger/kafka-7.6.0-SASL_SSL/security/secrets:/etc/kafka/secrets:ro
             - ./messenger/kafka-7.6.0-SASL_SSL/shared/kafka/:/home/shared/
         depends_on:
-            - zookeeper-7.6.0-sasl_ssl
+            - zookeeper-7.6.0-sasl-ssl
         networks:
             default:
             open_network:
             internal_network:
                 ipv4_address: ${KAFKA_IP}
     #----------------------------------------------------------------------------------------
-    schema-registry-7.6.0-sasl_ssl:
+    schema-registry-7.6.0-sasl-ssl:
         env_file: .env
         image: confluentinc/cp-schema-registry:7.6.0
-        hostname: schema-registry-7.6.0-sasl_ssl
-        container_name: schema-registry-7.6.0-sasl_ssl
+        hostname: schema-registry-7.6.0-sasl-ssl
+        container_name: schema-registry-7.6.0-sasl-ssl
         ports:
             - ${CUSTOM_KAFKA_SCHEMA_REGISTRY_PORT}:8081
         environment:
@@ -124,9 +124,9 @@ services:
 
             KAFKA_CLUSTERS_0_NAME: local-sasl-ssl
 
-            SCHEMA_REGISTRY_HOST_NAME: schema-registry-7.6.0-sasl_ssl
-            SCHEMA_REGISTRY_KAFKASTORE_BOOTSTRAP_SERVERS: SASL_SSL://kafka-7.6.0-sasl_ssl:9092
-            KAFKA_CLUSTERS_0_ZOOKEEPER: zookeeper-7.6.0-sasl_ssl:2181
+            SCHEMA_REGISTRY_HOST_NAME: schema-registry-7.6.0-sasl-ssl
+            SCHEMA_REGISTRY_KAFKASTORE_BOOTSTRAP_SERVERS: SASL_SSL://kafka-7.6.0-sasl-ssl:9092
+            KAFKA_CLUSTERS_0_ZOOKEEPER: zookeeper-7.6.0-sasl-ssl:2181
 
             SCHEMA_REGISTRY_KAFKASTORE_SECURITY_PROTOCOL: SASL_SSL
             SCHEMA_REGISTRY_KAFKASTORE_SASL_MECHANISM: PLAIN
@@ -139,23 +139,23 @@ services:
         privileged: true
         tty: true
         volumes:
-            - schema-registry-7.6.0-sasl_ssl_vol:/kafka/
+            - schema-registry-7.6.0-sasl-ssl_vol:/kafka/
             - ./messenger/kafka-7.6.0-SASL_SSL/security/secrets:/etc/kafka/secrets:ro
             - ./messenger/kafka-7.6.0-SASL_SSL/shared/schema/:/home/shared/
         depends_on:
-            - zookeeper-7.6.0-sasl_ssl
-            - kafka-7.6.0-sasl_ssl
+            - zookeeper-7.6.0-sasl-ssl
+            - kafka-7.6.0-sasl-ssl
         networks:
             default:
             open_network:
             internal_network:
                 ipv4_address: ${SCHEMA_REGISTRY_IP}
     #----------------------------------------------------------------------------------------
-    kafka-ui-0.7.2-sasl_ssl:
+    kafka-ui-0.7.2-sasl-ssl:
         env_file: .env
         image: provectuslabs/kafka-ui:v0.7.2
-        container_name: kafka-ui-0.7.2-sasl_ssl
-        hostname: kafka-ui-0.7.2-sasl_ssl
+        container_name: kafka-ui-0.7.2-sasl-ssl
+        hostname: kafka-ui-0.7.2-sasl-ssl
         ports:
             - ${CUSTOM_KAFKA_UI_PORT}:8080
         environment:
@@ -167,8 +167,8 @@ services:
 
             ### => Cluster Settings
             KAFKA_CLUSTERS_0_NAME: local-sasl-ssl
-            KAFKA_CLUSTERS_0_BOOTSTRAP_SERVERS: SASL_SSL://kafka-7.6.0-sasl_ssl:9092
-            KAFKA_CLUSTERS_0_ZOOKEEPER: zookeeper-7.6.0-sasl_ssl:2181
+            KAFKA_CLUSTERS_0_BOOTSTRAP_SERVERS: SASL_SSL://kafka-7.6.0-sasl-ssl:9092
+            KAFKA_CLUSTERS_0_ZOOKEEPER: zookeeper-7.6.0-sasl-ssl:2181
 
             ### => SASL credentials
             KAFKA_CLUSTERS_0_PROPERTIES_SECURITY_PROTOCOL: SASL_SSL
@@ -184,12 +184,12 @@ services:
         privileged: true
         tty: true
         volumes:
-            - kafka-ui-0.7.2-sasl_ssl_vol:/kafka-ui/
+            - kafka-ui-0.7.2-sasl-ssl_vol:/kafka-ui/
             - ./messenger/kafka-7.6.0-SASL_SSL/security/secrets:/etc/kafka/secrets:ro
             - ./messenger/kafka-7.6.0-SASL_SSL/shared/ui/:/home/shared/
         depends_on:
-            - kafka-7.6.0-sasl_ssl
-            - zookeeper-7.6.0-sasl_ssl
+            - kafka-7.6.0-sasl-ssl
+            - zookeeper-7.6.0-sasl-ssl
         networks:
             default:
             open_network:
@@ -300,10 +300,10 @@ networks:
                 - subnet: 10.0.0.0/16
 
 volumes:
-    zookeeper-7.6.0-sasl_ssl_vol:
-    kafka-7.6.0-sasl_ssl_vol:
-    schema-registry-7.6.0-sasl_ssl_vol:
-    kafka-ui-0.7.2-sasl_ssl_vol:
+    zookeeper-7.6.0-sasl-ssl_vol:
+    kafka-7.6.0-sasl-ssl_vol:
+    schema-registry-7.6.0-sasl-ssl_vol:
+    kafka-ui-0.7.2-sasl-ssl_vol:
 
     sonarqube_data998:
     sonarqube_extensions998:

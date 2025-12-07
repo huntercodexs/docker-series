@@ -15,10 +15,147 @@ This project provides Docker container configurations for the following services
 - Mongodb
 - Redis
 
+# TL;DR
+
+This integration directory provides Docker container configurations for popular services like Apache Kafka, RabbitMQ,
+Sonarqube, Mongodb, and Redis. Each service has its own setup instructions and usage guidelines to help you get
+started quickly. Whether you're looking to implement messaging queues, code quality analysis, or database solutions,
+this directory has you covered with ready-to-use Docker setups.
+
+> PT-BR
+
+1) Cleanup Script
+```text
+user@host:~/Documentos/Devel/Docker/docker-series/integration$ ./cleanup.sh 
+=========================================================
+ 🧹 LIMPANDO CERTIFICADOS E ARQUIVOS GERADOS
+=========================================================
+Base dir: /home/user/Documentos/Devel/Docker/docker-series/integration
+Conf dir: /home/user/Documentos/Devel/Docker/docker-series/integration/messenger/kafka-7.6.0-SASL_SSL/security
+Secrets dir: /home/user/Documentos/Devel/Docker/docker-series/integration/messenger/kafka-7.6.0-SASL_SSL/security/secrets
+
+🗑️  Removendo arquivos de CA...
+🗑️  Removendo arquivos do broker...
+🗑️  Removendo truststore do client...
+🗑️  Removendo JAAS copiados...
+
+🗂️  Limpando arquivos temporários (se existirem)...
+
+🧨 Removendo diretório secrets (se estiver vazio)...
+
+🧨 Removendo containers docker ...
+Removing network integration_default
+WARNING: Network integration_default not found.
+Network open_network is external, skipping
+Removing network integration_internal_network
+WARNING: Network integration_internal_network not found.
+Removing volume integration_zookeeper-7.6.0-sasl-ssl_vol
+WARNING: Volume integration_zookeeper-7.6.0-sasl-ssl_vol not found.
+Removing volume integration_kafka-7.6.0-sasl-ssl_vol
+WARNING: Volume integration_kafka-7.6.0-sasl-ssl_vol not found.
+Removing volume integration_schema-registry-7.6.0-sasl-ssl_vol
+WARNING: Volume integration_schema-registry-7.6.0-sasl-ssl_vol not found.
+Removing volume integration_kafka-ui-0.7.2-sasl-ssl_vol
+WARNING: Volume integration_kafka-ui-0.7.2-sasl-ssl_vol not found.
+Removing volume integration_sonarqube_data998
+WARNING: Volume integration_sonarqube_data998 not found.
+Removing volume integration_sonarqube_extensions998
+WARNING: Volume integration_sonarqube_extensions998 not found.
+Removing volume integration_postgresql998
+WARNING: Volume integration_postgresql998 not found.
+Removing volume integration_postgresql_data998
+WARNING: Volume integration_postgresql_data998 not found.
+Removing volume integration_mongodb_data
+WARNING: Volume integration_mongodb_data not found.
+Removing volume integration_rabbitmq_data
+WARNING: Volume integration_rabbitmq_data not found.
+
+=========================================================
+ ✅ LIMPEZA CONCLUÍDA COM SUCESSO
+ Agora você pode executar novamente o generate-certs.sh
+=========================================================
+```
+2) Generate Certificates for Kafka with SASL_SSL
+```text
+user@host:~/Documentos/Devel/Docker/docker-series/integration$ ./generate-certs.sh 
+🧨 Usando diretório base: /home/user/Documentos/Devel/Docker/docker-series/integration
+🧨 Usando diretório de conf: /home/user/Documentos/Devel/Docker/docker-series/integration/messenger/kafka-7.6.0-SASL_SSL/security
+🧨 Usando diretório de secrets: /home/user/Documentos/Devel/Docker/docker-series/integration/messenger/kafka-7.6.0-SASL_SSL/security/secrets
+🧨 1) Gerando CA...
+Generating RSA private key, 2048 bit long modulus (2 primes)
+............................................+++++
+....................+++++
+e is 65537 (0x010001)
+🧨 2) Criando SAN config...
+🧨 3) Gerando chave do broker...
+Generating RSA private key, 2048 bit long modulus (2 primes)
+...................................+++++
+............+++++
+e is 65537 (0x010001)
+🧨 4) Gerando CSR com SAN...
+🧨 5) Assinando certificado com CA...
+Signature ok
+subject=CN = kafka-7.6.0-sasl-ssl
+Getting CA Private Key
+🧨 6) Criando PKCS12 do broker...
+🧨 7) Criando keystore do broker (JKS)...
+Importing keystore /home/user/Documentos/Devel/Docker/docker-series/integration/messenger/kafka-7.6.0-SASL_SSL/security/secrets/broker.p12 to /home/user/Documentos/Devel/Docker/docker-series/integration/messenger/kafka-7.6.0-SASL_SSL/security/secrets/broker.keystore.jks...
+🧨 8) Criando truststore (broker)...
+Certificate was added to keystore
+🧨 9) Criando truststore (client)...
+🧨 10) Copiando arquivos JAAS...
+🧨 11) Criando arquivos *_credentials exigidos pela Confluent...
+Arquivos credentials criados:
+-rwxrwxr-x 1 user user    9 Dec  7 17:01 key_password
+-rwxrwxr-x 1 user user    9 Dec  7 17:01 keystore_password
+-rwxrwxr-x 1 user user    9 Dec  7 17:01 truststore_password
+
+====================================================
+✅ Certificados e JAAS gerados com sucesso!
+Pasta final: /home/user/Documentos/Devel/Docker/docker-series/integration/messenger/kafka-7.6.0-SASL_SSL/security/secrets
+total 72
+-rw-rw-r-- 1 user user 1099 Dec  7 17:01 broker.cert.pem
+-rw-rw-r-- 1 user user 1005 Dec  7 17:01 broker.csr.pem
+-rw------- 1 user user 1679 Dec  7 17:01 broker.key.pem
+-rw-rw-r-- 1 user user 3556 Dec  7 17:01 broker.keystore.jks
+-rw------- 1 user user 3318 Dec  7 17:01 broker.p12
+-rw-rw-r-- 1 user user 1158 Dec  7 17:01 broker.truststore.jks
+-rw-rw-r-- 1 user user 1123 Dec  7 17:01 ca.cert.pem
+-rw-rw-r-- 1 user user   41 Dec  7 17:01 ca.cert.srl
+-rw------- 1 user user 1679 Dec  7 17:01 ca.key.pem
+-rwxrwxr-x 1 user user  131 Dec  7 17:01 client_jaas.conf
+-rw-rw-r-- 1 user user 1158 Dec  7 17:01 client.truststore.jks
+-rwxrwxr-x 1 user user    9 Dec  7 17:01 key_password
+-rwxrwxr-x 1 user user    9 Dec  7 17:01 keystore_password
+-rwxrwxr-x 1 user user  321 Dec  7 15:42 openssl-san.cnf
+-rwxrwxr-x 1 user user  248 Dec  7 17:01 san.cnf
+-rwxrwxr-x 1 user user  312 Dec  7 17:01 server_jaas.conf
+-rwxrwxr-x 1 user user    9 Dec  7 17:01 truststore_password
+-rwxrwxr-x 1 user user  223 Dec  7 17:01 zookeeper_jaas.conf
+====================================================
+```
+
+3) Sonar Qube Fix Script for Linux
+```text
+user@host:~/Documentos/Devel/Docker/docker-series/integration$ ./sonar-fix-linux.sh 
+🧨 Sonar Qube Fix Script Started
+⚠️  System parameters updated
+✅ Sonar Qube Fix Script Completed
+```
+
+4) Docker Compose Up
+```text
+user@host:~/Documentos/Devel/Docker/docker-series/integration$ docker-compose up --build
+
+> IMPORTANT: Add the CN in the /etc/hosts file in your machine, for example: 127.0.0.1 kafka-7.6.0-sasl-ssl
+```
+
 # HOW TO RUN
 
 First, make sure you have Docker and Docker Compose installed on your machine.
 Then, follow the instructions below for each service you want to run.
+
+> NOTE: Add the CN in the /etc/hosts file in your machine, for example: 127.0.0.1 kafka-7.6.0-sasl-ssl
 
 <pre>
 user@host:/home/user$ git clone https://github.com/huntercodexs/docker-series.git .
@@ -33,6 +170,14 @@ user@host:/home/user/docker-series/integration$ docker-compose start
 
 
 # APACHE KAFKA 7.6.0-SASL_SSL
+
+- Access the  Kafka UI from web browser
+
+<pre>
+http://localhost:8282
+Username: admin
+Password: changeit
+</pre>
 
 - Sample Java Producer/Consumer Code
 
@@ -80,9 +225,9 @@ bash-4.2# rabbitmqctl set_permissions -p / test ".*" ".*" ".*"
 
 - Access the manager from web browser
 <pre>
-http://{SERVER-IP}:38080/
-Username: test
-Password: test
+http://localhost:38080/
+Username: test or guess
+Password: test or guess
 </pre>
 
 
@@ -383,6 +528,12 @@ ulimit -n 131072
 ulimit -u 8192
 </pre>
 
+or just execute the script
+
+```shell
+./sonar-fix-linux.sh
+```
+
 That's it !
 
 # MONGODB
@@ -423,8 +574,4 @@ OK
 (nil)
 127.0.0.1:6379> 
 </pre>
-
-
-
-
 
