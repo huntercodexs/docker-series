@@ -154,6 +154,22 @@ After that, run the command below to build and start all containers
 user@host:~/Documentos/Devel/Docker/docker-series/integration$ docker-compose up --build
 ```
 
+5) Final Output
+```text
+user@host:~/Documentos/Devel/Docker/docker-series/integration$ docker-compose ps
+             Name                           Command               State                                                                       Ports                                                                    
+-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+integration_db998_1              docker-entrypoint.sh postgres    Up      5432/tcp                                                                                                                                     
+kafka-7.6.0-sasl-ssl             /etc/confluent/docker/run        Up      0.0.0.0:29092->29092/tcp,:::29092->29092/tcp, 0.0.0.0:9092->9092/tcp,:::9092->9092/tcp, 0.0.0.0:9101->9101/tcp,:::9101->9101/tcp             
+kafka-ui-0.7.2-sasl-ssl          /bin/sh -c java --add-open ...   Up      0.0.0.0:8282->8080/tcp,:::8282->8080/tcp                                                                                                     
+mongo                            docker-entrypoint.sh mongod      Up      0.0.0.0:27017->27017/tcp,:::27017->27017/tcp                                                                                                 
+rabbitmq-3.9.8                   docker-entrypoint.sh rabbi ...   Up      0.0.0.0:38080->15672/tcp,:::38080->15672/tcp, 15691/tcp, 15692/tcp, 25672/tcp, 4369/tcp, 5671/tcp, 0.0.0.0:55672->5672/tcp,:::55672->5672/tcp
+redis                            docker-entrypoint.sh redis ...   Up      0.0.0.0:6379->6379/tcp,:::6379->6379/tcp                                                                                                     
+schema-registry-7.6.0-sasl-ssl   /etc/confluent/docker/run        Up      0.0.0.0:8081->8081/tcp,:::8081->8081/tcp                                                                                                     
+sonarqube998                     /opt/sonarqube/docker/entr ...   Up      0.0.0.0:39003->9000/tcp,:::39003->9000/tcp                                                                                                   
+zookeeper-7.6.0-sasl-ssl         /etc/confluent/docker/run        Up      0.0.0.0:2181->2181/tcp,:::2181->2181/tcp, 2888/tcp, 3888/tcp                                                                                 
+```
+
 # HOW TO RUN
 
 First, make sure you have Docker and Docker Compose installed on your machine.
