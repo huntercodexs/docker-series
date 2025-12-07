@@ -204,8 +204,8 @@ services:
             - ${RABBITMQ_PORT}:5672
             - ${RABBITMQ_HTTP_PORT}:15672
         volumes:
+            - rabbitmq_data:/var/lib/rabbitmq/
             - ./messenger/rabbitmq-3.9.8/shared/:/home/shared/
-            - ./messenger/rabbitmq-3.9.8/lib:/var/lib/rabbitmq/
         environment:
             RABBITMQ_DEFAULT_USER: ${RABBITMQ_DEFAULT_USER}
             RABBITMQ_DEFAULT_PASS: ${RABBITMQ_DEFAULT_PASS}
@@ -226,14 +226,8 @@ services:
             MONGO_INITDB_ROOT_USERNAME: ${MONGO_INIT_DB_ROOT_USERNAME}
             MONGO_INITDB_ROOT_PASSWORD: ${MONGO_INIT_DB_ROOT_PASSWORD}
         volumes:
-            - type: bind
-              source: ./mongodb/mongo/MongoDB
-              target: /data/db/
-              read_only: false
-            - type: bind
-              source: ./mongodb/mongo/mongod.conf
-              target: /etc/mongod.conf
-              read_only: false
+            - mongodb_data:/data/db
+            - ./mongodb/mongo/mongod.conf:/etc/mongod.conf
         tty: true
         networks:
             default:
@@ -315,3 +309,7 @@ volumes:
     sonarqube_extensions998:
     postgresql998:
     postgresql_data998:
+
+    mongodb_data:
+    rabbitmq_data:
+

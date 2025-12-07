@@ -4,7 +4,15 @@ Each subdirectory corresponds to a specific integration and includes the necessa
 and documentation to set up and use the integration effectively.
 
 
+# CONTAINERS AVAILABLE
 
+This project provides Docker container configurations for the following services:
+
+- Apache Kafka 7.6.0-SASL_SSL
+- RabbitMQ 3.9.8
+- Sonarqube 9.9.8
+- Mongodb latest
+- Redis latest
 
 
 # APACHE KAFKA 7.6.0-SASL_SSL
@@ -37,10 +45,6 @@ https://github.com/huntercodexs/java-spring-boot-kafka-consumer
 Also try this repo with both Producer and Consumer
 
 https://github.com/huntercodexs/java-spring-boot-integration-sample/tree/kafka-7.6.0-SASL_SSL ***Private***
-
-
-
-
 
 
 # RABBITMQ 3.9.8
@@ -95,20 +99,13 @@ Password: test
 </pre>
 
 
-
-
-
 # SONARQUBE
 
 > IMPORTANT: This work was tested using the following versions
 
 | Item | Version       | Build  | Description        | Operational System | URL                    |
 |------|---------------|--------|--------------------|--------------------|------------------------|
-| 1    | lts-community |        | Community Edition  | Linux / Windows    | http://localhost:39000 |
-| 2    | 6.7           |        | Community Edition  | Linux / Windows    | http://localhost:39001 |
-| 3    | 9.7           |        | Community Edition  | Linux / Windows    | http://localhost:39002 |
 | 4    | 9.9.8         | 100196 | Community Edition  | Linux / Windows    | http://localhost:39003 |
-| 5    | 24.12.0       | 100206 | Community Edition  | Linux / Windows    | http://localhost:39004 |
 
 - How to run sonarqube from this project use
 
@@ -124,15 +121,7 @@ The expected result for this sonar docker configuration repository is something 
 ```text
      Name                    Command               State                     Ports                   
 -----------------------------------------------------------------------------------------------------
-sonar_db24120_1   docker-entrypoint.sh postgres    Up      5432/tcp                                  
-sonar_db67_1      docker-entrypoint.sh postgres    Up      5432/tcp                                  
-sonar_db97_1      docker-entrypoint.sh postgres    Up      5432/tcp                                  
 sonar_db998_1     docker-entrypoint.sh postgres    Up      5432/tcp                                  
-sonar_db_1        docker-entrypoint.sh postgres    Up      5432/tcp                                  
-sonarqube         /opt/sonarqube/docker/entr ...   Up      0.0.0.0:39000->9000/tcp,:::39000->9000/tcp
-sonarqube24120    /opt/sonarqube/docker/entr ...   Up      0.0.0.0:39004->9000/tcp,:::39004->9000/tcp
-sonarqube67       ./bin/run.sh                     Up      0.0.0.0:39001->9000/tcp,:::39001->9000/tcp
-sonarqube97       /opt/sonarqube/bin/run.sh  ...   Up      0.0.0.0:39002->9000/tcp,:::39002->9000/tcp
 sonarqube998      /opt/sonarqube/docker/entr ...   Up      0.0.0.0:39003->9000/tcp,:::39003->9000/tcp
 
 ```
@@ -156,7 +145,7 @@ Password: admin
 ** You might be requested to change the password after first login
 </pre>
 
-![update-password.png](update-password.png)
+![update-password.png](./integration/files/sonar/update-password.png)
 
 ## Usage
 
@@ -177,7 +166,7 @@ Under “Generate Tokens”:
 Example: sqa_753b0f09b0b8ca51d78251912cdfa48e0ccf0377
 </pre>
 
-![token-generate.png](token-generate.png)
+![token-generate.png](./integration/files/sonar/token-generate.png)
 
 ### ✅ Step 2: Define a Minimum Score Using Quality Gates
 
@@ -227,12 +216,12 @@ After your next analysis (e.g., via CI/CD), go to the project dashboard. You’l
 6. Also you can add more conditions to your Gate settings for measurements more strict or critical in the
    Quality Gates top menu, see the example below
 
-![quality-gates.png](quality-gates.png)
+![quality-gates.png](./integration/files/sonar/quality-gates.png)
 
 So in this case you will get Failed when sonar was running because the coverage consider the
 Overall Code as well, so the results should be like something below
 
-![overall-coverage-failed.png](overall-coverage-failed.png)
+![overall-coverage-failed.png](./integration/files/sonar/overall-coverage-failed.png)
 
 ### ✅ Step 3: Create a Custom Quality Profile for Java
 
@@ -287,7 +276,7 @@ If you want a specific project to use this profile:
 You can pass the token directly via the command line:
 
 <pre>
-mvn clean verify sonar:sonar -Dsonar.projectKey=simple-api-demo -Dsonar.host.url=http://localhost:3900[0-4] -Dsonar.login=sqa_912c6e493d5c9527a6c855e714de03ac41c82509
+mvn clean verify sonar:sonar -Dsonar.projectKey=simple-api-demo -Dsonar.host.url=http://localhost:39003 -Dsonar.login=sqa_912c6e493d5c9527a6c855e714de03ac41c82509
 </pre>
 
 Replace YOUR_TOKEN_HERE with your generated token.
@@ -297,7 +286,7 @@ Replace YOUR_TOKEN_HERE with your generated token.
 - Example 1
 
 <pre>
-mvn clean verify sonar:sonar -Dsonar.projectKey=simple-api-demo -Dsonar.host.url=http://localhost:3900[0-4] -Dsonar.login=sqa_912c6e493d5c9527a6c855e714de03ac41c82509
+mvn clean verify sonar:sonar -Dsonar.projectKey=simple-api-demo -Dsonar.host.url=http://localhost:39003 -Dsonar.login=sqa_912c6e493d5c9527a6c855e714de03ac41c82509
 </pre>
 
 - Example 2
@@ -312,7 +301,7 @@ mvn -V org.jacoco:jacoco-maven-plugin:prepare-agent test org.jacoco:jacoco-maven
 -Dbranch=pipeline-release 
 -Dsonar.projectKey=simple-api-demo 
 -Dsonar.projectName=simple-api-demo 
--Dsonar.host.url=http://localhost:3900[0-4] 
+-Dsonar.host.url=http://localhost:39003
 -Dsonar.login=sqa_912c6e493d5c9527a6c855e714de03ac41c82509
 
 # Example2
@@ -322,7 +311,7 @@ mvn -V org.jacoco:jacoco-maven-plugin:prepare-agent test org.jacoco:jacoco-maven
 -Dbranch=pipeline-release  
 -Dsonar.projectKey=simple-api-demo  
 -Dsonar.projectName=simple-api-demo  
--Dsonar.host.url=http://localhost:3900[0-4]  
+-Dsonar.host.url=http://localhost:39003  
 -Dsonar.login=sqa_5654448d73d6552f6f36568e8f9ecd9dfb8868a2
 </pre>
 
@@ -429,9 +418,6 @@ ulimit -u 8192
 That's it !
 
 
-
-
-
 # MONGODB
 
 - Set up the self-containers/mongodb/mongo/mongod.conf
@@ -461,47 +447,7 @@ MONGO_PORT=27017
 # Set mongo username and password
 MONGO_INIT_DB_ROOT_USERNAME=root
 MONGO_INIT_DB_ROOT_PASSWORD=MongoDB2019!
-
-##############################################################################
-#### MONGO EXPRESS SETTINGS
-##############################################################################
-
-# Set the port to MONGO
-MONGO_EXPRESS_PORT=38091
-
-# Define express access by web
-MONGO_EXPRESS_USERNAME=devel
-MONGO_EXPRESS_PASSWORD=MongoExpress2019!
-
-# Set a connection with Mongo Server
-MONGO_EXPRESS_SERVER_DRIVER=mongo
-MONGO_EXPRESS_SERVER_PORT=27017
-MONGO_EXPRESS_SERVER_URL=mongo://root:MongoDB2019!@mongo:27017/
-MONGO_EXPRESS_SERVER_USERNAME=root
-MONGO_EXPRESS_SERVER_PASSWORD=MongoDB2019!
 </pre>
-
-- Access the MongoDB Express
-
-<pre>
-http://${WEBSERVER_ADDRESS}:38091/
-username: ${MONGO_EXPRESS_USERNAME}
-password: ${MONGO_EXPRESS_PASSWORD}
-</pre>
-
-- Create a database: dbname
-
-![img.png](./media/Mongo-Express-Dashboard.png)
-
-- Create a collection: users
-- Create a documents(index): id, name
-
-Enjoy !
-
-
-
-
-
 
 
 # REDIS

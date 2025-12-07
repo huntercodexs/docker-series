@@ -1,9 +1,9 @@
 #!/usr/bin/env bash
 set -e
 
-KEYTOOL_PATH=/home/jereelton/.jdks/jdk-21/bin
+KEYTOOL_PATH=/home/${USER}/.jdks/jdk-21/bin
 BASE_DIR="$(pwd)"
-CONF_DIR="${BASE_DIR}/security"
+CONF_DIR="${BASE_DIR}/messenger/kafka-7.6.0-SASL_SSL/security"
 SECRETS_DIR="${CONF_DIR}/secrets"
 
 mkdir -p "${SECRETS_DIR}"

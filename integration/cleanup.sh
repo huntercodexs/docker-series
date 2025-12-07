@@ -2,7 +2,7 @@
 set -e
 
 BASE_DIR="$(pwd)"
-CONF_DIR="${BASE_DIR}/security"
+CONF_DIR="${BASE_DIR}/messenger/kafka-7.6.0-SASL_SSL/security"
 SECRETS_DIR="${CONF_DIR}/secrets"
 
 echo "========================================================="
