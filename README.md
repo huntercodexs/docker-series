@@ -144,7 +144,12 @@ user@host:~/Documentos/Devel/Docker/docker-series/integration$ ./sonar-fix-linux
 ```
 
 4) Docker Compose Up
-> IMPORTANT: Add the CN in the /etc/hosts file in your machine, for example: 127.0.0.1 kafka-7.6.0-sasl-ssl
+> IMPORTANT: Add the CN in the /etc/hosts file in your machine, for example:
+
+```text
+127.0.0.1 kafka-7.6.0-sasl-ssl
+```
+After that, run the command below to build and start all containers
 ```text
 user@host:~/Documentos/Devel/Docker/docker-series/integration$ docker-compose up --build
 ```
