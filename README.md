@@ -12,19 +12,19 @@ The helpful repository for all databases
 # Summary
 
 
-| Database Name | Version   | Status | Details                        |
-|---------------|-----------|--------|--------------------------------|
-| Firebird      | 3.0       | ✅ OK   |                                |
-| Oracle        | 193000    | ✅ OK   | Linux.x64_193000_db_home       |
-| Mssql         |           | ✅ OK   | 2019-latest                    |
-| Mysql         | 5.7       | ✅ OK   |                                |
-| Mysql         | 8.0       | ✅ OK   |                                |
-| Postgres      |           | ✅ OK   | latest                         |
-| MongoDB       |           | ✅ OK   | latest                         |
-| SQLite3       | 3         | ✅ OK   |                                |
-| Redis         |           | ✅ OK   | latest                         |
-| H2            |           | ✅ OK   | version-2.1.214 (Linux Ubuntu) |
-| DB2           | 11.5.8.0  | ✅ OK   |                                |
+| Database Name | Version  | Status | Details                        |
+|---------------|----------|--------|--------------------------------|
+| Firebird      | 3.0      | ✅ OK   |                                |
+| Oracle        | 193000   | ✅ OK   | Linux.x64_193000_db_home       |
+| Mssql         |          | ✅ OK   | 2019-latest                    |
+| Mysql         | 5.7      | ✅ OK   |                                |
+| Mysql         | 8.0      | ✅ OK   |                                |
+| Postgres      | 12       | ✅ OK   |                                |
+| MongoDB       |          | ✅ OK   | latest                         |
+| SQLite3       | 3        | ✅ OK   |                                |
+| Redis         |          | ✅ OK   | latest                         |
+| H2            |          | ✅ OK   | version-2.1.214 (Linux Ubuntu) |
+| DB2           | 11.5.8.0 | ✅ OK   |                                |
 
 
 # Usage
