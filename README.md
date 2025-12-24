@@ -327,10 +327,19 @@ Unzip the oraclelinux-database-scripts-19c.tar.bz2 file inside the oracle/databa
 <pre>
 user@host:/home/user/docker-series/databases/oracle/database$ tar -xvf oraclelinux-database-scripts-19c.tar.bz2
 </pre>
-Create the oradata folder in oracle path
+
+Create the oradata folder in oracle path and give the permissions 777 in this folder
+
 Check if oracle/oradata is empty or just have the dbconfig/ and ORCLCDB/ folders
 
-Final results from build
+Now, execute the command docker-compose
+
+```shell
+docker-compose up --build
+```
+
+The final results from build should be something like below
+
 <pre>
 oraclelinux    | Version 19.3.0.0.0
 oraclelinux    | The Oracle base remains unchanged with value /opt/oracle
@@ -414,6 +423,21 @@ SELECT * FROM ALL_USERS au WHERE au.USERNAME = '{{ORACLELINUX_USERNAME}}';
 EXIT;
 </pre>
 
+Example
+<pre>
+sqlplus sys/oracle1Ipw@ORCLPDB1 as sysdba
+CREATE USER DEVEL IDENTIFIED BY oracle1Ipw;
+GRANT CREATE SESSION, CREATE TABLE TO DEVEL;
+ALTER USER DEVEL QUOTA 50m ON SYSTEM;
+CREATE SMALLFILE TABLESPACE DEVEL DATAFILE '/opt/oracle/oradata/ORCLCDB/ORCLPDB1/devel.dbf' SIZE 1G;
+ALTER DATABASE DEFAULT TABLESPACE DEVEL;
+ALTER USER DEVEL QUOTA UNLIMITED ON SYSTEM;
+ALTER USER DEVEL QUOTA UNLIMITED ON DEVEL;
+SELECT * FROM ALL_USERS au;
+SELECT * FROM ALL_USERS au WHERE au.USERNAME = 'DEVEL';
+EXIT;
+</pre>
+
 > TIP: User the script init.sql to make a test in the current oraclelinux instance via docker
 
 [init.sql](./databases/oracle/scripts/init.sql)
@@ -433,6 +457,11 @@ SQL>EXIT;
 Connect on database using the new user
 <pre>
 sqlplus {{ORACLELINUX_USERNAME}}/{{ORACLELINUX_PASSWORD}}@{{ORACLELINUX_PDB}}
+</pre>
+
+Example
+<pre>
+sqlplus DEVEL/oracle1Ipw@ORCLPDB1
 </pre>
 
 - Configuration to access the Database Oracle Linux:
